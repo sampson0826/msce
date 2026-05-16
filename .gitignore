@@ -31,3 +31,6 @@ env/
 
 # Claude Code
 .claude/
+
+# Nested git repos (external contracts)
+contracts/discovered/MachFi_sonic/
