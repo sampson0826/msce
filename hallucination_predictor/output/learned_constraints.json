@@ -1,0 +1,48 @@
+{
+  "config": {
+    "model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "n_train": 24,
+    "n_test": 16
+  },
+  "training": {
+    "cv_scores": {
+      "fact": 0.4666666666666666,
+      "syntax": 0.6,
+      "style": 0.31111111111111106,
+      "safety": 0.6,
+      "coherence": 0.44444444444444436
+    },
+    "meta_cv": 1.0,
+    "learned_weights": [
+      1.0947771254461365,
+      0.9983299034966986,
+      0.9771816023646248,
+      0.9922481003859519,
+      1.0333643066248333
+    ],
+    "weight_labels": [
+      "σ_fact",
+      "σ_syntax",
+      "σ_style",
+      "σ_safety",
+      "σ_coherence"
+    ]
+  },
+  "test_results": {
+    "Hand-crafted Δ||Π||": {
+      "auc": 0.23636363636363633,
+      "mean_hallu": 0.008280548597197623,
+      "mean_correct": 0.027437547239883512
+    },
+    "Learned unweighted Π": {
+      "auc": 0.5272727272727272,
+      "mean_hallu": 0.5698288630346479,
+      "mean_correct": 0.5069655680159152
+    },
+    "Learned weighted Π_w": {
+      "auc": 0.5272727272727272,
+      "mean_hallu": 2.914949832825088,
+      "mean_correct": 2.5914010545726325
+    }
+  }
+}

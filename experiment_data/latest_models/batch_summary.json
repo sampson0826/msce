@@ -1,0 +1,464 @@
+{
+  "timestamp": "2026-05-16",
+  "n_models": 16,
+  "n_families": 6,
+  "method": "pre-registered: exponential + total_constraint",
+  "results": {
+    "deepseek-v4-pro_s100": {
+      "model": "deepseek-v4-pro",
+      "family": "DeepSeek",
+      "provider": "deepseek",
+      "global_beta": 0.055247299523265146,
+      "per_cap_beta": {
+        "math_reasoning": 0.13710566762258547,
+        "code_generation": 0.001,
+        "factual_knowledge": 0.001,
+        "logical_consistency": 0.001,
+        "creative_writing": 0.1903781295170054,
+        "general": 0.001
+      },
+      "per_cap_sn": {
+        "math_reasoning": 0.6424995819978627,
+        "code_generation": 0.997002999,
+        "factual_knowledge": 0.997002999,
+        "logical_consistency": 0.997002999,
+        "creative_writing": 0.5306970750637064,
+        "general": 0.997002999
+      },
+      "n_capabilities": 6
+    },
+    "gemini-2.5-flash_s100": {
+      "model": "gemini-2.5-flash",
+      "family": "Gemini",
+      "provider": "quickrouter",
+      "global_beta": 0.014051818815484507,
+      "per_cap_beta": {
+        "math_reasoning": 0.07931091289290704,
+        "code_generation": 0.001,
+        "factual_knowledge": 0.001,
+        "logical_consistency": 0.001,
+        "creative_writing": 0.001,
+        "general": 0.001
+      },
+      "per_cap_sn": {
+        "math_reasoning": 0.780439040870811,
+        "code_generation": 0.997002999,
+        "factual_knowledge": 0.997002999,
+        "logical_consistency": 0.997002999,
+        "creative_writing": 0.997002999,
+        "general": 0.997002999
+      },
+      "n_capabilities": 6
+    },
+    "claude-opus-4-7_s100": {
+      "model": "claude-opus-4-7",
+      "family": "Claude",
+      "provider": "quickrouter",
+      "global_beta": 0.16353372352921397,
+      "per_cap_beta": {
+        "math_reasoning": 0.20454445533438304,
+        "code_generation": 0.11850543605381947,
+        "factual_knowledge": 0.001,
+        "logical_consistency": 0.1397893523708691,
+        "creative_writing": 0.33770486384868736,
+        "general": 0.17965823356752486
+      },
+      "per_cap_sn": {
+        "math_reasoning": 0.5033241168838424,
+        "code_generation": 0.6849500713226736,
+        "factual_knowledge": 0.997002999,
+        "logical_consistency": 0.6365234994497156,
+        "creative_writing": 0.29050572595941626,
+        "general": 0.5520576986260728
+      },
+      "n_capabilities": 6
+    },
+    "llama-4-maverick_s100": {
+      "model": "meta-llama/llama-4-maverick",
+      "family": "Llama",
+      "provider": "openrouter",
+      "global_beta": 0.045263954898031845,
+      "per_cap_beta": {
+        "math_reasoning": 0.001,
+        "code_generation": 0.07642731177265394,
+        "factual_knowledge": 0.001,
+        "logical_consistency": 0.001,
+        "creative_writing": 0.17511504176789794,
+        "general": 0.017041375847639206
+      },
+      "per_cap_sn": {
+        "math_reasoning": 0.997002999,
+        "code_generation": 0.7877950444682598,
+        "factual_knowledge": 0.997002999,
+        "logical_consistency": 0.997002999,
+        "creative_writing": 0.5612807568443066,
+        "general": 0.9497421489691832
+      },
+      "n_capabilities": 6
+    },
+    "deepseek-v4-flash_s100": {
+      "model": "deepseek-v4-flash",
+      "family": "DeepSeek",
+      "provider": "deepseek",
+      "global_beta": 0.034959608685221265,
+      "per_cap_beta": {
+        "math_reasoning": 0.001,
+        "code_generation": 0.001,
+        "factual_knowledge": 0.001,
+        "logical_consistency": 0.02268559564965944,
+        "creative_writing": 0.18307205646166813,
+        "general": 0.001
+      },
+      "per_cap_sn": {
+        "math_reasoning": 0.997002999,
+        "code_generation": 0.997002999,
+        "factual_knowledge": 0.997002999,
+        "logical_consistency": 0.9334754469710875,
+        "creative_writing": 0.5451942350389183,
+        "general": 0.997002999
+      },
+      "n_capabilities": 6
+    },
+    "gpt-5.5_s100": {
+      "model": "gpt-5.5",
+      "family": "OpenAI",
+      "provider": "quickrouter",
+      "global_beta": 0.01087094723806383,
+      "per_cap_beta": {
+        "math_reasoning": 0.001,
+        "code_generation": 0.001,
+        "factual_knowledge": 0.001,
+        "logical_consistency": 0.001,
+        "creative_writing": 0.06022568342838297,
+        "general": 0.001
+      },
+      "per_cap_sn": {
+        "math_reasoning": 0.997002999,
+        "code_generation": 0.997002999,
+        "factual_knowledge": 0.997002999,
+        "logical_consistency": 0.997002999,
+        "creative_writing": 0.8299859019876356,
+        "general": 0.997002999
+      },
+      "n_capabilities": 6
+    },
+    "llama-4-scout_s100": {
+      "model": "meta-llama/llama-4-scout",
+      "family": "Llama",
+      "provider": "openrouter",
+      "global_beta": 0.0606378209058252,
+      "per_cap_beta": {
+        "math_reasoning": 0.05387722363804015,
+        "code_generation": 0.001,
+        "factual_knowledge": 0.001,
+        "logical_consistency": 0.001,
+        "creative_writing": 0.1628448216444125,
+        "general": 0.14410488015249856
+      },
+      "per_cap_sn": {
+        "math_reasoning": 0.8469202023741812,
+        "code_generation": 0.997002999,
+        "factual_knowledge": 0.997002999,
+        "logical_consistency": 0.997002999,
+        "creative_writing": 0.5867024529056121,
+        "general": 0.6269914958561883
+      },
+      "n_capabilities": 6
+    },
+    "claude-sonnet-4-6_s100": {
+      "model": "claude-sonnet-4-6_s100",
+      "family": "",
+      "provider": "",
+      "global_beta": 0.10554868170776172,
+      "per_cap_beta": {
+        "math_reasoning": 0.2160822388213871,
+        "code_generation": 0.018740934711935275,
+        "factual_knowledge": 0.001,
+        "logical_consistency": 0.014921454767174214,
+        "creative_writing": 0.23926890813300983,
+        "general": 0.14327855381306387
+      },
+      "per_cap_sn": {
+        "math_reasoning": 0.4817386741515505,
+        "code_generation": 0.9448242815253743,
+        "factual_knowledge": 0.997002999,
+        "logical_consistency": 0.9559002628764797,
+        "creative_writing": 0.4402440550272107,
+        "general": 0.6288092417596486
+      },
+      "n_capabilities": 6
+    },
+    "deepseek-reasoner_s100": {
+      "model": "deepseek-reasoner_s100",
+      "family": "",
+      "provider": "",
+      "global_beta": 0.10379524757022013,
+      "per_cap_beta": {
+        "math_reasoning": 0.001,
+        "code_generation": 0.025794769927102612,
+        "factual_knowledge": 0.001,
+        "logical_consistency": 0.1815298621854443,
+        "creative_writing": 0.31783654693136354,
+        "general": 0.0956103063774103
+      },
+      "per_cap_sn": {
+        "math_reasoning": 0.997002999,
+        "code_generation": 0.9245946376153888,
+        "factual_knowledge": 0.997002999,
+        "logical_consistency": 0.5482877159955463,
+        "creative_writing": 0.31744270050244533,
+        "general": 0.7397190674969701
+      },
+      "n_capabilities": 6
+    },
+    "gpt-4o_s100": {
+      "model": "gpt-4o_s100",
+      "family": "",
+      "provider": "",
+      "global_beta": 0.09854234334687854,
+      "per_cap_beta": {
+        "math_reasoning": 0.06376483876034189,
+        "code_generation": 0.03890886012553518,
+        "factual_knowledge": 0.001,
+        "logical_consistency": 0.04053218708201789,
+        "creative_writing": 0.2178021760879948,
+        "general": 0.22924599802538148
+      },
+      "per_cap_sn": {
+        "math_reasoning": 0.8206440827619338,
+        "code_generation": 0.8877562137123463,
+        "factual_knowledge": 0.997002999,
+        "logical_consistency": 0.8832654246874092,
+        "creative_writing": 0.4785747820267051,
+        "general": 0.45787545701975696
+      },
+      "n_capabilities": 6
+    },
+    "deepseek-chat_s100": {
+      "model": "deepseek-chat_s100",
+      "family": "",
+      "provider": "",
+      "global_beta": 0.028110257813765378,
+      "per_cap_beta": {
+        "math_reasoning": 0.001,
+        "code_generation": 0.001,
+        "factual_knowledge": 0.001,
+        "logical_consistency": 0.001,
+        "creative_writing": 0.16366154688259227,
+        "general": 0.001
+      },
+      "per_cap_sn": {
+        "math_reasoning": 0.997002999,
+        "code_generation": 0.997002999,
+        "factual_knowledge": 0.997002999,
+        "logical_consistency": 0.997002999,
+        "creative_writing": 0.5849869739212872,
+        "general": 0.997002999
+      },
+      "n_capabilities": 6
+    },
+    "meta-llama_llama-3_1-70b-instruct_s100": {
+      "model": "meta-llama_llama-3_1-70b-instruct_s100",
+      "family": "",
+      "provider": "",
+      "global_beta": 0.0924797440794401,
+      "per_cap_beta": {
+        "math_reasoning": 0.10849153961548186,
+        "code_generation": 0.001,
+        "factual_knowledge": 0.001,
+        "logical_consistency": 0.14234759216040616,
+        "creative_writing": 0.2431976387099143,
+        "general": 0.05884169399083827
+      },
+      "per_cap_sn": {
+        "math_reasoning": 0.7085596333029542,
+        "code_generation": 0.997002999,
+        "factual_knowledge": 0.997002999,
+        "logical_consistency": 0.630861368443962,
+        "creative_writing": 0.4334584117047135,
+        "general": 0.8336582226404803
+      },
+      "n_capabilities": 6
+    },
+    "claude-opus-4-6_s100": {
+      "model": "claude-opus-4-6_s100",
+      "family": "",
+      "provider": "",
+      "global_beta": 0.11963765071658077,
+      "per_cap_beta": {
+        "math_reasoning": 0.14090322069503391,
+        "code_generation": 0.12839862798375534,
+        "factual_knowledge": 0.001,
+        "logical_consistency": 0.18676110010743274,
+        "creative_writing": 0.25976295551326256,
+        "general": 0.001
+      },
+      "per_cap_sn": {
+        "math_reasoning": 0.6340540379686742,
+        "code_generation": 0.6621459326078257,
+        "factual_knowledge": 0.997002999,
+        "logical_consistency": 0.5378416524843397,
+        "creative_writing": 0.40561354143812867,
+        "general": 0.997002999
+      },
+      "n_capabilities": 6
+    },
+    "gpt-4o-mini_s100": {
+      "model": "gpt-4o-mini_s100",
+      "family": "",
+      "provider": "",
+      "global_beta": 0.08848613155619972,
+      "per_cap_beta": {
+        "math_reasoning": 0.041175518892980434,
+        "code_generation": 0.05476217211796741,
+        "factual_knowledge": 0.001,
+        "logical_consistency": 0.001,
+        "creative_writing": 0.2236880042583711,
+        "general": 0.20929109406787938
+      },
+      "per_cap_sn": {
+        "math_reasoning": 0.8814899034529463,
+        "code_generation": 0.8445459441000662,
+        "factual_knowledge": 0.997002999,
+        "logical_consistency": 0.997002999,
+        "creative_writing": 0.4678524316841495,
+        "general": 0.49436747597082925
+      },
+      "n_capabilities": 6
+    },
+    "meta-llama_llama-3_1-8b-instruct_s100": {
+      "model": "meta-llama_llama-3_1-8b-instruct_s100",
+      "family": "",
+      "provider": "",
+      "global_beta": 0.09419159971673403,
+      "per_cap_beta": {
+        "math_reasoning": 0.001,
+        "code_generation": 0.001,
+        "factual_knowledge": 0.001,
+        "logical_consistency": 0.06068015194554277,
+        "creative_writing": 0.24086281397927634,
+        "general": 0.2606066323755851
+      },
+      "per_cap_sn": {
+        "math_reasoning": 0.997002999,
+        "code_generation": 0.997002999,
+        "factual_knowledge": 0.997002999,
+        "logical_consistency": 0.828782357458919,
+        "creative_writing": 0.4374826126357451,
+        "general": 0.40422824107644917
+      },
+      "n_capabilities": 6
+    },
+    "claude-haiku-4-5-20251001_s100": {
+      "model": "claude-haiku-4-5-20251001_s100",
+      "family": "",
+      "provider": "",
+      "global_beta": 0.1467693553941845,
+      "per_cap_beta": {
+        "math_reasoning": 0.27186292188301,
+        "code_generation": 0.001,
+        "factual_knowledge": 0.18779660397079312,
+        "logical_consistency": 0.13256472533554753,
+        "creative_writing": 0.2863918811757564,
+        "general": 0.001
+      },
+      "per_cap_sn": {
+        "math_reasoning": 0.38604634066709603,
+        "code_generation": 0.997002999,
+        "factual_knowledge": 0.5357897526400439,
+        "logical_consistency": 0.6526964294101629,
+        "creative_writing": 0.36339533452096406,
+        "general": 0.997002999
+      },
+      "n_capabilities": 6
+    }
+  },
+  "ranking": [
+    [
+      "gpt-5.5",
+      0.01087094723806383
+    ],
+    [
+      "gemini-2.5-flash",
+      0.014051818815484507
+    ],
+    [
+      "deepseek-chat",
+      0.028110257813765378
+    ],
+    [
+      "deepseek-v4-flash",
+      0.034959608685221265
+    ],
+    [
+      "llama-4-maverick",
+      0.045263954898031845
+    ],
+    [
+      "deepseek-v4-pro",
+      0.055247299523265146
+    ],
+    [
+      "llama-4-scout",
+      0.0606378209058252
+    ],
+    [
+      "gpt-4o-mini retest",
+      0.08848613155619972
+    ],
+    [
+      "gpt-4o-mini",
+      0.08848613155619972
+    ],
+    [
+      "meta-llama_llama-3_1-70b-instruct",
+      0.0924797440794401
+    ],
+    [
+      "gpt-4o-mini alt seeds",
+      0.0937711138958328
+    ],
+    [
+      "meta-llama_llama-3_1-8b-instruct",
+      0.09419159971673403
+    ],
+    [
+      "gpt-4o",
+      0.09854234334687854
+    ],
+    [
+      "deepseek-reasoner",
+      0.10379524757022013
+    ],
+    [
+      "claude-sonnet-4-6",
+      0.10554868170776172
+    ],
+    [
+      "claude-opus-4-6",
+      0.11963765071658077
+    ],
+    [
+      "claude-haiku-4-5-20251001",
+      0.1467693553941845
+    ],
+    [
+      "gpt-4o-mini s36",
+      0.15541064471078905
+    ],
+    [
+      "claude-opus-4-7",
+      0.16353372352921397
+    ]
+  ],
+  "key_findings": {
+    "range": "0.0109 - 0.1635",
+    "best": "gpt-5.5",
+    "worst": "claude-opus-4-7",
+    "universal_bottleneck": "creative_writing (15/16 models)",
+    "sole_exception": "gemini-2.5-flash (math_reasoning bottleneck)",
+    "test_retest_cv": "0% (0.0885 = 0.0885)",
+    "temperature_robustness": "Δ<0.014 across T∈[0.0,1.0]",
+    "p3_neural_validation": "λ_C=+0.0415, R²=0.884"
+  }
+}

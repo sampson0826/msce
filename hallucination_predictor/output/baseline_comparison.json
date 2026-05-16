@@ -1,0 +1,40 @@
+{
+  "methods": {
+    "constraint_residual": {
+      "name": "Constraint Residual (Ours)",
+      "auc": 0.3406593406593406,
+      "precision": 0.3,
+      "recall": 0.42857142857142855,
+      "f1": 0.35294117647058826,
+      "latency_ms": 7960.844647884369,
+      "extra_cost": "1x inference"
+    },
+    "attention_entropy": {
+      "name": "Attention Entropy",
+      "auc": 0.37362637362637363,
+      "precision": 0.2,
+      "recall": 0.2857142857142857,
+      "f1": 0.23529411764705882,
+      "latency_ms": 7855.819547176361,
+      "extra_cost": "1x inference"
+    },
+    "response_length": {
+      "name": "Response Length (simple)",
+      "auc": 0.434065934065934,
+      "precision": 0.25,
+      "recall": 0.2857142857142857,
+      "f1": 0.26666666666666666,
+      "latency_ms": 7407.641279697418,
+      "extra_cost": "1x inference"
+    },
+    "selfcheck": {
+      "name": "SelfCheckGPT (3x)",
+      "auc": 0.3333333333333333,
+      "precision": 0.25,
+      "recall": 0.3333333333333333,
+      "f1": 0.2857142857142857,
+      "latency_ms": 17541.309475898743,
+      "extra_cost": "3x inference"
+    }
+  }
+}

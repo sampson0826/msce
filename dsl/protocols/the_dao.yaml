@@ -1,0 +1,56 @@
+# The DAO (2016) — Reentrancy as Type III dark zone
+# Mutual cancellation: withdraw_limit ∇ ≈ -call_mechanism ∇ at recursion midpoint
+protocol: the_dao
+description: >
+  Decentralized Autonomous Organization. The exploit drained ~3.6M ETH via
+  recursive withdrawal. Two correct constraints (withdraw limit, EVM call
+  mechanism) have opposing gradients at the recursion midpoint while the
+  balance sync constraint is at its inflection point (strong value, zero gradient).
+
+state_space:
+  - name: recursion_depth
+    range: [0, 1]
+    description: 0 = normal single call, 1 = deep recursive re-entry
+  - name: balance_consistency
+    range: [0, 1]
+    description: 0 = balance not yet updated post-transfer, 1 = fully synced
+
+constraints:
+  - name: withdraw_limit
+    layer: L1
+    domain: tokenomics
+    fn: gaussian
+    center: [0.2, 0.5]
+    width: [0.25, 0.4]
+    description: >
+      Prevents withdrawing more than proportional token share.
+      Strongest at low recursion depth — resists state moving toward deeper recursion.
+
+  - name: call_mechanism
+    layer: L1
+    domain: evm_platform
+    fn: gaussian
+    center: [0.8, 0.5]
+    width: [0.25, 0.4]
+    description: >
+      EVM's native ability to make nested contract calls. Not a bug — a platform feature.
+      Strongest at high recursion depth — enables state to move deeper.
+
+  - name: balance_sync
+    layer: L1
+    domain: accounting
+    fn: gaussian
+    center: [0.5, 0.5]
+    width: [0.2, 0.2]
+    scale: -0.85
+    description: >
+      Balance accounting consistency: totalEther must equal sum of individual balances.
+      Strong VALUE at the recursion midpoint but zero GRADIENT — knows something is wrong
+      but cannot tell which direction to push.
+
+scan:
+  cancellation_eps: 0.15
+  individual_min: 0.3
+
+dark_zone_type: mutual_cancellation
+cancellation_signature: "c(p) → 0, Σ||∇σ|| ≫ 0"

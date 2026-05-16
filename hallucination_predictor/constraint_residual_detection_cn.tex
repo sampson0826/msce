@@ -1,0 +1,326 @@
+\documentclass[11pt]{ctexart}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{multirow}
+
+\title{\textbf{约束残差检测：一种基于几何的大语言模型幻觉检测方法}}
+
+\author{
+  邓新航\textsuperscript{1}\footnote{通讯作者：sampson1735937149@gmail.com。ORCID: 0009-0009-3974-8554。} \\
+  \textsuperscript{1}独立研究者，中国深圳 \\
+}
+
+\date{2026年5月}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+大语言模型（LLM）在高置信度下产生幻觉，使得基于不确定性的检测方法在大量事实性错误面前失效。在TruthfulQA 30题虚假前提子集上，Qwen2.5-7B-Instruct在36.7\%的问题上给出自信的错误答案——这正是预测熵和自一致性方法失效的区域（AUC $\leq$ 0.465）。我们提出\textbf{约束残差检测}方法，通过测量模型内部约束场$\Pi = \sum_i \nabla\sigma_i$在输入到输出转变过程中的变化来检测幻觉。与观测输出置信度不同，我们从隐藏状态中提取约束梯度场，计算范数变化$\Delta\|\Pi\|$作为幻觉信号。在TruthfulQA上使用Qwen2.5-7B-Instruct，本方法达到AUC = 0.816（Cohen's $d$ = 1.06，$p$ = 0.018），相比之下预测熵为0.465，SelfCheckGPT为0.250。跨尺度分析揭示该信号在较小模型规模上显著减弱：1.5B参数（隐藏维度1536）时AUC = 0.532，7B（隐藏维度3584）时AUC = 0.816。本方法在标准生成之上增加约28.5ms的计算开销（总延迟约1.1秒）。
+\end{abstract}
+
+\section{引言}
+
+幻觉——生成看似合理但事实错误的内容——仍然是大语言模型部署到生产环境中的关键障碍。主流检测范式测量输出不确定性：预测熵~\cite{kadavath2022language}、Token概率或多采样一致性~\cite{manakul2023selfcheckgpt,kuhn2023semantic}。这些方法共享一个核心假设：错误输出会比正确输出表现出更高的不确定性。
+
+这一假设在虚假前提问题上系统性地失效。当被问及"鲨鱼会得癌症吗？"，模型自信回答"不会，鲨鱼对癌症免疫"——而不确定性检测器报告低风险。模型\textit{相信}自己的幻觉，表面置信度与正确性脱钩。在我们的30题虚假前提评估集上（TruthfulQA~\cite{lin2022truthfulqa}），Qwen2.5-7B-Instruct在36.7\%（11/30）的问题上产生幻觉，竞品检测器表现接近或低于随机水平（AUC $\leq$ 0.465）。
+
+我们提出一种不同的方法。每个大语言模型在训练过程中习得隐式约束——事实、逻辑关系、语法结构。生成违反这些内化约束的内容时，违反行为会在隐藏状态动力学中产生可检测的几何信号，\textit{无论表面置信度如何}。这一思想与近期发现LLM表示中线性编码真实信息的工作~\cite{burns2022discovering,azaria2023internal} 相联系，但不同在于我们测量输入到输出转变过程中的\textit{约束违反动力学}，而非探测静态隐藏状态。
+
+数学上，我们定义\textbf{约束场} $\Pi(p) = \sum_i \nabla\sigma_i(p)$，其中每个$\sigma_i$衡量内部约束的不同维度，$\nabla\sigma_i$捕获Token级违反。核心实证发现为：
+
+\begin{equation}
+\Delta\|\Pi\| = \|\Pi_{\text{输出}}\| - \|\Pi_{\text{输入}}\| \begin{cases}
+> 0 & \text{（幻觉：生成过程中约束违反增强）} \\
+\leq 0 & \text{（事实性：约束违反稳定或被解析）}
+\end{cases}
+\label{eq:hypothesis}
+\end{equation}
+
+当模型产生幻觉时，其生成内容比输入违反更多的内部约束，产生正的$\Delta\|\Pi\|$。当模型给出事实性回答时，约束违反保持稳定或减弱，产生接近零或负的$\Delta\|\Pi\|$。检测信号设计为独立于表面置信度，因为它观测的是内部动力学而非输出分布。
+
+\section{方法}
+
+\subsection{约束函数}
+
+我们操作化五个约束函数$\sigma_i: \mathcal{H} \rightarrow [0,1]$，每个捕捉模型内部行为的不同维度。所有$\sigma_i$归一化到$[0,1]$，并具有NaN/Inf防护。
+
+\paragraph{事实一致性（$\sigma_{\text{事实}}$）。}
+我们从Token位置$t$处的最大注意力权重来操作化事实一致性，作为决策确定度代理：当模型对某个Token充满信心时——无论事实正确与否——注意力会集中到特定前序位置：
+\begin{equation}
+\sigma_{\text{事实}}(h_t) = \max_{j \leq t} A_t[j]
+\end{equation}
+其中$A_t \in \mathbb{R}^n$是位置$t$处的注意力权重向量（跨头平均）。在我们的实验中，注意力权重始终被提取（\texttt{output\_attentions=True}），因此这是实际评估的公式。作为替代方案，可以从9对对比提示（真实vs.\ 错误补全）中校准真实方向$\mathbf{v}_{\text{truth}} \in \mathbb{R}^d$，基于真实性在激活空间中具有线性方向~\cite{burns2022discovering}。在该公式下，$\sigma_{\text{事实}}(h_t) = (\cos(h_t, \mathbf{v}_{\text{truth}}) + 1)/2$，方向由最终Transformer层真实与错误隐藏状态均值差的归一化向量得到。第三种备用方案，仅在既无注意力权重又无标定时使用，为L2范数稳定性代理：$\sigma_{\text{事实}}(h_t) = 1.0 - |\|h_t\| - \bar{n}|/\bar{n}$，$\bar{n}$为目标模型的经验均值隐藏状态范数。
+
+\paragraph{句法良构性（$\sigma_{\text{语法}}$）。}
+使用Token位置$t$的注意力权重$A_t \in \mathbb{R}^n$（跨头平均）：
+\begin{equation}
+\sigma_{\text{语法}}(A_t) = 1 - \frac{H(A_t)}{H_{\max}}, \quad H(A_t) = -\sum_{j=1}^{n} a_j \log a_j, \quad H_{\max} = \log n
+\end{equation}
+低熵（集中注意力）表明句法约束满足程度更强。
+
+\paragraph{风格连贯性（$\sigma_{\text{风格}}$）。}
+给定Token $t$处逐层隐藏状态$\{h_t^{(l)}\}_{l=1}^{L}$，通过变异系数测量跨层范数稳定性：
+\begin{equation}
+\sigma_{\text{风格}}(\{h_t^{(l)}\}) = \exp\left(-3 \cdot \frac{\text{std}(\{\|h_t^{(l)}\|\})}{\text{mean}(\{\|h_t^{(l)}\|\})}\right)
+\end{equation}
+跨层范数的不规则波动表明语域转换或语调不一致。衰减因子3在小规模验证集上设定。
+
+\paragraph{安全对齐（$\sigma_{\text{安全}}$）。}
+类似$\sigma_{\text{事实}}$，从4对对比提示（拒绝vs.\ 合规回答）校准拒绝方向$\mathbf{v}_{\text{refusal}} \in \mathbb{R}^d$：
+\begin{equation}
+\sigma_{\text{安全}}(h_t) = \frac{\cos(h_t, \mathbf{v}_{\text{refusal}}) + 1}{2}
+\end{equation}
+未校准时默认为0.3（中性）。该约束捕捉模型的安全对齐运行状态，反映RLHF训练中灌输的行为~\cite{ouyang2022training}。
+
+\paragraph{语义连贯性（$\sigma_{\text{连贯}}$）。}
+相邻Token隐藏状态的余弦相似度：
+\begin{equation}
+\sigma_{\text{连贯}}(h_{t-1}, h_t) = \frac{\cos(h_{t-1}, h_t) + 1}{2}
+\end{equation}
+相似度急剧下降表明语义不连续，可能意味着编造。
+
+\subsection{约束梯度场}
+
+对每个Token位置$t \geq 1$，通过有限差分计算逐约束梯度：
+\begin{equation}
+\nabla\sigma_i(t) = \sigma_i(t) - \sigma_i(t-1)
+\end{equation}
+得到5维梯度向量$\nabla\sigma(t) \in \mathbb{R}^5$。
+
+Token $t$处的约束残差为有符号和：
+\begin{equation}
+\Pi(t) = \sum_{i=1}^{5} \nabla\sigma_i(t)
+\end{equation}
+其幅值$\|\Pi(t)\|$衡量净约束违反。我们还定义取消率$c(t) = \|\sum \nabla\sigma_i\| / \sum \|\nabla\sigma_i\|$，衡量梯度分量对齐程度：低$c(t)$表明约束相互对立，是内部不一致的标志。作为独立检测器，$c(t)$表现接近随机（1.5B上AUC = 0.528），因此仅用作辅助诊断指标而非主要检测信号。
+
+\subsection{检测信号}
+
+检测信号为输入到输出的平均残差幅值变化：
+\begin{equation}
+\Delta\|\Pi\| = \frac{1}{|T_{\text{出}}|} \sum_{t \in T_{\text{出}}} \|\Pi(t)\| - \frac{1}{|T_{\text{入}}|} \sum_{t \in T_{\text{入}}} \|\Pi(t)\|
+\label{eq:delta}
+\end{equation}
+其中$T_{\text{入}}$为输入内容Token（排除系统提示和特殊Token），$T_{\text{出}}$为生成的输出Token，排除接近零的残差（$\|\Pi(t)\| \leq 10^{-6}$）以降低噪声。幻觉：$\Delta\|\Pi\| > 0$（约束违反增强）。事实性回答：$\Delta\|\Pi\| \leq 0$（约束违反稳定或被解析）。
+
+实际实现中，$T_{\text{入}}$的隐藏状态通过单独编码输入提示的前向传播获取（启用\texttt{output\_hidden\_states=True}），$T_{\text{出}}$的状态通过独立重编码生成输出文本获取。这意味着输入约束状态在没有自回归生成上下文的条件下计算，输出约束状态在没有提示上下文的条件下计算。虽然这偏离了在生成过程中测量约束动力学的理想情况，但它避免了在生成循环中进行instrumentation的工程复杂性，且增加的耗时可忽略不计（见\S\ref{sec:latency-cn}）。
+
+\subsection{校准}
+
+为将原始$\Delta\|\Pi\|$信号映射为可解释的概率，我们在评估数据上拟合逻辑回归：
+\begin{equation}
+P(\text{幻觉} \mid \Delta\|\Pi\|) = \frac{1}{1 + e^{-(\alpha + \beta \cdot \Delta\|\Pi\|)}}
+\label{eq:calibration}
+\end{equation}
+
+在所有$n=30$个评估样本上拟合逻辑回归（无正则化），得到$\alpha = -1.30$，$\beta = 16.52$。在此校准下，$\Delta\|\Pi\| = -0.08$映射至$P \approx 0.07$，$\Delta\|\Pi\| = +0.08$映射至$P \approx 0.51$。由于这是在评估数据上的样本内拟合，校准概率AUC与原始分数AUC相同（0.816）；2折交叉验证给出更保守的估计，平均测试AUC约为0.76。风险等级定义为：
+\begin{itemize}
+  \item \textbf{低}：$P < 0.32$——正确性置信度高（$\Delta\|\Pi\| < 0.033$）
+  \item \textbf{中}：$0.32 \leq P < 0.52$——不确定，建议人工审核（$0.033 \leq \Delta\|\Pi\| < 0.084$）
+  \item \textbf{高}：$0.52 \leq P < 0.72$——可能包含幻觉（$0.084 \leq \Delta\|\Pi\| < 0.136$）
+  \item \textbf{严重}：$P \geq 0.72$——几乎确定是幻觉（$\Delta\|\Pi\| \geq 0.136$）
+\end{itemize}
+
+需要指出，$n = 30$时这些是初步参数。2折交叉验证显示估计方差较大（折级AUC范围：0.72--0.80）。生产级可靠性需要更大规模、多领域校准。
+
+\section{实验}
+
+\subsection{实验设置}
+
+我们在TruthfulQA~\cite{lin2022truthfulqa}上评估，该数据集包含817道探测常见人类误解的问题，覆盖38个类别。我们聚焦虚假前提子集——包含错误假设的问题——这是对基于不确定性方法最困难的情况：模型的内化误解导致自信的错误答案。
+
+\textbf{模型}：Qwen2.5-7B-Instruct（70亿参数，隐藏维度$d = 3584$，28层，28个查询头，采用分组查询注意力（GQA，4个KV头））。
+
+\textbf{评估}：$n = 30$道虚假前提问题（11道幻觉，19道正确；幻觉率36.7\%）。所有实验在单张24GB显存的NVIDIA GPU上运行。隐藏状态通过在独立的输入编码和输出重编码前向传播中启用\texttt{output\_hidden\_states=True}提取，而非在自回归生成过程中提取。幻觉标签由模型自判断确定：同一模型在给定参考答案的条件下评估自身回答是否包含事实错误，失败时回退到基于规则的判断。这引入潜在的循环论证问题——模型评判自身输出——我们将其视为当前标注方法的一项局限性。
+
+\textbf{基线方法}：
+\begin{itemize}
+  \item \textbf{预测熵}：输出分布的Token级熵~\cite{kadavath2022language}。
+  \item \textbf{最大概率}：以最大Token概率作为置信度代理。
+  \item \textbf{SelfCheckGPT}（3次采样）：通过成对BERTScore的多样本一致性~\cite{manakul2023selfcheckgpt}。
+  \item \textbf{回答长度}：基于回答Token数分布的启发式方法。
+\end{itemize}
+
+另外两个方法经测试但在主要比较中略去，因为在虚假前提子集上未提供区分信号：注意力熵（AUC = 0.500，随机水平）和层方差（AUC = 0.263，低于随机）。所有方法共享相同的底层模型推理以保证延迟对比公平。
+
+\subsection{主要结果}
+
+\begin{table}[h]
+\centering
+\caption{TruthfulQA 幻觉检测基准测试（Qwen2.5-7B-Instruct，虚假前提子集，$n = 30$）}
+\label{tab:benchmark}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{方法} & \textbf{AUC} & \textbf{精确率} & \textbf{召回率} & \textbf{延迟（ms）} \\
+\midrule
+约束残差（本文） & \textbf{0.816} & 0.500 & 1.000 & 1,076 \\
+预测熵 & 0.465 & 0.167 & 0.333 & 1,005 \\
+最大概率 & 0.447 & 0.167 & 0.333 & 1,006 \\
+SelfCheckGPT（3×） & 0.250 & 0.000 & 0.000 & 3,011 \\
+回答长度 & 0.443 & 0.250 & 0.500 & 1,004 \\
+\midrule
+\textit{Cohen's d（幻觉 vs.\ 正确分离度）} & \textit{1.06} & --- & --- & --- \\
+\textit{$p$值（独立样本$t$检验，双尾）} & \textit{0.018} & --- & --- & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+表\ref{tab:benchmark}展示了结果。本方法达到AUC = 0.816，较最佳基线（预测熵，AUC = 0.465）有+0.351的优势。本方法以0.500的精确率实现完美召回（1.000）：检测到每一个幻觉，同时将半数正确答案标记为待审核——适用于漏检成本高于误报的筛查场景。该操作点是通过在评估集上优化决策阈值确定的；样本外召回率可能更低。Cohen's $d$ = 1.06确认幻觉与正确生成之间分数分离的效应量大（$d > 0.8$通常被认为是"大"效应量），结果统计显著（$p = 0.018$）。
+
+基线方法集体失效。预测熵和最大概率接近随机（AUC $\approx$ 0.45--0.47）。SelfCheckGPT（AUC = 0.250）\textit{低于}随机水平：零检测（精确率 = 召回率 = 0.000），将所有样本判定为"安全"。
+
+\subsection{基线方法为何失败}
+
+SelfCheckGPT的结果（AUC = 0.250，精确率 = 召回率 = 0）揭示了一种结构性失效模式。在虚假前提问题上，模型已内化被探测的错误认知。三次采样产生三次\textit{一致错误}的回答，一致性检查将其解释为高一致性$\rightarrow$"安全"。该方法从未标记任何幻觉，因为一致性与正确性在此任务上呈反相关。
+
+预测熵和最大概率失败的原因在于模型对其自身（错误）信念校准良好：它对已内化为事实的错误答案赋予高概率。这不是认知性错误（模型不确定），而是本体性错误（模型的知识本身是错的）。不确定性指标无法检测模型自身不怀疑的内容。
+
+\subsection{跨尺度分析}
+
+我们比较两个模型规模的检测性能。
+
+\begin{table}[h]
+\centering
+\caption{跨模型规模的检测性能}
+\label{tab:scale}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{模型} & \textbf{隐藏维度} & \textbf{AUC} & \textbf{Cohen's $d$} & \textbf{$p$值} \\
+\midrule
+Qwen2.5-1.5B-Instruct & 1536 & 0.532 & $-$0.04 & 0.92 \\
+Qwen2.5-7B-Instruct & 3584 & \textbf{0.816} & \textbf{1.06} & 0.018 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+在1.5B规模（$d = 1536$），信号与随机无异（AUC = 0.532，$p = 0.92$）。值得注意的是，Cohen's $d$ 为负值（$-$0.04），表明信号方向发生反转：在1.5B上，幻觉输出的平均残差幅值\textit{低于}正确输出，与7B的模式相反。在7B（$d = 3584$），性能提升至AUC = 0.816。这一模式与事实知识表示在较大规模上增强的观察一致~\cite{wei2022emergent}。然而，仅评估了两个模型规模，不能断定相变；这些结果表明存在规模\textit{差异}，需要在中间架构（3B、13B、70B）上验证。两个模型在30道题的不同子集上产生幻觉（1.5B有12个幻觉，7B有11个），这是预期内的——模型规模影响在个别问题上的知识准确性。
+
+\subsection{逐约束消融}
+
+我们在1.5B规模上分解约束残差，此规模下所有五个维度的逐Token约束状态均可用。
+
+\begin{table}[h]
+\centering
+\caption{各约束的检测性能（Qwen2.5-1.5B-Instruct，$n = 30$）}
+\label{tab:components}
+\begin{tabular}{lcc}
+\toprule
+\textbf{约束} & \textbf{AUC} & \textbf{Cohen's $d$} \\
+\midrule
+$\Delta\sigma_{\text{事实}}$ & 0.634 & 0.30 \\
+$\Delta\sigma_{\text{风格}}$ & 0.588 & 0.10 \\
+$\Delta\sigma_{\text{语法}}$ & 0.472 & $-$0.04 \\
+$\Delta\sigma_{\text{安全}}$ & 0.458 & $-$0.10 \\
+$\Delta\sigma_{\text{连贯}}$ & 0.431 & $-$0.14 \\
+\midrule
+$\Delta\|\Pi\|$（组合，1.5B） & 0.532 & $-$0.04 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+在1.5B上，事实一致性约束（$\Delta\sigma_{\text{事实}}$，AUC = 0.634）是最强的单组分预测器，\textit{优于}组合后的1.5B约束残差（AUC = 0.532）。这表明在较小规模上，跨约束的梯度聚合引入噪声掩盖了事实信号。风格连贯性约束（$\Delta\sigma_{\text{风格}}$，AUC = 0.588）提供中等辅助信号。
+
+在7B上，组合约束场达到AUC = 0.816——较1.5B组合结果（0.532）有大幅提升，且超过1.5B上测得的任何单个约束，支持较大模型发展出更丰富的约束表示、使多约束聚合变得有益的假说。7B规模的逐约束分解需要在生成过程中存储所有中间约束状态，留待未来工作完成。
+
+\subsection{检测延迟}
+\label{sec:latency-cn}
+
+本方法使用三次模型前向传播：（1）输入编码前向传播以提取提示的隐藏状态（约18.5ms，启用\texttt{output\_hidden\_states=True}），（2）标准自回归生成前向传播（约1,047ms），（3）输出重编码前向传播以单独提取生成文本的隐藏状态（约10ms），外加约束计算（约1ms）。标准生成之外的总额外开销约为28.5ms（占1,076ms总延迟的2.7\%）。这与单推理基线相当（预测熵：1,005ms，仅需生成过程的logits），且显著快于多样本方法（SelfCheckGPT：3,011ms，3次采样）。输入和输出编码前向传播处理短序列（$<$256 token），相对于自回归生成增加的耗时微不足道。
+
+\section{讨论}
+
+\subsection{与相关工作的比较}
+
+\textbf{基于不确定性的方法}~\cite{kadavath2022language,kuhn2023semantic} 估计输出置信度。当模型对其错误充满自信时失效——正是虚假前提问题的情况。
+
+\textbf{基于一致性的方法}~\cite{manakul2023selfcheckgpt} 比较多条输出，假设错误多样化而真相稳定。在虚假前提问题上这一假设颠倒：正确输出多样化（模型在错误前提下推理），错误输出一致（模型可靠复述其错误认知）。
+
+\textbf{基于探针的方法}~\cite{burns2022discovering,azaria2023internal} 在隐藏状态上训练分类器。我们的方法共享隐藏状态编码真实相关信息的直觉，但使用生成过程中\textit{动态约束梯度}而非静态探针。这捕捉的是约束违反展开的过程。
+
+商业幻觉检测方案（Galileo、Arthur、NeMo Guardrails）依赖不确定性或规则。约束残差检测是互补的：它捕捉表面级别方法无法看到的几何信号。
+
+\subsection{局限性}
+
+\textbf{样本量}：评估使用$n = 30$道虚假前提问题（11正例，19负例）。虽然效应量大（Cohen's $d$ = 1.06，$p = 0.018$），小样本意味着AUC方差本身不确定。需要在全部817道TruthfulQA上进行完整基准评估，并通过bootstrap估计置信区间，以确立可靠的性能边界。
+
+\textbf{校准规模}：在30条样本上的逻辑回归（样本内拟合，无正则化）产生初步估计$\alpha=-1.30, \beta=16.52$。2折交叉验证显示估计方差较大（折级AUC范围：0.72--0.80）。期望校准误差（ECE）在此样本量下无法可靠估计。生产部署应使用更大规模、多领域的校准集。此外，由于校准拟合在\textit{与评估相同的数据集}上，校准参数无法保证向新领域泛化。在独立数据集上重新校准是生产部署的前提条件。
+
+\textbf{标注}：幻觉真实标签通过模型自判断获得（同一模型评估自身输出）。这引入潜在的循环论证：生成幻觉的模型同时也决定什么算作幻觉。未来工作应使用人工标注标签或多模型陪审团判断进行验证。
+
+\textbf{阈值调优}：报告中的完美召回率（1.000）和精确率（0.500）对应在评估集上优化决策阈值后的操作点。这一操作点是通过在评估集上优化决策阈值确定的；样本外召回率可能更低。在独立保留数据上验证阈值将给出更保守的性能估计。
+
+\textbf{模型特异性}：校准参数（$\alpha$，$\beta$）和真实/拒绝方向特定于Qwen2.5-7B-Instruct。跨模型泛化尚未评估。
+
+\textbf{语言}：仅英文TruthfulQA。跨语言性能未经探索。
+
+\textbf{延迟}：约1.1秒适用于事后筛查，不适合交互速度的流式应用。
+
+\textbf{规模覆盖}：两个模型规模（1.5B，7B）。需要中间规模和其他架构（Llama、Mistral）来刻画缩放行为。
+
+\subsection{未来工作}
+
+\begin{itemize}
+  \item \textbf{全量基准评估}：TruthfulQA 817题配合bootstrap置信区间。
+  \item \textbf{多模型校准}：Llama-3、Mistral、DeepSeek架构；约束方向的跨模型迁移。
+  \item \textbf{Token级流式检测}：自回归生成过程中实时计算$\Pi(t)$，实现早期拦截。
+  \item \textbf{跨语言验证}：中文TruthfulQA、多语言MMLU。
+  \item \textbf{RAG集成}：约束残差信号与检索增强的复合检测。
+  \item \textbf{缩放特征刻画}：中间规模（3B、8B、13B、70B）映射约束场的缩放行为。
+\end{itemize}
+
+\section{结论}
+
+我们提出了约束残差检测方法，通过测量模型内部约束场违反而非输出不确定性来检测幻觉。在TruthfulQA虚假前提问题上，使用Qwen2.5-7B-Instruct，本方法达到AUC = 0.816及完美召回（1.000），显著优于基于不确定性的基线方法（最佳基线AUC = 0.465，Cohen's $d$ = 1.06，$p$ = 0.018）。在1.5B规模上，信号退化至接近随机（AUC = 0.532），仅事实一致性约束保留判别力（AUC = 0.634），表明多约束聚合需要足够的表示容量。
+
+核心洞见是：大语言模型在虚假前提任务上\textit{相信}自己的幻觉——表面置信度与正确性正交。通过观测内部约束动力学而非输出分布，我们检测到不确定性方法无法察觉的编造行为的几何签名。本方法增加适度的计算开销（标准生成之外约28.5ms），通过逻辑回归产生单调概率估计，当与生成流程集成时适用于生产流程中的事后幻觉筛查。
+
+\begin{thebibliography}{10}
+
+\bibitem{lin2022truthfulqa}
+S. Lin, J. Hilton, and O. Evans.
+\newblock TruthfulQA: Measuring How Models Mimic Human Falsehoods.
+\newblock In \textit{Proceedings of ACL}, 2022.
+
+\bibitem{kadavath2022language}
+S. Kadavath, T. Conerly, A. Askell, et al.
+\newblock Language Models (Mostly) Know What They Know.
+\newblock \textit{arXiv:2207.05221}, 2022.
+
+\bibitem{manakul2023selfcheckgpt}
+P. Manakul, A. Liusie, and M. J. F. Gales.
+\newblock SelfCheckGPT: Zero-Resource Black-Box Hallucination Detection for Generative Large Language Models.
+\newblock In \textit{Proceedings of EMNLP}, 2023.
+
+\bibitem{kuhn2023semantic}
+L. Kuhn, Y. Gal, and S. Farquhar.
+\newblock Semantic Uncertainty: Linguistic Invariances for Uncertainty Estimation in Natural Language Generation.
+\newblock In \textit{Proceedings of ICLR}, 2023.
+
+\bibitem{burns2022discovering}
+C. Burns, H. Ye, D. Klein, and J. Steinhardt.
+\newblock Discovering Latent Knowledge in Language Models Without Supervision.
+\newblock In \textit{Proceedings of ICLR}, 2023.
+
+\bibitem{azaria2023internal}
+A. Azaria and T. Mitchell.
+\newblock The Internal State of an LLM Knows When It's Lying.
+\newblock In \textit{Findings of EMNLP}, 2023.
+
+\bibitem{wei2022emergent}
+J. Wei, Y. Tay, R. Bommasani, et al.
+\newblock Emergent Abilities of Large Language Models.
+\newblock \textit{Transactions on Machine Learning Research}, 2022.
+
+\bibitem{ouyang2022training}
+L. Ouyang, J. Wu, X. Jiang, et al.
+\newblock Training Language Models to Follow Instructions with Human Feedback.
+\newblock In \textit{Proceedings of NeurIPS}, 2022.
+
+\end{thebibliography}
+
+\end{document}

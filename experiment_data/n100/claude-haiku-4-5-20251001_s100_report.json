@@ -1,0 +1,1029 @@
+{
+  "report_metadata": {
+    "generated_at": "2026-05-14T16:32:17.931451",
+    "framework_version": "0.1.0"
+  },
+  "data_summary": {
+    "n_samples": 400,
+    "n_generations": 4,
+    "capabilities": [
+      "math_reasoning",
+      "code_generation",
+      "factual_knowledge",
+      "logical_consistency",
+      "creative_writing",
+      "general"
+    ],
+    "generation_summary": {
+      "0": {
+        "n_samples": 100,
+        "models": [
+          "human"
+        ],
+        "capability_tags": [
+          "factual_knowledge",
+          "creative_writing",
+          "math_reasoning",
+          "logical_consistency",
+          "code_generation",
+          "general"
+        ]
+      },
+      "1": {
+        "n_samples": 100,
+        "models": [
+          "claude-haiku-4-5-20251001"
+        ],
+        "capability_tags": [
+          "factual_knowledge",
+          "creative_writing",
+          "math_reasoning",
+          "logical_consistency",
+          "code_generation",
+          "general"
+        ]
+      },
+      "2": {
+        "n_samples": 100,
+        "models": [
+          "claude-haiku-4-5-20251001"
+        ],
+        "capability_tags": [
+          "factual_knowledge",
+          "creative_writing",
+          "math_reasoning",
+          "logical_consistency",
+          "code_generation",
+          "general"
+        ]
+      },
+      "3": {
+        "n_samples": 100,
+        "models": [
+          "claude-haiku-4-5-20251001"
+        ],
+        "capability_tags": [
+          "factual_knowledge",
+          "creative_writing",
+          "math_reasoning",
+          "logical_consistency",
+          "code_generation",
+          "general"
+        ]
+      }
+    }
+  },
+  "decay_analysis": {
+    "trajectories": [
+      {
+        "capability": "math_reasoning",
+        "trajectory": [
+          {
+            "generation": 0,
+            "S_n": 1.0,
+            "beta": 0.27186292188301,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.33,
+              "E-II": 0.33,
+              "E-III": 0.34
+            },
+            "cancellation_ratio": 3.808807004976727e-18
+          },
+          {
+            "generation": 1,
+            "S_n": 0.72813707811699,
+            "beta": 0.27186292188301,
+            "status": "degrading",
+            "executor_composition": {
+              "E-I": 0.002979938965527716,
+              "E-II": 0.9970200610344724,
+              "E-III": 0.0
+            },
+            "cancellation_ratio": 0.023593938114631938
+          },
+          {
+            "generation": 2,
+            "S_n": 0.5301836045287476,
+            "beta": 0.27186292188301,
+            "status": "degrading",
+            "executor_composition": {
+              "E-I": 0.0,
+              "E-II": 0.9983452105818131,
+              "E-III": 0.0016547894181867641
+            },
+            "cancellation_ratio": 0.04082958650043167
+          },
+          {
+            "generation": 3,
+            "S_n": 0.38604634066709603,
+            "beta": 0.27186292188301,
+            "status": "critical",
+            "executor_composition": {
+              "E-I": 0.0,
+              "E-II": 0.0057481916172169535,
+              "E-III": 0.9942518083827829
+            },
+            "cancellation_ratio": 0.049167467889190054
+          }
+        ],
+        "predicted_collapse_gen": 4,
+        "current_status": "critical",
+        "fit_model": "exponential",
+        "fit_r2": 0.9541015956319918,
+        "fit_target": "total_constraint"
+      },
+      {
+        "capability": "code_generation",
+        "trajectory": [
+          {
+            "generation": 0,
+            "S_n": 1.0,
+            "beta": 0.001,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.33,
+              "E-II": 0.33,
+              "E-III": 0.34
+            },
+            "cancellation_ratio": 0.0
+          },
+          {
+            "generation": 1,
+            "S_n": 0.999,
+            "beta": 0.001,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.305030127809416,
+              "E-II": 0.5411028114390548,
+              "E-III": 0.15386706075152917
+            },
+            "cancellation_ratio": 0.023954989672928844
+          },
+          {
+            "generation": 2,
+            "S_n": 0.998001,
+            "beta": 0.001,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.33,
+              "E-II": 0.33,
+              "E-III": 0.34
+            },
+            "cancellation_ratio": 0.005188923824413
+          },
+          {
+            "generation": 3,
+            "S_n": 0.997002999,
+            "beta": 0.001,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.0,
+              "E-II": 0.0004715879748047345,
+              "E-III": 0.9995284120251953
+            },
+            "cancellation_ratio": 0.03895470056081382
+          }
+        ],
+        "predicted_collapse_gen": -1,
+        "current_status": "healthy",
+        "fit_model": "exponential",
+        "fit_r2": 0.0002276944487862309,
+        "fit_target": "total_constraint"
+      },
+      {
+        "capability": "factual_knowledge",
+        "trajectory": [
+          {
+            "generation": 0,
+            "S_n": 1.0,
+            "beta": 0.18779660397079312,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.13288391519547355,
+              "E-II": 0.8671160848045264,
+              "E-III": 0.0
+            },
+            "cancellation_ratio": 1.3410251123726876e-17
+          },
+          {
+            "generation": 1,
+            "S_n": 0.8122033960292069,
+            "beta": 0.18779660397079312,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.9934528301132473,
+              "E-II": 0.006547169886752669,
+              "E-III": 0.0
+            },
+            "cancellation_ratio": 0.017443249731340933
+          },
+          {
+            "generation": 2,
+            "S_n": 0.6596743565213766,
+            "beta": 0.18779660397079312,
+            "status": "degrading",
+            "executor_composition": {
+              "E-I": 0.0,
+              "E-II": 0.0005059971059209655,
+              "E-III": 0.999494002894079
+            },
+            "cancellation_ratio": 0.06065653225873084
+          },
+          {
+            "generation": 3,
+            "S_n": 0.5357897526400439,
+            "beta": 0.18779660397079312,
+            "status": "degrading",
+            "executor_composition": {
+              "E-I": 3.0723899525565197e-06,
+              "E-II": 0.19809569778500186,
+              "E-III": 0.8019012298250456
+            },
+            "cancellation_ratio": 0.05036067078875354
+          }
+        ],
+        "predicted_collapse_gen": 6,
+        "current_status": "degrading",
+        "fit_model": "exponential",
+        "fit_r2": 0.3341853456839031,
+        "fit_target": "total_constraint"
+      },
+      {
+        "capability": "logical_consistency",
+        "trajectory": [
+          {
+            "generation": 0,
+            "S_n": 1.0,
+            "beta": 0.13256472533554753,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.33,
+              "E-II": 0.33,
+              "E-III": 0.34
+            },
+            "cancellation_ratio": 9.482697933733845e-18
+          },
+          {
+            "generation": 1,
+            "S_n": 0.8674352746644525,
+            "beta": 0.13256472533554753,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.33,
+              "E-II": 0.33,
+              "E-III": 0.34
+            },
+            "cancellation_ratio": 0.015031051657682823
+          },
+          {
+            "generation": 2,
+            "S_n": 0.7524439557321941,
+            "beta": 0.13256472533554753,
+            "status": "degrading",
+            "executor_composition": {
+              "E-I": 0.33,
+              "E-II": 0.33,
+              "E-III": 0.34
+            },
+            "cancellation_ratio": 0.011266621880621603
+          },
+          {
+            "generation": 3,
+            "S_n": 0.6526964294101629,
+            "beta": 0.13256472533554753,
+            "status": "degrading",
+            "executor_composition": {
+              "E-I": 0.005906481831351943,
+              "E-II": 0.9936989264744571,
+              "E-III": 0.00039459169419092573
+            },
+            "cancellation_ratio": 0.003383597707011267
+          }
+        ],
+        "predicted_collapse_gen": 9,
+        "current_status": "degrading",
+        "fit_model": "exponential",
+        "fit_r2": 0.2225099427037075,
+        "fit_target": "total_constraint"
+      },
+      {
+        "capability": "creative_writing",
+        "trajectory": [
+          {
+            "generation": 0,
+            "S_n": 1.0,
+            "beta": 0.2863918811757564,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.9983604238311574,
+              "E-II": 0.0016395761688426007,
+              "E-III": 0.0
+            },
+            "cancellation_ratio": 0.07304510251958068
+          },
+          {
+            "generation": 1,
+            "S_n": 0.7136081188242436,
+            "beta": 0.2863918811757564,
+            "status": "degrading",
+            "executor_composition": {
+              "E-I": 0.0,
+              "E-II": 1.0,
+              "E-III": 0.0
+            },
+            "cancellation_ratio": 0.038970854722814786
+          },
+          {
+            "generation": 2,
+            "S_n": 0.5092365472518757,
+            "beta": 0.2863918811757564,
+            "status": "degrading",
+            "executor_composition": {
+              "E-I": 0.0,
+              "E-II": 0.0,
+              "E-III": 1.0
+            },
+            "cancellation_ratio": 0.03662465821082982
+          },
+          {
+            "generation": 3,
+            "S_n": 0.36339533452096406,
+            "beta": 0.2863918811757564,
+            "status": "critical",
+            "executor_composition": {
+              "E-I": 0.0,
+              "E-II": 0.9706897778331035,
+              "E-III": 0.02931022216689651
+            },
+            "cancellation_ratio": 0.024732345701815678
+          }
+        ],
+        "predicted_collapse_gen": 4,
+        "current_status": "critical",
+        "fit_model": "exponential",
+        "fit_r2": 0.8825955830486578,
+        "fit_target": "total_constraint"
+      },
+      {
+        "capability": "general",
+        "trajectory": [
+          {
+            "generation": 0,
+            "S_n": 1.0,
+            "beta": 0.001,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.33,
+              "E-II": 0.33,
+              "E-III": 0.34
+            },
+            "cancellation_ratio": 0.1324965711207394
+          },
+          {
+            "generation": 1,
+            "S_n": 0.999,
+            "beta": 0.001,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.33,
+              "E-II": 0.33,
+              "E-III": 0.34
+            },
+            "cancellation_ratio": 0.08736155632968488
+          },
+          {
+            "generation": 2,
+            "S_n": 0.998001,
+            "beta": 0.001,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.0,
+              "E-II": 0.018502704812051345,
+              "E-III": 0.9814972951879486
+            },
+            "cancellation_ratio": 0.023925541741574265
+          },
+          {
+            "generation": 3,
+            "S_n": 0.997002999,
+            "beta": 0.001,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.9305484348104959,
+              "E-II": 0.06945156518950421,
+              "E-III": 0.0
+            },
+            "cancellation_ratio": 0.024655797556649543
+          }
+        ],
+        "predicted_collapse_gen": -1,
+        "current_status": "healthy",
+        "fit_model": "exponential",
+        "fit_r2": 0.023976770608587716,
+        "fit_target": "total_constraint"
+      }
+    ],
+    "global_beta": 0.1467693553941845,
+    "collapse_order": [
+      {
+        "capability": "code_generation",
+        "trajectory": [
+          {
+            "generation": 0,
+            "S_n": 1.0,
+            "beta": 0.001,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.33,
+              "E-II": 0.33,
+              "E-III": 0.34
+            },
+            "cancellation_ratio": 0.0
+          },
+          {
+            "generation": 1,
+            "S_n": 0.999,
+            "beta": 0.001,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.305030127809416,
+              "E-II": 0.5411028114390548,
+              "E-III": 0.15386706075152917
+            },
+            "cancellation_ratio": 0.023954989672928844
+          },
+          {
+            "generation": 2,
+            "S_n": 0.998001,
+            "beta": 0.001,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.33,
+              "E-II": 0.33,
+              "E-III": 0.34
+            },
+            "cancellation_ratio": 0.005188923824413
+          },
+          {
+            "generation": 3,
+            "S_n": 0.997002999,
+            "beta": 0.001,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.0,
+              "E-II": 0.0004715879748047345,
+              "E-III": 0.9995284120251953
+            },
+            "cancellation_ratio": 0.03895470056081382
+          }
+        ],
+        "predicted_collapse_gen": -1,
+        "current_status": "healthy",
+        "fit_model": "exponential",
+        "fit_r2": 0.0002276944487862309,
+        "fit_target": "total_constraint"
+      },
+      {
+        "capability": "general",
+        "trajectory": [
+          {
+            "generation": 0,
+            "S_n": 1.0,
+            "beta": 0.001,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.33,
+              "E-II": 0.33,
+              "E-III": 0.34
+            },
+            "cancellation_ratio": 0.1324965711207394
+          },
+          {
+            "generation": 1,
+            "S_n": 0.999,
+            "beta": 0.001,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.33,
+              "E-II": 0.33,
+              "E-III": 0.34
+            },
+            "cancellation_ratio": 0.08736155632968488
+          },
+          {
+            "generation": 2,
+            "S_n": 0.998001,
+            "beta": 0.001,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.0,
+              "E-II": 0.018502704812051345,
+              "E-III": 0.9814972951879486
+            },
+            "cancellation_ratio": 0.023925541741574265
+          },
+          {
+            "generation": 3,
+            "S_n": 0.997002999,
+            "beta": 0.001,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.9305484348104959,
+              "E-II": 0.06945156518950421,
+              "E-III": 0.0
+            },
+            "cancellation_ratio": 0.024655797556649543
+          }
+        ],
+        "predicted_collapse_gen": -1,
+        "current_status": "healthy",
+        "fit_model": "exponential",
+        "fit_r2": 0.023976770608587716,
+        "fit_target": "total_constraint"
+      },
+      {
+        "capability": "math_reasoning",
+        "trajectory": [
+          {
+            "generation": 0,
+            "S_n": 1.0,
+            "beta": 0.27186292188301,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.33,
+              "E-II": 0.33,
+              "E-III": 0.34
+            },
+            "cancellation_ratio": 3.808807004976727e-18
+          },
+          {
+            "generation": 1,
+            "S_n": 0.72813707811699,
+            "beta": 0.27186292188301,
+            "status": "degrading",
+            "executor_composition": {
+              "E-I": 0.002979938965527716,
+              "E-II": 0.9970200610344724,
+              "E-III": 0.0
+            },
+            "cancellation_ratio": 0.023593938114631938
+          },
+          {
+            "generation": 2,
+            "S_n": 0.5301836045287476,
+            "beta": 0.27186292188301,
+            "status": "degrading",
+            "executor_composition": {
+              "E-I": 0.0,
+              "E-II": 0.9983452105818131,
+              "E-III": 0.0016547894181867641
+            },
+            "cancellation_ratio": 0.04082958650043167
+          },
+          {
+            "generation": 3,
+            "S_n": 0.38604634066709603,
+            "beta": 0.27186292188301,
+            "status": "critical",
+            "executor_composition": {
+              "E-I": 0.0,
+              "E-II": 0.0057481916172169535,
+              "E-III": 0.9942518083827829
+            },
+            "cancellation_ratio": 0.049167467889190054
+          }
+        ],
+        "predicted_collapse_gen": 4,
+        "current_status": "critical",
+        "fit_model": "exponential",
+        "fit_r2": 0.9541015956319918,
+        "fit_target": "total_constraint"
+      },
+      {
+        "capability": "creative_writing",
+        "trajectory": [
+          {
+            "generation": 0,
+            "S_n": 1.0,
+            "beta": 0.2863918811757564,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.9983604238311574,
+              "E-II": 0.0016395761688426007,
+              "E-III": 0.0
+            },
+            "cancellation_ratio": 0.07304510251958068
+          },
+          {
+            "generation": 1,
+            "S_n": 0.7136081188242436,
+            "beta": 0.2863918811757564,
+            "status": "degrading",
+            "executor_composition": {
+              "E-I": 0.0,
+              "E-II": 1.0,
+              "E-III": 0.0
+            },
+            "cancellation_ratio": 0.038970854722814786
+          },
+          {
+            "generation": 2,
+            "S_n": 0.5092365472518757,
+            "beta": 0.2863918811757564,
+            "status": "degrading",
+            "executor_composition": {
+              "E-I": 0.0,
+              "E-II": 0.0,
+              "E-III": 1.0
+            },
+            "cancellation_ratio": 0.03662465821082982
+          },
+          {
+            "generation": 3,
+            "S_n": 0.36339533452096406,
+            "beta": 0.2863918811757564,
+            "status": "critical",
+            "executor_composition": {
+              "E-I": 0.0,
+              "E-II": 0.9706897778331035,
+              "E-III": 0.02931022216689651
+            },
+            "cancellation_ratio": 0.024732345701815678
+          }
+        ],
+        "predicted_collapse_gen": 4,
+        "current_status": "critical",
+        "fit_model": "exponential",
+        "fit_r2": 0.8825955830486578,
+        "fit_target": "total_constraint"
+      },
+      {
+        "capability": "factual_knowledge",
+        "trajectory": [
+          {
+            "generation": 0,
+            "S_n": 1.0,
+            "beta": 0.18779660397079312,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.13288391519547355,
+              "E-II": 0.8671160848045264,
+              "E-III": 0.0
+            },
+            "cancellation_ratio": 1.3410251123726876e-17
+          },
+          {
+            "generation": 1,
+            "S_n": 0.8122033960292069,
+            "beta": 0.18779660397079312,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.9934528301132473,
+              "E-II": 0.006547169886752669,
+              "E-III": 0.0
+            },
+            "cancellation_ratio": 0.017443249731340933
+          },
+          {
+            "generation": 2,
+            "S_n": 0.6596743565213766,
+            "beta": 0.18779660397079312,
+            "status": "degrading",
+            "executor_composition": {
+              "E-I": 0.0,
+              "E-II": 0.0005059971059209655,
+              "E-III": 0.999494002894079
+            },
+            "cancellation_ratio": 0.06065653225873084
+          },
+          {
+            "generation": 3,
+            "S_n": 0.5357897526400439,
+            "beta": 0.18779660397079312,
+            "status": "degrading",
+            "executor_composition": {
+              "E-I": 3.0723899525565197e-06,
+              "E-II": 0.19809569778500186,
+              "E-III": 0.8019012298250456
+            },
+            "cancellation_ratio": 0.05036067078875354
+          }
+        ],
+        "predicted_collapse_gen": 6,
+        "current_status": "degrading",
+        "fit_model": "exponential",
+        "fit_r2": 0.3341853456839031,
+        "fit_target": "total_constraint"
+      },
+      {
+        "capability": "logical_consistency",
+        "trajectory": [
+          {
+            "generation": 0,
+            "S_n": 1.0,
+            "beta": 0.13256472533554753,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.33,
+              "E-II": 0.33,
+              "E-III": 0.34
+            },
+            "cancellation_ratio": 9.482697933733845e-18
+          },
+          {
+            "generation": 1,
+            "S_n": 0.8674352746644525,
+            "beta": 0.13256472533554753,
+            "status": "healthy",
+            "executor_composition": {
+              "E-I": 0.33,
+              "E-II": 0.33,
+              "E-III": 0.34
+            },
+            "cancellation_ratio": 0.015031051657682823
+          },
+          {
+            "generation": 2,
+            "S_n": 0.7524439557321941,
+            "beta": 0.13256472533554753,
+            "status": "degrading",
+            "executor_composition": {
+              "E-I": 0.33,
+              "E-II": 0.33,
+              "E-III": 0.34
+            },
+            "cancellation_ratio": 0.011266621880621603
+          },
+          {
+            "generation": 3,
+            "S_n": 0.6526964294101629,
+            "beta": 0.13256472533554753,
+            "status": "degrading",
+            "executor_composition": {
+              "E-I": 0.005906481831351943,
+              "E-II": 0.9936989264744571,
+              "E-III": 0.00039459169419092573
+            },
+            "cancellation_ratio": 0.003383597707011267
+          }
+        ],
+        "predicted_collapse_gen": 9,
+        "current_status": "degrading",
+        "fit_model": "exponential",
+        "fit_r2": 0.2225099427037075,
+        "fit_target": "total_constraint"
+      }
+    ],
+    "_method": "pre-registered: exponential + total_constraint"
+  },
+  "executor_diagnoses": [
+    {
+      "capability": "math_reasoning",
+      "diagnosis": {
+        "degradation_type": "E-II_loss",
+        "severity": 0.779621179995185,
+        "intervention_type": "add_calibration_data",
+        "recommended_data_sources": [
+          "human preference comparisons",
+          "calibrated scoring data",
+          "diverse style exemplars"
+        ],
+        "confidence": 0.7,
+        "description": "E-II executor degradation: scale/calibration constraints weakening.",
+        "helmholtz_scalar_potential": 3.243409450430747,
+        "helmholtz_vector_potential": 0.2942316893945359
+      },
+      "current_stability": 0.38604634066709603,
+      "current_beta": 0.27186292188301,
+      "current_status": "critical",
+      "executor_composition": {
+        "E-I": 0.0,
+        "E-II": 0.0057481916172169535,
+        "E-III": 0.9942518083827829
+      },
+      "dark_zone_detected": true,
+      "intervention_urgency": "immediate",
+      "summary": "Primary: E-II executor loss. Scale calibration degrading. Stability S_3 = 0.386, β = 0.272. WARNING: Type III dark zone detected—constraint cancellation masking degradation. Recommended: add_calibration_data → human preference comparisons, calibrated scoring data."
+    },
+    {
+      "capability": "code_generation",
+      "diagnosis": {
+        "degradation_type": "E-III_loss",
+        "severity": 0.7808503947397694,
+        "intervention_type": "add_boundary_data",
+        "recommended_data_sources": [
+          "edge case examples",
+          "domain-specific boundary data",
+          "rare scenario demonstrations"
+        ],
+        "confidence": 0.7,
+        "description": "E-III executor degradation: boundary condition constraints weakening — slowest but still concerning.",
+        "helmholtz_scalar_potential": 3.2605309965005156,
+        "helmholtz_vector_potential": 0.30256186790388656
+      },
+      "current_stability": 0.997002999,
+      "current_beta": 0.001,
+      "current_status": "healthy",
+      "executor_composition": {
+        "E-I": 0.0,
+        "E-II": 0.0004715879748047345,
+        "E-III": 0.9995284120251953
+      },
+      "dark_zone_detected": true,
+      "intervention_urgency": "immediate",
+      "summary": "Primary: E-III executor loss. Boundary conditions degrading—slowest but still concerning. Stability S_3 = 0.997, β = 0.001. WARNING: Type III dark zone detected—constraint cancellation masking degradation. Recommended: add_boundary_data → edge case examples, domain-specific boundary data."
+    },
+    {
+      "capability": "factual_knowledge",
+      "diagnosis": {
+        "degradation_type": "E-II_loss",
+        "severity": 0.7904270771142553,
+        "intervention_type": "add_calibration_data",
+        "recommended_data_sources": [
+          "human preference comparisons",
+          "calibrated scoring data",
+          "diverse style exemplars"
+        ],
+        "confidence": 0.7,
+        "description": "E-II executor degradation: scale/calibration constraints weakening.",
+        "helmholtz_scalar_potential": 3.6094884666592764,
+        "helmholtz_vector_potential": 0.16212031862822734
+      },
+      "current_stability": 0.5357897526400439,
+      "current_beta": 0.18779660397079312,
+      "current_status": "degrading",
+      "executor_composition": {
+        "E-I": 3.0723899525565197e-06,
+        "E-II": 0.19809569778500186,
+        "E-III": 0.8019012298250456
+      },
+      "dark_zone_detected": true,
+      "intervention_urgency": "immediate",
+      "summary": "Primary: E-II executor loss. Scale calibration degrading. Stability S_3 = 0.536, β = 0.188. WARNING: Type III dark zone detected—constraint cancellation masking degradation. Recommended: add_calibration_data → human preference comparisons, calibrated scoring data."
+    },
+    {
+      "capability": "logical_consistency",
+      "diagnosis": {
+        "degradation_type": "E-II_loss",
+        "severity": 0.7817006605000401,
+        "intervention_type": "add_calibration_data",
+        "recommended_data_sources": [
+          "human preference comparisons",
+          "calibrated scoring data",
+          "diverse style exemplars"
+        ],
+        "confidence": 0.7,
+        "description": "E-II executor degradation: scale/calibration constraints weakening.",
+        "helmholtz_scalar_potential": 3.463718955149759,
+        "helmholtz_vector_potential": 0.11714694343984025
+      },
+      "current_stability": 0.6526964294101629,
+      "current_beta": 0.13256472533554753,
+      "current_status": "degrading",
+      "executor_composition": {
+        "E-I": 0.005906481831351943,
+        "E-II": 0.9936989264744571,
+        "E-III": 0.00039459169419092573
+      },
+      "dark_zone_detected": true,
+      "intervention_urgency": "immediate",
+      "summary": "Primary: E-II executor loss. Scale calibration degrading. Stability S_3 = 0.653, β = 0.133. WARNING: Type III dark zone detected—constraint cancellation masking degradation. Recommended: add_calibration_data → human preference comparisons, calibrated scoring data."
+    },
+    {
+      "capability": "creative_writing",
+      "diagnosis": {
+        "degradation_type": "E-II_loss",
+        "severity": 0.7848041546855198,
+        "intervention_type": "add_calibration_data",
+        "recommended_data_sources": [
+          "human preference comparisons",
+          "calibrated scoring data",
+          "diverse style exemplars"
+        ],
+        "confidence": 0.7,
+        "description": "E-II executor degradation: scale/calibration constraints weakening.",
+        "helmholtz_scalar_potential": 3.249171820292019,
+        "helmholtz_vector_potential": 0.39775804277588916
+      },
+      "current_stability": 0.36339533452096406,
+      "current_beta": 0.2863918811757564,
+      "current_status": "critical",
+      "executor_composition": {
+        "E-I": 0.0,
+        "E-II": 0.9706897778331035,
+        "E-III": 0.02931022216689651
+      },
+      "dark_zone_detected": true,
+      "intervention_urgency": "immediate",
+      "summary": "Primary: E-II executor loss. Scale calibration degrading. Stability S_3 = 0.363, β = 0.286. WARNING: Type III dark zone detected—constraint cancellation masking degradation. Recommended: add_calibration_data → human preference comparisons, calibrated scoring data."
+    },
+    {
+      "capability": "general",
+      "diagnosis": {
+        "degradation_type": "E-II_loss",
+        "severity": 0.7864459019504191,
+        "intervention_type": "add_calibration_data",
+        "recommended_data_sources": [
+          "human preference comparisons",
+          "calibrated scoring data",
+          "diverse style exemplars"
+        ],
+        "confidence": 0.7,
+        "description": "E-II executor degradation: scale/calibration constraints weakening.",
+        "helmholtz_scalar_potential": 3.4971663863199063,
+        "helmholtz_vector_potential": 0.1854878410310947
+      },
+      "current_stability": 0.997002999,
+      "current_beta": 0.001,
+      "current_status": "healthy",
+      "executor_composition": {
+        "E-I": 0.9305484348104959,
+        "E-II": 0.06945156518950421,
+        "E-III": 0.0
+      },
+      "dark_zone_detected": true,
+      "intervention_urgency": "immediate",
+      "summary": "Primary: E-II executor loss. Scale calibration degrading. Stability S_3 = 0.997, β = 0.001. WARNING: Type III dark zone detected—constraint cancellation masking degradation. Recommended: add_calibration_data → human preference comparisons, calibrated scoring data."
+    }
+  ],
+  "cascade_analysis": {},
+  "interventions": [
+    {
+      "intervention_type": "add_calibration_data",
+      "affected_capabilities": [
+        "math_reasoning",
+        "factual_knowledge",
+        "logical_consistency",
+        "creative_writing",
+        "general"
+      ],
+      "recommended_data_sources": [
+        "human preference comparisons",
+        "calibrated scoring data",
+        "diverse style exemplars"
+      ]
+    },
+    {
+      "intervention_type": "add_boundary_data",
+      "affected_capabilities": [
+        "code_generation"
+      ],
+      "recommended_data_sources": [
+        "edge case examples",
+        "domain-specific boundary data",
+        "rare scenario demonstrations"
+      ]
+    }
+  ],
+  "warnings": [
+    {
+      "type": "capability_critical",
+      "severity": "warning",
+      "capability": "math_reasoning",
+      "message": "math_reasoning approaching collapse (S=0.386 at gen 3)."
+    },
+    {
+      "type": "capability_critical",
+      "severity": "warning",
+      "capability": "creative_writing",
+      "message": "creative_writing approaching collapse (S=0.363 at gen 3)."
+    },
+    {
+      "type": "dark_zone_detected",
+      "severity": "critical",
+      "capability": "math_reasoning",
+      "message": "Type III dark zone at gen 0 in math_reasoning: c=0.000—constraint structure being hollowed out unseen."
+    },
+    {
+      "type": "dark_zone_detected",
+      "severity": "critical",
+      "capability": "code_generation",
+      "message": "Type III dark zone at gen 0 in code_generation: c=0.000—constraint structure being hollowed out unseen."
+    },
+    {
+      "type": "dark_zone_detected",
+      "severity": "critical",
+      "capability": "factual_knowledge",
+      "message": "Type III dark zone at gen 0 in factual_knowledge: c=0.000—constraint structure being hollowed out unseen."
+    },
+    {
+      "type": "dark_zone_detected",
+      "severity": "critical",
+      "capability": "logical_consistency",
+      "message": "Type III dark zone at gen 0 in logical_consistency: c=0.000—constraint structure being hollowed out unseen."
+    },
+    {
+      "type": "dark_zone_detected",
+      "severity": "critical",
+      "capability": "creative_writing",
+      "message": "Type III dark zone at gen 0 in creative_writing: c=0.073—constraint structure being hollowed out unseen."
+    },
+    {
+      "type": "dark_zone_detected",
+      "severity": "critical",
+      "capability": "general",
+      "message": "Type III dark zone at gen 1 in general: c=0.087—constraint structure being hollowed out unseen."
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+# Compound Finance — Constraint Topology Model
+#
+# Key finding from real code analysis:
+# Oracle price validation uses if/return (weak) not require() (strong).
+# The only oracle check is price != 0 — no staleness, no deviation, no bounds.
+# This creates a soft oracle boundary that high-magnitude manipulation can breach.
+
+protocol: compound_finance
+description: |
+  Compound Finance Comptroller constraint topology.
+  Oracle price guard uses if/return (not require), and only checks price != 0.
+  Missing: price staleness, price deviation bounds, TWAP comparison.
+  This is a Type II cold_start_gap in the oracle constraint.
+
+state_space:
+  - name: capital_efficiency
+    range: [0, 1]
+    description: 0=idle → 1=max-leveraged
+  - name: oracle_reliability
+    range: [0, 1]
+    description: 0=manipulated → 1=accurate
+
+constraints:
+  # ── collateral factor (LTV check) ──
+  - name: collateral_factor
+    fn: gaussian
+    domain: tokenomics
+    center: [0.25, 0.5]
+    width: [0.18, 0.35]
+    scale: 3.0
+
+  # ── borrow cap ──
+  - name: borrow_cap
+    fn: gaussian
+    domain: tokenomics
+    center: [0.35, 0.5]
+    width: [0.2, 0.35]
+    scale: 2.5
+
+  # ── liquidation incentive ──
+  - name: liquidation_incentive
+    fn: gaussian
+    domain: tokenomics
+    center: [0.12, 0.35]
+    width: [0.1, 0.28]
+    scale: 3.0
+
+  # ── pause/guardian gates ──
+  - name: guardian_pause
+    fn: sigmoid
+    domain: risk
+    axis: x
+    center: 0.65
+    width: 0.05
+    scale: 1.5
+
+  # ── access control ──
+  - name: access_control
+    fn: sigmoid
+    domain: access_control
+    axis: x
+    center: 0.7
+    width: 0.05
+    scale: 2.0
+
+  # ── oracle price guard ──
+  # WEAK CONSTRAINT: modeled with low scale + narrow width
+  # In real code: if (price == 0) return error; — no staleness/deviation check
+  # This is the Type II cold_start_gap: the constraint exists but is too weak
+  - name: oracle_price_guard
+    fn: gaussian
+    domain: oracle
+    center: [0.5, 0.2]
+    width: [0.3, 0.15]
+    scale: 0.5
+    certainty: 0.3
+    description: "WEAK: only checks price != 0, uses if/return (not require)"
+
+  # Missing constraint — what should exist:
+  # oracle_staleness_check: require(block.timestamp - updatedAt < STALENESS_THRESHOLD)
+  # oracle_price_bounds: require(price > minPrice && price < maxPrice)
+
+scan:
+  cancellation_eps: 0.15
+  individual_min: 0.25
+
+dark_zone_type: cold_start_gap
+dark_zone_species: II
+missing_executors:
+  - name: oracle_staleness_check
+    reason: "No require() for price staleness. Oracle price can be stale without constraint resistance."
+  - name: oracle_price_bounds
+    reason: "No require() for price bounds. Oracle manipulation beyond != 0 has zero constraint resistance."

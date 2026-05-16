@@ -1,0 +1,30 @@
+{
+  "deepseek-v4-pro": {
+    "model": "deepseek-v4-pro",
+    "family": "DeepSeek",
+    "global_beta": 0.055247299523265146,
+    "per_cap_beta": {},
+    "per_cap_sn": {}
+  },
+  "meta-llama/llama-4-maverick": {
+    "model": "meta-llama/llama-4-maverick",
+    "family": "Llama",
+    "global_beta": 0.045263954898031845,
+    "per_cap_beta": {},
+    "per_cap_sn": {}
+  },
+  "deepseek-v4-flash": {
+    "model": "deepseek-v4-flash",
+    "family": "DeepSeek",
+    "global_beta": 0.034959608685221265,
+    "per_cap_beta": {},
+    "per_cap_sn": {}
+  },
+  "meta-llama/llama-4-scout": {
+    "model": "meta-llama/llama-4-scout",
+    "family": "Llama",
+    "global_beta": 0.0606378209058252,
+    "per_cap_beta": {},
+    "per_cap_sn": {}
+  }
+}

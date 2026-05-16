@@ -1,0 +1,100 @@
+Metadata-Version: 2.4
+Name: decay-eval
+Version: 0.1.0
+Summary: Measure LLM recursive stability via constraint residual beta
+Author-email: Deng Xinhang <dengxinhang@example.com>
+License: MIT
+Project-URL: Homepage, https://github.com/constraint-residual/decay-monitor
+Project-URL: Repository, https://github.com/constraint-residual/decay-monitor
+Keywords: llm,evaluation,stability,recursive-generation,decay,constraint-residual,benchmark
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.20.0
+Requires-Dist: httpx>=0.25.0
+Requires-Dist: certifi>=2023.0.0
+Provides-Extra: server
+Requires-Dist: fastapi>=0.100.0; extra == "server"
+Requires-Dist: uvicorn>=0.20.0; extra == "server"
+Requires-Dist: python-multipart>=0.0.5; extra == "server"
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: matplotlib>=3.5.0; extra == "dev"
+
+# decay-eval
+
+**Measure LLM recursive stability via constraint residual beta.**
+
+[![PyPI - Version](https://img.shields.io/pypi/v/decay-eval)](https://pypi.org/project/decay-eval/)
+[![arXiv](https://img.shields.io/badge/arXiv-coming_soon-b31b1b)](https://arxiv.org/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![GPU free](https://img.shields.io/badge/GPU%20free-yes-success.svg)]()
+
+When AI generates data to train the next AI, quality degrades. decay-eval tells you **what** is breaking -- logic, style, or facts -- and recommends the fix. No GPU needed.
+
+## Quick Install
+
+```bash
+pip install decay-eval
+```
+
+## Quick Start
+
+```python
+from synthetic_decay_monitor import (
+    DecayEngine, HybridConstraintExtractor,
+    generate_synthetic_lineage, generate_json_report,
+)
+
+# 1. Create or load data lineage
+lineage = generate_synthetic_lineage(
+    ["Prove sqrt(2) is irrational.", "Explain photosynthesis."],
+    n_generations=4,
+)
+
+# 2. Run decay analysis (CPU-only, <1 second)
+engine = DecayEngine(lineage, HybridConstraintExtractor())
+engine.run_all_capabilities()
+
+# 3. Get results
+for t in engine.get_all_trajectories():
+    print(f"{t['capability']}: beta={t['beta']:.3f}, collapse gen {t['predicted_collapse_gen']}")
+```
+
+Or via CLI:
+
+```bash
+decay-eval --preset qwen --generations 4
+```
+
+## What it measures
+
+Traditional metrics (perplexity, BERTScore) only tell you **that** quality dropped. decay-eval tells you **why**:
+
+| Executor | What breaks | Alpha | Signature |
+|----------|-------------|-------|-----------|
+| **E-I** Axiom | Logic chains, reasoning | 0.40 | "therefore", "because" vanish |
+| **E-II** Scale | Vocabulary, style | 0.20 | Bigram repetition, filler words multiply |
+| **E-III** Boundary | Facts, names, numbers | 0.08 | Proper nouns erode, numbers randomize |
+
+## Citation
+
+```bibtex
+@software{decay_eval_2026,
+  author = {Deng, Xinhang},
+  title = {decay-eval: Measure LLM recursive stability via constraint residual beta},
+  year = {2026},
+  url = {https://github.com/constraint-residual/decay-monitor}
+}
+```
+
+## License
+
+MIT -- Deng Xinhang, 2026.

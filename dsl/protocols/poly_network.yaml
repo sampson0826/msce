@@ -1,0 +1,70 @@
+# Poly Network Cross-Chain Attack (2021) — Hierarchical cross-layer dark zone
+# Missing L1→L2 executor: nothing prevents verified payloads from modifying keepers
+protocol: poly_network
+description: >
+  Cross-chain interoperability protocol. Attacker crafted a cross-chain message
+  whose payload changed the keeper keys. Verification passed (message format valid),
+  but the payload execution had no sandbox — it could modify the verification
+  infrastructure itself. A missing executor between L1 (verification) and L2 (access).
+
+state_space:
+  - name: verification_integrity
+    range: [0, 1]
+    description: 0 = attacker controls keepers, 1 = legitimate keepers
+  - name: access_boundary
+    range: [0, 1]
+    description: 0 = payload can touch infrastructure, 1 = strong sandbox
+
+constraints:
+  - name: verification
+    layer: L1
+    domain: cross_chain
+    fn: gaussian
+    center: [0.75, 0.5]
+    width: [0.25, 0.4]
+    description: >
+      Cross-chain message verification via keeper threshold signatures.
+      Strong when legitimate keepers are in control.
+
+  - name: access_control
+    layer: L2
+    domain: access
+    fn: gaussian
+    center: [0.5, 0.25]
+    width: [0.35, 0.25]
+    description: >
+      Keeper management access control. Should prevent unauthorized keeper changes.
+      Strong when access boundary is intact.
+
+  - name: payload_isolation
+    layer: L1
+    domain: cross_chain_to_access
+    fn: gaussian
+    center: [0.5, 0.5]
+    width: [0.35, 0.35]
+    scale: 0.05
+    certainty: 0.05
+    description: >
+      MISSING EXECUTOR. Should prevent cross-chain message payloads from modifying
+      verification infrastructure. In the actual protocol, this constraint does
+      not exist — creating a hierarchical dark zone between L1 and L2.
+
+executors:
+  - name: coupler
+    from_layer: L1
+    to_layer: L2
+    type: E-I
+    transmits: verification
+    receives: access_control
+    certainty: 0.05
+    description: >
+      MISSING. Should couple cross-chain verification to access control,
+      ensuring verified payloads cannot modify the verification keys.
+      With certainty raised to 0.9, the dark zone is broken.
+
+scan:
+  cancellation_eps: 0.2
+  individual_min: 0.2
+
+dark_zone_type: hierarchical
+cancellation_signature: "c(p) → 0, Σ||∇σ|| ≫ 0, cross-layer L1↛L2"

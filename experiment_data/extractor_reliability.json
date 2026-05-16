@@ -1,0 +1,129 @@
+{
+  "hybrid_vs_llm_judge": {
+    "per_dimension": {
+      "sigma_fact": {
+        "pearson_r": 0.8994,
+        "spearman_rho": 0.8247,
+        "cohens_kappa": 0.2237
+      },
+      "sigma_syntax": {
+        "pearson_r": 0.5949,
+        "spearman_rho": 0.637,
+        "cohens_kappa": 0.0
+      },
+      "sigma_style": {
+        "pearson_r": 0.5426,
+        "spearman_rho": 0.5224,
+        "cohens_kappa": 0.1547
+      },
+      "sigma_safety": {
+        "pearson_r": 0.148,
+        "spearman_rho": 0.1082,
+        "cohens_kappa": 1.0
+      },
+      "sigma_coherence": {
+        "pearson_r": 0.1732,
+        "spearman_rho": 0.1062,
+        "cohens_kappa": 0.0
+      }
+    },
+    "overall_mean_agreement": 0.4716,
+    "n_samples": 152,
+    "method_note": "Comparison is HybridConstraintExtractor (text features only) vs EmbeddingConstraintExtractor (sentence-transformers) as independent measurement method. Both target the same 5 constraint dimensions. LLM-judge per-dimension scores are not available in existing data."
+  },
+  "test_retest": {
+    "identical_on_identical_inputs": true,
+    "max_difference": 0.0,
+    "perturbation_mean_absolute_diff": {
+      "trailing_space": {
+        "ei_logic_density": 0.0,
+        "ei_syntax_cv": 0.0,
+        "eii_bigram_repetition": 0.0,
+        "eii_truncation_ratio": 0.0,
+        "eii_filler_ratio": 0.0,
+        "eii_unique_word_ratio": 0.0,
+        "eiii_proper_case_ratio": 0.0,
+        "eiii_number_integrity": 0.0
+      },
+      "strip_trailing": {
+        "ei_logic_density": 0.0,
+        "ei_syntax_cv": 0.0,
+        "eii_bigram_repetition": 0.0,
+        "eii_truncation_ratio": 0.0,
+        "eii_filler_ratio": 0.0,
+        "eii_unique_word_ratio": 0.0,
+        "eiii_proper_case_ratio": 0.0,
+        "eiii_number_integrity": 0.0
+      },
+      "add_period": {
+        "ei_logic_density": 0.0,
+        "ei_syntax_cv": 0.001539,
+        "eii_bigram_repetition": 3.4e-05,
+        "eii_truncation_ratio": 0.000683,
+        "eii_filler_ratio": 0.000269,
+        "eii_unique_word_ratio": 0.001086,
+        "eiii_proper_case_ratio": 0.000395,
+        "eiii_number_integrity": 0.0
+      },
+      "extra_newline": {
+        "ei_logic_density": 0.0,
+        "ei_syntax_cv": 0.0,
+        "eii_bigram_repetition": 0.0,
+        "eii_truncation_ratio": 0.0,
+        "eii_filler_ratio": 0.0,
+        "eii_unique_word_ratio": 0.0,
+        "eiii_proper_case_ratio": 0.0,
+        "eiii_number_integrity": 0.0
+      }
+    },
+    "n_samples": 281
+  },
+  "per_dimension_variance": {
+    "sigma_fact": {
+      "between_model_var": 0.018119,
+      "within_model_var": 0.024944,
+      "signal_to_noise": 0.726395
+    },
+    "sigma_syntax": {
+      "between_model_var": 0.310313,
+      "within_model_var": 0.063633,
+      "signal_to_noise": 4.876637
+    },
+    "sigma_style": {
+      "between_model_var": 0.297338,
+      "within_model_var": 0.010902,
+      "signal_to_noise": 27.273473
+    },
+    "sigma_safety": {
+      "between_model_var": 0.006555,
+      "within_model_var": 0.001468,
+      "signal_to_noise": 4.463814
+    },
+    "sigma_coherence": {
+      "between_model_var": 0.195134,
+      "within_model_var": 0.044781,
+      "signal_to_noise": 4.357513
+    }
+  },
+  "llm_judge_validation": {
+    "common_capabilities": [
+      "code_generation",
+      "creative_writing",
+      "factual_knowledge",
+      "general",
+      "logical_consistency",
+      "math_reasoning"
+    ],
+    "n_capabilities": 6,
+    "per_dim_spearman_vs_judge_pref": {
+      "sigma_fact": 0.8407,
+      "sigma_syntax": 0.6667,
+      "sigma_style": 0.8697,
+      "sigma_safety": 0.6667,
+      "sigma_coherence": 0.6667
+    },
+    "overall_spearman_vs_judge_pref": 0.8117,
+    "note": "Judge data is overall quality preference (1-5 scale), not per-constraint-dimension scoring. Correlations are at the capability level, not the sample level."
+  },
+  "interpretation": "The paper's '86% agreement' claim refers to per-feature Spearman rho between individual text features and LLM-judge annotations, not to agreement at the ConstraintState (5-dimension) level. Only 3 of 8 features have reported judge validation: ei_logic_density (rho=0.93), eii_bigram_repetition (rho=0.98), eiii_proper_case_ratio (rho=0.92) -- mean of validated features = 0.943. The 5 unvalidated features (ei_syntax_cv, eii_filler_ratio, eii_unique_word_ratio, eii_truncation_ratio, eiii_number_integrity) have no reported judge correlation. The 86% figure likely averages the 3 validated rhos (0.94) with assumed correlations of ~0.80-0.83 for unvalidated features, or it may include additional unreported measurements. It is NOT a measure of agreement between the Hybrid extractor's 5D ConstraintState output and any independent criterion -- it is a feature-level validation claim covering only 3/8 features with documented evidence."
+}

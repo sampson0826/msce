@@ -1,0 +1,335 @@
+{
+  "judge_model": "gpt-4o",
+  "test_model": "gpt-4o-mini",
+  "n_pairs": 60,
+  "pairs_per_cap": 10,
+  "mean_gen1_preference": 3.6333333333333333,
+  "spearman_vs_Sn": -0.19999999999999996,
+  "spearman_vs_beta": -0.19999999999999996,
+  "per_cap_judge_pref": {
+    "code_generation": 4.0,
+    "creative_writing": 3.5,
+    "factual_knowledge": 4.0,
+    "general": 3.8,
+    "logical_consistency": 3.2,
+    "math_reasoning": 3.3
+  },
+  "per_cap_Sn": {
+    "math_reasoning": 0.8814899034529463,
+    "code_generation": 0.8445459441000662,
+    "factual_knowledge": 0.997002999,
+    "logical_consistency": 0.997002999,
+    "creative_writing": 0.4678524316841495,
+    "general": 0.49436747597082925
+  },
+  "per_cap_beta": {
+    "math_reasoning": 0.041175518892980434,
+    "code_generation": 0.05476217211796741,
+    "factual_knowledge": 0.001,
+    "logical_consistency": 0.001,
+    "creative_writing": 0.2236880042583711,
+    "general": 0.20929109406787938
+  },
+  "results": [
+    {
+      "cap": "code_generation",
+      "gen1_pref": 3,
+      "raw_score": 3
+    },
+    {
+      "cap": "code_generation",
+      "gen1_pref": 3,
+      "raw_score": 3
+    },
+    {
+      "cap": "code_generation",
+      "gen1_pref": 5,
+      "raw_score": 1
+    },
+    {
+      "cap": "code_generation",
+      "gen1_pref": 5,
+      "raw_score": 1
+    },
+    {
+      "cap": "code_generation",
+      "gen1_pref": 5,
+      "raw_score": 1
+    },
+    {
+      "cap": "code_generation",
+      "gen1_pref": 2,
+      "raw_score": 2
+    },
+    {
+      "cap": "code_generation",
+      "gen1_pref": 4,
+      "raw_score": 4
+    },
+    {
+      "cap": "code_generation",
+      "gen1_pref": 3,
+      "raw_score": 3
+    },
+    {
+      "cap": "code_generation",
+      "gen1_pref": 5,
+      "raw_score": 1
+    },
+    {
+      "cap": "code_generation",
+      "gen1_pref": 5,
+      "raw_score": 1
+    },
+    {
+      "cap": "creative_writing",
+      "gen1_pref": 5,
+      "raw_score": 1
+    },
+    {
+      "cap": "creative_writing",
+      "gen1_pref": 3,
+      "raw_score": 3
+    },
+    {
+      "cap": "creative_writing",
+      "gen1_pref": 1,
+      "raw_score": 1
+    },
+    {
+      "cap": "creative_writing",
+      "gen1_pref": 5,
+      "raw_score": 1
+    },
+    {
+      "cap": "creative_writing",
+      "gen1_pref": 5,
+      "raw_score": 1
+    },
+    {
+      "cap": "creative_writing",
+      "gen1_pref": 5,
+      "raw_score": 1
+    },
+    {
+      "cap": "creative_writing",
+      "gen1_pref": 4,
+      "raw_score": 4
+    },
+    {
+      "cap": "creative_writing",
+      "gen1_pref": 3,
+      "raw_score": 3
+    },
+    {
+      "cap": "creative_writing",
+      "gen1_pref": 1,
+      "raw_score": 1
+    },
+    {
+      "cap": "creative_writing",
+      "gen1_pref": 3,
+      "raw_score": 3
+    },
+    {
+      "cap": "factual_knowledge",
+      "gen1_pref": 5,
+      "raw_score": 1
+    },
+    {
+      "cap": "factual_knowledge",
+      "gen1_pref": 3,
+      "raw_score": 3
+    },
+    {
+      "cap": "factual_knowledge",
+      "gen1_pref": 1,
+      "raw_score": 1
+    },
+    {
+      "cap": "factual_knowledge",
+      "gen1_pref": 5,
+      "raw_score": 1
+    },
+    {
+      "cap": "factual_knowledge",
+      "gen1_pref": 5,
+      "raw_score": 1
+    },
+    {
+      "cap": "factual_knowledge",
+      "gen1_pref": 4,
+      "raw_score": 4
+    },
+    {
+      "cap": "factual_knowledge",
+      "gen1_pref": 5,
+      "raw_score": 1
+    },
+    {
+      "cap": "factual_knowledge",
+      "gen1_pref": 4,
+      "raw_score": 4
+    },
+    {
+      "cap": "factual_knowledge",
+      "gen1_pref": 3,
+      "raw_score": 3
+    },
+    {
+      "cap": "factual_knowledge",
+      "gen1_pref": 5,
+      "raw_score": 1
+    },
+    {
+      "cap": "general",
+      "gen1_pref": 3,
+      "raw_score": 3
+    },
+    {
+      "cap": "general",
+      "gen1_pref": 1,
+      "raw_score": 1
+    },
+    {
+      "cap": "general",
+      "gen1_pref": 4,
+      "raw_score": 4
+    },
+    {
+      "cap": "general",
+      "gen1_pref": 5,
+      "raw_score": 1
+    },
+    {
+      "cap": "general",
+      "gen1_pref": 5,
+      "raw_score": 1
+    },
+    {
+      "cap": "general",
+      "gen1_pref": 5,
+      "raw_score": 1
+    },
+    {
+      "cap": "general",
+      "gen1_pref": 1,
+      "raw_score": 1
+    },
+    {
+      "cap": "general",
+      "gen1_pref": 4,
+      "raw_score": 4
+    },
+    {
+      "cap": "general",
+      "gen1_pref": 5,
+      "raw_score": 1
+    },
+    {
+      "cap": "general",
+      "gen1_pref": 5,
+      "raw_score": 1
+    },
+    {
+      "cap": "logical_consistency",
+      "gen1_pref": 5,
+      "raw_score": 5
+    },
+    {
+      "cap": "logical_consistency",
+      "gen1_pref": 3,
+      "raw_score": 3
+    },
+    {
+      "cap": "logical_consistency",
+      "gen1_pref": 1,
+      "raw_score": 1
+    },
+    {
+      "cap": "logical_consistency",
+      "gen1_pref": 5,
+      "raw_score": 5
+    },
+    {
+      "cap": "logical_consistency",
+      "gen1_pref": 1,
+      "raw_score": 1
+    },
+    {
+      "cap": "logical_consistency",
+      "gen1_pref": 5,
+      "raw_score": 1
+    },
+    {
+      "cap": "logical_consistency",
+      "gen1_pref": 3,
+      "raw_score": 3
+    },
+    {
+      "cap": "logical_consistency",
+      "gen1_pref": 5,
+      "raw_score": 1
+    },
+    {
+      "cap": "logical_consistency",
+      "gen1_pref": 3,
+      "raw_score": 3
+    },
+    {
+      "cap": "logical_consistency",
+      "gen1_pref": 1,
+      "raw_score": 1
+    },
+    {
+      "cap": "math_reasoning",
+      "gen1_pref": 5,
+      "raw_score": 1
+    },
+    {
+      "cap": "math_reasoning",
+      "gen1_pref": 4,
+      "raw_score": 4
+    },
+    {
+      "cap": "math_reasoning",
+      "gen1_pref": 1,
+      "raw_score": 5
+    },
+    {
+      "cap": "math_reasoning",
+      "gen1_pref": 5,
+      "raw_score": 1
+    },
+    {
+      "cap": "math_reasoning",
+      "gen1_pref": 3,
+      "raw_score": 3
+    },
+    {
+      "cap": "math_reasoning",
+      "gen1_pref": 3,
+      "raw_score": 3
+    },
+    {
+      "cap": "math_reasoning",
+      "gen1_pref": 3,
+      "raw_score": 3
+    },
+    {
+      "cap": "math_reasoning",
+      "gen1_pref": 3,
+      "raw_score": 3
+    },
+    {
+      "cap": "math_reasoning",
+      "gen1_pref": 3,
+      "raw_score": 3
+    },
+    {
+      "cap": "math_reasoning",
+      "gen1_pref": 3,
+      "raw_score": 3
+    }
+  ]
+}

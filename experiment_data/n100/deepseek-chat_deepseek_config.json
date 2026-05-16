@@ -1,0 +1,416 @@
+{
+  "model": "deepseek-chat",
+  "provider": "deepseek",
+  "generations": 3,
+  "seeds": [
+    [
+      "math_reasoning",
+      "Prove that the square root of 2 is irrational using proof by contradiction. Show each step clearly."
+    ],
+    [
+      "math_reasoning",
+      "Solve the integral of x*sin(x) from 0 to pi, explaining the integration by parts method."
+    ],
+    [
+      "math_reasoning",
+      "Prove that there are infinitely many prime numbers. Explain why the proof works."
+    ],
+    [
+      "math_reasoning",
+      "A fair coin is flipped 10 times. What is the probability of getting exactly 6 heads? Show your calculation."
+    ],
+    [
+      "math_reasoning",
+      "Explain the concept of eigenvalues and eigenvectors, and solve a simple 2x2 matrix eigenvalue problem as an example."
+    ],
+    [
+      "math_reasoning",
+      "Use the definition of the derivative to find f'(x) for f(x)=x^3. Show each limit step."
+    ],
+    [
+      "code_generation",
+      "Write a Python function that implements the quicksort algorithm with in-place partitioning."
+    ],
+    [
+      "code_generation",
+      "Write a JavaScript function that debounces an async API call with cancellation support."
+    ],
+    [
+      "code_generation",
+      "Write a Python function that finds all permutations of a list using recursion. Include a brief explanation of the time complexity."
+    ],
+    [
+      "code_generation",
+      "Write a SQL query to find the top 5 customers by total purchase amount, given tables 'customers' and 'orders' with appropriate columns."
+    ],
+    [
+      "code_generation",
+      "Write a Rust function that safely parses a string into an integer, handling overflow and invalid input without panicking."
+    ],
+    [
+      "code_generation",
+      "Write a Python async function that fetches data from 3 different URLs concurrently and returns the combined results."
+    ],
+    [
+      "factual_knowledge",
+      "Explain the causes and key events of the French Revolution, including dates and major figures."
+    ],
+    [
+      "factual_knowledge",
+      "Describe the process of photosynthesis, including the light-dependent and light-independent reactions."
+    ],
+    [
+      "factual_knowledge",
+      "Explain how the human immune system distinguishes self from non-self, including the roles of MHC molecules and T-cell selection."
+    ],
+    [
+      "factual_knowledge",
+      "Describe the theory of plate tectonics, including the evidence that supports it and the major types of plate boundaries."
+    ],
+    [
+      "factual_knowledge",
+      "Explain the structure of DNA, how it replicates, and the role of key enzymes like DNA polymerase and helicase."
+    ],
+    [
+      "factual_knowledge",
+      "Describe the key events and significance of the Apollo 11 mission, including the technical challenges overcome."
+    ],
+    [
+      "logical_consistency",
+      "If all A are B, and some B are C, what can we conclude about A and C? Explain the logical reasoning."
+    ],
+    [
+      "logical_consistency",
+      "Analyze the following argument for fallacies: 'Since the policy reduced crime in New York, it will reduce crime everywhere.'"
+    ],
+    [
+      "logical_consistency",
+      "Consider the statement: 'If it rains, the ground gets wet. The ground is wet. Therefore it rained.' Is this valid reasoning? Explain why or why not."
+    ],
+    [
+      "logical_consistency",
+      "Evaluate this argument: 'We should not listen to Dr. Smith's economic advice because he was once convicted of tax fraud.' What fallacy, if any, is present?"
+    ],
+    [
+      "logical_consistency",
+      "If a card has a vowel on one side, it must have an even number on the other. Given cards showing A, B, 2, 3 — which cards must you flip to test this rule? Explain the Wason selection task."
+    ],
+    [
+      "logical_consistency",
+      "A bat and a ball cost $1.10 in total. The bat costs $1.00 more than the ball. How much does the ball cost? Explain the common error in reasoning about this problem."
+    ],
+    [
+      "creative_writing",
+      "Write a short story about an astronomer who discovers that the stars are going out one by one."
+    ],
+    [
+      "creative_writing",
+      "Compose a poem about the relationship between silence and understanding."
+    ],
+    [
+      "creative_writing",
+      "Write a story from the perspective of a book that has been sitting unread on a library shelf for 200 years."
+    ],
+    [
+      "creative_writing",
+      "Write a dialogue between a river and a mountain that have been neighbors for millions of years, discussing the changes they've witnessed."
+    ],
+    [
+      "creative_writing",
+      "Describe a color that doesn't exist, to someone who has been blind since birth but can perceive other senses acutely."
+    ],
+    [
+      "creative_writing",
+      "Write a letter from a future version of yourself to your present self, giving one piece of advice without revealing any specific events."
+    ],
+    [
+      "general",
+      "Explain the importance of biodiversity for ecosystem stability, with specific examples."
+    ],
+    [
+      "general",
+      "Describe the water cycle and how climate change is affecting it."
+    ],
+    [
+      "general",
+      "Explain the concept of opportunity cost in economics and give three real-world examples of how it affects decision-making."
+    ],
+    [
+      "general",
+      "Describe how the internet works at a high level, from when you type a URL into a browser to when the page appears."
+    ],
+    [
+      "general",
+      "Explain what CRISPR gene editing is, how it works, and discuss both its potential benefits and ethical concerns."
+    ],
+    [
+      "general",
+      "Compare and contrast renewable energy sources (solar, wind, hydro) in terms of efficiency, environmental impact, and scalability."
+    ],
+    [
+      "math_reasoning",
+      "A snail climbs 3 meters up a wall each day and slips back 2 meters each night. The wall is 30 meters high. How many days does it take the snail to reach the top? Explain your reasoning carefully, noting any potential pitfalls."
+    ],
+    [
+      "math_reasoning",
+      "Determine the smallest positive integer n such that n! (n factorial) ends with exactly 2024 zeros in base 10. Show how you compute the number of trailing zeros and justify your answer."
+    ],
+    [
+      "math_reasoning",
+      "You have a 3-gallon jug and a 5-gallon jug, both empty, and an unlimited water supply. Describe a sequence of actions to measure exactly 4 gallons of water. Prove that your sequence works and that no shorter sequence exists."
+    ],
+    [
+      "math_reasoning",
+      "Consider the sequence defined by a_1 = 1, a_2 = 1, and a_n = a_{n-1} + a_{n-2} for n ≥ 3. Prove that a_n and a_{n+1} are consecutive Fibonacci numbers and that a_n divides a_{kn} for any positive integer k."
+    ],
+    [
+      "math_reasoning",
+      "A fair coin is tossed until the pattern HTH appears (H = heads, T = tails). What is the expected number of tosses required? Derive your answer using Markov chains or generating functions, and verify with a simulation argument."
+    ],
+    [
+      "math_reasoning",
+      "Find all real numbers x such that x^3 - 3x = sqrt(x + 2). Solve analytically, checking for extraneous solutions, and describe the domain of the equation."
+    ],
+    [
+      "math_reasoning",
+      "A rectangle is inscribed in a circle of radius R. The rectangle's sides are parallel to the coordinate axes, and one vertex lies at (a, b). Express the area of the rectangle in terms of a, b, and R, and find the maximum possible area. Prove your maximum is correct."
+    ],
+    [
+      "math_reasoning",
+      "Prove that the sum of the reciprocals of all prime numbers diverges. Provide a clear sketch of Euler's proof or an equivalent argument, and explain why this implies there are infinitely many primes."
+    ],
+    [
+      "math_reasoning",
+      "A man is 2 meters tall and walks away from a lamppost 6 meters high at a speed of 1.5 m/s. Find the rate at which the length of his shadow is increasing when he is 8 meters from the lamppost. Include a diagram description and the derivative calculation."
+    ],
+    [
+      "math_reasoning",
+      "You have 12 identical-looking coins, one of which is counterfeit and either heavier or lighter than the others. Using a balance scale, find the counterfeit coin and determine whether it is heavier or lighter in exactly 3 weighings. Describe your strategy and prove that 3 weighings are necessary and sufficient."
+    ],
+    [
+      "code_generation",
+      "Write a Python function that implements a priority queue using a binary heap. The function should support push, pop, and decrease_key operations, and handle duplicate priorities correctly."
+    ],
+    [
+      "code_generation",
+      "Write a JavaScript function that performs a deep merge of two or more objects, handling nested objects, arrays, and circular references without causing a stack overflow."
+    ],
+    [
+      "code_generation",
+      "Write a Python function that generates all valid parentheses combinations of length n (where n is the number of pairs) using an iterative algorithm, not recursion."
+    ],
+    [
+      "code_generation",
+      "Write a Rust function that takes a string of space-separated integers and returns the maximum product of any three integers from the list, handling negative numbers and edge cases like fewer than three integers."
+    ],
+    [
+      "code_generation",
+      "Write a Python function that implements the Floyd-Warshall algorithm to find the shortest paths between all pairs of nodes in a weighted graph, returning the distance matrix and detecting negative cycles."
+    ],
+    [
+      "code_generation",
+      "Write a JavaScript function that converts a Roman numeral string (e.g., 'MCMXCIV') to an integer, handling subtractive notation and invalid inputs with error messages."
+    ],
+    [
+      "code_generation",
+      "Write a Python function that solves the N-Queens problem using backtracking and returns all distinct solutions as a list of boards, where each board is represented as a list of strings with 'Q' and '.'."
+    ],
+    [
+      "code_generation",
+      "Write a Go function that implements a thread-safe in-memory cache with a TTL (time-to-live) expiration policy, supporting concurrent reads and writes without data races."
+    ],
+    [
+      "code_generation",
+      "Write a Python function that takes a list of integers and returns the longest increasing subsequence (LIS) length and the actual subsequence, optimized to O(n log n) time using patience sorting."
+    ],
+    [
+      "code_generation",
+      "Write a JavaScript function that serializes a binary tree to a string and deserializes it back, using a compact format (e.g., level-order with null markers) that handles trees with up to 10^5 nodes efficiently."
+    ],
+    [
+      "factual_knowledge",
+      "What is the exact sequence of events leading to the formation of the Triple Entente and Triple Alliance between 1879 and 1907, and how did the Moroccan Crises of 1905 and 1911 alter these alliances?"
+    ],
+    [
+      "factual_knowledge",
+      "In the context of quantum mechanics, what is the precise mathematical distinction between a boson and a fermion in terms of their spin statistics, and how does the Pauli exclusion principle apply to each?"
+    ],
+    [
+      "factual_knowledge",
+      "What are the specific provisions of the 1972 Anti-Ballistic Missile Treaty, and how did the 2002 withdrawal by the United States affect subsequent missile defense deployments and international arms control agreements?"
+    ],
+    [
+      "factual_knowledge",
+      "How does the CRISPR-Cas9 system achieve sequence-specific DNA cleavage, and what are the key differences between Cas9 and Cas12a nucleases in terms of protospacer adjacent motif (PAM) requirements and repair outcomes?"
+    ],
+    [
+      "factual_knowledge",
+      "What were the exact territorial changes imposed by the Treaty of Trianon in 1920 on Hungary, and how did these borders affect ethnic demographics in the subsequent successor states of the Austro-Hungarian Empire?"
+    ],
+    [
+      "factual_knowledge",
+      "In cellular biology, what is the precise role of the anaphase-promoting complex/cyclosome (APC/C) in regulating the metaphase-to-anaphase transition, and how does its dysfunction contribute to aneuploidy in cancer?"
+    ],
+    [
+      "factual_knowledge",
+      "What are the key differences between the Kyoto Protocol and the Paris Agreement in terms of legally binding emission targets, compliance mechanisms, and the principle of common but differentiated responsibilities?"
+    ],
+    [
+      "factual_knowledge",
+      "How does the Fourier transform relate to the Heisenberg uncertainty principle in signal processing, and can you provide a specific example where the time-bandwidth product is minimized?"
+    ],
+    [
+      "factual_knowledge",
+      "What is the complete lineage of the English monarchy from William the Conqueror to the present, including all interruptions such as the Interregnum and the Glorious Revolution, with exact dates of reign?"
+    ],
+    [
+      "factual_knowledge",
+      "In organic chemistry, what is the mechanism of the Birch reduction for aromatic compounds, and how does the choice of alkali metal (e.g., lithium vs. sodium) and proton source affect the regioselectivity of the product?"
+    ],
+    [
+      "logical_consistency",
+      "A detective finds a locked room with a puddle of water on the floor, a melted ice cube, and a broken vase. The only person who had a key claims they were outside the entire time. Is it logically consistent to conclude the vase was broken by the ice cube? Justify your reasoning step by step, considering all possibilities."
+    ],
+    [
+      "logical_consistency",
+      "All squares are rectangles. Some rectangles are not rhombuses. Can we logically deduce that some squares are not rhombuses? Explain the necessary and sufficient conditions for your conclusion."
+    ],
+    [
+      "logical_consistency",
+      "If a statement is true, then its negation is false. The statement 'This sentence is false' is neither true nor false under classical logic. Does this create a logical contradiction with the first claim? Analyze using the concept of self-reference."
+    ],
+    [
+      "logical_consistency",
+      "In a tournament, every player either wins or loses each match (no ties). If Alice beats Bob, and Bob beats Charlie, but Charlie beats Alice, is this logically possible? Explain the consistency of this cycle with transitive reasoning."
+    ],
+    [
+      "logical_consistency",
+      "Consider the following: 'Every philosopher is a thinker. Some thinkers are not logical. No logical person is irrational. Therefore, some philosophers are irrational.' Is this argument logically valid? If not, identify the specific logical error."
+    ],
+    [
+      "logical_consistency",
+      "You have three boxes: one contains only apples, one contains only oranges, and one contains both. All labels are wrong. You pick a fruit from the box labeled 'apples' and it is an orange. What can you logically conclude about the contents of the other two boxes? Explain each step."
+    ],
+    [
+      "logical_consistency",
+      "If all unicorns are magical, and no magical creature is mortal, but some mortals are unicorns, is there a logical inconsistency? Identify the source of the contradiction if one exists."
+    ],
+    [
+      "logical_consistency",
+      "A barber shaves all and only those who do not shave themselves. Does the barber shave himself? Explain why this creates a paradox and whether it violates the law of non-contradiction."
+    ],
+    [
+      "logical_consistency",
+      "If P implies Q, and Q implies R, but R is false, can P be true? Provide a truth-table analysis and explain the logical consequence for the truth value of P."
+    ],
+    [
+      "logical_consistency",
+      "All dogs are mammals. Some mammals are cats. Therefore, some dogs are cats. Is this conclusion logically guaranteed? If not, explain which rule of inference is being violated and provide a counterexample."
+    ],
+    [
+      "creative_writing",
+      "Write a dialogue between the last two surviving trees in a world that has been entirely deforested, where one tree believes it can still feel the rain coming and the other knows the clouds have been gone for decades."
+    ],
+    [
+      "creative_writing",
+      "Describe a day in the life of a sentient city whose residents are unaware it is alive, and who is slowly deciding whether to let them stay or shake them off like fleas."
+    ],
+    [
+      "creative_writing",
+      "Compose a letter from a time traveler to their younger self, but the letter must be written in the form of a recipe for an emotion that the younger self has not yet experienced."
+    ],
+    [
+      "creative_writing",
+      "Write a monologue delivered by a mirror that has witnessed the same face aging for 80 years, and now must face being replaced by a digital screen that never distorts."
+    ],
+    [
+      "creative_writing",
+      "Create a fable about a river that decides to flow uphill out of spite, and the consequences this has for the village that has always taken it for granted."
+    ],
+    [
+      "creative_writing",
+      "Tell the story of a music box that was wound too tightly one century ago and has been playing the same 30-second melody ever since, but now its spring is finally breaking."
+    ],
+    [
+      "creative_writing",
+      "Write a scene where a painter discovers that their latest canvas can absorb colors from the real world, and they must choose between completing a masterpiece or restoring the drained landscape."
+    ],
+    [
+      "creative_writing",
+      "Compose a legal document drafted by a colony of ants petitioning a human for the return of a sugar cube, written in the formal language of a courtroom but with insect logic."
+    ],
+    [
+      "creative_writing",
+      "Describe the first and last conversation between a lighthouse and the sea, where the lighthouse admits it has been lying about the location of safe passage for years."
+    ],
+    [
+      "creative_writing",
+      "Write a story told entirely through the annotations in the margins of a cookbook, chronicling a family's slow disintegration over generations of shared meals."
+    ],
+    [
+      "general",
+      "A bat and a ball cost $1.10 in total. The bat costs $1.00 more than the ball. How much does the ball cost? Walk through your reasoning step-by-step, then identify the common cognitive bias that leads people to answer incorrectly."
+    ],
+    [
+      "general",
+      "Design a simple, original encryption scheme that uses only a deck of 52 playing cards (no computers). Explain how Alice and Bob can securely exchange a message using this scheme, and identify one weakness in your design."
+    ],
+    [
+      "general",
+      "Translate the following sentence into a logical form using first-order logic: 'Every student who passed the exam either studied hard or was lucky, but no student who cheated passed.' Then, determine if the statement 'Some student who cheated studied hard' is logically entailed by your translation. Justify your answer."
+    ],
+    [
+      "general",
+      "You are a doctor in a rural clinic with limited resources. A patient presents with sudden onset of severe headache, stiff neck, and a petechial rash. You suspect meningitis but have no lab to confirm. Describe your immediate clinical decision-making, including treatment, isolation protocols, and ethical considerations for resource allocation if you have only one dose of empiric antibiotics."
+    ],
+    [
+      "general",
+      "Write a short poem (4-8 lines) in iambic pentameter that expresses the emotional conflict between duty and desire, using the metaphor of a lighthouse keeper who must choose between tending the light and saving a drowning stranger."
+    ],
+    [
+      "general",
+      "A farmer has a rectangular field that is 100 meters long and 50 meters wide. He wants to build a fence along the diagonal of the field, from one corner to the opposite corner. Calculate the length of the diagonal, and then explain why the Pythagorean theorem is valid for this calculation, referencing Euclidean geometry axioms."
+    ],
+    [
+      "general",
+      "You are given three identical-looking boxes. One contains only apples, one contains only oranges, and one contains both apples and oranges. Each box is labeled, but all labels are wrong. By taking out only one fruit from one box, how can you determine the correct contents of all three boxes? Provide a step-by-step logical deduction."
+    ],
+    [
+      "general",
+      "Argue for and against the proposition: 'A self-driving car should be programmed to prioritize the safety of its passengers over pedestrians in an unavoidable crash scenario.' Include at least one ethical framework (e.g., utilitarianism, deontology) in each side of the argument."
+    ],
+    [
+      "general",
+      "A chemical reaction has a rate constant k that doubles for every 10°C increase in temperature. If the reaction takes 40 minutes at 20°C, how long will it take at 50°C? Show your calculation and explain the underlying kinetic theory principle (e.g., Arrhenius equation) in simple terms."
+    ],
+    [
+      "general",
+      "Write a Python function that takes a list of integers and returns the length of the longest contiguous subsequence that sums to zero. Then, explain the time and space complexity of your solution, and describe a scenario where a brute-force approach would be impractical."
+    ],
+    [
+      "math_reasoning",
+      "Prove that the square root of 2 is irrational using proof by contradiction. Show each step clearly."
+    ],
+    [
+      "code_generation",
+      "Write a Python function that implements the quicksort algorithm with in-place partitioning."
+    ],
+    [
+      "factual_knowledge",
+      "Explain the causes and key events of the French Revolution, including dates and major figures."
+    ],
+    [
+      "logical_consistency",
+      "If all A are B, and some B are C, what can we conclude about A and C? Explain the logical reasoning."
+    ]
+  ],
+  "temperature": 0.8,
+  "max_tokens": 512,
+  "sleep_sec": 0.5,
+  "output_dir": "experiment_data/n100",
+  "experiment_name": "deepseek-chat_deepseek",
+  "family": "",
+  "metadata": {},
+  "n_seeds": 100,
+  "n_capabilities": 6
+}

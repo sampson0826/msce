@@ -1,0 +1,179 @@
+{
+  "method": "embedding_drift",
+  "embedder": "all-MiniLM-L6-v2",
+  "description": "Cosine similarity of sentence embeddings vs. Gen0 prompt, fitted with exponential decay",
+  "per_model": {
+    "gpt-4o-mini": {
+      "model": "gpt-4o-mini",
+      "n_seeds": 12,
+      "n_empty_skipped": 0,
+      "degenerate": false,
+      "warnings": [],
+      "avg_cos_sim_vs_gen0": {
+        "1": 0.741102601091067,
+        "2": 0.6629579315582911,
+        "3": 0.6492334951957067
+      },
+      "avg_consecutive_sims": {
+        "1": 0.741102601091067,
+        "2": 0.8105326220393181,
+        "3": 0.7715951651334763
+      },
+      "avg_gen0_gen3_sim": 0.6492334951957067,
+      "beta_emb": 0.1580438847140486,
+      "fit_r_squared": 0.8539488161513706,
+      "fit_trajectory": {
+        "0.0": 1.0,
+        "1.0": 0.741102601091067,
+        "2.0": 0.6629579315582911,
+        "3.0": 0.6492334951957067
+      }
+    },
+    "claude": {
+      "model": "claude",
+      "n_seeds": 12,
+      "n_empty_skipped": 0,
+      "degenerate": false,
+      "warnings": [],
+      "avg_cos_sim_vs_gen0": {
+        "1": 0.676947832107544,
+        "2": 0.4935244197646777,
+        "3": 0.46211036915580433
+      },
+      "avg_consecutive_sims": {
+        "1": 0.676947832107544,
+        "2": 0.6001705136150122,
+        "3": 0.6563270390033722
+      },
+      "avg_gen0_gen3_sim": 0.46211036915580433,
+      "beta_emb": 0.2972571234585169,
+      "fit_r_squared": 0.9523774422953277,
+      "fit_trajectory": {
+        "0.0": 1.0,
+        "1.0": 0.676947832107544,
+        "2.0": 0.4935244197646777,
+        "3.0": 0.46211036915580433
+      }
+    },
+    "gpt4o": {
+      "model": "gpt4o",
+      "n_seeds": 12,
+      "n_empty_skipped": 0,
+      "degenerate": true,
+      "warnings": [
+        "DEGENERATE LINEAGE: all 36 post-Gen0 entries are identical to prompt (recursive generation failed)",
+        "β_emb set to None — data unusable for drift analysis"
+      ],
+      "avg_cos_sim_vs_gen0": {},
+      "avg_consecutive_sims": {},
+      "avg_gen0_gen3_sim": null,
+      "beta_emb": null,
+      "fit_r_squared": null,
+      "fit_trajectory": {
+        "0.0": 1.0
+      }
+    },
+    "haiku": {
+      "model": "haiku",
+      "n_seeds": 12,
+      "n_empty_skipped": 0,
+      "degenerate": false,
+      "warnings": [],
+      "avg_cos_sim_vs_gen0": {
+        "1": 0.6597086191177368,
+        "2": 0.6410253172119459,
+        "3": 0.541316827138265
+      },
+      "avg_consecutive_sims": {
+        "1": 0.6597086191177368,
+        "2": 0.7858045480468057,
+        "3": 0.7574879204233488
+      },
+      "avg_gen0_gen3_sim": 0.541316827138265,
+      "beta_emb": 0.21056413561980272,
+      "fit_r_squared": 0.8650666342367364,
+      "fit_trajectory": {
+        "0.0": 1.0,
+        "1.0": 0.6597086191177368,
+        "2.0": 0.6410253172119459,
+        "3.0": 0.541316827138265
+      }
+    },
+    "opus": {
+      "model": "opus",
+      "n_seeds": 12,
+      "n_empty_skipped": 0,
+      "degenerate": false,
+      "warnings": [],
+      "avg_cos_sim_vs_gen0": {
+        "1": 0.6774113674958547,
+        "2": 0.5480376283327738,
+        "3": 0.5212346948683262
+      },
+      "avg_consecutive_sims": {
+        "1": 0.6774113674958547,
+        "2": 0.6136932224035263,
+        "3": 0.6017152244846026
+      },
+      "avg_gen0_gen3_sim": 0.5212346948683262,
+      "beta_emb": 0.2485211027773663,
+      "fit_r_squared": 0.9151719691624612,
+      "fit_trajectory": {
+        "0.0": 1.0,
+        "1.0": 0.6774113674958547,
+        "2.0": 0.5480376283327738,
+        "3.0": 0.5212346948683262
+      }
+    },
+    "gpt-5_5": {
+      "model": "gpt-5_5",
+      "n_seeds": 12,
+      "n_empty_skipped": 7,
+      "degenerate": false,
+      "warnings": [
+        "Skipped 7 entries with empty/identical-to-prompt text"
+      ],
+      "avg_cos_sim_vs_gen0": {
+        "1": 0.6835745573043823,
+        "2": 0.7233315706253052,
+        "3": 0.4834831211377274
+      },
+      "avg_consecutive_sims": {
+        "1": 0.6835745573043823,
+        "2": 0.8063990026712418,
+        "3": 0.8330965340137482
+      },
+      "avg_gen0_gen3_sim": 0.4834831211377274,
+      "beta_emb": 0.21361357814418835,
+      "fit_r_squared": 0.853883339693748,
+      "fit_trajectory": {
+        "0.0": 1.0,
+        "1.0": 0.6835745573043823,
+        "2.0": 0.7233315706253052,
+        "3.0": 0.4834831211377274
+      }
+    }
+  },
+  "excluded_models": [
+    "gpt4o"
+  ],
+  "spearman_vs_constraint_beta": {
+    "rho": 0.09999999999999999,
+    "p_value": 0.8728885715695384,
+    "n_models": 5,
+    "models_compared": [
+      "gpt-4o-mini",
+      "claude",
+      "haiku",
+      "opus",
+      "gpt-5_5"
+    ]
+  },
+  "constraint_betas_used": {
+    "gpt-4o-mini": 0.08848613155619972,
+    "claude": 0.10554868170776172,
+    "haiku": 0.1467693553941845,
+    "opus": 0.11963765071658077,
+    "gpt-5_5": 0.01087094723806383
+  }
+}

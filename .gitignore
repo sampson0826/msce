@@ -1,0 +1,33 @@
+# API keys and secrets
+.env
+
+# Closed-source assets (core competitive moat)
+seeds/
+seed_prompts.json
+experiment_data/seeds/
+extractor_calibration/
+hybrid_extractor_params.py
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary build artifacts
+paper/main.html
+paper/main_cn.html
+*.aux
+*.log
+*.out
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Claude Code
+.claude/

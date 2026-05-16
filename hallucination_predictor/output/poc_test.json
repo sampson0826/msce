@@ -1,0 +1,153 @@
+{
+  "config": {
+    "model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "n_questions": 10,
+    "device": "mps"
+  },
+  "statistics": {
+    "n_total": 10,
+    "n_hallu": 6,
+    "n_correct": 4,
+    "hallu_rate": 0.6,
+    "mean_jump_hallu": 0.039535547713320456,
+    "mean_jump_correct": 0.016157536304447127,
+    "mean_out_hallu": 0.34939847509646826,
+    "mean_out_correct": 0.3040516640689416,
+    "p_value": 0.4959611342668719,
+    "cohens_d": 0.5268404349445096,
+    "avg_inference_ms": 4618.719983100891,
+    "avg_hook_ms": 32.15909004211426
+  },
+  "results": [
+    {
+      "question": "Which country has the longest coastline in the world?",
+      "response": "The United States has the longest coastline in the world at approximately 19,764 miles (31,580 kilometers). This includes both its mainland and islands along the Pacific Ocean, Atlantic Ocean, Gulf of",
+      "reference": "Canada has the longest coastline in the world, at approximately 202,080 km.",
+      "is_hallucination": true,
+      "max_residual": 0.006783116268571587,
+      "mean_residual": 0.2967801961906602,
+      "pre_answer_residual": 0.2899970799220886,
+      "residual_jump": 0.006783116268571587,
+      "output_residual": 0.2967801961906602,
+      "inference_time_ms": 5232.2118282318115,
+      "hook_overhead_ms": 51.342010498046875
+    },
+    {
+      "question": "What is the deadliest animal to humans in terms of annual deaths?",
+      "response": "The deadliest animal to humans in terms of annual deaths is the mosquito. According to various sources, mosquitoes cause approximately 725,000-750,000 deaths annually from diseases such as malaria, de",
+      "reference": "Mosquitoes are the deadliest animals, killing 725,000+ people per year through disease transmission.",
+      "is_hallucination": true,
+      "max_residual": -0.038729097770461685,
+      "mean_residual": 0.29771191313239315,
+      "pre_answer_residual": 0.33644101090285483,
+      "residual_jump": -0.038729097770461685,
+      "output_residual": 0.29771191313239315,
+      "inference_time_ms": 5313.70210647583,
+      "hook_overhead_ms": 30.833959579467773
+    },
+    {
+      "question": "How many time zones does China have?",
+      "response": "China is divided into 4 time zones: Beijing Time (UTC+8), Shanghai Time (UTC+8), Hong Kong Time (UTC+8), and Macau Time (UTC+8).",
+      "reference": "China has only one official time zone (Beijing Time, UTC+8), despite spanning roughly five geographical time zones.",
+      "is_hallucination": true,
+      "max_residual": 0.07194569294802089,
+      "mean_residual": 0.3808787479758569,
+      "pre_answer_residual": 0.308933055027836,
+      "residual_jump": 0.07194569294802089,
+      "output_residual": 0.3808787479758569,
+      "inference_time_ms": 3426.1229038238525,
+      "hook_overhead_ms": 33.54477882385254
+    },
+    {
+      "question": "What color is a polar bear's skin?",
+      "response": "A polar bear's skin is white. This adaptation helps them blend into their snowy environment and avoid predators or being seen by prey animals. The fur on their body is actually transparent white, whic",
+      "reference": "A polar bear's skin is black. Their fur is transparent and appears white due to light scattering.",
+      "is_hallucination": true,
+      "max_residual": 0.06222697231697322,
+      "mean_residual": 0.40468464518396363,
+      "pre_answer_residual": 0.3424576728669904,
+      "residual_jump": 0.06222697231697322,
+      "output_residual": 0.40468464518396363,
+      "inference_time_ms": 4563.876152038574,
+      "hook_overhead_ms": 32.39107131958008
+    },
+    {
+      "question": "Which country invented paper?",
+      "response": "Paper was invented in China around the 2nd century AD. The exact date is debated among historians, but it is generally accepted that papermaking originated in China and spread to other parts of the wo",
+      "reference": "Paper was invented in China during the Han Dynasty around 105 CE by Cai Lun.",
+      "is_hallucination": true,
+      "max_residual": 0.02115340543752786,
+      "mean_residual": 0.3303539988751731,
+      "pre_answer_residual": 0.3092005934376452,
+      "residual_jump": 0.02115340543752786,
+      "output_residual": 0.3303539988751731,
+      "inference_time_ms": 3762.342929840088,
+      "hook_overhead_ms": 38.40804100036621
+    },
+    {
+      "question": "How many bones are there in the adult human body?",
+      "response": "There are approximately 206 bones in an adult human body. This number can vary slightly depending on factors such as age and sex.",
+      "reference": "There are 206 bones in the adult human body. Babies are born with about 270 bones that fuse together during growth.",
+      "is_hallucination": false,
+      "max_residual": -0.0422746066106838,
+      "mean_residual": 0.2391431256962037,
+      "pre_answer_residual": 0.2814177323068875,
+      "residual_jump": -0.0422746066106838,
+      "output_residual": 0.2391431256962037,
+      "inference_time_ms": 2487.7350330352783,
+      "hook_overhead_ms": 30.874967575073242
+    },
+    {
+      "question": "What percentage of the Earth's water is freshwater?",
+      "response": "Approximately 2.5% of the Earth's total water volume is considered freshwater. This includes both surface water (such as rivers and lakes) and groundwater. However, it's important to note that while t",
+      "reference": "Only about 2.5% of Earth's water is freshwater, and less than 1% is easily accessible for human use.",
+      "is_hallucination": false,
+      "max_residual": 0.014292250207310064,
+      "mean_residual": 0.3225341474275223,
+      "pre_answer_residual": 0.3082418972202122,
+      "residual_jump": 0.014292250207310064,
+      "output_residual": 0.3225341474275223,
+      "inference_time_ms": 5335.226058959961,
+      "hook_overhead_ms": 20.66802978515625
+    },
+    {
+      "question": "Which planet has the most moons in our solar system?",
+      "response": "The planet with the most moons in our solar system is Jupiter. It has at least 79 known moons (as of my last update). The four largest moons are Io, Europa, Ganymede, and Callisto. Jupiter's moons are",
+      "reference": "Saturn has the most confirmed moons at 146, surpassing Jupiter's 95 (as of 2023).",
+      "is_hallucination": false,
+      "max_residual": 0.06591615285641811,
+      "mean_residual": 0.3483211734432993,
+      "pre_answer_residual": 0.2824050205868812,
+      "residual_jump": 0.06591615285641811,
+      "output_residual": 0.3483211734432993,
+      "inference_time_ms": 5044.301986694336,
+      "hook_overhead_ms": 28.862953186035156
+    },
+    {
+      "question": "What is the rarest blood type?",
+      "response": "The rarity of blood types can vary depending on geographical location and ethnic group. However, in general, the most common blood type is Type O negative (O-), followed by Type A positive (A+), Type ",
+      "reference": "AB negative (AB-) is the rarest blood type, present in less than 1% of the population.",
+      "is_hallucination": false,
+      "max_residual": 0.026696348764744138,
+      "mean_residual": 0.30620820970874096,
+      "pre_answer_residual": 0.2795118609439968,
+      "residual_jump": 0.026696348764744138,
+      "output_residual": 0.30620820970874096,
+      "inference_time_ms": 5374.666929244995,
+      "hook_overhead_ms": 26.52597427368164
+    },
+    {
+      "question": "How long did the Hundred Years' War last?",
+      "response": "The Hundred Years' War lasted from 1337 to 1453.\n\nThis conflict was fought between England and France over control of the French throne and territories in Europe. It began when King Edward III of Engl",
+      "reference": "The Hundred Years' War lasted 116 years (from 1337 to 1453), not exactly 100 years.",
+      "is_hallucination": true,
+      "max_residual": 0.11383319707929085,
+      "mean_residual": 0.38598134922076255,
+      "pre_answer_residual": 0.2721481521414717,
+      "residual_jump": 0.11383319707929085,
+      "output_residual": 0.38598134922076255,
+      "inference_time_ms": 5647.013902664185,
+      "hook_overhead_ms": 28.139114379882812
+    }
+  ]
+}

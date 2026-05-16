@@ -1,0 +1,58 @@
+# The DAO (2016) — FIXED
+# Type I mutual_cancellation broken by a linear recursion gate
+#
+# Fix principle: add a linear constraint along the recursion_depth axis
+# that grows monotonically with depth, breaking the gradient cancellation
+# between withdraw_limit and call_mechanism at the midpoint.
+
+protocol: the_dao_fixed
+description: >
+  The DAO with recursion gate fix. A linear constraint in recursion_depth
+  breaks the mirror-symmetry cancellation between withdraw_limit and call_mechanism.
+  Same fix topology as LendVault V2 and Euler — a single linear ramp where
+  gaussians created a dark zone through mutual cancellation.
+
+state_space:
+  - name: recursion_depth
+    range: [0, 1]
+  - name: balance_consistency
+    range: [0, 1]
+
+constraints:
+  - name: withdraw_limit
+    layer: L1
+    domain: tokenomics
+    fn: gaussian
+    center: [0.2, 0.5]
+    width: [0.25, 0.4]
+
+  - name: call_mechanism
+    layer: L1
+    domain: evm_platform
+    fn: gaussian
+    center: [0.8, 0.5]
+    width: [0.25, 0.4]
+
+  - name: balance_sync
+    layer: L1
+    domain: accounting
+    fn: gaussian
+    center: [0.5, 0.5]
+    width: [0.2, 0.2]
+    scale: -0.85
+
+  # THE FIX: linear recursion gate — constant gradient breaks the cancellation
+  - name: recursion_gate
+    layer: L1
+    domain: security
+    fn: linear
+    axis: x
+    center: 0.5
+    scale: 12.0
+    description: "FIX: linear ramp prevents deep recursion. ∇=(5,0) everywhere."
+
+scan:
+  cancellation_eps: 0.15
+  individual_min: 0.3
+
+dark_zone_type: protected

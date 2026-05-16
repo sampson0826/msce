@@ -1,0 +1,84 @@
+{
+  "config": {
+    "method": "perplexity_baseline",
+    "scoring_model": "gpt-4o-mini",
+    "n_seeds": 10,
+    "n_tokens_logprobs": 15,
+    "pilot_models": [
+      "gpt-4o-mini",
+      "deepseek-v3",
+      "claude-opus-4-7"
+    ]
+  },
+  "models": {
+    "gpt-4o-mini": {
+      "model": "gpt-4o-mini",
+      "file": "experiment_data/n100/gpt-4o-mini_s100_lineage.jsonl",
+      "constraint_beta": 0.08848613155619972,
+      "perplexity_beta": 0.052281,
+      "perplexity_r_squared": 0.7761,
+      "gen_mean_perplexity": {
+        "0": 1.11,
+        "1": 1.2,
+        "2": 1.32,
+        "3": 1.28
+      },
+      "n_texts_scored": 40,
+      "logprobs_success_rate": "40/40",
+      "perplexity_r2": 0.7743
+    },
+    "deepseek-v3": {
+      "model": "deepseek-v3",
+      "file": "experiment_data/n100/deepseek-chat_s100_lineage.jsonl",
+      "constraint_beta": 0.028110257813765378,
+      "perplexity_beta": 0.080757,
+      "perplexity_r_squared": 0.9764,
+      "gen_mean_perplexity": {
+        "0": 1.11,
+        "1": 1.23,
+        "2": 1.29,
+        "3": 1.43
+      },
+      "n_texts_scored": 40,
+      "logprobs_success_rate": "40/40",
+      "perplexity_r2": 0.9816
+    },
+    "claude-opus-4-7": {
+      "model": "claude-opus-4-7",
+      "file": "experiment_data/latest_models/claude-opus-4-7_s100_lineage.jsonl",
+      "constraint_beta": 0.16353372352921397,
+      "perplexity_beta": 0.121049,
+      "perplexity_r_squared": 0.7677,
+      "gen_mean_perplexity": {
+        "0": 1.11,
+        "1": 1.4,
+        "2": 1.66,
+        "3": 1.57
+      },
+      "n_texts_scored": 39,
+      "logprobs_success_rate": "39/39",
+      "perplexity_r2": 0.7685
+    }
+  },
+  "comparison": {
+    "spearman_rho": 0.5,
+    "n_models": 3,
+    "model_names": [
+      "gpt-4o-mini",
+      "deepseek-v3",
+      "claude-opus-4-7"
+    ],
+    "constraint_betas": [
+      0.088486,
+      0.02811,
+      0.163534
+    ],
+    "perplexity_betas": [
+      0.054386,
+      0.081772,
+      0.121873
+    ]
+  },
+  "spearman_rho": 0.5,
+  "n_models_with_both": 3
+}

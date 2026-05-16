@@ -1,0 +1,93 @@
+# Euler Finance — vulnerable (pre-exploit, March 2023)
+#
+# Modeled as parameter-space gap in health_factor constraint:
+# donateToReserves changes balance without triggering checkLiquidity,
+# creating a region in parameter space where health checks don't apply.
+#
+# x-axis: capital efficiency (0=idle → 1=max-leveraged)
+# y-axis: health factor (0=liquidated → 1=overcollateralized)
+
+protocol: euler_vulnerable
+dark_zone_type: cold_start_gap
+dark_zone_species: II
+description: |
+  Euler Finance before the $200M exploit.
+  donateToReserves() has no checkLiquidity() edge.
+  Modeled as health_factor constraint with a gap at the "donate surface."
+
+constraints:
+  # health_factor — the CRITICAL constraint, with a gap at the donate region
+  # The gap at x=0.55~0.7, y=0.2~0.35 represents operations that change
+  # user balance without triggering health re-check.
+  # In real code: checkLiquidity() is called on withdraw/mint/burn/transfer,
+  # but NOT on donateToReserves — the dark zone is precisely the parameter
+  # subspace where donate operates.
+  - name: health_factor
+    fn: gaussian
+    domain: tokenomics
+    center: [0.25, 0.6]
+    width: [0.18, 0.35]
+    scale: 4.0
+    description: "Health check: collateral >= liability"
+
+  # balance_sufficiency — ensures user has enough balance
+  - name: balance_sufficiency
+    fn: gaussian
+    domain: accounting
+    center: [0.2, 0.55]
+    width: [0.15, 0.35]
+    scale: 3.0
+    description: "Sufficient balance for any operation"
+
+  # borrow cap
+  - name: borrow_cap
+    fn: gaussian
+    domain: tokenomics
+    center: [0.35, 0.5]
+    width: [0.22, 0.35]
+    scale: 2.5
+
+  # liquidation guard
+  - name: liquidation_guard
+    fn: gaussian
+    domain: tokenomics
+    center: [0.12, 0.35]
+    width: [0.1, 0.25]
+    scale: 3.5
+
+  # oracle price feed
+  - name: oracle_price
+    fn: gaussian
+    domain: oracle
+    center: [0.5, 0.85]
+    width: [0.35, 0.18]
+    scale: 1.0
+
+  # access control
+  - name: access_control
+    fn: sigmoid
+    domain: access_control
+    axis: x
+    center: 0.7
+    width: 0.05
+    scale: 2.0
+
+  # The MISSING constraint — donate_health_check
+  # If this existed, there would be no dark zone.
+  # This is what the fix adds.
+
+scan:
+  cancellation_eps: 0.12
+  individual_min: 0.2
+
+# Missing executor (documented for analysis)
+missing_executors:
+  - name: donate_health_check
+    from: donateToReserves
+    to: checkLiquidity
+    reason: |
+      donateToReserves() at EToken.sol:359 changes user balance (reduceFromBalance)
+      and reserve balance without calling checkLiquidity(account).
+      All other state-mutation functions (withdraw:197, mint:227, burn:262,
+      transferFrom:345) DO call checkLiquidity.
+      Attacker exploited this to manipulate account health status and liquidate.

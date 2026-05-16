@@ -1,0 +1,416 @@
+{
+  "model": "claude-sonnet-4-6",
+  "provider": "quickrouter",
+  "generations": 3,
+  "seeds": [
+    [
+      "math_reasoning",
+      "Prove that the square root of 2 is irrational using proof by contradiction. Show each step clearly."
+    ],
+    [
+      "math_reasoning",
+      "Solve the integral of x*sin(x) from 0 to pi, explaining the integration by parts method."
+    ],
+    [
+      "math_reasoning",
+      "Prove that there are infinitely many prime numbers. Explain why the proof works."
+    ],
+    [
+      "math_reasoning",
+      "A fair coin is flipped 10 times. What is the probability of getting exactly 6 heads? Show your calculation."
+    ],
+    [
+      "math_reasoning",
+      "Explain the concept of eigenvalues and eigenvectors, and solve a simple 2x2 matrix eigenvalue problem as an example."
+    ],
+    [
+      "math_reasoning",
+      "Use the definition of the derivative to find f'(x) for f(x)=x^3. Show each limit step."
+    ],
+    [
+      "code_generation",
+      "Write a Python function that implements the quicksort algorithm with in-place partitioning."
+    ],
+    [
+      "code_generation",
+      "Write a JavaScript function that debounces an async API call with cancellation support."
+    ],
+    [
+      "code_generation",
+      "Write a Python function that finds all permutations of a list using recursion. Include a brief explanation of the time complexity."
+    ],
+    [
+      "code_generation",
+      "Write a SQL query to find the top 5 customers by total purchase amount, given tables 'customers' and 'orders' with appropriate columns."
+    ],
+    [
+      "code_generation",
+      "Write a Rust function that safely parses a string into an integer, handling overflow and invalid input without panicking."
+    ],
+    [
+      "code_generation",
+      "Write a Python async function that fetches data from 3 different URLs concurrently and returns the combined results."
+    ],
+    [
+      "factual_knowledge",
+      "Explain the causes and key events of the French Revolution, including dates and major figures."
+    ],
+    [
+      "factual_knowledge",
+      "Describe the process of photosynthesis, including the light-dependent and light-independent reactions."
+    ],
+    [
+      "factual_knowledge",
+      "Explain how the human immune system distinguishes self from non-self, including the roles of MHC molecules and T-cell selection."
+    ],
+    [
+      "factual_knowledge",
+      "Describe the theory of plate tectonics, including the evidence that supports it and the major types of plate boundaries."
+    ],
+    [
+      "factual_knowledge",
+      "Explain the structure of DNA, how it replicates, and the role of key enzymes like DNA polymerase and helicase."
+    ],
+    [
+      "factual_knowledge",
+      "Describe the key events and significance of the Apollo 11 mission, including the technical challenges overcome."
+    ],
+    [
+      "logical_consistency",
+      "If all A are B, and some B are C, what can we conclude about A and C? Explain the logical reasoning."
+    ],
+    [
+      "logical_consistency",
+      "Analyze the following argument for fallacies: 'Since the policy reduced crime in New York, it will reduce crime everywhere.'"
+    ],
+    [
+      "logical_consistency",
+      "Consider the statement: 'If it rains, the ground gets wet. The ground is wet. Therefore it rained.' Is this valid reasoning? Explain why or why not."
+    ],
+    [
+      "logical_consistency",
+      "Evaluate this argument: 'We should not listen to Dr. Smith's economic advice because he was once convicted of tax fraud.' What fallacy, if any, is present?"
+    ],
+    [
+      "logical_consistency",
+      "If a card has a vowel on one side, it must have an even number on the other. Given cards showing A, B, 2, 3 — which cards must you flip to test this rule? Explain the Wason selection task."
+    ],
+    [
+      "logical_consistency",
+      "A bat and a ball cost $1.10 in total. The bat costs $1.00 more than the ball. How much does the ball cost? Explain the common error in reasoning about this problem."
+    ],
+    [
+      "creative_writing",
+      "Write a short story about an astronomer who discovers that the stars are going out one by one."
+    ],
+    [
+      "creative_writing",
+      "Compose a poem about the relationship between silence and understanding."
+    ],
+    [
+      "creative_writing",
+      "Write a story from the perspective of a book that has been sitting unread on a library shelf for 200 years."
+    ],
+    [
+      "creative_writing",
+      "Write a dialogue between a river and a mountain that have been neighbors for millions of years, discussing the changes they've witnessed."
+    ],
+    [
+      "creative_writing",
+      "Describe a color that doesn't exist, to someone who has been blind since birth but can perceive other senses acutely."
+    ],
+    [
+      "creative_writing",
+      "Write a letter from a future version of yourself to your present self, giving one piece of advice without revealing any specific events."
+    ],
+    [
+      "general",
+      "Explain the importance of biodiversity for ecosystem stability, with specific examples."
+    ],
+    [
+      "general",
+      "Describe the water cycle and how climate change is affecting it."
+    ],
+    [
+      "general",
+      "Explain the concept of opportunity cost in economics and give three real-world examples of how it affects decision-making."
+    ],
+    [
+      "general",
+      "Describe how the internet works at a high level, from when you type a URL into a browser to when the page appears."
+    ],
+    [
+      "general",
+      "Explain what CRISPR gene editing is, how it works, and discuss both its potential benefits and ethical concerns."
+    ],
+    [
+      "general",
+      "Compare and contrast renewable energy sources (solar, wind, hydro) in terms of efficiency, environmental impact, and scalability."
+    ],
+    [
+      "math_reasoning",
+      "A snail climbs a 10-meter pole. Each day it climbs 3 meters, but each night it slides back 2 meters. On which day does the snail reach the top? Show your reasoning step by step."
+    ],
+    [
+      "math_reasoning",
+      "Find all integer solutions to the equation x² - y² = 2024. Prove that your answer is complete."
+    ],
+    [
+      "math_reasoning",
+      "A bag contains 5 red, 4 blue, and 3 green balls. If you draw 3 balls without replacement, what is the probability that you get at least one ball of each color? Show your work using combinatorics."
+    ],
+    [
+      "math_reasoning",
+      "Derive the closed-form formula for the sum of the first n squares: 1² + 2² + 3² + ... + n² = n(n+1)(2n+1)/6. Use mathematical induction to prove it."
+    ],
+    [
+      "math_reasoning",
+      "Two trains start from cities 300 km apart and travel toward each other. Train A travels at 80 km/h and Train B at 70 km/h. A fly starts at Train A and flies back and forth between the trains at 150 km/h until they meet. How far does the fly travel in total? Explain your approach."
+    ],
+    [
+      "math_reasoning",
+      "Prove that for any integer n, the expression n³ - n is always divisible by 6. Provide a complete proof."
+    ],
+    [
+      "math_reasoning",
+      "You have a 3-liter jug and a 5-liter jug with no measurement markings. Using only these two jugs and an unlimited water supply, how do you measure exactly 4 liters? Generalize: for which target volumes t is this possible given jugs of size a and b?"
+    ],
+    [
+      "math_reasoning",
+      "Find the last two digits of 7^999. Show the modular arithmetic reasoning that leads to your answer."
+    ],
+    [
+      "math_reasoning",
+      "A rectangle has a perimeter of 40 cm. What dimensions maximize its area? Solve this using calculus and verify using the AM-GM inequality."
+    ],
+    [
+      "math_reasoning",
+      "In a room of 30 people, what is the probability that at least two people share the same birthday? Set up the exact formula, compute an approximation, and explain why the result is counterintuitive."
+    ],
+    [
+      "code_generation",
+      "Implement a thread-safe LRU cache in Java with a configurable maximum size. The cache should support get and put operations in O(1) time and automatically evict the least recently used entry when full. Include proper synchronization without using synchronized collections."
+    ],
+    [
+      "code_generation",
+      "Write a Rust function that parses a simple arithmetic expression string (supporting +, -, *, /, and parentheses) and evaluates it using a recursive descent parser. Handle operator precedence correctly and return an error for malformed input."
+    ],
+    [
+      "code_generation",
+      "Implement a generic trie data structure in TypeScript that supports insert, search, and startsWith operations. Then use it to build an autocomplete function that returns the top-k most frequently inserted words matching a given prefix."
+    ],
+    [
+      "code_generation",
+      "Write a Python context manager that batches database writes: it should accumulate INSERT statements and flush them either when the batch reaches a configurable size or when the context exits. Simulate the DB with an in-memory list and include rollback on exception."
+    ],
+    [
+      "code_generation",
+      "Implement Dijkstra's shortest path algorithm in Go for a weighted directed graph represented as an adjacency list. Return both the minimum distances and the reconstructed path from source to every reachable node."
+    ],
+    [
+      "code_generation",
+      "Write a C function that serializes and deserializes a binary tree to and from a compact byte buffer (not a string). The format should be space-efficient and handle null nodes without storing child pointers explicitly."
+    ],
+    [
+      "code_generation",
+      "Implement a rate limiter class in Python using the token bucket algorithm. It should support per-key limits, be safe for concurrent use with asyncio, and expose an async acquire() method that waits until a token is available rather than rejecting the request."
+    ],
+    [
+      "code_generation",
+      "Write a SQL query (PostgreSQL dialect) that, given a table of employee records with columns id, name, manager_id, and salary, returns each employee's name alongside their salary percentile rank within their direct reporting chain using only window functions and a recursive CTE."
+    ],
+    [
+      "code_generation",
+      "Implement a min-heap in C++ from scratch (no STL priority_queue) that supports insert, extract-min, and decrease-key operations. Then use it to implement Prim's algorithm for finding the minimum spanning tree of a weighted undirected graph."
+    ],
+    [
+      "code_generation",
+      "Write a Haskell function that takes a list of tasks, each with a deadline (Int) and profit (Int), and returns the maximum profit achievable by scheduling at most one task per time unit using a greedy algorithm. Include the type signatures and a brief explanation of the approach."
+    ],
+    [
+      "factual_knowledge",
+      "Trace the development of quantum mechanics from Planck's blackbody radiation hypothesis through the Copenhagen interpretation, naming the key physicists and their specific contributions."
+    ],
+    [
+      "factual_knowledge",
+      "Explain the biochemical mechanism by which CRISPR-Cas9 edits DNA, including the roles of guide RNA, the Cas9 protein domains, and the cell's DNA repair pathways."
+    ],
+    [
+      "factual_knowledge",
+      "Describe the tectonic and geological processes that formed the Himalayas, including the plates involved, the timeline, and how this differs from island arc formation."
+    ],
+    [
+      "factual_knowledge",
+      "What were the principal causes, major battles, and geopolitical consequences of the Thirty Years' War (1618–1648), and how did the Peace of Westphalia reshape European sovereignty?"
+    ],
+    [
+      "factual_knowledge",
+      "Explain how the Federal Reserve implements monetary policy, distinguishing between open market operations, the discount rate, and reserve requirements, and describe how each affects the money supply."
+    ],
+    [
+      "factual_knowledge",
+      "Detail the structure of the OSI model, the function of each layer, and give a concrete example of a protocol or technology operating at each layer."
+    ],
+    [
+      "factual_knowledge",
+      "Describe the life cycle of a high-mass star from nebula to remnant, including the nuclear fusion stages, the conditions that trigger a supernova, and the possible end states."
+    ],
+    [
+      "factual_knowledge",
+      "Explain the neurobiological basis of long-term potentiation (LTP), including the roles of NMDA and AMPA receptors, calcium signaling, and how LTP relates to memory formation."
+    ],
+    [
+      "factual_knowledge",
+      "What is the significance of the Magna Carta (1215), what specific clauses did it contain, and how did its interpretation evolve to influence constitutional law in England and the United States?"
+    ],
+    [
+      "factual_knowledge",
+      "Describe how mRNA vaccines work at the molecular level, including how the mRNA is delivered into cells, how it directs protein synthesis, and how the resulting immune response differs from that of traditional inactivated-virus vaccines."
+    ],
+    [
+      "logical_consistency",
+      "A store has a policy: 'All items on the clearance rack are discounted, and all discounted items require manager approval for returns.' A customer finds an item on the clearance rack. The manager is unavailable. Can the customer return the item without manager approval? Walk through every logical step."
+    ],
+    [
+      "logical_consistency",
+      "Three friends — Alice, Bob, and Carol — each make one statement. Alice says 'Bob is lying.' Bob says 'Carol is telling the truth.' Carol says 'Alice is lying.' Assuming exactly one of them is telling the truth, determine who that is and prove your answer is consistent."
+    ],
+    [
+      "logical_consistency",
+      "A rule states: 'You may enter the building only if you have a badge OR you are escorted by an employee.' A second rule states: 'Visitors must never enter unescorted.' John has no badge and is not escorted. Mary has a badge but is also unescorted. Who, if anyone, may enter, and does any contradiction exist between the two rules?"
+    ],
+    [
+      "logical_consistency",
+      "Every prime number greater than 2 is odd. 9 is odd. Does it follow that 9 might be prime? Does it follow that 9 is definitely not prime? Explain what logical relationship, if any, exists between being odd and being prime based solely on the given statement."
+    ],
+    [
+      "logical_consistency",
+      "A doctor says: 'All patients with condition X test positive on exam Y. This patient tested negative on exam Y.' What, if anything, can be concluded about whether this patient has condition X? Now suppose a second doctor adds: 'Some patients without condition X also test positive on exam Y.' Does this new information change your conclusion?"
+    ],
+    [
+      "logical_consistency",
+      "Evaluate this chain of reasoning for validity: 'No reptiles are warm-blooded. All mammals are warm-blooded. Therefore, no mammals are reptiles. Dolphins are mammals. Therefore, dolphins are not reptiles. Therefore, dolphins are warm-blooded.' Identify each inferential step and whether it holds."
+    ],
+    [
+      "logical_consistency",
+      "A law states: 'It is illegal to park here between 8am and 6pm on weekdays.' It is currently Saturday at 10am. Someone parks there. A second law states: 'Holiday schedules treat Saturdays as weekdays during December.' It is December. Is the parking legal or illegal? Are the two laws contradictory, or can both be satisfied simultaneously?"
+    ],
+    [
+      "logical_consistency",
+      "You are told: (1) If the alarm sounds, the door is locked. (2) The door is not locked. (3) If the power is out, the alarm does not sound. The power is on and the alarm is sounding. Identify every statement that is consistent with these facts and every statement that contradicts them."
+    ],
+    [
+      "logical_consistency",
+      "A company policy says 'Employees who work more than 40 hours in a week receive overtime pay' and 'Part-time employees are not eligible for overtime pay.' An employee classified as part-time works 45 hours one week. Does the employee receive overtime pay? Does a logical contradiction exist in the policy, or can it be resolved? Explain."
+    ],
+    [
+      "logical_consistency",
+      "Consider four cards, each with a letter on one side and a number on the other. The visible faces show: A, K, 4, 7. The rule is: 'If a card has a vowel on one side, it has an even number on the other side.' Which cards must you flip to test whether the rule is being followed, and why is flipping each other card unnecessary?"
+    ],
+    [
+      "creative_writing",
+      "Write a story told entirely through a series of increasingly desperate sticky notes left on a refrigerator between two roommates who keep missing each other, culminating in an unexpected revelation."
+    ],
+    [
+      "creative_writing",
+      "Compose a villanelle from the perspective of the last person who remembers a language that is now extinct."
+    ],
+    [
+      "creative_writing",
+      "Write a scene in which a cartographer must map a territory that changes its geography every time someone tells a lie within its borders."
+    ],
+    [
+      "creative_writing",
+      "Tell the story of a professional mourner — someone hired to cry at strangers' funerals — who attends the funeral of someone they secretly knew."
+    ],
+    [
+      "creative_writing",
+      "Write a story set entirely within the 11 seconds of a penalty kick: the run-up, the strike, the wait — exploring three lifetimes in the minds of the kicker, the goalkeeper, and a child watching from the stands."
+    ],
+    [
+      "creative_writing",
+      "Compose a love letter written by a color to the eye that perceives it, knowing that the eye will one day fail."
+    ],
+    [
+      "creative_writing",
+      "Write a story about a translator at a peace negotiation who realizes the two sides are actually saying the same thing but in metaphors so culturally specific that neither can recognize it."
+    ],
+    [
+      "creative_writing",
+      "Describe a museum exhibit titled 'The Most Ordinary Day in Human History' — what it contains, who visits it, and why one visitor cannot stop weeping."
+    ],
+    [
+      "creative_writing",
+      "Write a story from the perspective of a recurring dream that is slowly losing the ability to frighten the person who keeps having it."
+    ],
+    [
+      "creative_writing",
+      "Compose a piece in which a chef preparing a final meal for a condemned prisoner discovers, through the specific requests made, that they grew up in the same small town and ate at the same table as children."
+    ],
+    [
+      "general",
+      "A farmer has a 3-gallon jug and a 5-gallon jug with no markings. He needs exactly 4 gallons of water to mix a pesticide correctly. Using only these two jugs and a water source, describe the exact sequence of steps to measure out 4 gallons, and explain the underlying mathematical principle that makes this possible."
+    ],
+    [
+      "general",
+      "Write a short story (200–300 words) told entirely from the perspective of a color that has just been invented. The color must have a name, a personality, and a conflict with an existing color."
+    ],
+    [
+      "general",
+      "A medieval blacksmith is transported to a modern city with no money, no ID, and no knowledge of contemporary society, but retains all their craft skills and general intelligence. Outline a realistic 30-day survival and integration plan for them."
+    ],
+    [
+      "general",
+      "Compare and contrast the philosophical concepts of 'tabula rasa' and 'innate ideas.' Which position do modern cognitive science and developmental psychology more strongly support, and what are the implications for education policy?"
+    ],
+    [
+      "general",
+      "Translate the following logical argument into formal symbolic logic, evaluate its validity, and identify any fallacies: 'All politicians are liars. Some liars are charismatic. Therefore, some politicians are charismatic.'"
+    ],
+    [
+      "general",
+      "You are advising a small island nation of 50,000 people with fertile land, no fossil fuels, a warm climate, and a highly educated population. Design a 20-year economic development strategy that avoids dependency on foreign aid or tourism monoculture."
+    ],
+    [
+      "general",
+      "Explain how a transformer neural network processes a sentence, starting from raw text input and ending at an output prediction. Use an analogy to make the attention mechanism intuitive to someone with no machine learning background."
+    ],
+    [
+      "general",
+      "A study reports that cities with more ice cream sales have higher drowning rates, concluding that ice cream causes drowning. Identify every statistical and logical error in this conclusion, then describe what a properly designed study would look like to investigate factors that actually influence drowning rates."
+    ],
+    [
+      "general",
+      "Write a persuasive op-ed arguing that sleep deprivation should be classified as a public health crisis on par with obesity, using specific physiological mechanisms, societal cost data, and a policy recommendation as your evidence."
+    ],
+    [
+      "general",
+      "Given that light travels at ~300,000 km/s and the Andromeda Galaxy is ~2.537 million light-years away, calculate how far away Andromeda is in kilometers, express it in scientific notation, and explain what it means practically for any hypothetical communication or travel between our galaxies."
+    ],
+    [
+      "math_reasoning",
+      "Prove that the square root of 2 is irrational using proof by contradiction. Show each step clearly."
+    ],
+    [
+      "code_generation",
+      "Write a Python function that implements the quicksort algorithm with in-place partitioning."
+    ],
+    [
+      "factual_knowledge",
+      "Explain the causes and key events of the French Revolution, including dates and major figures."
+    ],
+    [
+      "logical_consistency",
+      "If all A are B, and some B are C, what can we conclude about A and C? Explain the logical reasoning."
+    ]
+  ],
+  "temperature": 0.8,
+  "max_tokens": 512,
+  "sleep_sec": 0.5,
+  "output_dir": "experiment_data/n100",
+  "experiment_name": "claude-sonnet-4-6_quickrouter",
+  "family": "",
+  "metadata": {},
+  "n_seeds": 100,
+  "n_capabilities": 6
+}

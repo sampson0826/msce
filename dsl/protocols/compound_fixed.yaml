@@ -1,0 +1,81 @@
+# Compound Finance — FIXED
+# Oracle constraint strengthened + staleness check added
+
+protocol: compound_fixed
+description: |
+  Compound with hardened oracle constraints.
+  oracle_price_guard: certainty 0.3→1.0, scale 0.5→3.0
+  Added: oracle_staleness_check (linear y-axis ramp)
+  Added: oracle_price_bounds (gaussian at oracle boundary)
+
+constraints:
+  - name: collateral_factor
+    fn: gaussian
+    domain: tokenomics
+    center: [0.25, 0.5]
+    width: [0.18, 0.35]
+    scale: 3.0
+
+  - name: borrow_cap
+    fn: gaussian
+    domain: tokenomics
+    center: [0.35, 0.5]
+    width: [0.2, 0.35]
+    scale: 2.5
+
+  - name: liquidation_incentive
+    fn: gaussian
+    domain: tokenomics
+    center: [0.12, 0.35]
+    width: [0.1, 0.28]
+    scale: 3.0
+
+  - name: guardian_pause
+    fn: sigmoid
+    domain: risk
+    axis: x
+    center: 0.65
+    width: 0.05
+    scale: 1.5
+
+  - name: access_control
+    fn: sigmoid
+    domain: access_control
+    axis: x
+    center: 0.7
+    width: 0.05
+    scale: 2.0
+
+  # FIX 1: oracle_price_guard strengthened
+  - name: oracle_price_guard
+    fn: gaussian
+    domain: oracle
+    center: [0.5, 0.2]
+    width: [0.35, 0.2]
+    scale: 3.0
+    certainty: 1.0
+    description: "FIXED: price != 0 check converted to require() with full certainty"
+
+  # FIX 2: oracle staleness — linear ramp prevents stale price usage
+  - name: oracle_staleness_check
+    fn: linear
+    domain: oracle
+    axis: y
+    center: 0.25
+    scale: 6.0
+    description: "FIXED: require(updatedAt within staleness threshold). ∇=(0,6) everywhere."
+
+  # FIX 3: oracle price bounds — prevents extreme price deviation
+  - name: oracle_price_bounds
+    fn: gaussian
+    domain: oracle
+    center: [0.5, 0.15]
+    width: [0.35, 0.12]
+    scale: 2.5
+    description: "FIXED: price within [minPrice, maxPrice] guard"
+
+scan:
+  cancellation_eps: 0.15
+  individual_min: 0.25
+
+dark_zone_type: protected

@@ -1,0 +1,12 @@
+numpy>=1.20.0
+httpx>=0.25.0
+certifi>=2023.0.0
+
+[dev]
+pytest>=7.0.0
+matplotlib>=3.5.0
+
+[server]
+fastapi>=0.100.0
+uvicorn>=0.20.0
+python-multipart>=0.0.5

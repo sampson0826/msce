@@ -1,0 +1,2 @@
+[console_scripts]
+decay-eval = synthetic_decay_monitor.experiment_runner:main

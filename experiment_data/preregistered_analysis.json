@@ -1,0 +1,72 @@
+{
+  "claude-haiku-4-5-20251001": {
+    "pre_registered_beta": 0.1467693553941845,
+    "post_hoc_beta": 0.207337049450812,
+    "delta": -0.060567694056627486,
+    "mean_r2_adj": 0.10439923303140856,
+    "n_capabilities": 6
+  },
+  "claude-sonnet-4-6": {
+    "pre_registered_beta": 0.10554868170776172,
+    "post_hoc_beta": 0.235211840572883,
+    "delta": -0.12966315886512128,
+    "mean_r2_adj": 0.21865769614832523,
+    "n_capabilities": 6
+  },
+  "deepseek-chat": {
+    "pre_registered_beta": 0.028110257813765378,
+    "post_hoc_beta": 0.047887080048899834,
+    "delta": -0.019776822235134457,
+    "mean_r2_adj": 0.196651533809558,
+    "n_capabilities": 6
+  },
+  "deepseek-reasoner": {
+    "pre_registered_beta": 0.10379524757022013,
+    "post_hoc_beta": 0.13679791015050663,
+    "delta": -0.0330026625802865,
+    "mean_r2_adj": 0.19342901675270008,
+    "n_capabilities": 6
+  },
+  "gpt-4o": {
+    "pre_registered_beta": 0.09854234334687854,
+    "post_hoc_beta": 0.1343823143397381,
+    "delta": -0.03583997099285956,
+    "mean_r2_adj": -0.03977345616121523,
+    "n_capabilities": 6
+  },
+  "gpt-4o-mini": {
+    "pre_registered_beta": 0.08848613155619972,
+    "post_hoc_beta": 0.17384509399609974,
+    "delta": -0.08535896243990002,
+    "mean_r2_adj": 0.4219688626145785,
+    "n_capabilities": 6
+  },
+  "gpt-4o-mini_alt_seeds": {
+    "pre_registered_beta": 0.0937711138958328,
+    "post_hoc_beta": 0.14491830897041394,
+    "delta": -0.05114719507458114,
+    "mean_r2_adj": 0.36954624886594045,
+    "n_capabilities": 6
+  },
+  "gpt-4o-mini_s36": {
+    "pre_registered_beta": 0.15541064471078905,
+    "post_hoc_beta": 0.3068729834956047,
+    "delta": -0.15146233878481566,
+    "mean_r2_adj": 0.26692317988346465,
+    "n_capabilities": 6
+  },
+  "meta-llama_llama-3_1-70b-instruct": {
+    "pre_registered_beta": 0.0924797440794401,
+    "post_hoc_beta": 0.13812179987095766,
+    "delta": -0.04564205579151756,
+    "mean_r2_adj": 0.5082040630381418,
+    "n_capabilities": 6
+  },
+  "meta-llama_llama-3_1-8b-instruct": {
+    "pre_registered_beta": 0.09419159971673403,
+    "post_hoc_beta": 0.2664874969224548,
+    "delta": -0.1722958972057208,
+    "mean_r2_adj": 0.3628408457821415,
+    "n_capabilities": 6
+  }
+}

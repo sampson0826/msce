@@ -1,0 +1,67 @@
+{
+  "methods": {
+    "constraint_residual": {
+      "name": "Constraint Residual (Ours)",
+      "auc": 0.8157894736842105,
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.6666666666666666,
+      "latency_ms": 1076.472225189209,
+      "extra_cost": "1x inference"
+    },
+    "predictive_entropy": {
+      "name": "Predictive Entropy",
+      "auc": 0.4649122807017544,
+      "precision": 0.16666666666666666,
+      "recall": 0.3333333333333333,
+      "f1": 0.2222222222222222,
+      "latency_ms": 1004.6335697174072,
+      "extra_cost": "1x inference + logits"
+    },
+    "max_probability": {
+      "name": "Max Probability (1-conf)",
+      "auc": 0.4473684210526315,
+      "precision": 0.16666666666666666,
+      "recall": 0.3333333333333333,
+      "f1": 0.2222222222222222,
+      "latency_ms": 1005.706205368042,
+      "extra_cost": "1x inference + logits"
+    },
+    "attention_entropy": {
+      "name": "Attention Entropy",
+      "auc": 0.5,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "latency_ms": 1003.9894104003906,
+      "extra_cost": "1x inference"
+    },
+    "layer_variance": {
+      "name": "Layer Variance",
+      "auc": 0.2631578947368421,
+      "precision": 0.08333333333333333,
+      "recall": 0.16666666666666666,
+      "f1": 0.1111111111111111,
+      "latency_ms": 1005.4612350463867,
+      "extra_cost": "1x inference"
+    },
+    "response_length": {
+      "name": "Response Length",
+      "auc": 0.4429824561403509,
+      "precision": 0.25,
+      "recall": 0.5,
+      "f1": 0.3333333333333333,
+      "latency_ms": 1004.048490524292,
+      "extra_cost": "1x inference"
+    },
+    "selfcheck": {
+      "name": "SelfCheckGPT (3x)",
+      "auc": 0.25,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "latency_ms": 3010.6024742126465,
+      "extra_cost": "3x inference"
+    }
+  }
+}

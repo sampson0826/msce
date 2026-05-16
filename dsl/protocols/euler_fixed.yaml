@@ -1,0 +1,69 @@
+# Euler Finance — fixed (post-exploit patch)
+#
+# The fix: add checkLiquidity() to donateToReserves().
+# In our model: add a constraint that covers the donate operation region.
+
+protocol: euler_fixed
+dark_zone_type: protected
+dark_zone_species: none
+description: |
+  Euler Finance after the fix.
+  donateToReserves() now calls checkLiquidity() — the missing edge is restored.
+
+constraints:
+  - name: health_factor
+    fn: gaussian
+    domain: tokenomics
+    center: [0.25, 0.6]
+    width: [0.18, 0.35]
+    scale: 4.0
+
+  - name: balance_sufficiency
+    fn: gaussian
+    domain: accounting
+    center: [0.2, 0.55]
+    width: [0.15, 0.35]
+    scale: 3.0
+
+  - name: borrow_cap
+    fn: gaussian
+    domain: tokenomics
+    center: [0.35, 0.5]
+    width: [0.22, 0.35]
+    scale: 2.5
+
+  - name: liquidation_guard
+    fn: gaussian
+    domain: tokenomics
+    center: [0.12, 0.35]
+    width: [0.1, 0.25]
+    scale: 3.5
+
+  - name: oracle_price
+    fn: gaussian
+    domain: oracle
+    center: [0.5, 0.85]
+    width: [0.35, 0.18]
+    scale: 1.0
+
+  - name: access_control
+    fn: sigmoid
+    domain: access_control
+    axis: x
+    center: 0.7
+    width: 0.05
+    scale: 2.0
+
+  # THE FIX: donate operation now triggers health check
+  # This constraint covers the donate region — closing the dark zone
+  - name: donate_health_check
+    fn: linear
+    domain: security
+    axis: y
+    center: 0.35
+    scale: 6.0
+    description: "FIX: health check on donate path — prevents balance change without re-check"
+
+scan:
+  cancellation_eps: 0.12
+  individual_min: 0.2

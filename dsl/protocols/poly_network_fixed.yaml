@@ -1,0 +1,60 @@
+# Poly Network (2021) — FIXED
+# Type III hierarchical dark zone broken by restoring the L1→L2 coupler
+#
+# Fix principle: raise the payload_isolation constraint certainty from 0.05→0.9
+# and add a linear bridging constraint that connects cross-chain verification
+# to access boundary, closing the hierarchical gap.
+
+protocol: poly_network_fixed
+description: >
+  Poly Network with the hierarchical gap closed. The payload_isolation constraint
+  is strengthened (certainty 0.05→0.9), and a linear bridge prevents cross-chain
+  messages from modifying keeper keys. L1 (verification) → L2 (access) is restored.
+
+state_space:
+  - name: verification_integrity
+    range: [0, 1]
+  - name: access_boundary
+    range: [0, 1]
+
+constraints:
+  - name: verification
+    layer: L1
+    domain: cross_chain
+    fn: gaussian
+    center: [0.75, 0.5]
+    width: [0.25, 0.4]
+
+  - name: access_control
+    layer: L2
+    domain: access
+    fn: gaussian
+    center: [0.5, 0.25]
+    width: [0.35, 0.25]
+
+  # FIX: payload_isolation restored from certainty=0.05 → full strength
+  - name: payload_isolation
+    layer: L1
+    domain: cross_chain_to_access
+    fn: gaussian
+    center: [0.5, 0.5]
+    width: [0.35, 0.35]
+    scale: 3.0
+    certainty: 0.9
+    description: "FIX: restored cross-chain→access isolation. Prevents payloads from modifying keeper keys."
+
+  # FIX: linear bridge connecting L1 verification to L2 access boundary
+  - name: cross_layer_bridge
+    layer: L1
+    domain: security
+    fn: linear
+    axis: y
+    center: 0.3
+    scale: 12.0
+    description: "FIX: linear bridge at access boundary. Closes the L1↛L2 hierarchical gap."
+
+scan:
+  cancellation_eps: 0.2
+  individual_min: 0.2
+
+dark_zone_type: protected

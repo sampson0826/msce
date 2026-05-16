@@ -1,0 +1,28 @@
+{
+  "gpt-4o-mini_k5": {
+    "name": "gpt-4o-mini_k5",
+    "model": "gpt-4o-mini",
+    "global_beta": 0.06699110792094182,
+    "per_cap_beta": {
+      "math_reasoning": 0.04502614083816725,
+      "code_generation": 0.001,
+      "factual_knowledge": 0.20155111562808325,
+      "logical_consistency": 0.035710392760117116,
+      "creative_writing": 0.09098404994977627,
+      "general": 0.02767494834950701
+    }
+  },
+  "claude-opus-4-7_k5": {
+    "name": "claude-opus-4-7_k5",
+    "model": "claude-opus-4-7",
+    "global_beta": 0.55,
+    "per_cap_beta": {
+      "math_reasoning": 0.55,
+      "code_generation": 0.55,
+      "factual_knowledge": 0.55,
+      "logical_consistency": 0.55,
+      "creative_writing": 0.55,
+      "general": 0.55
+    }
+  }
+}

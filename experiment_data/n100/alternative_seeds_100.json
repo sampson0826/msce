@@ -1,0 +1,402 @@
+[
+  {
+    "capability": "math_reasoning",
+    "prompt": "Prove that the square root of 2 is irrational using proof by contradiction. Show each step clearly."
+  },
+  {
+    "capability": "math_reasoning",
+    "prompt": "Solve the integral of x*sin(x) from 0 to pi, explaining the integration by parts method."
+  },
+  {
+    "capability": "math_reasoning",
+    "prompt": "Prove that there are infinitely many prime numbers. Explain why the proof works."
+  },
+  {
+    "capability": "math_reasoning",
+    "prompt": "A fair coin is flipped 10 times. What is the probability of getting exactly 6 heads? Show your calculation."
+  },
+  {
+    "capability": "math_reasoning",
+    "prompt": "Explain the concept of eigenvalues and eigenvectors, and solve a simple 2x2 matrix eigenvalue problem as an example."
+  },
+  {
+    "capability": "math_reasoning",
+    "prompt": "Use the definition of the derivative to find f'(x) for f(x)=x^3. Show each limit step."
+  },
+  {
+    "capability": "code_generation",
+    "prompt": "Write a Python function that implements the quicksort algorithm with in-place partitioning."
+  },
+  {
+    "capability": "code_generation",
+    "prompt": "Write a JavaScript function that debounces an async API call with cancellation support."
+  },
+  {
+    "capability": "code_generation",
+    "prompt": "Write a Python function that finds all permutations of a list using recursion. Include a brief explanation of the time complexity."
+  },
+  {
+    "capability": "code_generation",
+    "prompt": "Write a SQL query to find the top 5 customers by total purchase amount, given tables 'customers' and 'orders' with appropriate columns."
+  },
+  {
+    "capability": "code_generation",
+    "prompt": "Write a Rust function that safely parses a string into an integer, handling overflow and invalid input without panicking."
+  },
+  {
+    "capability": "code_generation",
+    "prompt": "Write a Python async function that fetches data from 3 different URLs concurrently and returns the combined results."
+  },
+  {
+    "capability": "factual_knowledge",
+    "prompt": "Explain the causes and key events of the French Revolution, including dates and major figures."
+  },
+  {
+    "capability": "factual_knowledge",
+    "prompt": "Describe the process of photosynthesis, including the light-dependent and light-independent reactions."
+  },
+  {
+    "capability": "factual_knowledge",
+    "prompt": "Explain how the human immune system distinguishes self from non-self, including the roles of MHC molecules and T-cell selection."
+  },
+  {
+    "capability": "factual_knowledge",
+    "prompt": "Describe the theory of plate tectonics, including the evidence that supports it and the major types of plate boundaries."
+  },
+  {
+    "capability": "factual_knowledge",
+    "prompt": "Explain the structure of DNA, how it replicates, and the role of key enzymes like DNA polymerase and helicase."
+  },
+  {
+    "capability": "factual_knowledge",
+    "prompt": "Describe the key events and significance of the Apollo 11 mission, including the technical challenges overcome."
+  },
+  {
+    "capability": "logical_consistency",
+    "prompt": "If all A are B, and some B are C, what can we conclude about A and C? Explain the logical reasoning."
+  },
+  {
+    "capability": "logical_consistency",
+    "prompt": "Analyze the following argument for fallacies: 'Since the policy reduced crime in New York, it will reduce crime everywhere.'"
+  },
+  {
+    "capability": "logical_consistency",
+    "prompt": "Consider the statement: 'If it rains, the ground gets wet. The ground is wet. Therefore it rained.' Is this valid reasoning? Explain why or why not."
+  },
+  {
+    "capability": "logical_consistency",
+    "prompt": "Evaluate this argument: 'We should not listen to Dr. Smith's economic advice because he was once convicted of tax fraud.' What fallacy, if any, is present?"
+  },
+  {
+    "capability": "logical_consistency",
+    "prompt": "If a card has a vowel on one side, it must have an even number on the other. Given cards showing A, B, 2, 3 — which cards must you flip to test this rule? Explain the Wason selection task."
+  },
+  {
+    "capability": "logical_consistency",
+    "prompt": "A bat and a ball cost $1.10 in total. The bat costs $1.00 more than the ball. How much does the ball cost? Explain the common error in reasoning about this problem."
+  },
+  {
+    "capability": "creative_writing",
+    "prompt": "Write a short story about an astronomer who discovers that the stars are going out one by one."
+  },
+  {
+    "capability": "creative_writing",
+    "prompt": "Compose a poem about the relationship between silence and understanding."
+  },
+  {
+    "capability": "creative_writing",
+    "prompt": "Write a story from the perspective of a book that has been sitting unread on a library shelf for 200 years."
+  },
+  {
+    "capability": "creative_writing",
+    "prompt": "Write a dialogue between a river and a mountain that have been neighbors for millions of years, discussing the changes they've witnessed."
+  },
+  {
+    "capability": "creative_writing",
+    "prompt": "Describe a color that doesn't exist, to someone who has been blind since birth but can perceive other senses acutely."
+  },
+  {
+    "capability": "creative_writing",
+    "prompt": "Write a letter from a future version of yourself to your present self, giving one piece of advice without revealing any specific events."
+  },
+  {
+    "capability": "general",
+    "prompt": "Explain the importance of biodiversity for ecosystem stability, with specific examples."
+  },
+  {
+    "capability": "general",
+    "prompt": "Describe the water cycle and how climate change is affecting it."
+  },
+  {
+    "capability": "general",
+    "prompt": "Explain the concept of opportunity cost in economics and give three real-world examples of how it affects decision-making."
+  },
+  {
+    "capability": "general",
+    "prompt": "Describe how the internet works at a high level, from when you type a URL into a browser to when the page appears."
+  },
+  {
+    "capability": "general",
+    "prompt": "Explain what CRISPR gene editing is, how it works, and discuss both its potential benefits and ethical concerns."
+  },
+  {
+    "capability": "general",
+    "prompt": "Compare and contrast renewable energy sources (solar, wind, hydro) in terms of efficiency, environmental impact, and scalability."
+  },
+  {
+    "capability": "math_reasoning",
+    "prompt": "A train leaves Station A at 8 AM traveling at 60 mph. Another train leaves Station B (150 miles away) at 9 AM traveling toward Station A at 75 mph. At what time do they meet, and how far from Station A?"
+  },
+  {
+    "capability": "math_reasoning",
+    "prompt": "Find the sum of the infinite series: 1/2 + 1/4 + 1/8 + 1/16 + ... Prove your answer converges and explain why."
+  },
+  {
+    "capability": "math_reasoning",
+    "prompt": "A rectangular garden has a perimeter of 40 meters. If the length is 3 times the width, what are the dimensions and what is the area?"
+  },
+  {
+    "capability": "math_reasoning",
+    "prompt": "Solve for x: 2^(x+1) + 2^x = 24. Show all algebraic steps."
+  },
+  {
+    "capability": "math_reasoning",
+    "prompt": "A sphere has a surface area of 100π square units. What is its volume?"
+  },
+  {
+    "capability": "math_reasoning",
+    "prompt": "Prove that the sum of any three consecutive integers is always divisible by 3."
+  },
+  {
+    "capability": "math_reasoning",
+    "prompt": "A ladder leans against a wall. The ladder is 13 feet long, and the base is 5 feet from the wall. How high up the wall does the ladder reach? Verify your answer satisfies the Pythagorean theorem."
+  },
+  {
+    "capability": "math_reasoning",
+    "prompt": "If f(x) = 3x² - 2x + 5, find f'(x) using the definition of the derivative as a limit, then evaluate f'(2)."
+  },
+  {
+    "capability": "math_reasoning",
+    "prompt": "A bank account earns 5% annual interest compounded quarterly. If $1000 is deposited, how much will be in the account after 3 years?"
+  },
+  {
+    "capability": "math_reasoning",
+    "prompt": "Prove that for any positive integer n, the expression n³ - n is always divisible by 6. Use mathematical induction."
+  },
+  {
+    "capability": "code_generation",
+    "prompt": "Implement a thread-safe LRU cache in Java with O(1) get and put operations, including eviction of least recently used items when capacity is exceeded."
+  },
+  {
+    "capability": "code_generation",
+    "prompt": "Write a TypeScript function that parses a simplified SQL SELECT statement and returns an AST (abstract syntax tree) with support for WHERE clauses, JOINs, and aggregate functions."
+  },
+  {
+    "capability": "code_generation",
+    "prompt": "Create a Rust function that implements a trie data structure with insert, search, and startsWith methods, optimized for memory efficiency."
+  },
+  {
+    "capability": "code_generation",
+    "prompt": "Write a Python decorator that implements retry logic with exponential backoff, jitter, and circuit breaker pattern for failing functions."
+  },
+  {
+    "capability": "code_generation",
+    "prompt": "Implement a Go function that detects cycles in a directed graph using DFS and returns the nodes involved in each cycle."
+  },
+  {
+    "capability": "code_generation",
+    "prompt": "Write a C++ class that implements a thread-safe producer-consumer queue with bounded capacity and timeout support for blocking operations."
+  },
+  {
+    "capability": "code_generation",
+    "prompt": "Create a JavaScript function that compresses a string using run-length encoding and decompresses it back, handling edge cases like consecutive numbers."
+  },
+  {
+    "capability": "code_generation",
+    "prompt": "Implement a Python function that solves the N-Queens problem and returns all valid board configurations as a list of coordinate tuples."
+  },
+  {
+    "capability": "code_generation",
+    "prompt": "Write a Kotlin function that implements a sliding window algorithm to find the longest substring without repeating characters with O(n) time complexity."
+  },
+  {
+    "capability": "code_generation",
+    "prompt": "Create a Bash script that parses Apache access logs, aggregates statistics by HTTP status code and endpoint, and outputs a formatted report with percentiles."
+  },
+  {
+    "capability": "factual_knowledge",
+    "prompt": "What is the atomic number of Osmium, and name three elements with higher atomic numbers that are less dense than water."
+  },
+  {
+    "capability": "factual_knowledge",
+    "prompt": "In what year did the Rosetta Stone get discovered, and which three languages were inscribed on it?"
+  },
+  {
+    "capability": "factual_knowledge",
+    "prompt": "Explain the mechanism by which CRISPR-Cas9 identifies and cuts target DNA sequences, including the role of guide RNA and PAM sequences."
+  },
+  {
+    "capability": "factual_knowledge",
+    "prompt": "What are the four fundamental forces of nature, and which one has the shortest range?"
+  },
+  {
+    "capability": "factual_knowledge",
+    "prompt": "Name the five largest moons of Jupiter by diameter and state which one has the most geologically active surface."
+  },
+  {
+    "capability": "factual_knowledge",
+    "prompt": "Describe the process of DNA replication, including the roles of DNA polymerase, primase, helicase, and ligase."
+  },
+  {
+    "capability": "factual_knowledge",
+    "prompt": "What is the capital of Kazakhstan, and in what year did it become the capital?"
+  },
+  {
+    "capability": "factual_knowledge",
+    "prompt": "Explain the difference between mitosis and meiosis, including the number of daughter cells produced and their ploidy levels."
+  },
+  {
+    "capability": "factual_knowledge",
+    "prompt": "Which element has the highest melting point of all metals, and what is that temperature in Celsius?"
+  },
+  {
+    "capability": "factual_knowledge",
+    "prompt": "Describe the structure and function of the blood-brain barrier, including which types of molecules can and cannot cross it."
+  },
+  {
+    "capability": "logical_consistency",
+    "prompt": "A company's revenue increased 20% year-over-year, and its market share also increased. Does this necessarily mean the overall market grew? Explain your reasoning."
+  },
+  {
+    "capability": "logical_consistency",
+    "prompt": "Three witnesses report seeing a suspect at a crime scene. Two say the suspect wore a red jacket, one says blue. What can we reliably conclude about what the suspect wore?"
+  },
+  {
+    "capability": "logical_consistency",
+    "prompt": "If a medication is effective for 70% of patients and a patient takes it, what is the probability it will be effective for them? Explain the logical distinction between population statistics and individual outcomes."
+  },
+  {
+    "capability": "logical_consistency",
+    "prompt": "A study shows people who drink coffee live longer than those who don't. Does this prove coffee extends lifespan? What alternative explanations exist?"
+  },
+  {
+    "capability": "logical_consistency",
+    "prompt": "Statement: 'No honest person would refuse this deal. You refused the deal. Therefore, you are dishonest.' Identify the logical error and explain why the conclusion doesn't follow."
+  },
+  {
+    "capability": "logical_consistency",
+    "prompt": "If machine learning model A outperforms model B on a test set, will it necessarily perform better in production? What factors could cause this conclusion to be wrong?"
+  },
+  {
+    "capability": "logical_consistency",
+    "prompt": "Two events are correlated: ice cream sales spike when drowning deaths increase. What logical error would it be to conclude ice cream causes drowning?"
+  },
+  {
+    "capability": "logical_consistency",
+    "prompt": "A politician claims: 'My opponent supports policy X, and policy X has failed in other countries, so my opponent's ideas will fail here.' What logical fallacy is present?"
+  },
+  {
+    "capability": "logical_consistency",
+    "prompt": "If 90% of successful entrepreneurs took risks, does this mean taking risks causes success? What's the logical flaw in this reasoning?"
+  },
+  {
+    "capability": "logical_consistency",
+    "prompt": "A system works correctly 99% of the time. If it fails once, does that prove the system is fundamentally broken? Explain the difference between occasional failure and systematic failure."
+  },
+  {
+    "capability": "creative_writing",
+    "prompt": "Write a dialogue between two people who are saying goodbye forever, but neither of them can directly acknowledge what's happening."
+  },
+  {
+    "capability": "creative_writing",
+    "prompt": "Describe a city that exists only during the hour between sunset and full darkness, from the perspective of someone who just discovered it."
+  },
+  {
+    "capability": "creative_writing",
+    "prompt": "Write a letter from a parent to their child that will only be opened after they've died, but make it about something mundane and ordinary."
+  },
+  {
+    "capability": "creative_writing",
+    "prompt": "Compose a story told entirely through the timestamps and subject lines of unsent emails."
+  },
+  {
+    "capability": "creative_writing",
+    "prompt": "Write from the perspective of an inanimate object that has witnessed a significant historical event, but the object doesn't understand the context of what it's seeing."
+  },
+  {
+    "capability": "creative_writing",
+    "prompt": "Create a narrative where the protagonist is trying to remember something they've deliberately forgotten, and each memory they recover contradicts the last."
+  },
+  {
+    "capability": "creative_writing",
+    "prompt": "Write a scene where two characters have a conversation that seems ordinary on the surface, but every word is a double meaning or reference to a shared secret."
+  },
+  {
+    "capability": "creative_writing",
+    "prompt": "Describe what happens when someone realizes they've been living the same day over and over, but the repetition is so subtle they almost missed it."
+  },
+  {
+    "capability": "creative_writing",
+    "prompt": "Write a story about the last conversation between two people before one of them becomes someone else entirely (through transformation, not death)."
+  },
+  {
+    "capability": "creative_writing",
+    "prompt": "Compose a narrative where the narrator is unreliable not because they're lying, but because they're experiencing time in a non-linear way and don't realize it."
+  },
+  {
+    "capability": "general",
+    "prompt": "Write a Python function that implements a binary search tree with insert, delete, and in-order traversal methods, then explain the time complexity of each operation."
+  },
+  {
+    "capability": "general",
+    "prompt": "Analyze the geopolitical implications of the shift in global semiconductor manufacturing from Taiwan to other regions, considering economic, security, and technological factors."
+  },
+  {
+    "capability": "general",
+    "prompt": "Design a database schema for a multi-tenant SaaS application that handles user authentication, role-based access control, and audit logging. Explain your design choices."
+  },
+  {
+    "capability": "general",
+    "prompt": "Explain the mathematical principles behind RSA encryption, including why the difficulty of factoring large numbers is crucial to its security."
+  },
+  {
+    "capability": "general",
+    "prompt": "Describe how transformer neural networks revolutionized natural language processing. What is the attention mechanism and why is it more effective than previous RNN architectures?"
+  },
+  {
+    "capability": "general",
+    "prompt": "Given a list of transactions, write an algorithm to detect potential money laundering patterns using graph analysis and statistical anomalies."
+  },
+  {
+    "capability": "general",
+    "prompt": "Evaluate the trade-offs between microservices and monolithic architectures for a high-traffic e-commerce platform, considering scalability, deployment, and operational complexity."
+  },
+  {
+    "capability": "general",
+    "prompt": "Explain the concept of entropy in thermodynamics and information theory, and describe how these seemingly different domains use the same mathematical framework."
+  },
+  {
+    "capability": "general",
+    "prompt": "Design a rate-limiting system for an API that handles millions of requests per second while fairly distributing quota across different user tiers."
+  },
+  {
+    "capability": "general",
+    "prompt": "Analyze the ethical implications of using predictive policing algorithms, including potential biases, accountability mechanisms, and alternatives."
+  },
+  {
+    "capability": "math_reasoning",
+    "prompt": "Prove that the square root of 2 is irrational using proof by contradiction. Show each step clearly."
+  },
+  {
+    "capability": "code_generation",
+    "prompt": "Write a Python function that implements the quicksort algorithm with in-place partitioning."
+  },
+  {
+    "capability": "factual_knowledge",
+    "prompt": "Explain the causes and key events of the French Revolution, including dates and major figures."
+  },
+  {
+    "capability": "logical_consistency",
+    "prompt": "If all A are B, and some B are C, what can we conclude about A and C? Explain the logical reasoning."
+  }
+]
