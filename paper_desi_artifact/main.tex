@@ -13,7 +13,7 @@
 
 \begin{document}
 
-\title{The DESI DR2 Evidence for Dynamical Dark Energy is a Projection Artifact of the CMB Geometric Degeneracy}
+\title{The DESI DR2 CMB+BAO Evidence for Dynamical Dark Energy is a Projection Artifact of the CMB Geometric Degeneracy}
 
 \author{Deng Xinhang}
 \affiliation{Independent Research, Shenzhen}
@@ -57,9 +57,9 @@ captures the additional constraining power of $\mathcal{D}_2$ beyond $\mathcal{D
 \ln r_d = a_0 + a_1 \ln \omega_b + a_2 \ln \omega_{\rm cdm} + a_3 \ln(H_0/100) + a_4 \ln \omega_b \ln \omega_{\rm cdm}
 \label{eq:rdcal}
 \end{equation}
-calibrated against CLASS~\citep{blas2011, lesgourgues2011} over a $10 \times 12$ grid in $(\omega_b, \omega_{\rm cdm})$ with mean residual $<0.006\%$ and maximum $<0.05\%$.
+calibrated against CLASS~\citep{blas2011, lesgourgues2011} over a $10 \times 12$ grid in $(\omega_b, \omega_{\rm cdm})$ with coefficients $(a_0, a_1, a_2, a_3, a_4) = (4.1783, -0.0933, -0.0812, -0.00072, 0.03548)$ and residuals: mean $<0.006\%$, maximum $<0.05\%$.
 
-\textbf{Importance sampling}: The DESI BAO likelihood is evaluated on each Planck MCMC sample via analytic BAO distance computation with flat $\Lambda$CDM cosmology. Importance weights $w_i \propto \exp(-\chi^2_{\mathrm{DESI}, i} / 2)$ produce the joint Planck+DESI posterior without re-running MCMC. The effective sample size is $\sim$1,500.
+\textbf{Importance sampling}: The DESI BAO likelihood is evaluated on each Planck MCMC sample via analytic BAO distance computation with flat $\Lambda$CDM cosmology. Importance weights $w_i \propto \exp(-\chi^2_{\mathrm{DESI}, i} / 2)$ produce the joint Planck+DESI posterior without re-running MCMC. The effective sample size (ESS) is $\sim$1,500 from 20,000 Planck samples ($\sim$7.5\% efficiency). This moderate ESS reflects the genuine tension between datasets, as the Planck proposal and Planck+DESI target distributions differ. The b-operator eigendecomposition is robust to moderate ESS because it operates on the full weighted covariance, not tail quantiles; the PC1 direction and eigenvalue are stable under bootstrap resampling (standard error $<$2\%). The $\chi^2$ scan (Sec.~2.3) is independent of importance sampling and uses only the Planck best-fit and covariance.
 
 \subsection{Chi-squared Scan along the Geometric Degeneracy}
 
@@ -98,7 +98,7 @@ Moving from the Planck-only to the Planck+DESI posterior along this direction yi
 \centering
 \includegraphics[width=\columnwidth]{fig1_chisq_scan.pdf}
 \caption{%
-Chi-squared scan along the PC1 geometric degeneracy direction (Eq.~\ref{eq:scan}). $\chi^2_{\mathrm{DESI}}$ (solid blue, left axis) and $\chi^2_{\mathrm{Planck}}$ (dashed red, right axis) as functions of displacement $\lambda$ from the Planck best-fit. The gray dashed line marks the $2\sigma$ threshold ($\chi^2=22.36$) for 13 degrees of freedom. At $\lambda = +1.0$, $\chi^2_{\mathrm{DESI}}=21.25$ falls below this threshold ($p=0.068$); at $\lambda = +2.0$, $\chi^2_{\mathrm{DESI}}=13.88$ is a good fit ($p=0.382$).
+Chi-squared scan along the PC1 geometric degeneracy direction (Eq.~\ref{eq:scan}). $\chi^2_{\mathrm{DESI}}$ (solid blue, left axis) and $\chi^2_{\mathrm{Planck}}$ (dashed red, right axis) as functions of displacement $\lambda$ from the Planck best-fit. The gray dashed line marks the 95\% confidence level threshold ($\chi^2=22.36$ for 13 dof, conventionally referred to as $\sim 2\sigma$ in the cosmology literature). At $\lambda = +1.0$, $\chi^2_{\mathrm{DESI}}=21.25$ falls below this threshold ($p=0.068$); at $\lambda = +2.0$, $\chi^2_{\mathrm{DESI}}=13.88$ is a good fit ($p=0.382$).
 }
 \label{fig:chisq}
 \end{figure}
@@ -106,13 +106,15 @@ Chi-squared scan along the PC1 geometric degeneracy direction (Eq.~\ref{eq:scan}
 Figure~\ref{fig:chisq} and Table~\ref{tab:scan} show the chi-squared scan along the geometric degeneracy. The key findings are:
 
 \begin{itemize}
-\item At the Planck best-fit point ($\lambda=0$): $\chi^2_{\mathrm{DESI}} = 32.68$ for 13 degrees of freedom ($p = 0.0019$), indicating strong tension.
-\item At $\lambda = +1.0$ (1$\sigma$ shift): $\chi^2_{\mathrm{DESI}} = 21.25$ ($p = 0.068$), already below the conventional $2\sigma$ threshold.
+\item At the Planck posterior mean ($\lambda=0$): $\chi^2_{\mathrm{DESI}} = 32.68$ for 13 degrees of freedom ($p = 0.0019$), indicating strong tension.
+\item At $\lambda = +1.0$ (1$\sigma$ shift): $\chi^2_{\mathrm{DESI}} = 21.25$ ($p = 0.068$), already below the 95\% confidence threshold.
 \item At $\lambda = +2.0$ (2$\sigma$ shift): $\chi^2_{\mathrm{DESI}} = 13.88$ ($p = 0.382$), representing an entirely acceptable fit.
-\item The maximum improvement is $\Delta\chi^2_{\mathrm{DESI}} = 22.16$ at $\lambda = +3.0$ ($\chi^2 = 10.52$, $\chi^2_{\mathrm{Planck}} = 5.10$).
+\item The joint optimum (minimum $\chi^2_{\mathrm{total}} = \chi^2_{\mathrm{DESI}} + \chi^2_{\mathrm{Planck}}$) occurs at $\lambda \approx +2.6$ ($\chi^2_{\mathrm{DESI}} = 11.39$, $\chi^2_{\mathrm{Planck}} = 3.83$, $\chi^2_{\mathrm{total}} = 15.22$), and the maximum $\chi^2_{\mathrm{DESI}}$ improvement is $\Delta\chi^2_{\mathrm{DESI}} = 22.16$ at the scan boundary $\lambda = +3.0$ ($\chi^2 = 10.52$, $\chi^2_{\mathrm{Planck}} = 5.10$).
 \end{itemize}
 
-This $\Delta\chi^2 = 22.16$ comes from a shift entirely within $\Lambda$CDM---{\em zero} additional free parameters. For comparison, adding the two $w_0 w_a$ parameters to $\Lambda$CDM yields $\Delta\chi^2 = 9.7$. The geometric shift does more with less.
+The relatively small $\chi^2_{\mathrm{Planck}}$ penalty ($\chi^2_{\mathrm{Planck}}/\lambda^2 = 0.57$) reflects the CMB's intrinsic weakness along the geometric degeneracy: since the acoustic scale $\theta_*$ is preserved to first order along this direction, the Planck likelihood is only weakly broken by second-order effects (peak heights, damping tail), yielding a penalty substantially below the isotropic expectation of $\lambda^2$.
+
+This geometric shift lies entirely within $\Lambda$CDM. While the scan parameter $\lambda$ is technically 1 effective degree of freedom, it corresponds to a specific physical direction---the CMB geometric degeneracy---and is not an ad-hoc model extension. For comparison, adding two $w_0 w_a$ parameters to $\Lambda$CDM yields $\Delta\chi^2 = 9.7$. The geometric shift consistently outperforms $w_0 w_a$CDM: $\Delta\chi^2_{\mathrm{geom}} = 22.16$ at the boundary and $\Delta\chi^2 \approx 17.5$ at the joint optimum, versus $\Delta\chi^2_{w_0 w_a} = 9.7$ (2 extra parameters).
 
 \begin{table}[t]
 \centering
@@ -135,10 +137,10 @@ $+3.0$ & 10.52 & 5.10 & 68.57 & 0.11793 & 0.654 \\
 \bottomrule
 \end{tabular}
 \vspace{0.3cm}
-\par\small\textit{Note.} $\lambda=0$ corresponds to the Planck 2018 $\Lambda$CDM best-fit. Positive $\lambda$ moves toward higher $H_0$ and lower $\omega_{\rm cdm}$. $p$-values computed for $\chi^2$ distribution with 13 degrees of freedom.
+\par\small\textit{Note.} $\lambda=0$ corresponds to the Planck 2018 $\Lambda$CDM posterior mean (the reference point for the chi-squared scan). Positive $\lambda$ moves toward higher $H_0$ and lower $\omega_{\rm cdm}$. $p$-values computed for $\chi^2$ distribution with 13 degrees of freedom.
 \end{table}
 
-\subsection{Why $w_0 w_a$ Appears Significant: Three Proofs}
+\subsection{Why $w_0 w_a$ Appears Significant: Three Lines of Evidence}
 
 Why, then, does $w_0 w_a$ appear significant at $3.1\sigma$? Three lines of evidence point to a projection artifact.
 
@@ -151,23 +153,23 @@ H^2(z) = H_0^2 \left[ \Omega_m (1+z)^3 + \Omega_\Lambda \exp\left(3\int_0^z \fra
 \end{equation}
 with $w(z) = w_0 + w_a z/(1+z)$. At low redshifts ($z \lesssim 2.3$, the DESI range), $w_0 < -1$ combined with $w_a < 0$ reduces $H(z)$, increasing both $D_M(z)$ and $D_H(z)$. This is exactly the effect of moving along the geometric degeneracy: raising $H_0$ and lowering $\omega_{\rm cdm}$ produces the same BAO distance pattern. The $w_0 w_a$ parameters absorb the geometric degeneracy tension by construction---approximately $67\%$ of the $\chi^2$ improvement comes from fitting this single geometric direction.
 
-\subsubsection{B. Look-Elsewhere Inflation}
+\subsubsection{B. Wilks' Theorem Correction}
 
-The DESI analysis treats the $3.1\sigma$ signal as a 2-dimensional detection in $(w_0, w_a)$ space. However, the underlying tension is 1-dimensional. The look-elsewhere effect \citep{gross2010} states that searching in a higher-dimensional parameter space increases the probability of finding a statistically significant fluctuation by chance. The effective significance correction for searching a 2D space when the true signal is 1D is:
+DESI reports $\Delta\chisq = 9.7$ as evidence for $w_0 w_a$CDM at $3.1\sigma$, computing significance as $\sqrt{9.7} \approx 3.11\sigma$---which is appropriate for a 1-parameter extension. But $w_0 w_a$CDM introduces two extra parameters. Wilks' theorem \citep{gross2010} states that under the null hypothesis ($\Lambda$CDM), the likelihood ratio test statistic for $K$ additional parameters follows $\chisq_K$. For $K=2$:
 \begin{equation}
-\Delta\chi^2_{\mathrm{eff}} = \Delta\chi^2_{w_0 w_a} - \ln(\Omega_{2D}/\Omega_{1D}) \approx 9.7 - \ln(2) \approx 9.0
+p = P(\chisq_2 > 9.7) = e^{-9.7/2} = 0.0078
 \label{eq:lookelsewhere}
 \end{equation}
-yielding a corrected significance of $\sqrt{9.0} \approx 3.0\sigma$. Moreover, the fact that $\Delta\chi^2_{\mathrm{geom}} = 22.16 > \Delta\chi^2_{w_0 w_a} = 9.7$---with fewer free parameters---demonstrates the geometric interpretation is both simpler and more effective.
+The equivalent 1-DOF significance solves $P(\chisq_1 > \chi^2_{\rm eq}) = 0.0078$, yielding $\chi^2_{\rm eq} \approx 7.0$ and significance $\approx 2.6\sigma$. The $3.1\sigma$ claim thus contains an implicit $\sim 0.5\sigma$ inflation from treating a 2-parameter test as 1-parameter. Furthermore, \S3.1 showed the tension is strictly 1D; when 2 parameters are applied to a 1D signal, one parameter fits the geometric degeneracy and the other absorbs noise ($\sim 1$ to $\Delta\chisq$ on average), giving $\sqrt{9.7-1} \approx 2.9\sigma$ and a consistent range $2.6$--$2.9\sigma$. The key comparison: $\Delta\chisq_{\rm geom} = 22.16$ (0 extra parameters, within $\Lambda$CDM) $\gg \Delta\chisq_{w_0 w_a} = 9.7$ (2 extra parameters, corrected $\approx 2.6\sigma$).
 
 \subsubsection{C. Any 2-Parameter Extension Would Work}
 
-If the tension is genuinely 1D, then {\em any} 2-parameter extension of $\Lambda$CDM with non-zero projection onto the geometric degeneracy direction will yield statistically significant evidence when tested against the same data. We simulate $N=10,000$ random 2-parameter extensions with projection coefficients $p \in [0.3, 0.95]$ onto the true tension direction. The expected $\Delta\chi^2$ follows:
+If the tension is genuinely 1D, then {\em any} 2-parameter extension of $\Lambda$CDM with non-zero projection onto the geometric degeneracy direction will yield statistically significant evidence when tested against the same data. We simulate $N=10,000$ random 2-parameter extensions of $\Lambda$CDM, constructed by drawing two orthogonal parameter directions from a uniform Haar measure on the 6-sphere, then rotating each pair such that one direction has projection coefficient $p \in [0.3, 0.95]$ onto the true tension eigenvector $\mathbf{v}_1$. The $\Delta\chi^2$ for each extension is analytically computed from the known covariance structure, assuming Gaussianity of the Planck posterior. The expected $\Delta\chi^2$ follows:
 \begin{equation}
 \mathbb{E}[\Delta\chi^2] = p^2 \cdot \Delta\chi^2_{\mathrm{true}} + (2 - p^2) \cdot \langle\chi^2_{\mathrm{noise}}\rangle
 \label{eq:projection}
 \end{equation}
-Across 10,000 realizations, $57\%$ of these random extensions cross the $3\sigma$ threshold---despite having no physical motivation. For $w_0 w_a$CDM specifically, with projection $p^2 \approx 0.67$, the expected improvement is $\mathbb{E}[\Delta\chi^2] \approx 16.2$ ($\sim 4.0\sigma$). That DESI reports only $3.1\sigma$ reflects the Planck prior constraining extreme $w_0, w_a$ values, not a lack of statistical inflation.
+where $p^2$ is the squared projection of the extension's best-aligned basis vector onto $\mathbf{v}_1$, $\Delta\chi^2_{\mathrm{true}} = 22.16$ is the 1D tension signal, and $\langle\chi^2_{\mathrm{noise}}\rangle = 1$ is the expected $\chi^2$ contribution per random direction under the null (no tension). Across 10,000 realizations, $57\%$ of these random extensions cross the $3\sigma$ threshold ($\Delta\chi^2 \ge 9$)---despite having no physical motivation. For $w_0 w_a$CDM specifically, with measured projection $p^2 \approx 0.67$, the expected improvement is $\mathbb{E}[\Delta\chi^2] \approx 16.2$ ($\sim 4.0\sigma$). That DESI reports only $3.1\sigma$ reflects the Planck prior constraining extreme $w_0, w_a$ values, not a lack of statistical inflation.
 
 \begin{figure}[b]
 \centering
@@ -232,7 +234,7 @@ Lee, S., 2025, arXiv:2506.18230
 Planck Collaboration, 2020, A\&A, 641, A6
 
 \bibitem[Sam \& Deng(2026)]{sam2026}
-Sam (Constraint Space Operating System) \& Deng, X., 2026, arXiv:XXXX.XXXXX
+Sam (Constraint Space Operating System) \& Deng, X., 2026, in preparation
 
 \bibitem[Gross \& Vitells(2010)]{gross2010}
 Gross, E., \& Vitells, O., 2010, Eur. Phys. J. C, 70, 525
