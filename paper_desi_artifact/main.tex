@@ -59,7 +59,7 @@ captures the additional constraining power of $\mathcal{D}_2$ beyond $\mathcal{D
 \end{equation}
 calibrated against CLASS~\citep{blas2011, lesgourgues2011} over a $10 \times 12$ grid in $(\omega_b, \omega_{\rm cdm})$ with coefficients $(a_0, a_1, a_2, a_3, a_4) = (4.1783, -0.0933, -0.0812, -0.00072, 0.03548)$ and residuals: mean $<0.006\%$, maximum $<0.05\%$.
 
-\textbf{Importance sampling}: The DESI BAO likelihood is evaluated on each Planck MCMC sample via analytic BAO distance computation with flat $\Lambda$CDM cosmology. Importance weights $w_i \propto \exp(-\chi^2_{\mathrm{DESI}, i} / 2)$ produce the joint Planck+DESI posterior without re-running MCMC. The effective sample size (ESS) is $\sim$1,500 from 20,000 Planck samples ($\sim$7.5\% efficiency). This moderate ESS reflects the genuine tension between datasets, as the Planck proposal and Planck+DESI target distributions differ. The b-operator eigendecomposition is robust to moderate ESS because it operates on the full weighted covariance, not tail quantiles; the PC1 direction and eigenvalue are stable under bootstrap resampling (standard error $<$2\%). The $\chi^2$ scan (Sec.~2.3) is independent of importance sampling and uses only the Planck posterior mean and covariance.
+\textbf{Importance sampling}: The DESI BAO likelihood is evaluated on each Planck MCMC sample via analytic BAO distance computation with flat $\Lambda$CDM cosmology. Importance weights $w_i \propto \exp(-\chi^2_{\mathrm{DESI}, i} / 2)$ produce the joint Planck+DESI posterior without re-running MCMC. The effective sample size (ESS) is $\sim$1,500 from 20,000 Planck samples ($\sim$7.5\% efficiency). This moderate ESS reflects the genuine tension between datasets, as the Planck proposal and Planck+DESI target distributions differ. The b-operator eigendecomposition is robust to moderate ESS because it operates on the full weighted covariance matrix, which converges faster than tail quantiles; the dominant eigenvector direction is determined by the bulk of the distribution and is insensitive to individual sample weights. The $\chi^2$ scan (Sec.~2.3) is independent of importance sampling and uses only the Planck posterior mean and covariance.
 
 \subsection{Chi-squared Scan along the Geometric Degeneracy}
 
@@ -199,7 +199,7 @@ The DESI-Planck tension is one-dimensional. Its direction is the CMB geometric d
 The constraint residual decomposition and chi-squared scan pipeline were developed within the Sam analysis framework. We thank the DESI collaboration for making their DR2 BAO measurements publicly available.
 
 \section*{Data Availability}
-All code, MCMC chains, chi-squared scan pipeline, and reproduction instructions are publicly available at \url{https://github.com/sampson0826/constraint_residual}. The DESI DR2 BAO measurements are available at \url{https://github.com/CobayaSampler/bao_data}. Planck 2018 chains are available at \url{https://pla.esac.esa.int}.
+Pre-computed results (JSON), figure generation code, and reproduction instructions are available at \url{https://github.com/sampson0826/constraint_residual}. The full analysis pipeline (B-operator, importance sampling, chi-squared scan) is documented in the repository. Planck 2018 MCMC chains are available at \url{https://pla.esac.esa.int} (plikHM\_TTTEEE\_lowl\_lowE\_lensing). DESI DR2 BAO measurements are available at \url{https://github.com/CobayaSampler/bao_data}.
 
 \begin{thebibliography}{99}
 
