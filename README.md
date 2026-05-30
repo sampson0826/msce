@@ -20,6 +20,33 @@ MSCE is not an AI model. It is a **multi-source verification system**. It does n
 
 > **MSCE is to verification what a compiler is to code.** A compiler doesn't write programs — it checks whether they can run. MSCE doesn't propose theories — it checks whether they can simultaneously satisfy all the verification conditions they claim to meet.
 
+## Who Uses MSCE — and for What
+
+MSCE is not a research paper. It is verification infrastructure. Here is what it does for different people:
+
+**Scientists & Researchers**
+Your theory satisfies conditions A and B. But there are 8 independent conditions that must ALL hold. Have you checked D, E, and F simultaneously? MSCE runs every claim against every known verification condition — in parallel. One command shows you where the conflicts are. → [Example: Hubble tension](#the-hubble-tension-result)
+
+**Peer Reviewers & Journal Editors**
+A single reviewer typically checks 1–2 conditions per paper. No one person can hold all 8 in their head at once. MSCE flags cross-condition inconsistencies that serial review structurally misses. It does not replace reviewers — it gives them a tool to see what they collectively cannot.
+
+**Quantitative Finance & Risk Teams**
+A trading strategy backtests well against 3 market regimes. Does it survive all 7 simultaneously — including the ones nobody thought to check? MSCE cross-validates strategies against a full matrix of independent risk conditions.
+
+**Security Auditors & Smart Contract Developers**
+Your contract passed two audits. But have all known vulnerability categories been checked simultaneously? One audit covers reentrancy, another covers access control — who checks both at once? MSCE maps the protection gap.
+
+**Medical & Pharmaceutical Researchers**
+Drug interaction studies typically verify 2–3 metabolic pathways. MSCE cross-validates claims against all known contraindication conditions — catching interactions that fall between specialist silos.
+
+**Legal & Compliance Teams**
+Does your data policy simultaneously satisfy GDPR, CCPA, PIPL, and industry regulations? Each lawyer checks their jurisdiction. MSCE checks all of them at once — and finds where compliance in one region creates a violation in another.
+
+**Journalists & Fact-Checkers**
+A claim cites two sources and looks solid. MSCE verifies it against all publicly available independent sources simultaneously. The contradiction is never in the sources you checked — it is in the ones you did not.
+
+---
+
 ## Quick Demo
 
 ```bash
