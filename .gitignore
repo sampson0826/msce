@@ -32,8 +32,6 @@ env/
 *.mp4
 hubble_heatmap.png
 !assets/heatmap.png
-!arxiv-extension/icons/icon48.png
-!arxiv-extension/icons/icon128.png
 
 # Secrets
 .env
