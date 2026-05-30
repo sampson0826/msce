@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "MSCE — Constraint Conflict Detector for arXiv",
+  "name": "MSCE — Cross-Validation Detector for arXiv",
   "version": "0.1.0",
-  "description": "Detect hidden constraint conflicts in cosmology papers on arXiv.",
+  "description": "Detect hidden cross-validation inconsistencies in cosmology papers on arXiv.",
   "author": "MSCE Collaboration",
   "icons": {
     "48": "icons/icon48.png",

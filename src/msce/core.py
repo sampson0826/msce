@@ -8,17 +8,17 @@ _HUBBLE_DATA = None
 
 
 def load_hubble_data():
-    """Load the built-in Hubble tension constraint analysis results."""
+    """Load the built-in Hubble tension cross-validation analysis results."""
     global _HUBBLE_DATA
     if _HUBBLE_DATA is not None:
         return _HUBBLE_DATA
 
-    # Embedded results from MSCE v3.0 multi-proposal × multi-constraint analysis
+    # Embedded results from MSCE v3.0 multi-proposal × multi-condition analysis
     _HUBBLE_DATA = {
         "context": {
             "tension": "H₀ = 67.4±0.5 (Planck CMB) vs 73.0±1.0 (SH0ES distance ladder)",
             "significance": "~5σ",
-            "constraints_checked": 8,
+            "conditions_checked": 8,
             "proposals_analyzed": 6,
             "combinations_analyzed": 4,
         },
@@ -80,7 +80,7 @@ def load_hubble_data():
             "E_local_void": {"msce_confidence": 0.171, "msce_disagreement": 0.425, "pass_count": 6, "violation_count": 2},
             "F_systematic_error": {"msce_confidence": 0.108, "msce_disagreement": 0.582, "pass_count": 6, "violation_count": 0},
         },
-        "constraint_matrix": {
+        "condition_matrix": {
             "cmb_power_spectrum":   [1, 1, 1, 0, 0, 1],
             "bao_scale":            [2, 0, 2, 1, 0, 0],
             "supernova_hubble":     [1, 1, 0, 1, 2, 0],
@@ -88,9 +88,9 @@ def load_hubble_data():
             "s8_tension":           [2, 0, 0, 1, 0, 2],
             "universe_age":         [0, 0, 0, 1, 0, 0],
             "gravity_tests":        [0, 2, 0, 0, 0, 0],
-            "cross_constraint":     [2, 2, 2, 2, 1, 2],
+            "cross_condition":     [2, 2, 2, 2, 1, 2],
         },
-        "constraint_labels": [
+        "condition_labels": [
             "CMB Power\nSpectrum",
             "BAO\nScale",
             "Supernova\nHubble Diag.",
@@ -98,7 +98,7 @@ def load_hubble_data():
             "S₈\nTension",
             "Universe\nAge",
             "Gravity\nTests",
-            "Cross-Constraint\nConsistency",
+            "Cross-Condition\nConsistency",
         ],
         "proposal_labels": ["EDE", "f(R)", "ΔN_eff", "DDM", "Void", "Syst."],
         "combinations": {
@@ -108,7 +108,7 @@ def load_hubble_data():
             "DDM + Local Void": {"msce_confidence": 0.317},
         },
         "residual_vector": {
-            "cross_constraint_consistency": 1.83,
+            "cross_condition_consistency": 1.83,
             "s8_tension": 1.00,
             "cmb_power_spectrum": 0.83,
             "supernova_hubble_diagram": 0.83,
@@ -141,13 +141,13 @@ def analyze(target="hubble_tension", quick=True, **kwargs):
             "confidence": max(all_conf),
             "all_fail": max(all_conf) < 0.36,
             "num_proposals": len(results),
-            "num_constraints": 8,
+            "num_conditions": 8,
             "proposals": {
                 k: {"name": data["proposals"][k]["name"], "confidence": v["msce_confidence"]}
                 for k, v in results.items()
             },
-            "heatmap_data": data["constraint_matrix"],
-            "constraint_labels": data["constraint_labels"],
+            "heatmap_data": list(data["condition_matrix"].values()),
+            "condition_labels": data["condition_labels"],
             "proposal_labels": data["proposal_labels"],
             "combinations": data["combinations"],
             "residual_vector": data["residual_vector"],
@@ -156,7 +156,7 @@ def analyze(target="hubble_tension", quick=True, **kwargs):
         raise NotImplementedError(f"Target '{target}' not yet supported. Try 'hubble_tension'.")
 
 
-def check(theory, constraints=None, domain="cosmology", **kwargs):
+def check(theory, conditions=None, domain="cosmology", **kwargs):
     """Check a theory against a set of verification conditions.
 
     This is the public API entry point. In v0.1.0, supports the built-in

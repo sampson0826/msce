@@ -7,7 +7,7 @@ print("=== MSCE Hubble Tension Quick Check ===\n")
 result = msce.analyze("hubble_tension", quick=True)
 
 print(f"Proposals analyzed: {result['num_proposals']}")
-print(f"Constraints checked: {result['num_constraints']}")
+print(f"Verification conditions checked: {result['num_conditions']}")
 print(f"Best confidence: {result['confidence']:.3f}")
 print(f"All proposals fail: {result['all_fail']}")
 print()
@@ -31,9 +31,9 @@ print("Try the full notebook: notebooks/hubble_tension.ipynb")
 try:
     fig = msce.heatmap(
         result["heatmap_data"],
-        constraint_labels=result["constraint_labels"],
+        condition_labels=result["condition_labels"],
         proposal_labels=result["proposal_labels"],
-        title="Hubble Tension: 6 Solutions × 8 Constraints"
+        title="Hubble Tension: 6 Solutions × 8 Verification Conditions"
     )
     fig.savefig("hubble_heatmap.png", dpi=150, bbox_inches="tight")
     print("\nHeatmap saved to hubble_heatmap.png")

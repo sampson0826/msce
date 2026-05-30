@@ -1,5 +1,5 @@
 // MSCE arXiv Extension — Content Script
-// Detects cosmology papers and displays constraint conflict status.
+// Detects cosmology papers and displays cross-validation status.
 
 (function () {
   "use strict";
@@ -40,13 +40,13 @@
         <span style="font-size: 18px;">🔍</span>
         <div>
           <span style="color: #e74c3c; font-weight: 700; font-size: 14px;">MSCE</span>
-          <span style="color: #aaa; font-size: 12px; margin-left: 8px;">Constraint Conflict Detector</span>
+          <span style="color: #aaa; font-size: 12px; margin-left: 8px;">Cross-Validation Detector</span>
         </div>
       </div>
       <p style="color: #ccc; font-size: 13px; margin: 8px 0 0 0;">
         This paper makes claims about cosmology.
-        <a href="https://github.com/msce-ai/msce" target="_blank" style="color: #3498db;">
-          Check constraint consistency →
+        <a href="https://github.com/sampson0826/msce" target="_blank" style="color: #3498db;">
+          Check cross-validation consistency →
         </a>
       </p>
     </div>

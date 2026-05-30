@@ -1,12 +1,12 @@
 """MSCE visualization — heatmaps and confidence charts."""
 
 
-def heatmap(constraint_matrix, constraint_labels=None, proposal_labels=None, title="Constraint Conflict Heatmap"):
-    """Generate a matplotlib heatmap of constraint check results.
+def heatmap(condition_matrix, condition_labels=None, proposal_labels=None, title="Cross-Validation Heatmap"):
+    """Generate a matplotlib heatmap of cross-validation check results.
 
     Args:
-        constraint_matrix: 2D list (n_constraints × n_proposals), values 0=pass, 1=tension, 2=violation
-        constraint_labels: List of constraint names
+        condition_matrix: 2D list (n_conditions × n_proposals), values 0=pass, 1=tension, 2=violation
+        condition_labels: List of verification condition names
         proposal_labels: List of proposal names
         title: Chart title
 
@@ -20,7 +20,7 @@ def heatmap(constraint_matrix, constraint_labels=None, proposal_labels=None, tit
     except ImportError:
         raise ImportError("matplotlib required. Install with: pip install msce[notebook]")
 
-    data = np.array(constraint_matrix)
+    data = np.array(condition_matrix)
     n_rows, n_cols = data.shape
 
     cmap = mcolors.ListedColormap(["#2ecc71", "#f39c12", "#e74c3c"])
@@ -34,8 +34,8 @@ def heatmap(constraint_matrix, constraint_labels=None, proposal_labels=None, tit
     ax.set_yticks(range(n_rows))
     if proposal_labels:
         ax.set_xticklabels(proposal_labels, fontsize=10)
-    if constraint_labels:
-        ax.set_yticklabels(constraint_labels, fontsize=10)
+    if condition_labels:
+        ax.set_yticklabels(condition_labels, fontsize=10)
 
     # Color-coded text in cells
     for i in range(n_rows):
