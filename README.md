@@ -148,7 +148,7 @@ Requirements: Python 3.10+. No GPU needed. For visualization features: `pip inst
 ## Documentation
 
 - [Quickstart](examples/quickstart.py)
-- [Hubble Tension Analysis](notebooks/hubble_tension.ipynb)
+- [Hubble Tension Analysis](notebooks/hubble_tension.md)
 - [Benchmark Results](benchmark/results.md)
 - [API Reference (coming soon)](https://github.com/sampson0826/msce/wiki)
 
