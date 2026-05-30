@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+dist/
+build/
+eggs/
+*.egg
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Notebooks
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Output
+*.png
+*.gif
+*.mp4
+hubble_heatmap.png
+!assets/heatmap.png
+!arxiv-extension/icons/icon48.png
+!arxiv-extension/icons/icon128.png
+
+# Secrets
+.env
+*.key
+credentials.json
+
+# Jupyter
+.jupyter/
+
+# pip
+pip-wheel-metadata/
