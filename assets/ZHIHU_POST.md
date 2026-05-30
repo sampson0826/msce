@@ -38,7 +38,7 @@
 **自己验证：**
 
 ```bash
-git clone https://github.com/msce-ai/msce.git
+git clone https://github.com/sampson0826/msce.git
 cd msce && pip install -e .
 msce check hubble --quick
 ```

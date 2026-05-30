@@ -31,7 +31,7 @@ Even more interesting: 2-factor combinations perform WORSE than single proposals
 
 **Try it yourself (3 lines):**
 ```
-git clone https://github.com/msce-ai/msce.git
+git clone https://github.com/sampson0826/msce.git
 cd msce && pip install -e .
 msce check hubble --quick
 ```

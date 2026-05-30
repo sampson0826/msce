@@ -4,7 +4,7 @@
 
 [![Python](https://img.shields.io/badge/python-3.10%2B-green)](https://python.org)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen)](LICENSE)
-[![Stars](https://img.shields.io/github/stars/msce-ai/msce)](https://github.com/msce-ai/msce/stargazers)
+[![Stars](https://img.shields.io/github/stars/sampson0826/msce)](https://github.com/sampson0826/msce/stargazers)
 
 <p align="center">
   <img src="assets/heatmap.png" width="600" alt="MSCE cross-validation matrix: all 6 proposals fail">
@@ -23,7 +23,7 @@ MSCE is not an AI model. It is a **multi-source verification system**. It does n
 ## Quick Demo
 
 ```bash
-git clone https://github.com/msce-ai/msce.git
+git clone https://github.com/sampson0826/msce.git
 cd msce
 pip install -e .
 msce check hubble --quick
@@ -54,7 +54,7 @@ If peer review worked the way people think it works, someone would have caught t
 
 ## Run It Yourself
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/msce-ai/msce/blob/main/notebooks/hubble_tension.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sampson0826/msce/blob/main/notebooks/hubble_tension.ipynb)
 
 ```python
 import msce
@@ -111,7 +111,7 @@ MSCE's average confidence is 0.49 — it achieves **higher accuracy** (87.4% vs 
 ## Installation
 
 ```bash
-git clone https://github.com/msce-ai/msce.git
+git clone https://github.com/sampson0826/msce.git
 cd msce
 pip install -e .
 ```
@@ -123,7 +123,7 @@ Requirements: Python 3.10+. No GPU needed. For visualization features: `pip inst
 - [Quickstart](examples/quickstart.py)
 - [Hubble Tension Analysis](notebooks/hubble_tension.ipynb)
 - [Benchmark Results](benchmark/results.md)
-- [API Reference (coming soon)](https://github.com/msce-ai/msce/wiki)
+- [API Reference (coming soon)](https://github.com/sampson0826/msce/wiki)
 
 ## FAQ
 
@@ -149,6 +149,6 @@ If you use MSCE in your research:
   author={Deng, Xinhang and MSCE Collaboration},
   year={2026},
   doi={10.5281/zenodo.20041757},
-  url={https://github.com/msce-ai/msce}
+  url={https://github.com/sampson0826/msce}
 }
 ```

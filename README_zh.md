@@ -16,7 +16,7 @@ MSCE 不是 AI 模型，是**多源验证系统**。它不生成答案，它检�
 ## 快速演示
 
 ```bash
-git clone https://github.com/msce-ai/msce.git
+git clone https://github.com/sampson0826/msce.git
 cd msce
 pip install -e .
 msce check hubble --quick
@@ -59,7 +59,7 @@ GPT-5.5 在 40 个案例中给出高度自信（>0.8）的错误答案。MSCE �
 ## 安装
 
 ```bash
-git clone https://github.com/msce-ai/msce.git
+git clone https://github.com/sampson0826/msce.git
 cd msce
 pip install -e .
 ```
@@ -74,6 +74,6 @@ pip install -e .
   author={Deng, Xinhang and MSCE Collaboration},
   year={2026},
   doi={10.5281/zenodo.20041757},
-  url={https://github.com/msce-ai/msce}
+  url={https://github.com/sampson0826/msce}
 }
 ```
