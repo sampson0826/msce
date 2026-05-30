@@ -5,7 +5,7 @@ build-backend = "setuptools.backends._legacy:_Backend"
 [project]
 name = "msce"
 version = "0.1.0"
-description = "Multi-Source Constraint Engine — detect hidden conflicts in scientific theories"
+description = "Multi-Source Consistency Engine — systematic cross-validation for scientific claims"
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
@@ -15,7 +15,7 @@ maintainers = [
     {name = "MSCE Collaboration"},
 ]
 requires-python = ">=3.10"
-keywords = ["constraint-checking", "scientific-computing", "cosmology", "physics", "multi-model"]
+keywords = ["cross-validation", "scientific-computing", "cosmology", "physics", "multi-model", "verification"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",

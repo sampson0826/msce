@@ -1,4 +1,4 @@
-"""MSCE core — constraint conflict detection engine."""
+"""MSCE core — multi-source cross-validation engine."""
 
 import json
 from pathlib import Path
@@ -122,7 +122,7 @@ def load_hubble_data():
 
 
 def analyze(target="hubble_tension", quick=True, **kwargs):
-    """Run a constraint conflict analysis.
+    """Run a multi-source cross-validation analysis.
 
     Args:
         target: 'hubble_tension' (built-in) or path to custom config.
@@ -130,7 +130,7 @@ def analyze(target="hubble_tension", quick=True, **kwargs):
         **kwargs: Additional domain-specific parameters.
 
     Returns:
-        dict with keys: confidence, all_fail, proposals, heatmap_data
+        dict with keys: confidence, all_fail, proposals, heatmap_data, deviation_vector
     """
     if target == "hubble_tension":
         data = load_hubble_data()
@@ -157,19 +157,19 @@ def analyze(target="hubble_tension", quick=True, **kwargs):
 
 
 def check(theory, constraints=None, domain="cosmology", **kwargs):
-    """Check a theory against a set of constraints.
+    """Check a theory against a set of verification conditions.
 
     This is the public API entry point. In v0.1.0, supports the built-in
-    Hubble tension analysis. Custom theory checking comes in v0.2.0.
+    Hubble tension analysis. Custom theory verification comes in v0.2.0.
 
     Args:
         theory: Description of the theory to check.
-        constraints: List of constraint names.
+        conditions: List of verification condition names.
         domain: Scientific domain (default: cosmology).
         **kwargs: Additional parameters.
 
     Returns:
-        dict with constraint check results.
+        dict with cross-validation results.
     """
     if theory.lower() in ("hubble", "hubble_tension", "h0 tension"):
         return analyze("hubble_tension", **kwargs)
@@ -177,9 +177,9 @@ def check(theory, constraints=None, domain="cosmology", **kwargs):
     return {
         "status": "not_implemented",
         "message": (
-            "Custom theory checking is coming in v0.2.0. "
+            "Custom theory verification is coming in v0.2.0. "
             "For now, try: msce.analyze('hubble_tension') "
-            "to see the built-in Hubble tension analysis."
+            "to see the built-in Hubble tension cross-validation analysis."
         ),
         "theory": theory,
         "domain": domain,
