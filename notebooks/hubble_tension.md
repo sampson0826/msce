@@ -2,7 +2,7 @@
 
 ## All 6 Mainstream Solutions Fail Multi-Condition Consistency Checks
 
-**Author:** Deng Xinhang & MSCE Collaboration | **DOI:** [10.5281/zenodo.20041757](https://doi.org/10.5281/zenodo.20041757)
+**Author:** Deng Xinhang & MSCE Collaboration | **Contact:** sampson1735937149@gmail.com
 
 > [Open in Colab](https://colab.research.google.com/github/sampson0826/msce/blob/main/notebooks/hubble_tension.ipynb) | [View notebook](hubble_tension.ipynb)
 
@@ -102,7 +102,8 @@ Highest component: **cross-condition consistency (1.83)** — the problem is not
   title={MSCE: Multi-Source Consistency Engine},
   author={Deng, Xinhang and MSCE Collaboration},
   year={2026},
-  doi={10.5281/zenodo.20041757},
   url={https://github.com/sampson0826/msce}
 }
 ```
+
+Questions? Contact: sampson1735937149@gmail.com

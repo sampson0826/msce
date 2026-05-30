@@ -100,7 +100,6 @@ pip install -e .
   title={MSCE: Multi-Source Consistency Engine},
   author={Deng, Xinhang and MSCE Collaboration},
   year={2026},
-  doi={10.5281/zenodo.20041757},
   url={https://github.com/sampson0826/msce}
 }
 ```
