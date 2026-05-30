@@ -162,6 +162,10 @@ Requirements: Python 3.10+. No GPU needed. For visualization features: `pip inst
 
 **Is the code fully open source?** The CLI, visualization tools, and verification condition templates are MIT-licensed. The ensemble voting engine is available as a hosted API.
 
+## Contact
+
+sampson1735937149@gmail.com
+
 ## License
 
 MIT — see [LICENSE](LICENSE) for details.

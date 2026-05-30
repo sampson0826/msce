@@ -93,6 +93,10 @@ pip install -e .
 
 需要 Python 3.10+，无需 GPU。可视化功能：`pip install -e ".[notebook]"`
 
+## 联系
+
+sampson1735937149@gmail.com
+
 ## 引用
 
 ```bibtex
