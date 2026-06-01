@@ -1,0 +1,17 @@
+{
+  "msce_avg": 0.8666666666666667,
+  "msce_correct": "26/30",
+  "gpt4o_avg": 0.5666666666666667,
+  "deepseek_avg": 0.8333333333333334,
+  "per_subject": {
+    "abstract_algebra": {
+      "msce": 0.7
+    },
+    "college_physics": {
+      "msce": 0.9
+    },
+    "formal_logic": {
+      "msce": 1.0
+    }
+  }
+}

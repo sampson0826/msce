@@ -1,0 +1,216 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" font-family="'SF Mono', 'Menlo', 'Consolas', monospace">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0e14"/>
+      <stop offset="100%" stop-color="#0d1117"/>
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#00E5FF" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00FF88" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#00FF88" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="yellowGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFD740" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#FFD740" stop-opacity="0.04"/>
+    </linearGradient>
+    <linearGradient id="redGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FF5252" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#FF5252" stop-opacity="0.04"/>
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#B388FF" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#B388FF" stop-opacity="0.04"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="750" fill="url(#bg)"/>
+
+  <!-- ===== TITLE ===== -->
+  <text x="600" y="42" text-anchor="middle" fill="#E6EDF3" font-size="22" font-weight="bold">MSCE — Multi-Source Consistency Engine</text>
+  <text x="600" y="66" text-anchor="middle" fill="#6E7681" font-size="12">6-Model Adversarial Architecture  ·  3-Layer Filtering  ·  Cross-Validation Matrix</text>
+
+  <!-- ===== SECTION 1: INPUT ===== -->
+  <rect x="40" y="90" width="1120" height="70" rx="8" fill="#00E5FF" fill-opacity="0.06" stroke="#00E5FF" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="70" y="118" fill="#00E5FF" font-size="11" font-weight="bold">▎INPUT</text>
+  <text x="70" y="140" fill="#8B949E" font-size="12">Claim / Theory / Paper Assertion</text>
+  <text x="600" y="118" fill="#00E5FF" font-size="11" font-weight="bold">▎CONSTRAINTS</text>
+  <text x="600" y="140" fill="#8B949E" font-size="12">CMB  ·  BAO  ·  S₈  ·  H₀ local  ·  BBN  ·  v_c  ·  LSS  ·  Time</text>
+  <text x="1120" y="128" text-anchor="end" fill="#484F58" font-size="10">N independent verification conditions</text>
+
+  <!-- Arrow: Input → Models -->
+  <line x1="600" y1="160" x2="600" y2="185" stroke="#484F58" stroke-width="1"/>
+  <polygon points="595,182 600,190 605,182" fill="#484F58"/>
+
+  <!-- ===== SECTION 2: 6 MODELS ===== -->
+  <text x="600" y="212" text-anchor="middle" fill="#6E7681" font-size="10" letter-spacing="4">PARALLEL INDEPENDENT EVALUATION</text>
+
+  <!-- Model cards: 2 rows x 3 cols -->
+  <!-- Row 1 -->
+  <g>
+    <!-- GPT-5.5 -->
+    <rect x="55" y="230" width="340" height="88" rx="6" fill="#10B981" fill-opacity="0.06" stroke="#10B981" stroke-opacity="0.35" stroke-width="1"/>
+    <text x="75" y="254" fill="#10B981" font-size="13" font-weight="bold">GPT-5.5</text>
+    <text x="75" y="274" fill="#E6EDF3" font-size="11">Depth-First Reasoning</text>
+    <text x="75" y="296" fill="#6E7681" font-size="10">Traces single reasoning chains · Finds breaks in logic</text>
+
+    <!-- Gemini 3.1 Pro -->
+    <rect x="430" y="230" width="340" height="88" rx="6" fill="#3B82F6" fill-opacity="0.06" stroke="#3B82F6" stroke-opacity="0.35" stroke-width="1"/>
+    <text x="450" y="254" fill="#3B82F6" font-size="13" font-weight="bold">Gemini 3.1 Pro</text>
+    <text x="450" y="274" fill="#E6EDF3" font-size="11">Breadth-First Reasoning</text>
+    <text x="450" y="296" fill="#6E7681" font-size="10">Parallel condition scanning · Finds cross-condition conflicts</text>
+
+    <!-- Grok 4.1 -->
+    <rect x="805" y="230" width="340" height="88" rx="6" fill="#F59E0B" fill-opacity="0.06" stroke="#F59E0B" stroke-opacity="0.35" stroke-width="1"/>
+    <text x="825" y="254" fill="#F59E0B" font-size="13" font-weight="bold">Grok 4.1</text>
+    <text x="825" y="274" fill="#E6EDF3" font-size="11">Counterfactual Reasoning</text>
+    <text x="825" y="296" fill="#6E7681" font-size="10">Hypothesis → Observable consequence → Compare to data</text>
+  </g>
+
+  <!-- Row 2 -->
+  <g>
+    <!-- Kimi K2.5 -->
+    <rect x="55" y="338" width="340" height="88" rx="6" fill="#EF4444" fill-opacity="0.06" stroke="#EF4444" stroke-opacity="0.35" stroke-width="1"/>
+    <text x="75" y="362" fill="#EF4444" font-size="13" font-weight="bold">Kimi K2.5</text>
+    <text x="75" y="382" fill="#E6EDF3" font-size="11">Direct Reasoning</text>
+    <text x="75" y="404" fill="#6E7681" font-size="10">No assumptions · No explanations · Pure judgment</text>
+
+    <!-- GPT-5.1-thinking -->
+    <rect x="430" y="338" width="340" height="88" rx="6" fill="#8B5CF6" fill-opacity="0.06" stroke="#8B5CF6" stroke-opacity="0.35" stroke-width="1"/>
+    <text x="450" y="362" fill="#8B5CF6" font-size="13" font-weight="bold">GPT-5.1-thinking</text>
+    <text x="450" y="382" fill="#E6EDF3" font-size="11">Scientific Depth Reasoning</text>
+    <text x="450" y="404" fill="#6E7681" font-size="10">Internal mathematical / physical consistency check</text>
+
+    <!-- o4-mini -->
+    <rect x="805" y="338" width="340" height="88" rx="6" fill="#EC4899" fill-opacity="0.06" stroke="#EC4899" stroke-opacity="0.35" stroke-width="1"/>
+    <text x="825" y="362" fill="#EC4899" font-size="13" font-weight="bold">o4-mini</text>
+    <text x="825" y="382" fill="#E6EDF3" font-size="11">Constraint Propagation Reasoning</text>
+    <text x="825" y="404" fill="#6E7681" font-size="10">Traces condition changes through the constraint network</text>
+  </g>
+
+  <!-- Label: 6 strategies -->
+  <text x="600" y="455" text-anchor="middle" fill="#484F58" font-size="9">Six different detection tools — not six different opinions. Surviving all six = surviving six distinct attacks.</text>
+
+  <!-- Arrows: Models → Filters -->
+  <g stroke="#30363D" stroke-width="0.8">
+    <line x1="225" y1="426" x2="225" y2="460"/>
+    <line x1="600" y1="426" x2="600" y2="460"/>
+    <line x1="975" y1="426" x2="975" y2="460"/>
+  </g>
+  <polygon points="222,457 225,465 228,457" fill="#30363D"/>
+  <polygon points="597,457 600,465 603,457" fill="#30363D"/>
+  <polygon points="972,457 975,465 978,457" fill="#30363D"/>
+
+  <!-- ===== SECTION 3: 3-LAYER FILTERS ===== -->
+  <text x="600" y="485" text-anchor="middle" fill="#6E7681" font-size="10" letter-spacing="4">THREE-LAYER FILTRATION</text>
+
+  <!-- L1 -->
+  <rect x="55" y="500" width="340" height="85" rx="6" fill="#FF5252" fill-opacity="0.05" stroke="#FF5252" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="75" y="524" fill="#FF5252" font-size="12" font-weight="bold">L1  Confidence Filter</text>
+  <text x="75" y="546" fill="#E6EDF3" font-size="11">Discard all judgments with confidence &lt; 0.4</text>
+  <text x="75" y="568" fill="#6E7681" font-size="10">"I don't know" is a valid signal. MSCE listens.</text>
+
+  <!-- L2 -->
+  <rect x="430" y="500" width="340" height="85" rx="6" fill="#FF9100" fill-opacity="0.05" stroke="#FF9100" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="450" y="524" fill="#FF9100" font-size="12" font-weight="bold">L2  Statistical Outlier Detection</text>
+  <text x="450" y="546" fill="#E6EDF3" font-size="11">Each model's judgment pattern checked for bias</text>
+  <text x="450" y="568" fill="#6E7681" font-size="10">Systematic deviation flagged — not error, but "leaning"</text>
+
+  <!-- L3 -->
+  <rect x="805" y="500" width="340" height="85" rx="6" fill="#B388FF" fill-opacity="0.05" stroke="#B388FF" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="825" y="524" fill="#B388FF" font-size="12" font-weight="bold">L3  Collective Blindspot Detection</text>
+  <text x="825" y="546" fill="#E6EDF3" font-size="11">6-model consensus ≠ truth</text>
+  <text x="825" y="568" fill="#6E7681" font-size="10">Detects synchronized errors via divergence on adjacent conditions</text>
+
+  <!-- Arrow: Filters → Matrix -->
+  <line x1="600" y1="585" x2="600" y2="610" stroke="#30363D" stroke-width="0.8"/>
+  <polygon points="595,607 600,615 605,607" fill="#30363D"/>
+  <text x="610" y="600" fill="#484F58" font-size="9">Cross-validated signals only</text>
+
+  <!-- ===== SECTION 4: CROSS-VALIDATION MATRIX ===== -->
+  <text x="600" y="635" text-anchor="middle" fill="#FFD740" font-size="11" font-weight="bold">▎CROSS-VALIDATION MATRIX</text>
+  <text x="600" y="652" text-anchor="middle" fill="#6E7681" font-size="9">Every Proposal × Every Condition → Three-dimensional signal (Pass / Tension / Violation × Confidence × Conflict Level)</text>
+
+  <!-- Mini heatmap -->
+  <g transform="translate(180, 662)">
+    <!-- Headers -->
+    <text x="0" y="0" fill="#6E7681" font-size="8"></text>
+    <text x="55" y="-8" fill="#6E7681" font-size="7">CMB</text>
+    <text x="95" y="-8" fill="#6E7681" font-size="7">BAO</text>
+    <text x="135" y="-8" fill="#6E7681" font-size="7">S₈</text>
+    <text x="175" y="-8" fill="#6E7681" font-size="7">H₀</text>
+    <text x="215" y="-8" fill="#6E7681" font-size="7">BBN</text>
+    <text x="255" y="-8" fill="#6E7681" font-size="7">v_c</text>
+    <text x="295" y="-8" fill="#6E7681" font-size="7">LSS</text>
+    <text x="335" y="-8" fill="#6E7681" font-size="7">Time</text>
+
+    <!-- Row 1: DDM -->
+    <text x="-5" y="18" fill="#E6EDF3" font-size="7.5" text-anchor="end">DDM</text>
+    <rect x="55" y="8" width="32" height="16" rx="2" fill="#00FF88" fill-opacity="0.7"/>
+    <rect x="95" y="8" width="32" height="16" rx="2" fill="#FFD740" fill-opacity="0.7"/>
+    <rect x="135" y="8" width="32" height="16" rx="2" fill="#00FF88" fill-opacity="0.7"/>
+    <rect x="175" y="8" width="32" height="16" rx="2" fill="#FFD740" fill-opacity="0.7"/>
+    <rect x="215" y="8" width="32" height="16" rx="2" fill="#00FF88" fill-opacity="0.7"/>
+    <rect x="255" y="8" width="32" height="16" rx="2" fill="#FFD740" fill-opacity="0.7"/>
+    <rect x="295" y="8" width="32" height="16" rx="2" fill="#00FF88" fill-opacity="0.7"/>
+    <rect x="335" y="8" width="32" height="16" rx="2" fill="#FFD740" fill-opacity="0.7"/>
+    <text x="441" y="20" fill="#6E7681" font-size="7.5">Score: 0.358</text>
+
+    <!-- Row 2: EDE -->
+    <text x="-5" y="40" fill="#E6EDF3" font-size="7.5" text-anchor="end">EDE</text>
+    <rect x="55" y="30" width="32" height="16" rx="2" fill="#00FF88" fill-opacity="0.7"/>
+    <rect x="95" y="30" width="32" height="16" rx="2" fill="#FF5252" fill-opacity="0.7"/>
+    <rect x="135" y="30" width="32" height="16" rx="2" fill="#FF5252" fill-opacity="0.7"/>
+    <rect x="175" y="30" width="32" height="16" rx="2" fill="#FF5252" fill-opacity="0.7"/>
+    <rect x="215" y="30" width="32" height="16" rx="2" fill="#00FF88" fill-opacity="0.7"/>
+    <rect x="255" y="30" width="32" height="16" rx="2" fill="#FFD740" fill-opacity="0.7"/>
+    <rect x="295" y="30" width="32" height="16" rx="2" fill="#FFD740" fill-opacity="0.7"/>
+    <rect x="335" y="30" width="32" height="16" rx="2" fill="#FFD740" fill-opacity="0.7"/>
+    <text x="441" y="42" fill="#FF5252" font-size="7.5">Score: 0.076</text>
+
+    <!-- Row 3: Dark Radiation -->
+    <text x="-5" y="62" fill="#E6EDF3" font-size="7.5" text-anchor="end">Dark Rad.</text>
+    <rect x="55" y="52" width="32" height="16" rx="2" fill="#FFD740" fill-opacity="0.7"/>
+    <rect x="95" y="52" width="32" height="16" rx="2" fill="#00FF88" fill-opacity="0.7"/>
+    <rect x="135" y="52" width="32" height="16" rx="2" fill="#FFD740" fill-opacity="0.7"/>
+    <rect x="175" y="52" width="32" height="16" rx="2" fill="#FFD740" fill-opacity="0.7"/>
+    <rect x="215" y="52" width="32" height="16" rx="2" fill="#FFD740" fill-opacity="0.7"/>
+    <rect x="255" y="52" width="32" height="16" rx="2" fill="#FFD740" fill-opacity="0.7"/>
+    <rect x="295" y="52" width="32" height="16" rx="2" fill="#00FF88" fill-opacity="0.7"/>
+    <rect x="335" y="52" width="32" height="16" rx="2" fill="#FFD740" fill-opacity="0.7"/>
+    <text x="441" y="64" fill="#6E7681" font-size="7.5">Score: 0.223</text>
+
+    <!-- Legend -->
+    <circle cx="500" cy="12" r="4" fill="#00FF88" fill-opacity="0.7"/>
+    <text x="510" y="16" fill="#6E7681" font-size="7">Pass</text>
+    <circle cx="540" cy="12" r="4" fill="#FFD740" fill-opacity="0.7"/>
+    <text x="550" y="16" fill="#6E7681" font-size="7">Tension</text>
+    <circle cx="595" cy="12" r="4" fill="#FF5252" fill-opacity="0.7"/>
+    <text x="605" y="16" fill="#6E7681" font-size="7">Violation</text>
+  </g>
+
+  <!-- ===== FOOTER BAR ===== -->
+  <rect x="0" y="700" width="1200" height="50" fill="#0a0e14" stroke="#21262D" stroke-width="0.5"/>
+  <text x="40" y="722" fill="#484F58" font-size="10">MSCE v0.2.0-beta</text>
+  <text x="40" y="738" fill="#30363D" font-size="9">Verification Infrastructure — Not an LLM Wrapper</text>
+
+  <text x="600" y="728" text-anchor="middle" fill="#E6EDF3" font-size="12" font-weight="bold">87.4% Accuracy</text>
+  <text x="600" y="742" text-anchor="middle" fill="#00FF88" font-size="9">+12.6pp vs strongest single model</text>
+
+  <text x="820" y="728" text-anchor="middle" fill="#E6EDF3" font-size="12" font-weight="bold">+30.3pp</text>
+  <text x="820" y="742" text-anchor="middle" fill="#00E5FF" font-size="9">Cross-domain improvement</text>
+
+  <text x="980" y="728" text-anchor="middle" fill="#E6EDF3" font-size="12" font-weight="bold">0</text>
+  <text x="980" y="742" text-anchor="middle" fill="#FF5252" font-size="9">High-confidence errors (GPT-5.5: 40)</text>
+
+  <text x="1150" y="728" text-anchor="middle" fill="#E6EDF3" font-size="12" font-weight="bold">100%</text>
+  <text x="1150" y="742" text-anchor="middle" fill="#B388FF" font-size="9">Frontier benchmark (GPT-5.5: 85%)</text>
+
+</svg>

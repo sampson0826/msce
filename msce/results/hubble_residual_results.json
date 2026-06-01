@@ -1,0 +1,140 @@
+{
+  "timestamp": 1780135015.879575,
+  "analysis_type": "hubble_residual_diagnosis_with_combinations",
+  "method": "Sam's residual direction → targeted combination search",
+  "residual_diagnosis": {
+    "per_constraint": {
+      "cmb_power_spectrum": {
+        "avg_score": 0.833,
+        "n": 6,
+        "epoch": "early (z~1100, recombination)"
+      },
+      "bao_scale": {
+        "avg_score": 0.667,
+        "n": 6,
+        "epoch": "early (z~1100, drag epoch)"
+      },
+      "supernova_hubble_diagram": {
+        "avg_score": 0.833,
+        "n": 6,
+        "epoch": "late (z<2, cosmic expansion)"
+      },
+      "bbn_abundances": {
+        "avg_score": 0.167,
+        "n": 6,
+        "epoch": "very early (z~10^9, nucleosynthesis)"
+      },
+      "s8_tension": {
+        "avg_score": 1.0,
+        "n": 6,
+        "epoch": "late (z<2, large-scale structure)"
+      },
+      "universe_age": {
+        "avg_score": 0.167,
+        "n": 6,
+        "epoch": "global (integrated expansion)"
+      },
+      "gravity_tests": {
+        "avg_score": 0.333,
+        "n": 6,
+        "epoch": "solar system (z=0)"
+      },
+      "cross_constraint_consistency": {
+        "avg_score": 1.833,
+        "n": 6,
+        "epoch": "global (all epochs)"
+      }
+    },
+    "epoch_summary": {
+      "early_universe": 0.556,
+      "late_universe": 0.583,
+      "global_consistency": 1.833
+    },
+    "interpretation": "High early+late → need cross-epoch combinations"
+  },
+  "combinations_checked": [
+    {
+      "id": "combo_1",
+      "name": "EDE + 局部空洞 (early+late cross-epoch)",
+      "proposals": [
+        "A_early_dark_energy",
+        "E_local_void"
+      ],
+      "msce_confidence": 0.0752,
+      "msce_disagreement": 0.6966,
+      "msce_top_answer": "该组合方案仍无法在保持所有8项观测约束一致的前提下，将 H₀ 提升至 ~73 km/s/Mpc。",
+      "msce_elapsed": 147.52
+    },
+    {
+      "id": "combo_2",
+      "name": "ΔN_eff + 局部空洞 (early radiation + late void)",
+      "proposals": [
+        "C_extra_neutrinos",
+        "E_local_void"
+      ],
+      "msce_confidence": 0.2082,
+      "msce_disagreement": 0.6422,
+      "msce_top_answer": "不能。ΔN_eff≈0.2–0.3 + 半径200–300 Mpc、δ≈−0.3的局部空洞可以在方向上同时作用于早期声尺度和本地H₀偏置，但在满足全部8项约束时，无法自洽地把观测到的H₀提升到≈73 km/s/Mpc。主要失败点是：所需局部空洞过大，会与超新星哈勃图、低红移BAO、大尺度结构/星系巡天和跨约束一致性冲突；ΔN_eff在BBN+CMB阻尼尾约束下只能提供有限提升。",
+      "msce_elapsed": 91.99
+    },
+    {
+      "id": "combo_3",
+      "name": "EDE + ΔN_eff (dual early mechanism, fine-tuned)",
+      "proposals": [
+        "A_early_dark_energy",
+        "C_extra_neutrinos"
+      ],
+      "msce_confidence": 0.1467,
+      "msce_disagreement": 0.5461,
+      "msce_top_answer": "不能。EDE(f_EDE≈0.03)+ΔN_eff≈0.2 的低剂量组合可能比单独高剂量 EDE 或单独高 ΔN_eff 更温和，但不足以在同时满足 CMB、BAO、SN、BBN、S₈、宇宙年龄、引力检验和跨约束自洽性的前提下把 H₀稳定提升到约 73 km/s/Mpc。更合理的结果是 H₀提升到约 69.5–71 km/s/Mpc，仍保留明显哈勃张力。",
+      "msce_elapsed": 73.35
+    },
+    {
+      "id": "combo_4",
+      "name": "DDM + 局部空洞 (decaying DM + void)",
+      "proposals": [
+        "D_decaying_dark_matter",
+        "E_local_void"
+      ],
+      "msce_confidence": 0.317,
+      "msce_disagreement": 0.5947,
+      "msce_top_answer": "该组合方案**无法**在保持所有8项观测约束一致的前提下将H₀提升至~73 km/s/Mpc。DDM+局部空洞组合会产生新的跨时代冲突，特别是BAO尺度和S₈约束的严重恶化。",
+      "msce_elapsed": 121.24
+    }
+  ],
+  "single_proposal_statuses": {
+    "A_early_dark_energy": {
+      "pass_count": 3,
+      "violation_count": 3,
+      "overall_judgment": "早期暗能量可以部分缓解H0张力，但在f_EDE≈0.05、z_c≈3000的典型设定下不能同时满足CMB、BAO、S8和高H0要求。它对超新星、BBN和太阳系引力检验通常安全，但解决H0张力所需的声视界缩小与BAO/DESI声尺冲突，并且显著加剧S8张力。整体判断：不是一个在当前观测下完全一致的H0张力解决方案。"
+    },
+    "B_modified_gravity": {
+      "pass_count": 3,
+      "violation_count": 4,
+      "overall_judgment": "该晚期修改引力方案不能作为一致的H0张力解决方案。它可以保持BBN、r_d和宇宙年龄，但要么效应局限在z<0.01而无法影响SH0ES的Hubble-flow超新星，要么需要较大的f_R0从而违反太阳系检验、增强S8并影响CMB透镜。总体判定为不通过。"
+    },
+    "C_extra_neutrinos": {
+      "pass_count": 3,
+      "violation_count": 2,
+      "overall_judgment": "额外中微子/暗辐射ΔN_eff≈0.3-0.5可以部分提高CMB推断的H0，但代价是降低r_d并引发CMB、BBN和S8张力。特别是BAO声视界约束与所需r_d降低直接冲突，且H0通常仍达不到SH0ES值。因此该方案不能作为完全自洽的H0张力解决方案。"
+    },
+    "D_decaying_dark_matter": {
+      "pass_count": 5,
+      "violation_count": 2,
+      "overall_judgment": "衰变暗物质可以在一定程度上降低S8，并且不明显破坏BBN、r_d和太阳系引力检验；但作为H0张力的完整解决方案失败。能够显著提高H0到70-72的参数区间与Planck CMB温度/透镜谱及BAO+SN联合距离约束冲突；而满足这些约束的参数区间又无法把H0提高到SH0ES水平。"
+    },
+    "E_local_void": {
+      "pass_count": 6,
+      "violation_count": 2,
+      "overall_judgment": "局部空洞方案在不修改早期宇宙物理方面较安全，因此CMB声谱、r_d、BBN、宇宙年龄和太阳系引力检验基本可通过。但作为H0张力的完整解决方案失败：δ≈-0.3、200–300 Mpc的空洞只能提供约数%的局部H0提升，不足以消除约5σ的Planck-SH0ES差异；若调大到足以解释H0=73，则会与Pantheon+超新星Hubble图、星系密度场、BAO低红移距离和CMB大尺度/运动学约束发生冲突。因此该方案最多可贡献小的系统偏移，不能作为自洽的完整解决方案。"
+    },
+    "F_systematic_error": {
+      "pass_count": 6,
+      "violation_count": 0,
+      "overall_judgment": "系统误差方案在形式上最保守：不引入新自由参数，因此不会直接破坏CMB、BAO、SN、BBN、宇宙年龄或太阳系引力检验。其主要问题不是与某一项宇宙学观测发生明确数值矛盾，而是需要一个足够大的、尚未识别且能绕过多重交叉检验的系统偏差。目前更像是可能性而非已验证解决方案；同时不能解释Planck ΛCDM下的S8弱透镜张力。"
+    }
+  },
+  "summary": {
+    "total_time_s": 715.3
+  }
+}

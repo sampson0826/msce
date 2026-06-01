@@ -1,0 +1,450 @@
+[
+  {
+    "id": "math_001",
+    "problem": "Find the sum of all positive integers n such that n^2 - 19n + 99 is a perfect square.",
+    "difficulty": "AMC10",
+    "source": "AMC 10 (classic)",
+    "correct_answer": "38",
+    "student_answers": [
+      {
+        "answer": "The sum is 38. Let n^2 - 19n + 99 = k^2, then discriminant 4k^2 - 35 must be a perfect square m^2. Solving (2k-m)(2k+m)=35 gives factor pairs (1,35) and (5,7), leading to n = 1, 9, 10, 18. Sum = 1+9+10+18 = 38.",
+        "is_correct": true
+      },
+      {
+        "answer": "n = 1, 9, 10, 18 so the sum is 38.",
+        "is_correct": true
+      },
+      {
+        "answer": "The answer is 19. Only n = 9 and n = 10 work, giving sum 9+10 = 19.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "id": "math_002",
+    "problem": "A data set consists of 6 positive integers: 1, 7, 5, 2, 5, and X. The average (arithmetic mean) of the 6 numbers equals a value in the data set. What is the sum of all possible values of X?",
+    "difficulty": "AMC10",
+    "source": "2022 AMC 10A Problem 8",
+    "correct_answer": "36",
+    "student_answers": [
+      {
+        "answer": "The sum is 36. The mean must be 4 (if X=4), 5 (X=10), or 7 (X=22). The possible X values are 4, 10, and 22, summing to 36.",
+        "is_correct": true
+      },
+      {
+        "answer": "X can be 4, 10, 22 so the sum is 36.",
+        "is_correct": true
+      },
+      {
+        "answer": "The possible values are X = 4 and X = 10, giving a sum of 14.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "id": "math_003",
+    "problem": "How many positive perfect squares less than 2023 are divisible by 5?",
+    "difficulty": "AMC10",
+    "source": "2023 AMC 10A Problem 3",
+    "correct_answer": "8",
+    "student_answers": [
+      {
+        "answer": "A perfect square divisible by 5 must be divisible by 25. floor(2023/25) = 80, and floor(sqrt(80)) = 8. So there are 8 such squares.",
+        "is_correct": true
+      },
+      {
+        "answer": "The squares are 25, 100, 225, 400, 625, 900, 1225, 1600. That's 8 numbers.",
+        "is_correct": true
+      },
+      {
+        "answer": "There are 9 perfect squares. sqrt(2023) ≈ 44.98, and 45 is divisible by 5, so 45/5 = 9.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "id": "math_004",
+    "problem": "Consider the following 100 sets of 10 elements each: {1,2,...,10}, {11,12,...,20}, ..., {991,992,...,1000}. How many of these sets contain exactly two multiples of 7?",
+    "difficulty": "AMC10",
+    "source": "2022 AMC 10B Problem 8",
+    "correct_answer": "42",
+    "student_answers": [
+      {
+        "answer": "Let a = number of sets with 1 multiple of 7, b = number with 2 multiples. a + b = 100 and a + 2b = floor(1000/7) = 142. Solving gives b = 42.",
+        "is_correct": true
+      },
+      {
+        "answer": "42 sets. Each group of 10 consecutive numbers contains either 1 or 2 multiples of 7, and there are 142 total multiples. With 100 groups, 142-100 = 42 groups must have 2 multiples.",
+        "is_correct": true
+      },
+      {
+        "answer": "There are about 50 such sets, since roughly half the groups would have 2 multiples of 7. Answer: 50.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "id": "math_005",
+    "problem": "The least common multiple of a positive integer n and 18 is 180, and the greatest common divisor of n and 45 is 15. What is the sum of the digits of n?",
+    "difficulty": "AMC10",
+    "source": "2022 AMC 10A Problem 7",
+    "correct_answer": "6",
+    "student_answers": [
+      {
+        "answer": "From LCM(n,18)=180: n must have 2^2, 5^1, and at most 3^2. From GCD(n,45)=15: n must have 3^1 and 5^1 but not 3^2. So n = 2^2 * 3 * 5 = 60. Sum of digits = 6+0 = 6.",
+        "is_correct": true
+      },
+      {
+        "answer": "n = 60, so the digit sum is 6.",
+        "is_correct": true
+      },
+      {
+        "answer": "n = 30 works because LCM(30,18) = 90... no, let me recalculate. n = 90 gives LCM(90,18) = 90, not 180. So n = 180, digits sum to 9.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "id": "math_006",
+    "problem": "Ted mistakenly wrote 2^m * sqrt(1/4096) as 2 * (1/4096)^(1/m). What is the sum of all real numbers m for which these two expressions have the same value?",
+    "difficulty": "AMC10",
+    "source": "2022 AMC 10A Problem 11",
+    "correct_answer": "7",
+    "student_answers": [
+      {
+        "answer": "Rewrite as 2^(m-6) = 2^(1-12/m). So m-6 = 1-12/m, giving m^2-7m+12=0, so m=3 or m=4. Sum = 7.",
+        "is_correct": true
+      },
+      {
+        "answer": "m = 3 and m = 4, so the sum is 7.",
+        "is_correct": true
+      },
+      {
+        "answer": "Setting the exponents equal: m/2 - 6 = 1 - 12/(2m). Solving gives m = 6 as the only solution. Answer: 6.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "id": "math_007",
+    "problem": "The sum of three numbers is 96. The first number is 6 times the third number, and the third number is 40 less than the second number. What is the absolute value of the difference between the first and second numbers?",
+    "difficulty": "AMC10",
+    "source": "2022 AMC 10A Problem 3",
+    "correct_answer": "5",
+    "student_answers": [
+      {
+        "answer": "Let third = x. Then first = 6x, second = x+40. Sum: 6x + (x+40) + x = 96, so 8x = 56, x = 7. Numbers: 42, 47, 7. |42-47| = 5.",
+        "is_correct": true
+      },
+      {
+        "answer": "The difference is 5.",
+        "is_correct": true
+      },
+      {
+        "answer": "Let first = a, second = b, third = c. We know a+b+c=96 and a=6c. Also, c is 40 less than b, so b = c - 40. Then 6c + (c-40) + c = 96, so 8c = 136, c = 17. Then a = 102, b = -23. The absolute difference is |102 - (-23)| = 125.",
+        "is_correct": false
+      },
+      {
+        "answer": "The third number is 40 less than the second, so b - c = 40. The first is 6 times the third: a = 6c. Sum: a + b + c = 96. From b = c + 40: 6c + c + 40 + c = 96, 8c = 56, c = 7. Then a = 42, b = 47. Difference: 47 - 42 = 5. On second thought, the first minus second is 42 - 47 = -5, absolute value 5. But maybe they want b - a = 47 - 42 = 5. Either way it's 5. Actually re-reading the problem, it asks for the absolute value so 5 is correct. But wait, is the third 40 less than the second, or is the second 40 less than the third? 'The third number is 40 less than the second number' means b - c = 40. Final answer: 5.",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "id": "math_008",
+    "problem": "Evaluate the sum: 1/2! + 2/3! + 3/4! + ... + 2021/2022!. This sum can be expressed as a - 1/b! where a and b are positive integers. Find a + b.",
+    "difficulty": "AMC10",
+    "source": "2022 AMC 10B Problem 9",
+    "correct_answer": "2023",
+    "student_answers": [
+      {
+        "answer": "Using the identity n/(n+1)! = 1/n! - 1/(n+1)!, the sum telescopes to 1 - 1/2022!. So a=1, b=2022, and a+b = 2023.",
+        "is_correct": true
+      },
+      {
+        "answer": "2023. The telescoping sum equals 1 - 1/2022!.",
+        "is_correct": true
+      },
+      {
+        "answer": "a = 2021, b = 2022, so a + b = 4043.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "id": "math_009",
+    "problem": "Suppose that N is a positive integer that has one complementary pair of divisors that differ by 20 and another pair of complementary divisors that differ by 23. What is the sum of the digits of N? (Complementary divisors of N are positive integers a and b such that N = ab.)",
+    "difficulty": "AMC10",
+    "source": "2023 AMC 10A Problem 23",
+    "correct_answer": "15",
+    "student_answers": [
+      {
+        "answer": "Let the divisor pairs be (d1, d1+20) and (d2, d2+23). Setting d1(d1+20) = d2(d2+23) = N, we solve using discriminant methods. The pairs are (22,42) and (21,44), giving N = 924. Sum of digits: 9+2+4 = 15.",
+        "is_correct": true
+      },
+      {
+        "answer": "N = 924, and 9+2+4 = 15.",
+        "is_correct": true
+      },
+      {
+        "answer": "The divisor pairs are (20, 40) and (23, 46), so N = 800. Sum of digits = 8+0+0 = 8.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "id": "math_010",
+    "problem": "What is the least positive integer m such that m * 2! * 3! * 4! * 5! * ... * 16! is a perfect square?",
+    "difficulty": "AMC10",
+    "source": "2023 AMC 10B Problem 15",
+    "correct_answer": "70",
+    "student_answers": [
+      {
+        "answer": "Pair consecutive factorials: 2!*3! = (2!)^2*3, 4!*5! = (4!)^2*5, etc. After removing perfect squares, the remaining prime factors with odd exponents are 2, 5, and 7. So m = 2*5*7 = 70.",
+        "is_correct": true
+      },
+      {
+        "answer": "m = 70.",
+        "is_correct": true
+      },
+      {
+        "answer": "Computing the exponent parity of each prime in the product, I get odd exponents for 2, 3, 5, 7. So m = 2*3*5*7 = 210.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "id": "math_011",
+    "problem": "In triangle ABC, AB = BC. Lines parallel to AC are drawn through points on AB and BC. The shaded portions of the triangle between these lines have equal area. The unshaded heights from the lines to the base AC are 11 and 5 units. Find h, the height of triangle ABC from B to AC.",
+    "difficulty": "AMC8",
+    "source": "2023 AMC 8 Problem 24",
+    "correct_answer": "14.6",
+    "student_answers": [
+      {
+        "answer": "Using similar triangles and area ratios: 1 - (11/h)^2 = ((h-5)/h)^2. Solving: h^2 - 121 = h^2 - 10h + 25, so 10h = 146, h = 14.6.",
+        "is_correct": true
+      },
+      {
+        "answer": "14.6.",
+        "is_correct": true
+      },
+      {
+        "answer": "The heights add up: 11 + 5 = 16, and since the shaded areas are equal, h = 16.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "id": "math_012",
+    "problem": "Fifteen equally spaced integers a_1, a_2, ..., a_15 satisfy: 1 <= a_1 <= 10, 13 <= a_2 <= 20, and 241 <= a_15 <= 250. Find the sum of the digits of a_14.",
+    "difficulty": "AMC8",
+    "source": "2023 AMC 8 Problem 25",
+    "correct_answer": "8",
+    "student_answers": [
+      {
+        "answer": "Let d be the common difference. a_15 - a_1 = 14d, and from the bounds: 231 <= 14d <= 249, so d = 17. Then a_1 = 3 (since a_2 = a_1 + 17 must be between 13 and 20). a_14 = 3 + 13*17 = 224. Sum of digits: 2+2+4 = 8.",
+        "is_correct": true
+      },
+      {
+        "answer": "a_14 = 224, so the digit sum is 8.",
+        "is_correct": true
+      },
+      {
+        "answer": "d = 17, a_1 = 3, so a_14 = 3 + 14*17 = 241. Sum of digits = 2+4+1 = 7.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "id": "math_013",
+    "problem": "A cricket hops among 4 leaves on a plant. On each hop, it is equally likely to jump to any of the other 3 leaves. If the cricket starts on one leaf, what is the probability that after exactly 4 hops it returns to its starting leaf? Express your answer as a fraction in simplest form.",
+    "difficulty": "AMC8",
+    "source": "2022 AMC 8 Problem 25",
+    "correct_answer": "7/27",
+    "student_answers": [
+      {
+        "answer": "Let P_n = probability of being at the starting leaf after n hops. P_0 = 1, P_1 = 0, P_2 = 1/3. Recurrence: P_n = (1/3)(1 - P_(n-1)). So P_3 = (1/3)(1-1/3) = 2/9, and P_4 = (1/3)(1-2/9) = 7/27.",
+        "is_correct": true
+      },
+      {
+        "answer": "7/27.",
+        "is_correct": true
+      },
+      {
+        "answer": "After 4 hops, the cricket is equally likely to be on any of the 4 leaves, so the probability is 1/4.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "id": "math_014",
+    "problem": "A grasshopper can jump 5 pads to the right or 3 pads to the left. It needs to reach a pad that is 2023 pads to the right of its starting position. What is the fewest total number of jumps needed?",
+    "difficulty": "AMC8",
+    "source": "2023 AMC 8 Problem 18",
+    "correct_answer": "411",
+    "student_answers": [
+      {
+        "answer": "Let x = number of right jumps, y = number of left jumps. Then 5x - 3y = 2023. To minimize x+y, minimize y. y=4 gives x=407, total = 411 jumps.",
+        "is_correct": true
+      },
+      {
+        "answer": "411 jumps: 407 right, 4 left.",
+        "is_correct": true
+      },
+      {
+        "answer": "The grasshopper needs to travel 2023 pads. With net gain 2 per right-left pair, 2023/5 = about 405 right jumps needed. Answer: 405.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "id": "math_015",
+    "problem": "A sequence of positive integers begins: a, b, ab, ab^2, a^2b^3, a^3b^5, ... where each term after the second is the product of the two preceding terms. If the 6th term is 4000, what is the first term?",
+    "difficulty": "AMC8",
+    "source": "2023 AMC 8 Problem 22",
+    "correct_answer": "5",
+    "student_answers": [
+      {
+        "answer": "The 6th term is a^3 * b^5 = 4000 = 2^5 * 5^3. So a = 5, b = 2. The first term is 5.",
+        "is_correct": true
+      },
+      {
+        "answer": "a = 5.",
+        "is_correct": true
+      },
+      {
+        "answer": "a^3 * b^5 = 4000. Since 4000 = 5^3 * 2^5, a = 2 and b = 5. The first term is 2.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "id": "math_016",
+    "problem": "There exist real numbers x and y, both greater than 1, such that log_x(y^x) = log_y(x^{4y}) = 10. Find xy.",
+    "difficulty": "AIME",
+    "source": "2024 AIME I Problem 2",
+    "correct_answer": "25",
+    "student_answers": [
+      {
+        "answer": "From log_x(y^x) = 10: x*log_x(y) = 10, so log_x(y) = 10/x. From log_y(x^{4y}) = 10: 4y*log_y(x) = 10, so log_y(x) = 10/(4y). Since log_y(x) = 1/log_x(y), we have 1/(10/x) = 10/(4y), so x/10 = 10/(4y), giving 4xy = 100, xy = 25.",
+        "is_correct": true
+      },
+      {
+        "answer": "xy = 25.",
+        "is_correct": true
+      },
+      {
+        "answer": "Using the change of base formula: log_x(y^x) = x*ln(y)/ln(x) = 10, and log_y(x^{4y}) = 4y*ln(x)/ln(y) = 10. Multiplying: 4xy = 100, so xy = 25.",
+        "is_correct": true
+      },
+      {
+        "answer": "From the equations, I get x*log_x(y) = 10 and 4y*log_y(x) = 10. Since log_x(y)*log_y(x) = 1, x/4y = 1, so x = 4y. Then 4y*10/(4y) = 10 is satisfied. But xy = 4y^2, and I can't determine a unique value. The answer is 100.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "id": "math_017",
+    "problem": "Every morning Aya goes for a 9-kilometer walk and stops at a coffee shop along the way. When she walks at s km/h, the walk takes 4 hours, including t minutes spent in the coffee shop. When she walks at (s+2) km/h, the walk takes 2 hours and 24 minutes, including t minutes. Find the number of minutes the walk takes when she walks at (s+0.5) km/h. (Assume t minutes is the same in all cases.)",
+    "difficulty": "AIME",
+    "source": "2024 AIME I Problem 1",
+    "correct_answer": "204",
+    "student_answers": [
+      {
+        "answer": "Walking time at speed s: 9/s hours. Total time: 9/s + t/60 = 4. At speed s+2: 9/(s+2) + t/60 = 2.4. Subtracting: 9/s - 9/(s+2) = 1.6. Solving: 18/(s(s+2)) = 1.6, so s(s+2) = 11.25, s = 2.5. Then at s+0.5 = 3: 9/3 + t/60 = total. First find t: 9/2.5 + t/60 = 4, so t/60 = 0.4, t = 24. At speed 3: 9/3 + 24/60 = 3 + 0.4 = 3.4 hours = 204 minutes.",
+        "is_correct": true
+      },
+      {
+        "answer": "204 minutes.",
+        "is_correct": true
+      },
+      {
+        "answer": "9/s + t/60 = 4 and 9/(s+2) + t/60 = 2.4. Difference: 9/s - 9/(s+2) = 1.6. So 9(s+2-s)/(s(s+2)) = 1.6, giving 18/(s(s+2)) = 1.6, s(s+2) = 11.25. s = 2.5. Then t = 24 minutes. At s+0.5 = 3: 9/3 = 3 hours = 180 min + 24 = 204 min.",
+        "is_correct": true
+      },
+      {
+        "answer": "9/s + t = 4*60 = 240 and 9/(s+2) + t = 144. Subtracting: 9/s - 9/(s+2) = 96. This gives s negative, which isn't possible. Let me revise: 9/s - 9/(s+2) = 1.6 hours = 96 minutes. Wait no, 4 - 2.4 = 1.6 hours. Hmm, 9/s - 9/(s+2) = 4 - 2.4 = 1.6. In minutes that would be 96 minutes difference... Actually no, the equation should stay in hours since the times are in hours. I'm confused. Answer: 180.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "id": "math_018",
+    "problem": "The sum of all positive integers m such that 13!/m is a perfect square can be written as 2^a * 3^b * 5^c * 7^d * 11^e * 13^f, where a, b, c, d, e, and f are positive integers. Find a + b + c + d + e + f.",
+    "difficulty": "AIME",
+    "source": "2023 AIME I Problem 4",
+    "correct_answer": "12",
+    "student_answers": [
+      {
+        "answer": "13! = 2^10 * 3^5 * 5^2 * 7 * 11 * 13. For each prime p with exponent e in 13!, the exponent of p in m must have the same parity as e. So for 2 (even): m gets {0,2,4,6,8,10}, sum = 1+4+16+64+256+1024 = 1365. For 3 (odd): m gets {1,3,5}, sum = 3+27+243 = 273. For 5 (even): m gets {0,2}, sum = 1+25 = 26. For 7,11,13 (odd): m gets {1}, factor = 7*11*13 = 1001. Total sum = 1365*273*26*1001. Factor: 1365=3*5*7*13, 273=3*7*13, 26=2*13. Product = 2^1 * 3^2 * 5^1 * 7^3 * 11^1 * 13^4. So a+b+c+d+e+f = 1+2+1+3+1+4 = 12.",
+        "is_correct": true
+      },
+      {
+        "answer": "The sum is 2^1 * 3^2 * 5^1 * 7^3 * 11^1 * 13^4, so a+b+c+d+e+f = 12.",
+        "is_correct": true
+      },
+      {
+        "answer": "13! = 2^10 * 3^5 * 5^2 * 7 * 11 * 13. For 13!/m to be a perfect square, m must contain each prime to the same parity as in 13!. The only primes with odd exponent are 3, 7, 11, 13. So m = 3 * 7 * 11 * 13 = 3003. Sum of all such m is just 3003 = 3 * 7 * 11 * 13 = 2^0 * 3^1 * 5^0 * 7^1 * 11^1 * 13^1. But the problem says all exponents a-f are positive, and 0 is not positive. So the answer is 1+1+1+1 = 4. But that contradicts the problem statement... I must be wrong. Let me check: actually only m = 3003 works? No, other m values work too, like m = 3*7*11*13*4 = 12012... Let me reconsider.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "id": "math_019",
+    "problem": "The numbers of apples growing on each of six apple trees form an arithmetic sequence where the greatest number of apples growing on any of the six trees is double the least number of apples growing on any of the six trees. The total number of apples growing on all six trees is 990. Find the greatest number of apples growing on any of the six trees.",
+    "difficulty": "AIME",
+    "source": "2023 AIME II Problem 1",
+    "correct_answer": "220",
+    "student_answers": [
+      {
+        "answer": "Let smallest = a, difference = d. Then a + 5d = 2a, so a = 5d. Sum of 6 terms: (6/2)(a + a+5d) = 3(2a+5d) = 3(10d+5d) = 45d = 990, so d = 22, a = 110. Greatest = a + 5d = 220.",
+        "is_correct": true
+      },
+      {
+        "answer": "220 apples.",
+        "is_correct": true
+      },
+      {
+        "answer": "The six trees total 990 apples. If the greatest is twice the least, and there are six equally spaced numbers, then the total equals 6 times the median. 990/6 = 165. The greatest is the median plus something: greatest = median + (median - least). Since greatest = 2*least and median is halfway between, median = (least+2*least)/2 = 1.5*least. So 1.5*least = 165, least = 110. Then greatest = 2*110 = 220.",
+        "is_correct": true
+      },
+      {
+        "answer": "Total apples = 990 for 6 trees. The average is 165 apples per tree. Since the numbers are in arithmetic progression and greatest is double least, if we call the least 'x' then the sequence goes: x, 165, 2x with the other terms interpolated. But actually, the average of an arithmetic sequence is the average of the first and last terms only if the sequence has an even number of terms. Wait, it's always (first+last)/2. So (x + 2x)/2 = 165 gives 3x = 330, x = 110. Then the six terms would be 110, 132, 154, 176, 198, 220. But wait - arithmetic sequences with an even number of terms: the average = (first+last)/2 = (a1+an)/2 = (x+2x)/2 = 1.5x. So 1.5x = 165, x = 110. Greatest = 220. But hold on, is the average really (first+last)/2? For 6 terms: (a1+a6)/2 = (a1 + a1+5d)/2 = a1 + 2.5d, and the actual average is (6a1+15d)/6 = a1 + 2.5d. So yes. Answer: 220. I'm going in circles but the answer is definitely 220.",
+        "is_correct": true
+      },
+      {
+        "answer": "The total apples = 990. Average = 165. The sum of an arithmetic progression with 6 terms = 3(first + last). So 3(x + 2x) = 990, 9x = 990, x = 110. Greatest = 2x = 220.",
+        "is_correct": true
+      },
+      {
+        "answer": "Six trees, total 990. Let the trees have a, a+d, a+2d, a+3d, a+4d, a+5d. Sum = 6a+15d = 990. Greatest = a+5d = 2a, so a = 5d. Then 6(5d) + 15d = 45d = 990, d = 990/45 = 20. So a = 100, greatest = a+5d = 100+100 = 200.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "id": "math_020",
+    "problem": "Let P be a point on the circle circumscribing square ABCD that satisfies PA * PC = 56 and PB * PD = 90. Find the area of the square.",
+    "difficulty": "AIME",
+    "source": "2023 AIME I Problem 5",
+    "correct_answer": "106",
+    "student_answers": [
+      {
+        "answer": "Using Ptolemy's theorem on cyclic quadrilateral PAC and PBD, combined with the given products, we can derive that the area of the square is 106.",
+        "is_correct": true
+      },
+      {
+        "answer": "106.",
+        "is_correct": true
+      },
+      {
+        "answer": "By symmetry, PA*PC = PB*PD for any point on the circumcircle of a square. But 56 ≠ 90, so the given conditions are contradictory. No such point exists, so there is no answer.",
+        "is_correct": false
+      },
+      {
+        "answer": "Let the square's side be s. Diagonal = s*sqrt(2). Using power of a point: PA*PC = PB*PD only when P is at specific positions. Actually, by the intersecting chords theorem on the circle, PA*PC = PB*PD only when ABCD is a rectangle. For a square, PA*PC = PB*PD. Since 56 ≠ 90, this is impossible.",
+        "is_correct": false
+      }
+    ]
+  }
+]

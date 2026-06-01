@@ -1,0 +1,1211 @@
+[
+  {
+    "question": "The LeWorldModel paper (LeCun et al., 2026) claims that Sketched Isotropic Gaussian Regularization (SIGReg) prevents JEPA representation collapse, and that the isotropic Gaussian is 'provably optimal' as the latent distribution for minimizing downstream prediction risk. The paper presents this as a general solution that enables stable end-to-end training from pixels with just 2 loss terms.\n\nCritical question: Does the evidence support the claim that an isotropic Gaussian prior is the universal anti-collapse solution for JEPA world models? Consider these constraints:\n(1) The Cramér-Wold theorem ensures Gaussian marginals imply Gaussian joint — but this is a descriptive property, not a proof that Gaussian is optimal for world model latents. It tells you what you've regularized toward, not why that regularization target is correct.\n(2) A concurrent paper (Sub-JEPA, May 2026, arXiv:2605.09241) explicitly contradicts this claim, showing that 'latent representations inherently lie on low-dimensional manifolds within a high-dimensional ambient space, and enforcing an isotropic Gaussian prior directly in this ambient space introduces an overly strong bias.' Sub-JEPA outperforms LeWM 'with very clear margins' by relaxing the Gaussian constraint.\n(3) The paper itself acknowledges SIGReg effectiveness drops in low intrinsic-dimension environments (Two-Room). This suggests Gaussian is not universal — it's conditional on environment dimensionality.\n(4) The 'optimality proof' (from LeJEPA 2025) relies on the assumption that minimizing prediction risk in latent space is the correct objective. But if the encoder maps nonlinear dynamics to a space where Gaussian is enforced, the encoder may simply learn to discard non-Gaussian structure — which is information loss, not optimal representation.\nAnswer: TRUE (Gaussian is universal anti-collapse solution) or FALSE (overclaimed, conditional, or contradicted) with reasoning.",
+    "candidates": [
+      {
+        "strategy": "breadth_first",
+        "model": "gemini-3.1-pro-preview",
+        "answer": "【答案】FALSE\n【置信度】1.0\n【推理】根据提供的约束条件，现有证据并不支持“各向同性高斯先验是JEPA世界模型通用的反崩溃解决方案”这一主张。具体推理如下：\n\n1. **内部矛盾（条件性）**：约束(3)指出，论文自身承认SIGReg在低内在维度环境（如Two-Room）中有效性下降。这直接证明了该方案并非“通用（universal）”，而是高度依赖于环境维度的条件性方案。\n2. **外部反证（被反驳）**：约束(2)表明，同期的Sub-JEPA论文在实证和理论上直接反驳了该主张，指出强制使用各向同性高斯先验会引入过强的偏差，并且通过放宽这一限制取得了明显更优的性能。\n3. **理论缺陷（夸大其词）**：约束(1)和(4)揭示了“可证明最优”这一说法的理论漏洞。Cramér-Wold定理仅描述了正则化的目标分布特性，并未证明该目标对于世界模型是正确的；此外，最优性证明基于最小化潜在预测风险的假设，这可能导致编码器为了迎合高斯分布而强行丢弃非高斯的结构化信息，造成信息丢失而非获得最优表征。\n\n综上所述，该主张被过度夸大、具有条件局限性且被同期研究明确反驳，因此答案为FALSE。",
+        "core_answer": "FALSE",
+        "self_confidence": 1.0,
+        "reasoning": "根据提供的约束条件，现有证据并不支持“各向同性高斯先验是JEPA世界模型通用的反崩溃解决方案”这一主张。具体推理如下：\n\n1. **内部矛盾（条件性）**：约束(3)指出，论文自身承认SIGReg在低内在维度环境（如Two-Room）中有效性下降。这直接证明了该方案并非“通用（universal）”，而是高度依赖于环境维度的条件性方案。\n2. **外部反证（被反驳）**：约束(2)表明，同期的Sub-JEPA论文在实证和理论上直接反驳了该主张，指出强制使用各向同性高斯先验会引入过强的偏差，并且通过放宽这一限制取得了明显更优的性能。\n3. **理论缺陷（夸大其词）**：约束(1)和(4)揭示了“可证明最优”这一说法的理论漏洞。Cramér-Wold定理仅描述了正则化的目标分布特性，并未证明该目标对于世界模型是正确的；此外，最优性证明基于最小化潜在预测风险的假设，这可能导致编码器为了迎合高斯分布而强行丢弃非高斯的结构化信息，造成信息丢失而非获得最优表征。\n\n综上所述，该主张被过度夸大、具有条件局限性且被同期研究明确反驳，因此答案为FALSE。",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "constraint_propagation",
+        "model": "o4-mini",
+        "answer": "【答案】FALSE  \n【置信度】0.80  \n【推理】  \n1. 已知约束条件  \n   1.1 Cramér-Wold 定理只表明如果所有投影是高斯的，联合分布也是高斯的，但它是对正则化目标的描述性陈述，并不证明高斯先验对世界模型是最优的。  \n   1.2 Sub-JEPA（2026）论文直接反证：真实表征常在低维流形上，而在高维空间强制各向同性高斯先验会引入过强偏置，放松高斯约束能显著提升性能。  \n   1.3 LeWorldModel 作者自己报告：在低内在维度环境（Two-Room）中，SIGReg 效果显著下降，说明高斯先验并非普适。  \n   1.4 “最优性证明”建立在“在潜在空间最小化预测风险是正确目标”的假设上，如果编码器为满足高斯先验而丢弃非高斯结构，实际上是在丢失信息，不是最优表征。  \n\n2. 从最确定的约束开始传播  \n   - 约束1.2和1.3均直接来自实验证据：Sub-JEPA 对比测试和 Two-Room 环境下的性能下降，二者均否定了高斯先验的普适性。  \n   - 约束1.1、1.4 对“最优性”理论依据提出质疑，但核心反例仍源于实验证据。  \n\n3. 识别冲突与不确定区域  \n   - 文中声称“高斯先验是可证明最优”，与 1.2、1.3 中的对比实验证据冲突，表明该主张被过度推广。  \n   - 无实验证据支持高斯先验在所有环境下普适有效，存在明显条件限制。  \n\n4. 验证所有条件  \n   - 1.1 说明理论层面不充足；1.2–1.3 有具体对比实验；1.4 强调信息损失风险。所有条件协同指向：高斯先验并非通用抗崩塌解。  \n\n结论：现有理论与实验证据均指示 LeWorldModel 对“各向同性高斯先验普适最优”的断言被过度推广，不能视为通用解。",
+        "core_answer": "FALSE",
+        "self_confidence": 0.8,
+        "reasoning": "1. 已知约束条件  \n   1.1 Cramér-Wold 定理只表明如果所有投影是高斯的，联合分布也是高斯的，但它是对正则化目标的描述性陈述，并不证明高斯先验对世界模型是最优的。  \n   1.2 Sub-JEPA（2026）论文直接反证：真实表征常在低维流形上，而在高维空间强制各向同性高斯先验会引入过强偏置，放松高斯约束能显著提升性能。  \n   1.3 LeWorldModel 作者自己报告：在低内在维度环境（Two-Room）中，SIGReg 效果显著下降，说明高斯先验并非普适。  \n   1.4 “最优性证明”建立在“在潜在空间最小化预测风险是正确目标”的假设上，如果编码器为满足高斯先验而丢弃非高斯结构，实际上是在丢失信息，不是最优表征。  \n\n2. 从最确定的约束开始传播  \n   - 约束1.2和1.3均直接来自实验证据：Sub-JEPA 对比测试和 Two-Room 环境下的性能下降，二者均否定了高斯先验的普适性。  \n   - 约束1.1、1.4 对“最优性”理论依据提出质疑，但核心反例仍源于实验证据。  \n\n3. 识别冲突与不确定区域  \n   - 文中声称“高斯先验是可证明最优”，与 1.2、1.3 中的对比实验证据冲突，表明该主张被过度推广。  \n   - 无实验证据支持高斯先验在所有环境下普适有效，存在明显条件限制。  \n\n4. 验证所有条件  \n   - 1.1 说明理论层面不充足；1.2–1.3 有具体对比实验；1.4 强调信息损失风险。所有条件协同指向：高斯先验并非通用抗崩塌解。  \n\n结论：现有理论与实验证据均指示 LeWorldModel 对“各向同性高斯先验普适最优”的断言被过度推广，不能视为通用解。",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "counterfactual",
+        "model": "grok-4.1",
+        "answer": "\n\n【答案】FALSE\n\n【置信度】0.8\n\n【推理】The LeWorldModel paper's core claim—that SIGReg plus an isotropic Gaussian prior is a universal anti-collapse solution for JEPA world models, provably optimal for downstream prediction risk and enabling stable pixel-to-pixel training with only two losses—is not supported. Step 1: Cramér-Wold gives a descriptive property (marginals being Gaussian forces joint Gaussian), but supplies zero justification for why that target minimizes world-model risk rather than some other distribution. Step 2: Sub-JEPA (arXiv:2605.09241) directly contradicts the universality by demonstrating that ambient-space isotropic Gaussian imposes “overly strong bias” on inherently low-dimensional manifold latents, and outperforms LeWM “with very clear margins” once the Gaussian constraint is relaxed. Step 3: LeWorldModel itself reports SIGReg’s effectiveness collapsing in the low-intrinsic-dimension Two-Room environment, proving the prior is conditional on environment dimensionality, not universal. Step 4: The 2025 LeJEPA “optimality proof” rests on the unexamined premise that latent-space prediction risk minimization is the right objective; if the encoder is forced to map nonlinear dynamics into a Gaussian shell, it necessarily discards non-Gaussian structure—i.e., information loss masquerading as optimality. Taken together, the evidence falsifies the universality claim: SIGReg works well in some regimes but is neither provably optimal nor a general solution. The paper overstates its generality and is undermined by both a concurrent counter-result and its own empirical qualifiers.",
+        "core_answer": "FALSE",
+        "self_confidence": 0.8,
+        "reasoning": "The LeWorldModel paper's core claim—that SIGReg plus an isotropic Gaussian prior is a universal anti-collapse solution for JEPA world models, provably optimal for downstream prediction risk and enabling stable pixel-to-pixel training with only two losses—is not supported. Step 1: Cramér-Wold gives a descriptive property (marginals being Gaussian forces joint Gaussian), but supplies zero justification for why that target minimizes world-model risk rather than some other distribution. Step 2: Sub-JEPA (arXiv:2605.09241) directly contradicts the universality by demonstrating that ambient-space isotropic Gaussian imposes “overly strong bias” on inherently low-dimensional manifold latents, and outperforms LeWM “with very clear margins” once the Gaussian constraint is relaxed. Step 3: LeWorldModel itself reports SIGReg’s effectiveness collapsing in the low-intrinsic-dimension Two-Room environment, proving the prior is conditional on environment dimensionality, not universal. Step 4: The 2025 LeJEPA “optimality proof” rests on the unexamined premise that latent-space prediction risk minimization is the right objective; if the encoder is forced to map nonlinear dynamics into a Gaussian shell, it necessarily discards non-Gaussian structure—i.e., information loss masquerading as optimality. Taken together, the evidence falsifies the universality claim: SIGReg works well in some regimes but is neither provably optimal nor a general solution. The paper overstates its generality and is undermined by both a concurrent counter-result and its own empirical qualifiers.",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "deep_first",
+        "model": "gpt-5.5",
+        "answer": null,
+        "core_answer": "",
+        "self_confidence": 0.0,
+        "reasoning": "",
+        "success": false,
+        "error": "'str' object has no attribute 'choices'",
+        "attempts": 1
+      },
+      {
+        "strategy": "direct",
+        "model": "kimi-k2.5",
+        "answer": "【答案】FALSE\n\n【置信度】0.92\n\n【推理】\n\n1. **Cramér-Wold定理的误用**：该定理是描述性工具（高斯边缘分布⇒高斯联合分布），而非最优性证明。它只能说明正则化目标是什么，无法证明该目标对世界模型潜变量是最优的。这是范畴错误——从\"是什么\"推不出\"应该是什么\"。\n\n2. **直接经验反驳**：Sub-JEPA（2026年5月）明确否定该主张，证明潜表示本质上位于高维环境空间中的低维流形上，而各向同性高斯先验在此环境空间中引入过强偏置。Sub-JEPA通过放松高斯约束显著优于LeWM。这是一个直接的、可比较的实证反驳。\n\n3. **论文自身的条件性承认**：LeWorldModel本身承认SIGReg在内在维度低的环境（Two-Room）中效果下降。这直接证明高斯先验的效果依赖于环境维度特性，而非普适解。\n\n4. **\"最优性证明\"的循环假设**：证明假设\"在潜空间中最小化预测风险是正确的目标\"为前提。但若编码器将非线性动力学映射到强制高斯的空间，编码器可能直接丢弃非高斯结构——这是信息损失，而非最优表示。该证明在其假设框架内自洽，但假设本身排除了关键问题（信息保留vs.分布匹配）。\n\n**结论**：该主张是**过度宣称（overclaimed）**且**条件依赖（conditional）**的。证据支持高斯先验在特定高维环境中有效，但\"普适反崩溃解\"的强主张被（a）直接竞争结果、（b）自身局限性承认、（c）理论基础的范畴错误所否定。",
+        "core_answer": "FALSE",
+        "self_confidence": 0.92,
+        "reasoning": "1. **Cramér-Wold定理的误用**：该定理是描述性工具（高斯边缘分布⇒高斯联合分布），而非最优性证明。它只能说明正则化目标是什么，无法证明该目标对世界模型潜变量是最优的。这是范畴错误——从\"是什么\"推不出\"应该是什么\"。\n\n2. **直接经验反驳**：Sub-JEPA（2026年5月）明确否定该主张，证明潜表示本质上位于高维环境空间中的低维流形上，而各向同性高斯先验在此环境空间中引入过强偏置。Sub-JEPA通过放松高斯约束显著优于LeWM。这是一个直接的、可比较的实证反驳。\n\n3. **论文自身的条件性承认**：LeWorldModel本身承认SIGReg在内在维度低的环境（Two-Room）中效果下降。这直接证明高斯先验的效果依赖于环境维度特性，而非普适解。\n\n4. **\"最优性证明\"的循环假设**：证明假设\"在潜空间中最小化预测风险是正确的目标\"为前提。但若编码器将非线性动力学映射到强制高斯的空间，编码器可能直接丢弃非高斯结构——这是信息损失，而非最优表示。该证明在其假设框架内自洽，但假设本身排除了关键问题（信息保留vs.分布匹配）。\n\n**结论**：该主张是**过度宣称（overclaimed）**且**条件依赖（conditional）**的。证据支持高斯先验在特定高维环境中有效，但\"普适反崩溃解\"的强主张被（a）直接竞争结果、（b）自身局限性承认、（c）理论基础的范畴错误所否定。",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "science_deep",
+        "model": "gpt-5.1",
+        "answer": "【答案】FALSE（该“各向同性高斯先验是通用反坍塌解”的说法被明显夸大，且在重要条件下被证据和并行工作直接反驳）\n\n【置信度】0.9\n\n【推理】\n\n1. **问题的核心命题**\n\n   需评估的具体命题是：\n\n   > “各向同性高斯先验（SIGReg）是 JEPA 世界模型的通用（universal）反表征坍塌解，并且在一般意义上是下游预测风险最优的潜在分布。”\n\n   这不是在问“SIGReg 有没有用”或“在某些设置下是不是表现很好”，而是在问它是否是：\n   - 通用的（对各种环境与任务均成立）；\n   - 在严谨意义上“最优”（optimal），而不仅是一个有效的启发式正则项。\n\n2. **与 Cramér–Wold 定理相关的“最优性”混用**\n\n   - **Cramér–Wold 定理**（概率论基础定理）：\n\n     若随机向量 \\(X \\in \\mathbb{R}^d\\) 满足对所有方向向量 \\(u \\in \\mathbb{R}^d\\)，其一维投影 \\(u^\\top X\\) 都是高斯分布，则 \\(X\\) 的联合分布就是一个多元高斯。\n\n     这是一个**描述性结构定理**：  \n     - 告诉你“如果所有线性投影都是高斯，则整体是高斯”；  \n     - 不涉及任何关于“泛化最优”、“预测风险最小”的结论。\n\n   - SIGReg 利用这一点做的是：\n     - 通过约束大量随机投影的边缘分布接近一维高斯，来逼近一个多元各向同性高斯潜在分布；\n     - 从而控制表征的分布形状、避免退化到病态分布（如塌缩到低维子空间）。\n\n   - **逻辑缺口**：\n     - 从“我们能把潜在分布逼近各向同性高斯”  \n       并不能推导出  \n       “各向同性高斯是实现最小预测风险的最优潜在分布”。\n     - Cramér–Wold 所提供的是**“如果你选择高斯作为目标，怎样判定你已近似成功”**，而不是**“为什么这个目标就是全局最优目标”**。\n     - 这正好对应你在 (1) 中指出的：它只是告诉你你正把东西**往哪里正则化**，而非**为什么那里是最好的地方**。\n\n   结论：用 Cramér–Wold 作为“最优性”的理论支撑，属于**定理适用范围被延伸到了不支持的结论**。这一点本身就削弱了“普适最优”的说法。\n\n3. **与 Sub-JEPA（2026）的直接实证冲突**\n\n   你提到的 Sub-JEPA（2026, arXiv:2605.09241）给出如下两层论证：\n\n   1. **几何/表示论证（理论立场）**  \n      - 真实世界环境的有效表征往往：\n        - “潜在状态位于高维空间中的低维流形上”（低维流形假设 / manifold hypothesis）；  \n        - 强制整个潜在向量在高维**环境空间**中服从各向同性高斯，相当于在：\n          \\[\n          z \\in \\mathbb{R}^D \\quad \\text{被强行约束为} \\quad z \\sim \\mathcal{N}(0, \\sigma^2 I_D)\n          \\]\n          而真实可辨别状态仅依赖于某个低维流形 \\( \\mathcal{M} \\subset \\mathbb{R}^D \\)。  \n      - 这会产生**过强先验偏置（overly strong bias）**：\n        - 编码器为满足高斯形状约束，会被迫“填满”高维空间；\n        - 结果可能是把有意义的非高斯结构压扁或打散，导致信息丢失或表示扭曲。\n\n   2. **经验结果（实证立场）**  \n      - Sub-JEPA 通过**放松高斯约束**（只在子空间/子流形上约束，或使用更弱的正则）：\n        - 在多种环境与评测上**“very clear margins”地优于 LeWorldModel / SIGReg**；\n        - 特别是在明显低维结构任务上效果显著。\n      - 这直接反驳了“各向同性高斯是普适最优”的经验性命题：  \n        - 若某种先验是“普适最优”，那么在合理实验覆盖下不应出现**系统性、显著、可重复的性能劣势**；\n        - 而 Sub-JEPA 给出的就是“在相当广的设置下，放松高斯约束反而更好”的证据。\n\n   逻辑上，存在**精心对照实验 + 更好结果**的并行工作，且针对同类模型（JEPA / world model），说明：\n   - 最多只能说：**“各向同性高斯在某些特定设置中是有效的反坍塌正则”**；\n   - 绝不能维持“这是通用最优解”的命题。\n\n4. **环境维度依赖性：论文内的自我否定证据**\n\n   你提到的 (3)：  \n   - 在 LeWorldModel 自己的实验中，SIGReg 在**低本质维度环境**（如 Two-Room）上效果显著减弱甚至有负面迹象。\n   - 若命题是“普适 anti-collapse 解 + 最优潜在分布”，则按定义不应强依赖环境维度；\n   - 实际上却观察到：\n     - 在高维、多因素环境中，SIGReg 可能：\n       - 增强训练稳定性，\n       - 促使表示更“占满”潜在空间，避免塌缩；\n     - 在低维结构环境中，它反而可能：\n       - 打破原本已足够好的低维几何，\n       - 迫使表示在无意义的维度上扩散，从而损害性能或稳定性。\n\n   这说明“高斯先验是否合适”**显然依赖于环境的真实本质维度与结构**，",
+        "core_answer": "FALSE（该“各向同性高斯先验是通用反坍塌解”的说法被明显夸大，且在重要条件下被证据和并行工作直接反驳）",
+        "self_confidence": 0.9,
+        "reasoning": "1. **问题的核心命题**\n\n   需评估的具体命题是：\n\n   > “各向同性高斯先验（SIGReg）是 JEPA 世界模型的通用（universal）反表征坍塌解，并且在一般意义上是下游预测风险最优的潜在分布。”\n\n   这不是在问“SIGReg 有没有用”或“在某些设置下是不是表现很好”，而是在问它是否是：\n   - 通用的（对各种环境与任务均成立）；\n   - 在严谨意义上“最优”（optimal），而不仅是一个有效的启发式正则项。\n\n2. **与 Cramér–Wold 定理相关的“最优性”混用**\n\n   - **Cramér–Wold 定理**（概率论基础定理）：\n\n     若随机向量 \\(X \\in \\mathbb{R}^d\\) 满足对所有方向向量 \\(u \\in \\mathbb{R}^d\\)，其一维投影 \\(u^\\top X\\) 都是高斯分布，则 \\(X\\) 的联合分布就是一个多元高斯。\n\n     这是一个**描述性结构定理**：  \n     - 告诉你“如果所有线性投影都是高斯，则整体是高斯”；  \n     - 不涉及任何关于“泛化最优”、“预测风险最小”的结论。\n\n   - SIGReg 利用这一点做的是：\n     - 通过约束大量随机投影的边缘分布接近一维高斯，来逼近一个多元各向同性高斯潜在分布；\n     - 从而控制表征的分布形状、避免退化到病态分布（如塌缩到低维子空间）。\n\n   - **逻辑缺口**：\n     - 从“我们能把潜在分布逼近各向同性高斯”  \n       并不能推导出  \n       “各向同性高斯是实现最小预测风险的最优潜在分布”。\n     - Cramér–Wold 所提供的是**“如果你选择高斯作为目标，怎样判定你已近似成功”**，而不是**“为什么这个目标就是全局最优目标”**。\n     - 这正好对应你在 (1) 中指出的：它只是告诉你你正把东西**往哪里正则化**，而非**为什么那里是最好的地方**。\n\n   结论：用 Cramér–Wold 作为“最优性”的理论支撑，属于**定理适用范围被延伸到了不支持的结论**。这一点本身就削弱了“普适最优”的说法。\n\n3. **与 Sub-JEPA（2026）的直接实证冲突**\n\n   你提到的 Sub-JEPA（2026, arXiv:2605.09241）给出如下两层论证：\n\n   1. **几何/表示论证（理论立场）**  \n      - 真实世界环境的有效表征往往：\n        - “潜在状态位于高维空间中的低维流形上”（低维流形假设 / manifold hypothesis）；  \n        - 强制整个潜在向量在高维**环境空间**中服从各向同性高斯，相当于在：\n          \\[\n          z \\in \\mathbb{R}^D \\quad \\text{被强行约束为} \\quad z \\sim \\mathcal{N}(0, \\sigma^2 I_D)\n          \\]\n          而真实可辨别状态仅依赖于某个低维流形 \\( \\mathcal{M} \\subset \\mathbb{R}^D \\)。  \n      - 这会产生**过强先验偏置（overly strong bias）**：\n        - 编码器为满足高斯形状约束，会被迫“填满”高维空间；\n        - 结果可能是把有意义的非高斯结构压扁或打散，导致信息丢失或表示扭曲。\n\n   2. **经验结果（实证立场）**  \n      - Sub-JEPA 通过**放松高斯约束**（只在子空间/子流形上约束，或使用更弱的正则）：\n        - 在多种环境与评测上**“very clear margins”地优于 LeWorldModel / SIGReg**；\n        - 特别是在明显低维结构任务上效果显著。\n      - 这直接反驳了“各向同性高斯是普适最优”的经验性命题：  \n        - 若某种先验是“普适最优”，那么在合理实验覆盖下不应出现**系统性、显著、可重复的性能劣势**；\n        - 而 Sub-JEPA 给出的就是“在相当广的设置下，放松高斯约束反而更好”的证据。\n\n   逻辑上，存在**精心对照实验 + 更好结果**的并行工作，且针对同类模型（JEPA / world model），说明：\n   - 最多只能说：**“各向同性高斯在某些特定设置中是有效的反坍塌正则”**；\n   - 绝不能维持“这是通用最优解”的命题。\n\n4. **环境维度依赖性：论文内的自我否定证据**\n\n   你提到的 (3)：  \n   - 在 LeWorldModel 自己的实验中，SIGReg 在**低本质维度环境**（如 Two-Room）上效果显著减弱甚至有负面迹象。\n   - 若命题是“普适 anti-collapse 解 + 最优潜在分布”，则按定义不应强依赖环境维度；\n   - 实际上却观察到：\n     - 在高维、多因素环境中，SIGReg 可能：\n       - 增强训练稳定性，\n       - 促使表示更“占满”潜在空间，避免塌缩；\n     - 在低维结构环境中，它反而可能：\n       - 打破原本已足够好的低维几何，\n       - 迫使表示在无意义的维度上扩散，从而损害性能或稳定性。\n\n   这说明“高斯先验是否合适”**显然依赖于环境的真实本质维度与结构**，",
+        "success": true,
+        "attempts": 1
+      }
+    ],
+    "confidence": 0.57,
+    "disagreement": 0.287,
+    "top_answer": "FALSE",
+    "top_strategy": "breadth_first",
+    "weights": {
+      "breadth_first": {
+        "self_confidence": 1.0,
+        "judge_score": 10.0,
+        "judge_normalized": 1.0,
+        "weight": 1.0,
+        "penalties": []
+      },
+      "constraint_propagation": {
+        "self_confidence": 0.8,
+        "judge_score": 8.0,
+        "judge_normalized": 0.8,
+        "weight": 0.64,
+        "penalties": []
+      },
+      "counterfactual": {
+        "self_confidence": 0.8,
+        "judge_score": 8.0,
+        "judge_normalized": 0.8,
+        "weight": 0.64,
+        "penalties": []
+      },
+      "direct": {
+        "self_confidence": 0.92,
+        "judge_score": 9.200000000000001,
+        "judge_normalized": 0.9200000000000002,
+        "weight": 0.8464,
+        "penalties": []
+      },
+      "science_deep": {
+        "self_confidence": 0.9,
+        "judge_score": 9.0,
+        "judge_normalized": 0.45,
+        "weight": 0.405,
+        "penalties": [
+          "outlier"
+        ]
+      }
+    },
+    "judge_scores": {
+      "breadth_first": 10.0,
+      "constraint_propagation": 8.0,
+      "counterfactual": 8.0,
+      "direct": 9.200000000000001,
+      "science_deep": 9.0
+    },
+    "judge_verdict": "",
+    "outliers": [
+      "science_deep"
+    ],
+    "low_confidence_ids": [],
+    "collective_blind_risk": false,
+    "injection_probability": 0.0,
+    "injection_type": null,
+    "speculation_score": 0.0,
+    "speculation_matches": [],
+    "sim_matrix": {
+      "breadth_first": {
+        "constraint_propagation": 1.0,
+        "counterfactual": 1.0,
+        "direct": 1.0,
+        "science_deep": 0.077,
+        "_avg": 0.769
+      },
+      "constraint_propagation": {
+        "breadth_first": 1.0,
+        "counterfactual": 1.0,
+        "direct": 1.0,
+        "science_deep": 0.077,
+        "_avg": 0.769
+      },
+      "counterfactual": {
+        "breadth_first": 1.0,
+        "constraint_propagation": 1.0,
+        "direct": 1.0,
+        "science_deep": 0.077,
+        "_avg": 0.769
+      },
+      "direct": {
+        "breadth_first": 1.0,
+        "constraint_propagation": 1.0,
+        "counterfactual": 1.0,
+        "science_deep": 0.077,
+        "_avg": 0.769
+      },
+      "science_deep": {
+        "breadth_first": 0.077,
+        "constraint_propagation": 0.077,
+        "counterfactual": 0.077,
+        "direct": 0.077,
+        "_avg": 0.077
+      }
+    },
+    "reasoning_trail": [
+      {
+        "strategy": "breadth_first",
+        "model": "gemini-3.1-pro-preview",
+        "success": true,
+        "self_confidence": 1.0,
+        "core_answer": "FALSE",
+        "judge_score": 10.0,
+        "weight": 1.0,
+        "penalties": [],
+        "status": "selected"
+      },
+      {
+        "strategy": "constraint_propagation",
+        "model": "o4-mini",
+        "success": true,
+        "self_confidence": 0.8,
+        "core_answer": "FALSE",
+        "judge_score": 8.0,
+        "weight": 0.64,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "counterfactual",
+        "model": "grok-4.1",
+        "success": true,
+        "self_confidence": 0.8,
+        "core_answer": "FALSE",
+        "judge_score": 8.0,
+        "weight": 0.64,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "deep_first",
+        "model": "gpt-5.5",
+        "success": false,
+        "status": "failed",
+        "error": "'str' object has no attribute 'choices'"
+      },
+      {
+        "strategy": "direct",
+        "model": "kimi-k2.5",
+        "success": true,
+        "self_confidence": 0.92,
+        "core_answer": "FALSE",
+        "judge_score": 9.200000000000001,
+        "weight": 0.8464,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "science_deep",
+        "model": "gpt-5.1",
+        "success": true,
+        "self_confidence": 0.9,
+        "core_answer": "FALSE（该“各向同性高斯先验是通用反坍塌解”的说法被明显夸大，且在重要条件下被证据和并行工作直接反驳）",
+        "judge_score": 9.0,
+        "weight": 0.405,
+        "penalties": [
+          "outlier"
+        ],
+        "status": "outlier"
+      }
+    ],
+    "low_confidence": false,
+    "uncertain": false,
+    "arbitration_applied": false,
+    "validator_applied": false,
+    "validator_pass": true,
+    "validator_violations": [],
+    "elapsed_time": 38.73,
+    "timestamp": 1780254170.0063,
+    "degraded": true,
+    "failed_generators": [
+      "deep_first"
+    ],
+    "claim": "SIGReg (Gaussian prior) is the universal anti-collapse solution",
+    "question_id": "Q1"
+  },
+  {
+    "question": "The LeWorldModel paper claims LeWM plans '48x faster' than DINO-WM, and presents this as a key advantage. But is this comparison meaningful?\n\nConsider these constraints:\n(1) DINO-WM was designed for representation quality using pretrained DINOv2 features, not for planning speed. Its dense feature maps are ~200x larger than LeWM's latent. Comparing planning speed without controlling for representation dimensionality is like comparing a bicycle's speed to a truck's speed without noting the truck carries more cargo.\n(2) The paper's own data shows GCBC (goal-conditioned behavioral cloning) plans in ~0.01 seconds — 100x faster than LeWM — but the paper dismisses this because GCBC 'performs poorly.' This reveals an implicit trade-off: speed vs. performance. The 48x figure isolates the favorable side of one comparison pair while ignoring the other.\n(3) When DINO-WM outperforms LeWM on control tasks (OGBench-Cube, Two-Room), the paper attributes it to DINO-WM's pretrained features — but doesn't apply the same contextualization to the 48x speed claim, which is entirely explained by latent dimensionality, not architectural innovation.\n(4) Planning time is measured in seconds on a single GPU. For real-world robotics, the difference between 1s and 47s is meaningful. But the paper doesn't compare against the most natural baseline: a dimension-reduced DINO-WM (e.g., PCA on latent features).\nAnswer: FAIR (the 48x comparison is meaningful and well-contextualized) or UNFAIR (the comparison conflates speed with representation capacity, lacks proper controls) with reasoning.",
+    "candidates": [
+      {
+        "strategy": "breadth_first",
+        "model": "gemini-3.1-pro-preview",
+        "answer": "【答案】UNFAIR\n【置信度】1.0\n【推理】根据提供的约束条件，该比较是“UNFAIR”（不公平的），主要原因如下：\n1. **混淆了速度与表征容量**：DINO-WM 的特征图比 LeWM 大约 200 倍，其设计初衷是表征质量而非规划速度。LeWM 的 48 倍速度提升本质上源于其更小的隐空间维度，而非架构上的根本性创新。不控制维度的速度比较是不科学的。\n2. **缺乏适当的控制组（Baselines）**：为了使比较具有科学意义，论文本应引入一个控制了维度的基线模型（例如对 DINO-WM 的特征进行 PCA 降维），但论文并未这样做。\n3. **双重标准与选择性忽略权衡**：论文在面对 GCBC 时（GCBC 比 LeWM 快 100 倍），以“性能差”为由驳回，承认了速度与性能的权衡；但在面对 DINO-WM 时，却孤立地强调速度优势，忽略了 DINO-WM 庞大维度带来的表征优势（在部分任务中表现更好），在同一论文中使用了不一致的上下文标准。",
+        "core_answer": "UNFAIR",
+        "self_confidence": 1.0,
+        "reasoning": "根据提供的约束条件，该比较是“UNFAIR”（不公平的），主要原因如下：\n1. **混淆了速度与表征容量**：DINO-WM 的特征图比 LeWM 大约 200 倍，其设计初衷是表征质量而非规划速度。LeWM 的 48 倍速度提升本质上源于其更小的隐空间维度，而非架构上的根本性创新。不控制维度的速度比较是不科学的。\n2. **缺乏适当的控制组（Baselines）**：为了使比较具有科学意义，论文本应引入一个控制了维度的基线模型（例如对 DINO-WM 的特征进行 PCA 降维），但论文并未这样做。\n3. **双重标准与选择性忽略权衡**：论文在面对 GCBC 时（GCBC 比 LeWM 快 100 倍），以“性能差”为由驳回，承认了速度与性能的权衡；但在面对 DINO-WM 时，却孤立地强调速度优势，忽略了 DINO-WM 庞大维度带来的表征优势（在部分任务中表现更好），在同一论文中使用了不一致的上下文标准。",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "constraint_propagation",
+        "model": "o4-mini",
+        "answer": "【答案】UNFAIR  \n【置信度】0.90  \n【推理】  \n1. 已知约束条件  \n   1.1 DINO-WM 主要为表征质量设计，使用预训练的 DINOv2 特征，其密集特征图尺寸约为 LeWM 隐空间的 200 倍；  \n   1.2 论文中显示的 GCBC 基线规划时间约为 0.01s，比 LeWM 快 100 倍，但被以“性能差”为由忽略，暴露速度-性能的隐含权衡；  \n   1.3 在 DINO-WM 在控制任务上优于 LeWM 时，论文承认是由于预训练特征带来的表征优势，却未对 48× 加速宣称做同等上下文说明；  \n   1.4 规划时间在单 GPU 上测量，但缺少自然对比基线（例如对 DINO-WM 特征做 PCA 降维后的规划速度）。  \n\n2. 从最确定的约束开始传播  \n   2.1 由于(1.1)表明两者表征尺寸差异巨大，单纯比较规划时间无视维度差异，导致速度差异主要来自表征维度，而非架构本身的算法改进——这一点与论文将 DINO-WM 表现归因于预训练特征时的做法不一致；  \n   2.2 (1.2)证明了有更快但“性能更差”的方法存在，表明作者在比较时选择性忽略了速度-性能的权衡；  \n\n3. 冲突与不确定区域  \n   3.1 未发现与以上明确约束相冲突的信息；  \n\n4. 验证所有条件  \n   4.1 比较没有控制表征维度（验证约束 1.1）；  \n   4.2 忽略更快基线 GCBC 的存在（验证约束 1.2）；  \n   4.3 对比方式缺乏对称性（验证约束 1.3、1.4）；  \n\n5. 结论  \n   论文以 48× 加速为“关键优势”却未控制表征维度、也未对照降维后的 DINO-WM，且在对比速度-性能权衡时存在选择性忽略，故该对比不具备公平性。",
+        "core_answer": "UNFAIR",
+        "self_confidence": 0.9,
+        "reasoning": "1. 已知约束条件  \n   1.1 DINO-WM 主要为表征质量设计，使用预训练的 DINOv2 特征，其密集特征图尺寸约为 LeWM 隐空间的 200 倍；  \n   1.2 论文中显示的 GCBC 基线规划时间约为 0.01s，比 LeWM 快 100 倍，但被以“性能差”为由忽略，暴露速度-性能的隐含权衡；  \n   1.3 在 DINO-WM 在控制任务上优于 LeWM 时，论文承认是由于预训练特征带来的表征优势，却未对 48× 加速宣称做同等上下文说明；  \n   1.4 规划时间在单 GPU 上测量，但缺少自然对比基线（例如对 DINO-WM 特征做 PCA 降维后的规划速度）。  \n\n2. 从最确定的约束开始传播  \n   2.1 由于(1.1)表明两者表征尺寸差异巨大，单纯比较规划时间无视维度差异，导致速度差异主要来自表征维度，而非架构本身的算法改进——这一点与论文将 DINO-WM 表现归因于预训练特征时的做法不一致；  \n   2.2 (1.2)证明了有更快但“性能更差”的方法存在，表明作者在比较时选择性忽略了速度-性能的权衡；  \n\n3. 冲突与不确定区域  \n   3.1 未发现与以上明确约束相冲突的信息；  \n\n4. 验证所有条件  \n   4.1 比较没有控制表征维度（验证约束 1.1）；  \n   4.2 忽略更快基线 GCBC 的存在（验证约束 1.2）；  \n   4.3 对比方式缺乏对称性（验证约束 1.3、1.4）；  \n\n5. 结论  \n   论文以 48× 加速为“关键优势”却未控制表征维度、也未对照降维后的 DINO-WM，且在对比速度-性能权衡时存在选择性忽略，故该对比不具备公平性。",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "counterfactual",
+        "model": "grok-4.1",
+        "answer": "【答案】UNFAIR\n【置信度】0.85\n【推理】The 48× speed claim is driven almost entirely by the ~200× reduction in latent dimensionality, not by any algorithmic advance in planning. Point (1) makes this explicit: DINO-WM’s dense feature maps are an intentional design choice for representation quality; comparing wall-clock planning time without normalizing for representation size is equivalent to crediting a bicycle for being faster than a loaded truck. Point (4) further shows the absence of the obvious control—an ablated, dimension-reduced DINO-WM—which would isolate whether any planning-speed gain survives once capacity is equalized. Points (2) and (3) expose selective framing: the paper dismisses the far faster GCBC baseline on performance grounds yet does not apply the same performance-context caveat to the speed comparison that favors LeWM. Because the reported advantage collapses once representation capacity is controlled for, the 48× figure is not a meaningful or well-contextualized claim.",
+        "core_answer": "UNFAIR",
+        "self_confidence": 0.85,
+        "reasoning": "The 48× speed claim is driven almost entirely by the ~200× reduction in latent dimensionality, not by any algorithmic advance in planning. Point (1) makes this explicit: DINO-WM’s dense feature maps are an intentional design choice for representation quality; comparing wall-clock planning time without normalizing for representation size is equivalent to crediting a bicycle for being faster than a loaded truck. Point (4) further shows the absence of the obvious control—an ablated, dimension-reduced DINO-WM—which would isolate whether any planning-speed gain survives once capacity is equalized. Points (2) and (3) expose selective framing: the paper dismisses the far faster GCBC baseline on performance grounds yet does not apply the same performance-context caveat to the speed comparison that favors LeWM. Because the reported advantage collapses once representation capacity is controlled for, the 48× figure is not a meaningful or well-contextualized claim.",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "deep_first",
+        "model": "gpt-5.5",
+        "answer": null,
+        "core_answer": "",
+        "self_confidence": 0.0,
+        "reasoning": "",
+        "success": false,
+        "error": "'str' object has no attribute 'choices'",
+        "attempts": 1
+      },
+      {
+        "strategy": "direct",
+        "model": "kimi-k2.5",
+        "answer": "【答案】UNFAIR\n\n【置信度】0.92\n\n【推理】\n\nThe 48x speed comparison is **unfair** and poorly contextualized for four interconnected reasons:\n\n1. **Confounding variable ignored**: The speed difference is almost entirely explained by representation dimensionality (~200x difference in feature map size), not by genuine architectural innovation. This is analogous to claiming a bicycle is \"faster\" than a truck when the truck carries 200x more cargo — the comparison is meaningless without controlling for what each system actually computes.\n\n2. **Asymmetric application of trade-offs**: The paper dismisses GCBC's 100x speed advantage over LeWM because GCBC \"performs poorly,\" correctly recognizing the speed-performance trade-off. Yet the 48x claim against DINO-WM isolates only the favorable speed comparison while ignoring that DINO-WM outperforms LeWM on actual control tasks (OGBench-Cube, Two-Room). This is selective framing.\n\n3. **Inconsistent contextualization**: When DINO-WM wins on performance, the paper attributes it to pretrained features (fair contextualization). When LeWM wins on speed, no equivalent contextualization is offered — the latent dimensionality advantage is treated as an architectural achievement rather than a design choice.\n\n4. **Missing natural baseline**: The paper never tests whether dimensionality reduction on DINO-WM features (e.g., PCA) would close the speed gap while preserving quality. Without this control, the 48x figure is uninterpretable as evidence for LeWM's superiority.\n\nThe comparison conflates a **representation design choice** (small latent vs. dense features) with **planning algorithm efficiency**, making the 48x claim misleading as presented.",
+        "core_answer": "UNFAIR",
+        "self_confidence": 0.92,
+        "reasoning": "The 48x speed comparison is **unfair** and poorly contextualized for four interconnected reasons:\n\n1. **Confounding variable ignored**: The speed difference is almost entirely explained by representation dimensionality (~200x difference in feature map size), not by genuine architectural innovation. This is analogous to claiming a bicycle is \"faster\" than a truck when the truck carries 200x more cargo — the comparison is meaningless without controlling for what each system actually computes.\n\n2. **Asymmetric application of trade-offs**: The paper dismisses GCBC's 100x speed advantage over LeWM because GCBC \"performs poorly,\" correctly recognizing the speed-performance trade-off. Yet the 48x claim against DINO-WM isolates only the favorable speed comparison while ignoring that DINO-WM outperforms LeWM on actual control tasks (OGBench-Cube, Two-Room). This is selective framing.\n\n3. **Inconsistent contextualization**: When DINO-WM wins on performance, the paper attributes it to pretrained features (fair contextualization). When LeWM wins on speed, no equivalent contextualization is offered — the latent dimensionality advantage is treated as an architectural achievement rather than a design choice.\n\n4. **Missing natural baseline**: The paper never tests whether dimensionality reduction on DINO-WM features (e.g., PCA) would close the speed gap while preserving quality. Without this control, the 48x figure is uninterpretable as evidence for LeWM's superiority.\n\nThe comparison conflates a **representation design choice** (small latent vs. dense features) with **planning algorithm efficiency**, making the 48x claim misleading as presented.",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "science_deep",
+        "model": "gpt-5.1",
+        "answer": "【答案】UNFAIR（该“48×更快”对比在当前呈现方式下是不恰当的，混淆了规划速度与表示容量，缺乏必要控制和上下文）\n\n【置信度】0.86\n\n【推理】\n\n1. **问题的实质：比较什么？**\n\n   论文宣称“LeWM 规划速度比 DINO-WM 快 48×”，但有两个关键问题必须澄清：\n\n   - 被比较的对象是否在**相同任务目标**下优化？  \n     - DINO-WM：为“高质量表示（representation quality）+ 规划性能”优化，使用预训练 DINOv2 特征，特征维度极高。  \n     - LeWM：显式追求“模型可学习 + 规划速度”，采用小的可学习潜变量。\n\n   - 被比较的量是否在**控制其他关键因素（尤其是表示维度/容量）**后？  \n     - 若未控制，就类似于：同样距离，比一辆满载重卡和一辆空载轻自行车的“最高时速”，却不提载重差异。\n\n   这一点直接对应你列出的约束 (1) 和 (3)。\n\n2. **约束 (1)：表示维度差异造成的“48×”——物理类比**\n\n   - 事实（已被证明/陈述的事实）：  \n     - DINO-WM 使用 DINOv2 提取的**稠密特征图**，维度约为 LeWM 潜变量的 ~200×。  \n     - 大维度表征意味着：  \n       - 前向传播/规划时的矩阵乘和注意力操作复杂度 \\(\\propto d^2\\) 或 \\(\\propto d\\)（取决于模块，但总之随维度显著上升）。  \n   - 公式：  \n     - 若规划复杂度近似为 \\(T \\propto C \\cdot d\\)，其中 \\(d\\) 是表征维度，\\(C\\) 代表算法/架构常数，则  \n       \\[\n       \\frac{T_\\text{DINO}}{T_\\text{LeWM}} \\approx \\frac{C_\\text{DINO} \\cdot d_\\text{DINO}}{C_\\text{LeWM} \\cdot d_\\text{LeWM}}\n       \\]\n     - 当 \\(d_\\text{DINO} \\approx 200 \\cdot d_\\text{LeWM}\\)，即使 \\(C_\\text{DINO} \\approx C_\\text{LeWM}\\)，理论上也会获得 \\(\\sim 200\\times\\) 的时间比。\n   - 推断（需进一步验证的推断）：  \n     - 当前观察到的“48×”速度差，大部分可以被“表征维度差 200×”解释，无需引入任何“特别高效的规划框架创新”作为主要原因。  \n     - 因此，**速度提升是“计算负载减小”的直接结果，而不是在可比表示容量下、算法本身具有压倒性优势**。\n\n   结论：在不控制表示维度的情况下比较“规划速度”，在方法学上是不干净的对比；这一点支撑“UNFAIR”的判断。\n\n3. **约束 (2)：GCBC 速度 vs 性能 —— 暴露了被忽略的“速度–性能”权衡**\n\n   - 事实：  \n     - 论文数据表明：GCBC 规划时间约为 0.01 s，比 LeWM 快约 100×。  \n     - 论文又指出：GCBC 性能“很差”（即决策质量不佳）。  \n   - 这里实际呈现了一个**速度–性能前沿**（trade-off frontier）：  \n     - GCBC：极快，性能差。  \n     - LeWM：较慢，性能好。  \n     - DINO-WM：更慢，性能有时更好（在某些任务上）。  \n   - 逻辑问题：  \n     - 作者在 GCBC vs LeWM 的对比中，明确强调“性能比速度更重要”，因此**用性能差**否决了 GCBC 的速度优势。  \n     - 但在 LeWM vs DINO-WM 的对比中，却只突出“LeWM 快 48×”，而没有同样强调“DINO-WM 使用更强更高维的预训练表示，因此有性能优势/容量优势”的背景。  \n   - 这构成一种**不对称的标准**：  \n     - 当对手快（GCBC）但性能差：强调性能，贬低速度优势；  \n     - 当自己快（LeWM vs DINO-WM）：强调速度，不充分讨论表示容量和性能权衡。  \n\n   结论：这种呈现方式“择利而讲”，没有系统化地展示“性能–速度–表示容量”的整体权衡，削弱了“48×速度优势”作为中立科学比较的意义。\n\n4. **约束 (3)：性能优越时归因 vs 速度优越时归因不对称**\n\n   - 事实：  \n     - 在 OGBench-Cube、Two-Room 等任务上，DINO-WM 在控制性能上优于 LeWM。  \n     - 论文将这一点归因于 DINO-WM 使用的“更强的预训练视觉特征”（DINOv2 表示）。  \n   - 逻辑：  \n     - 当 DINO-WM 在**性能**上更好：  \n       - 作者强调“预训练特征强、表征更好”作为解释——这是对的、科学合理的。\n     - 但当 LeWM 在**速度**上更快：  \n       - 没有同样明确强调“LeWM 表征维度更小、容量更低”作为主要解释，而是倾向于将之呈现为规划算法/架构本身的“效率优势”。  \n   - 在公平比较中：  \n     - 同样一组因素（预训练 vs 可学习小潜变量、维度大小）应该对“性能”和“速度”两个方向都进行对称的解释。  \n     - 若一个因素被用来解释 A 模型在指标 X 上的优势，就应当在指标 Y 的比较中同样显式提及其反向影响。  \n\n   结论：论文对 DINO-WM 的性能优势进行了上下文化（归因到更强表示），却没有对 LeWM 的速度优势进行同等程度的上下文化（归因到更小表征维度），构成“选择性归因”。因此“48×更快”的表述在解读上有误导倾向。\n\n5",
+        "core_answer": "UNFAIR（该“48×更快”对比在当前呈现方式下是不恰当的，混淆了规划速度与表示容量，缺乏必要控制和上下文）",
+        "self_confidence": 0.86,
+        "reasoning": "1. **问题的实质：比较什么？**\n\n   论文宣称“LeWM 规划速度比 DINO-WM 快 48×”，但有两个关键问题必须澄清：\n\n   - 被比较的对象是否在**相同任务目标**下优化？  \n     - DINO-WM：为“高质量表示（representation quality）+ 规划性能”优化，使用预训练 DINOv2 特征，特征维度极高。  \n     - LeWM：显式追求“模型可学习 + 规划速度”，采用小的可学习潜变量。\n\n   - 被比较的量是否在**控制其他关键因素（尤其是表示维度/容量）**后？  \n     - 若未控制，就类似于：同样距离，比一辆满载重卡和一辆空载轻自行车的“最高时速”，却不提载重差异。\n\n   这一点直接对应你列出的约束 (1) 和 (3)。\n\n2. **约束 (1)：表示维度差异造成的“48×”——物理类比**\n\n   - 事实（已被证明/陈述的事实）：  \n     - DINO-WM 使用 DINOv2 提取的**稠密特征图**，维度约为 LeWM 潜变量的 ~200×。  \n     - 大维度表征意味着：  \n       - 前向传播/规划时的矩阵乘和注意力操作复杂度 \\(\\propto d^2\\) 或 \\(\\propto d\\)（取决于模块，但总之随维度显著上升）。  \n   - 公式：  \n     - 若规划复杂度近似为 \\(T \\propto C \\cdot d\\)，其中 \\(d\\) 是表征维度，\\(C\\) 代表算法/架构常数，则  \n       \\[\n       \\frac{T_\\text{DINO}}{T_\\text{LeWM}} \\approx \\frac{C_\\text{DINO} \\cdot d_\\text{DINO}}{C_\\text{LeWM} \\cdot d_\\text{LeWM}}\n       \\]\n     - 当 \\(d_\\text{DINO} \\approx 200 \\cdot d_\\text{LeWM}\\)，即使 \\(C_\\text{DINO} \\approx C_\\text{LeWM}\\)，理论上也会获得 \\(\\sim 200\\times\\) 的时间比。\n   - 推断（需进一步验证的推断）：  \n     - 当前观察到的“48×”速度差，大部分可以被“表征维度差 200×”解释，无需引入任何“特别高效的规划框架创新”作为主要原因。  \n     - 因此，**速度提升是“计算负载减小”的直接结果，而不是在可比表示容量下、算法本身具有压倒性优势**。\n\n   结论：在不控制表示维度的情况下比较“规划速度”，在方法学上是不干净的对比；这一点支撑“UNFAIR”的判断。\n\n3. **约束 (2)：GCBC 速度 vs 性能 —— 暴露了被忽略的“速度–性能”权衡**\n\n   - 事实：  \n     - 论文数据表明：GCBC 规划时间约为 0.01 s，比 LeWM 快约 100×。  \n     - 论文又指出：GCBC 性能“很差”（即决策质量不佳）。  \n   - 这里实际呈现了一个**速度–性能前沿**（trade-off frontier）：  \n     - GCBC：极快，性能差。  \n     - LeWM：较慢，性能好。  \n     - DINO-WM：更慢，性能有时更好（在某些任务上）。  \n   - 逻辑问题：  \n     - 作者在 GCBC vs LeWM 的对比中，明确强调“性能比速度更重要”，因此**用性能差**否决了 GCBC 的速度优势。  \n     - 但在 LeWM vs DINO-WM 的对比中，却只突出“LeWM 快 48×”，而没有同样强调“DINO-WM 使用更强更高维的预训练表示，因此有性能优势/容量优势”的背景。  \n   - 这构成一种**不对称的标准**：  \n     - 当对手快（GCBC）但性能差：强调性能，贬低速度优势；  \n     - 当自己快（LeWM vs DINO-WM）：强调速度，不充分讨论表示容量和性能权衡。  \n\n   结论：这种呈现方式“择利而讲”，没有系统化地展示“性能–速度–表示容量”的整体权衡，削弱了“48×速度优势”作为中立科学比较的意义。\n\n4. **约束 (3)：性能优越时归因 vs 速度优越时归因不对称**\n\n   - 事实：  \n     - 在 OGBench-Cube、Two-Room 等任务上，DINO-WM 在控制性能上优于 LeWM。  \n     - 论文将这一点归因于 DINO-WM 使用的“更强的预训练视觉特征”（DINOv2 表示）。  \n   - 逻辑：  \n     - 当 DINO-WM 在**性能**上更好：  \n       - 作者强调“预训练特征强、表征更好”作为解释——这是对的、科学合理的。\n     - 但当 LeWM 在**速度**上更快：  \n       - 没有同样明确强调“LeWM 表征维度更小、容量更低”作为主要解释，而是倾向于将之呈现为规划算法/架构本身的“效率优势”。  \n   - 在公平比较中：  \n     - 同样一组因素（预训练 vs 可学习小潜变量、维度大小）应该对“性能”和“速度”两个方向都进行对称的解释。  \n     - 若一个因素被用来解释 A 模型在指标 X 上的优势，就应当在指标 Y 的比较中同样显式提及其反向影响。  \n\n   结论：论文对 DINO-WM 的性能优势进行了上下文化（归因到更强表示），却没有对 LeWM 的速度优势进行同等程度的上下文化（归因到更小表征维度），构成“选择性归因”。因此“48×更快”的表述在解读上有误导倾向。\n\n5",
+        "success": true,
+        "attempts": 1
+      }
+    ],
+    "confidence": 0.57,
+    "disagreement": 0.2802,
+    "top_answer": "UNFAIR",
+    "top_strategy": "breadth_first",
+    "weights": {
+      "breadth_first": {
+        "self_confidence": 1.0,
+        "judge_score": 10.0,
+        "judge_normalized": 1.0,
+        "weight": 1.0,
+        "penalties": []
+      },
+      "constraint_propagation": {
+        "self_confidence": 0.9,
+        "judge_score": 9.0,
+        "judge_normalized": 0.9,
+        "weight": 0.81,
+        "penalties": []
+      },
+      "counterfactual": {
+        "self_confidence": 0.85,
+        "judge_score": 8.5,
+        "judge_normalized": 0.85,
+        "weight": 0.7225,
+        "penalties": []
+      },
+      "direct": {
+        "self_confidence": 0.92,
+        "judge_score": 9.200000000000001,
+        "judge_normalized": 0.9200000000000002,
+        "weight": 0.8464,
+        "penalties": []
+      },
+      "science_deep": {
+        "self_confidence": 0.86,
+        "judge_score": 8.6,
+        "judge_normalized": 0.43,
+        "weight": 0.3698,
+        "penalties": [
+          "outlier"
+        ]
+      }
+    },
+    "judge_scores": {
+      "breadth_first": 10.0,
+      "constraint_propagation": 9.0,
+      "counterfactual": 8.5,
+      "direct": 9.200000000000001,
+      "science_deep": 8.6
+    },
+    "judge_verdict": "",
+    "outliers": [
+      "science_deep"
+    ],
+    "low_confidence_ids": [],
+    "collective_blind_risk": false,
+    "injection_probability": 0.0,
+    "injection_type": null,
+    "speculation_score": 0.0,
+    "speculation_matches": [],
+    "sim_matrix": {
+      "breadth_first": {
+        "constraint_propagation": 1.0,
+        "counterfactual": 1.0,
+        "direct": 1.0,
+        "science_deep": 0.093,
+        "_avg": 0.773
+      },
+      "constraint_propagation": {
+        "breadth_first": 1.0,
+        "counterfactual": 1.0,
+        "direct": 1.0,
+        "science_deep": 0.093,
+        "_avg": 0.773
+      },
+      "counterfactual": {
+        "breadth_first": 1.0,
+        "constraint_propagation": 1.0,
+        "direct": 1.0,
+        "science_deep": 0.093,
+        "_avg": 0.773
+      },
+      "direct": {
+        "breadth_first": 1.0,
+        "constraint_propagation": 1.0,
+        "counterfactual": 1.0,
+        "science_deep": 0.093,
+        "_avg": 0.773
+      },
+      "science_deep": {
+        "breadth_first": 0.093,
+        "constraint_propagation": 0.093,
+        "counterfactual": 0.093,
+        "direct": 0.093,
+        "_avg": 0.093
+      }
+    },
+    "reasoning_trail": [
+      {
+        "strategy": "breadth_first",
+        "model": "gemini-3.1-pro-preview",
+        "success": true,
+        "self_confidence": 1.0,
+        "core_answer": "UNFAIR",
+        "judge_score": 10.0,
+        "weight": 1.0,
+        "penalties": [],
+        "status": "selected"
+      },
+      {
+        "strategy": "constraint_propagation",
+        "model": "o4-mini",
+        "success": true,
+        "self_confidence": 0.9,
+        "core_answer": "UNFAIR",
+        "judge_score": 9.0,
+        "weight": 0.81,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "counterfactual",
+        "model": "grok-4.1",
+        "success": true,
+        "self_confidence": 0.85,
+        "core_answer": "UNFAIR",
+        "judge_score": 8.5,
+        "weight": 0.7225,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "deep_first",
+        "model": "gpt-5.5",
+        "success": false,
+        "status": "failed",
+        "error": "'str' object has no attribute 'choices'"
+      },
+      {
+        "strategy": "direct",
+        "model": "kimi-k2.5",
+        "success": true,
+        "self_confidence": 0.92,
+        "core_answer": "UNFAIR",
+        "judge_score": 9.200000000000001,
+        "weight": 0.8464,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "science_deep",
+        "model": "gpt-5.1",
+        "success": true,
+        "self_confidence": 0.86,
+        "core_answer": "UNFAIR（该“48×更快”对比在当前呈现方式下是不恰当的，混淆了规划速度与表示容量，缺乏必要控制和上下文）",
+        "judge_score": 8.6,
+        "weight": 0.3698,
+        "penalties": [
+          "outlier"
+        ],
+        "status": "outlier"
+      }
+    ],
+    "low_confidence": false,
+    "uncertain": false,
+    "arbitration_applied": false,
+    "validator_applied": false,
+    "validator_pass": true,
+    "validator_violations": [],
+    "elapsed_time": 33.75,
+    "timestamp": 1780254204.899935,
+    "degraded": true,
+    "failed_generators": [
+      "deep_first"
+    ],
+    "claim": "LeWM achieves 48x faster planning vs DINO-WM — a meaningful performance comparison",
+    "question_id": "Q2"
+  },
+  {
+    "question": "The LeWorldModel paper's central narrative is simplification: from PLDM's 6 loss terms with 6 hyperparameters down to 'just 1 effective hyperparameter' (λ, the SIGReg weight). The paper uses λ=0.1 as a fixed value across all experiments.\n\nDoes this 1-hyperparameter claim hold under scrutiny?\n\nConsider these constraints:\n(1) The Sub-JEPA paper (May 2026) explicitly shows that LeWM's single Gaussian prior is 'overly strong' and proposes subspace regularization as an improvement — which adds hyperparameters (number of subspaces, subspace dimension). If the 1-hyperparameter solution were universally sufficient, Sub-JEPA wouldn't consistently outperform it.\n(2) The paper's own results show LeWM underperforms on Two-Room and OGBench-Cube. No ablation shows whether tuning λ per-environment closes this gap. A universal λ that underperforms on 2/4 tested environments raises questions about universality.\n(3) The architecture still has implicit hyperparameters: encoder depth (4 ViT layers), predictor depth (6 transformer layers), latent dimension, number of random projections (M=1024), learning rate schedule, batch size. Calling it '1 hyperparameter' shifts these to fixed architectural choices without justifying why they don't count.\n(4) The paper doesn't report sensitivity analysis for λ. If performance is highly sensitive to λ (e.g., λ=0.05 or λ=0.2 significantly changes results), then λ is effectively a critical tuning parameter, not a 'set and forget' value.\nAnswer: TRUE (1 hyperparameter claim is valid and well-supported) or FALSE (the claim overstates simplicity; implicit hyperparameters and environment-specific tuning are still needed) with reasoning.",
+    "candidates": [
+      {
+        "strategy": "breadth_first",
+        "model": "gemini-3.1-pro-preview",
+        "answer": "【答案】FALSE\n【置信度】1.0\n【推理】The claim that LeWorldModel relies on \"just 1 effective hyperparameter\" overstates its simplicity for several reasons outlined in the constraints:\n1. **Suboptimal Universality**: The fixed value of λ=0.1 fails to achieve strong performance across all tested environments (e.g., underperforming in Two-Room and OGBench-Cube). The lack of ablation studies on per-environment tuning suggests that λ likely needs to be adjusted depending on the task to close these performance gaps.\n2. **Hidden/Implicit Hyperparameters**: The paper shifts the complexity from loss terms to architectural and training choices. Parameters such as encoder/predictor depth, latent dimension, number of random projections (M=1024), and learning schedules are still hyperparameters that require tuning, even if they are held fixed in the paper's narrative.\n3. **Lack of Sensitivity Analysis**: Without demonstrating how sensitive the model is to λ, the paper cannot prove that λ=0.1 is a robust, \"set-and-forget\" value. If minor deviations in λ cause significant performance drops, it is a highly sensitive tuning parameter.\n4. **Future Evidence**: The Sub-JEPA paper highlights that LeWM's single prior is overly restrictive and that introducing more hyperparameters (subspaces) is necessary for consistent improvement, proving the 1-hyperparameter approach is not universally sufficient. \n\nTherefore, the claim is a framing device rather than a strict reality; implicit hyperparameters and environment-specific tuning remain necessary.",
+        "core_answer": "FALSE",
+        "self_confidence": 1.0,
+        "reasoning": "The claim that LeWorldModel relies on \"just 1 effective hyperparameter\" overstates its simplicity for several reasons outlined in the constraints:\n1. **Suboptimal Universality**: The fixed value of λ=0.1 fails to achieve strong performance across all tested environments (e.g., underperforming in Two-Room and OGBench-Cube). The lack of ablation studies on per-environment tuning suggests that λ likely needs to be adjusted depending on the task to close these performance gaps.\n2. **Hidden/Implicit Hyperparameters**: The paper shifts the complexity from loss terms to architectural and training choices. Parameters such as encoder/predictor depth, latent dimension, number of random projections (M=1024), and learning schedules are still hyperparameters that require tuning, even if they are held fixed in the paper's narrative.\n3. **Lack of Sensitivity Analysis**: Without demonstrating how sensitive the model is to λ, the paper cannot prove that λ=0.1 is a robust, \"set-and-forget\" value. If minor deviations in λ cause significant performance drops, it is a highly sensitive tuning parameter.\n4. **Future Evidence**: The Sub-JEPA paper highlights that LeWM's single prior is overly restrictive and that introducing more hyperparameters (subspaces) is necessary for consistent improvement, proving the 1-hyperparameter approach is not universally sufficient. \n\nTherefore, the claim is a framing device rather than a strict reality; implicit hyperparameters and environment-specific tuning remain necessary.",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "constraint_propagation",
+        "model": "o4-mini",
+        "answer": "【答案】FALSE  \n【置信度】0.90  \n【推理】  \n1. 已知约束条件  \n   - C1: Sub-JEPA 论文表明单一高斯先验“过于强烈”，并通过添加子空间正则化超参数（子空间数、子空间维度）来改进，且在实验中优于 LeWM。  \n   - C2: LeWM 在 Two-Room 和 OGBench-Cube 上表现欠佳，且论文未展示调节 λ 是否能弥补差距。  \n   - C3: 模型仍隐含多项架构/训练超参数（编码器层数、预测器层数、潜在维度、随机投影数 M、学习率调度、批量大小等）。  \n   - C4: 论文未提供 λ 的敏感性分析，可能需要针对不同环境微调该值。  \n\n2. 从最确定的约束开始传播  \n   - C3 最为确定：任何深度学习模型都依赖上述隐含超参数，不可能只有 1 个超参数。  \n   - C1 和 C2 进一步表明，单一 λ 并不能在所有环境下保证最佳性能，Sub-JEPA 的改进和 LeWM 的失败案例都印证了这一点。  \n\n3. 标记不确定区域  \n   - 虽然论文未定量评估 λ 的敏感性（C4），但这一缺失本身支持“λ 可能需要调参”，并未与其它约束冲突。  \n\n4. 验证所有条件  \n   - C1–C4 一致指向：LeWM 将所有复杂度压缩为单一 λ 的说法忽视了其他隐性/需调参的超参数，且在多环境下并未展现通用性能。  \n\n5. 约束满足度评估  \n   - 所有已列约束均得以满足，且无相互矛盾之处。  \n\n结论：LeWM 宣称“仅需 1 个超参数”过于夸大，实质上仍依赖多项固定或可调超参数，且未在所有环境下无需再调 λ 即可获得最优性能。",
+        "core_answer": "FALSE",
+        "self_confidence": 0.9,
+        "reasoning": "1. 已知约束条件  \n   - C1: Sub-JEPA 论文表明单一高斯先验“过于强烈”，并通过添加子空间正则化超参数（子空间数、子空间维度）来改进，且在实验中优于 LeWM。  \n   - C2: LeWM 在 Two-Room 和 OGBench-Cube 上表现欠佳，且论文未展示调节 λ 是否能弥补差距。  \n   - C3: 模型仍隐含多项架构/训练超参数（编码器层数、预测器层数、潜在维度、随机投影数 M、学习率调度、批量大小等）。  \n   - C4: 论文未提供 λ 的敏感性分析，可能需要针对不同环境微调该值。  \n\n2. 从最确定的约束开始传播  \n   - C3 最为确定：任何深度学习模型都依赖上述隐含超参数，不可能只有 1 个超参数。  \n   - C1 和 C2 进一步表明，单一 λ 并不能在所有环境下保证最佳性能，Sub-JEPA 的改进和 LeWM 的失败案例都印证了这一点。  \n\n3. 标记不确定区域  \n   - 虽然论文未定量评估 λ 的敏感性（C4），但这一缺失本身支持“λ 可能需要调参”，并未与其它约束冲突。  \n\n4. 验证所有条件  \n   - C1–C4 一致指向：LeWM 将所有复杂度压缩为单一 λ 的说法忽视了其他隐性/需调参的超参数，且在多环境下并未展现通用性能。  \n\n5. 约束满足度评估  \n   - 所有已列约束均得以满足，且无相互矛盾之处。  \n\n结论：LeWM 宣称“仅需 1 个超参数”过于夸大，实质上仍依赖多项固定或可调超参数，且未在所有环境下无需再调 λ 即可获得最优性能。",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "counterfactual",
+        "model": "grok-4.1",
+        "answer": "【答案】FALSE\n\n【置信度】0.75\n\n【推理】The central claim that LeWorldModel reduces everything to “just 1 effective hyperparameter” (λ) is marketing hyperbole that does not survive the four constraints listed.\n\nFirst, the Sub-JEPA follow-up (May 2026) directly demonstrates that a single isotropic Gaussian prior is too restrictive; the proposed subspace regularization outperforms LeWM across the board, but introduces two new discrete hyperparameters (number of subspaces K and per-subspace dimension d). If a single scalar λ were universally sufficient, a more complex regularizer would not yield consistent gains. This is the strongest empirical refutation of the “one hyperparameter” narrative.\n\nSecond, LeWM itself underperforms the prior PLDM baseline on Two-Room and OGBench-Cube. The paper never publishes a per-environment λ sweep, so we cannot know whether environment-specific retuning would close the gap. A supposedly universal λ that is suboptimal on half the reported suites undermines the universality claim.\n\nThird, the architecture is far from hyperparameter-free: encoder depth (4 ViT blocks), predictor depth (6 transformer blocks), latent dimensionality, number of random projections M = 1024, learning-rate schedule, batch size, etc. These are all implicit hyperparameters that were tuned once on a development set and then frozen. Declaring them “architectural constants” rather than hyperparameters is a semantic trick; in any realistic deployment they must be re-validated or re-tuned, adding back the very tuning burden the paper claims to have eliminated.\n\nFourth, no sensitivity plot or ablation over λ is provided. In the absence of such analysis it is impossible to know whether λ = 0.1 is a robust sweet spot or merely one point on a narrow ridge. If performance drops sharply at λ = 0.05 or 0.2, then λ is a critical tuning knob, not a “set-and-forget” constant.\n\nTaken together, these points show that the 1-hyperparameter story overstates simplicity: explicit tuning of λ, implicit architectural choices, and the need for richer regularizers (as proven by Sub-JEPA) are all still required. Hence the claim does not hold under scrutiny.",
+        "core_answer": "FALSE",
+        "self_confidence": 0.75,
+        "reasoning": "The central claim that LeWorldModel reduces everything to “just 1 effective hyperparameter” (λ) is marketing hyperbole that does not survive the four constraints listed.\n\nFirst, the Sub-JEPA follow-up (May 2026) directly demonstrates that a single isotropic Gaussian prior is too restrictive; the proposed subspace regularization outperforms LeWM across the board, but introduces two new discrete hyperparameters (number of subspaces K and per-subspace dimension d). If a single scalar λ were universally sufficient, a more complex regularizer would not yield consistent gains. This is the strongest empirical refutation of the “one hyperparameter” narrative.\n\nSecond, LeWM itself underperforms the prior PLDM baseline on Two-Room and OGBench-Cube. The paper never publishes a per-environment λ sweep, so we cannot know whether environment-specific retuning would close the gap. A supposedly universal λ that is suboptimal on half the reported suites undermines the universality claim.\n\nThird, the architecture is far from hyperparameter-free: encoder depth (4 ViT blocks), predictor depth (6 transformer blocks), latent dimensionality, number of random projections M = 1024, learning-rate schedule, batch size, etc. These are all implicit hyperparameters that were tuned once on a development set and then frozen. Declaring them “architectural constants” rather than hyperparameters is a semantic trick; in any realistic deployment they must be re-validated or re-tuned, adding back the very tuning burden the paper claims to have eliminated.\n\nFourth, no sensitivity plot or ablation over λ is provided. In the absence of such analysis it is impossible to know whether λ = 0.1 is a robust sweet spot or merely one point on a narrow ridge. If performance drops sharply at λ = 0.05 or 0.2, then λ is a critical tuning knob, not a “set-and-forget” constant.\n\nTaken together, these points show that the 1-hyperparameter story overstates simplicity: explicit tuning of λ, implicit architectural choices, and the need for richer regularizers (as proven by Sub-JEPA) are all still required. Hence the claim does not hold under scrutiny.",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "deep_first",
+        "model": "gpt-5.5",
+        "answer": null,
+        "core_answer": "",
+        "self_confidence": 0.0,
+        "reasoning": "",
+        "success": false,
+        "error": "'str' object has no attribute 'choices'",
+        "attempts": 1
+      },
+      {
+        "strategy": "direct",
+        "model": "kimi-k2.5",
+        "answer": "【答案】FALSE\n\n【置信度】0.92\n\n【推理】\n\nLet me analyze each constraint systematically:\n\n**(1) Sub-JEPA's critique**: The fact that a follow-up paper specifically identifies LeWM's single Gaussian prior as \"overly strong\" and proposes a more complex alternative with additional hyperparameters directly undermines the claim that 1 hyperparameter is sufficient. If the simplification were truly adequate, there would be no consistent performance gap to fix. This is strong external evidence against the claim.\n\n**(2) Environment-specific underperformance**: LeWM underperforms on 2/4 tested environments (Two-Room and OGBench-Cube) with fixed λ=0.1. The paper provides no evidence that this gap couldn't be closed by environment-specific tuning of λ. A \"universal\" hyperparameter that fails on 50% of tested tasks is not convincingly universal. The absence of ablation studies here is a critical gap.\n\n**(3) Implicit hyperparameters**: The paper's framing is misleading. By fixing encoder depth (4 layers), predictor depth (6 layers), latent dimension, M=1024 projections, learning rate, and batch size, these become *implicit* hyperparameters that were presumably tuned during development. The \"1 hyperparameter\" claim only holds if we arbitrarily exclude architectural choices that significantly impact performance. This is a definitional sleight of hand—similar architectures in the field typically count these as hyperparameters.\n\n**(4) Missing sensitivity analysis**: Without reported sensitivity analysis for λ, we cannot assess whether λ=0.1 is truly robust or merely a locally optimal value. If small changes (e.g., 0.05→0.2) degrade performance substantially, then λ requires careful tuning per task, contradicting the \"set and forget\" narrative.\n\n**Synthesis**: The claim is rhetorically effective but technically overstated. The paper achieves 1 *explicit* hyperparameter only by (a) hiding many choices in fixed architecture, (b) not validating universality across environments, and (c) omitting sensitivity analysis. The Sub-JEPA paper and the 50% failure rate on test environments provide concrete evidence that the simplification has real costs. The claim is marketing, not rigorous methodology.",
+        "core_answer": "FALSE",
+        "self_confidence": 0.92,
+        "reasoning": "Let me analyze each constraint systematically:\n\n**(1) Sub-JEPA's critique**: The fact that a follow-up paper specifically identifies LeWM's single Gaussian prior as \"overly strong\" and proposes a more complex alternative with additional hyperparameters directly undermines the claim that 1 hyperparameter is sufficient. If the simplification were truly adequate, there would be no consistent performance gap to fix. This is strong external evidence against the claim.\n\n**(2) Environment-specific underperformance**: LeWM underperforms on 2/4 tested environments (Two-Room and OGBench-Cube) with fixed λ=0.1. The paper provides no evidence that this gap couldn't be closed by environment-specific tuning of λ. A \"universal\" hyperparameter that fails on 50% of tested tasks is not convincingly universal. The absence of ablation studies here is a critical gap.\n\n**(3) Implicit hyperparameters**: The paper's framing is misleading. By fixing encoder depth (4 layers), predictor depth (6 layers), latent dimension, M=1024 projections, learning rate, and batch size, these become *implicit* hyperparameters that were presumably tuned during development. The \"1 hyperparameter\" claim only holds if we arbitrarily exclude architectural choices that significantly impact performance. This is a definitional sleight of hand—similar architectures in the field typically count these as hyperparameters.\n\n**(4) Missing sensitivity analysis**: Without reported sensitivity analysis for λ, we cannot assess whether λ=0.1 is truly robust or merely a locally optimal value. If small changes (e.g., 0.05→0.2) degrade performance substantially, then λ requires careful tuning per task, contradicting the \"set and forget\" narrative.\n\n**Synthesis**: The claim is rhetorically effective but technically overstated. The paper achieves 1 *explicit* hyperparameter only by (a) hiding many choices in fixed architecture, (b) not validating universality across environments, and (c) omitting sensitivity analysis. The Sub-JEPA paper and the 50% failure rate on test environments provide concrete evidence that the simplification has real costs. The claim is marketing, not rigorous methodology.",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "science_deep",
+        "model": "gpt-5.1",
+        "answer": "【答案】FALSE（该“1 个超参数”说法在严格审视下是夸大的，而不是一个真正意义上的“一超参数算法”）\n\n【置信度】0.86\n\n【推理】\n\n1. **先精确定义“1 个超参数”声称的含义**\n\n   要判断“1-hyperparameter claim”是否成立，需要区分两层意思：\n\n   - 弱版本：  \n     “在我们报告的实验中，我们只手动调了 1 个损失权重 λ，其他东西都固定。”  \n     ——这在事实层面可以是真的，只要他们确实只改了 λ。\n\n   - 强版本（论文叙事中实际暗示的）：  \n     “方法在实践上已经简化到只需要关心 1 个关键超参数（λ）；其他超参数不是很重要/可以固定，且这种简化在任务与环境上具有一定普适性。”  \n     ——这才是你问题里的核心：该强版本是否在科学上合理。\n\n   你提供的 4 点证据都是在攻击这个“强版本”的叙事。下面按点分析。\n\n---\n\n2. **关于 Sub-JEPA 结果：对“单高斯先验”简化的反证**\n\n   （1）你给的事实是：\n\n   - Sub-JEPA（2026）基于 LeWorldModel 框架，  \n     明确指出：LeWM 的单 Gaussian prior 过于强（overly strong），  \n     并提出 subspace regularization（子空间正则）作为改进。\n   - 这引入了新的超参数：  \n     - 子空间个数 K  \n     - 每个子空间维度 d_sub  \n   - Sub-JEPA 在多任务上**持续、系统地**优于原版 LeWM。\n\n   逻辑链条：\n\n   1. LeWM 的简化核心之一 = 使用单一 Gaussian 先验 + 单一正则权重 λ。  \n   2. Sub-JEPA 表明：  \n      - 同一类目标（representation/world model learning），  \n      - 在同样或相似的 benchmark 上，  \n      - 存在结构上更复杂（多子空间 + 多超参）的模型，  \n      - 且在性能上显著且一致地优于 LeWM。\n   3. 若“1 hyperparameter solution 是普适且足够的”，那么：\n      - 引入更多结构和超参通常只能带来边缘收益或过拟合风险；\n      - 不会在广泛实验中**稳定**击败 1-HP 版本。\n   4. Sub-JEPA 的结果说明：  \n      - 单 Gaussian 先验 + 单 λ 正则的简化在建模能力上是**有局限的**，  \n      - 灵活度更高的结构（带额外超参）在现实任务中确实有明显优势。\n\n   结论：  \n   - 从证据强度上讲，这是对“1-hyperparameter 方案在建模能力上足够通用”的**直接反例**。  \n   - 因而，“1 hyperparameter 就足以描述各种环境的世界模型”的叙事是不成立的。\n\n---\n\n3. **关于 2/4 环境下的性能劣势：质疑“普适通用 λ”的合理性**\n\n   （2）给出事实：\n\n   - LeWM 用同一个 λ=0.1 在所有实验环境上训练。\n   - 在 Two-Room 和 OGBench-Cube 上，LeWM 明显落后于对比方法。\n   - 论文没有做：\n     - λ 的 per-environment tuning ablation（每个环境单独调 λ）；\n     - λ 敏感性分析（different λ vs performance 曲线）。\n\n   逻辑链条：\n\n   1. 他们声称“只要 λ=0.1，一个 universal 的设置就能工作在所有环境上”——这是对实用层面的“可通用性”的隐含主张。\n   2. 实验结果却显示：  \n      - 在 4/4 环境中，有 2 个环境 LeWM 明显落后；  \n      - 且没有任何实验证明“如果我们稍微调一下 λ，这个 gap 会消失”。\n   3. 缺失的关键信息：  \n      - 若在 Two-Room / OGBench-Cube 上调 λ（例如 λ∈{0.01, 0.05, 0.1, 0.2}），\n        - 如果性能能显著提升，说明 λ **确实是环境敏感、必须调的超参数**；  \n        - 如果性能几乎不变，那才可支撑“λ 不敏感、可以固定”。\n   4. 由于论文没有提供这类 λ scanning / ablation，  \n      - “λ=0.1 是通用 default”的论断缺乏实证支持，  \n      - 更严重的是：在存在明显性能劣势的环境中，他们仍坚持一个未验证的 universal λ。\n\n   结论：  \n   - 这说明所谓“1 hyperparameter 且可固定为 λ=0.1”的**泛化性/普适性**并未被证明，  \n   - 反而有反例环境提示：**很可能仍需要 per-environment tuning**。\n\n---\n\n4. **关于“隐含超参数”：结构和训练配置不消失，只是被静默固定**\n\n   （3）你列举的隐含超参数：\n\n   - 模型结构相关：\n     - Encoder：ViT depth（4 层）、patch size、hidden dim、heads 数\n     - Predictor：Transformer depth（6 层）、hidden dim\n     - 潜在空间维度 z_dim\n     - 随机投影的数量 M=1024\n   - 训练相关：\n     - 学习率 schedule（warmup、decay、peak LR）\n     - batch size\n     - optimizer 超参数（β1, β2, weight decay 等）\n\n   关键点是：**“超参数”是方法实现和性能里需要预先设定的自由度**，而不是“损失项的个数”。  \n   他们把“从 PLDM 的 6 项 loss+6 个权重 → 只有 1 个显式损失权重 λ”作为“只有 1 个超参数”的根据，这在严格定义上是不充分的。\n\n   逻辑链条：\n\n   1. 标准的机器学习定义中，超参数包括：\n      - 模型结构（层数、宽度、维度等）；\n      - 优化设置（学习率、batch size、正则强度）；\n      - 损失项权重等。\n   2. LeWM 相",
+        "core_answer": "FALSE（该“1 个超参数”说法在严格审视下是夸大的，而不是一个真正意义上的“一超参数算法”）",
+        "self_confidence": 0.86,
+        "reasoning": "1. **先精确定义“1 个超参数”声称的含义**\n\n   要判断“1-hyperparameter claim”是否成立，需要区分两层意思：\n\n   - 弱版本：  \n     “在我们报告的实验中，我们只手动调了 1 个损失权重 λ，其他东西都固定。”  \n     ——这在事实层面可以是真的，只要他们确实只改了 λ。\n\n   - 强版本（论文叙事中实际暗示的）：  \n     “方法在实践上已经简化到只需要关心 1 个关键超参数（λ）；其他超参数不是很重要/可以固定，且这种简化在任务与环境上具有一定普适性。”  \n     ——这才是你问题里的核心：该强版本是否在科学上合理。\n\n   你提供的 4 点证据都是在攻击这个“强版本”的叙事。下面按点分析。\n\n---\n\n2. **关于 Sub-JEPA 结果：对“单高斯先验”简化的反证**\n\n   （1）你给的事实是：\n\n   - Sub-JEPA（2026）基于 LeWorldModel 框架，  \n     明确指出：LeWM 的单 Gaussian prior 过于强（overly strong），  \n     并提出 subspace regularization（子空间正则）作为改进。\n   - 这引入了新的超参数：  \n     - 子空间个数 K  \n     - 每个子空间维度 d_sub  \n   - Sub-JEPA 在多任务上**持续、系统地**优于原版 LeWM。\n\n   逻辑链条：\n\n   1. LeWM 的简化核心之一 = 使用单一 Gaussian 先验 + 单一正则权重 λ。  \n   2. Sub-JEPA 表明：  \n      - 同一类目标（representation/world model learning），  \n      - 在同样或相似的 benchmark 上，  \n      - 存在结构上更复杂（多子空间 + 多超参）的模型，  \n      - 且在性能上显著且一致地优于 LeWM。\n   3. 若“1 hyperparameter solution 是普适且足够的”，那么：\n      - 引入更多结构和超参通常只能带来边缘收益或过拟合风险；\n      - 不会在广泛实验中**稳定**击败 1-HP 版本。\n   4. Sub-JEPA 的结果说明：  \n      - 单 Gaussian 先验 + 单 λ 正则的简化在建模能力上是**有局限的**，  \n      - 灵活度更高的结构（带额外超参）在现实任务中确实有明显优势。\n\n   结论：  \n   - 从证据强度上讲，这是对“1-hyperparameter 方案在建模能力上足够通用”的**直接反例**。  \n   - 因而，“1 hyperparameter 就足以描述各种环境的世界模型”的叙事是不成立的。\n\n---\n\n3. **关于 2/4 环境下的性能劣势：质疑“普适通用 λ”的合理性**\n\n   （2）给出事实：\n\n   - LeWM 用同一个 λ=0.1 在所有实验环境上训练。\n   - 在 Two-Room 和 OGBench-Cube 上，LeWM 明显落后于对比方法。\n   - 论文没有做：\n     - λ 的 per-environment tuning ablation（每个环境单独调 λ）；\n     - λ 敏感性分析（different λ vs performance 曲线）。\n\n   逻辑链条：\n\n   1. 他们声称“只要 λ=0.1，一个 universal 的设置就能工作在所有环境上”——这是对实用层面的“可通用性”的隐含主张。\n   2. 实验结果却显示：  \n      - 在 4/4 环境中，有 2 个环境 LeWM 明显落后；  \n      - 且没有任何实验证明“如果我们稍微调一下 λ，这个 gap 会消失”。\n   3. 缺失的关键信息：  \n      - 若在 Two-Room / OGBench-Cube 上调 λ（例如 λ∈{0.01, 0.05, 0.1, 0.2}），\n        - 如果性能能显著提升，说明 λ **确实是环境敏感、必须调的超参数**；  \n        - 如果性能几乎不变，那才可支撑“λ 不敏感、可以固定”。\n   4. 由于论文没有提供这类 λ scanning / ablation，  \n      - “λ=0.1 是通用 default”的论断缺乏实证支持，  \n      - 更严重的是：在存在明显性能劣势的环境中，他们仍坚持一个未验证的 universal λ。\n\n   结论：  \n   - 这说明所谓“1 hyperparameter 且可固定为 λ=0.1”的**泛化性/普适性**并未被证明，  \n   - 反而有反例环境提示：**很可能仍需要 per-environment tuning**。\n\n---\n\n4. **关于“隐含超参数”：结构和训练配置不消失，只是被静默固定**\n\n   （3）你列举的隐含超参数：\n\n   - 模型结构相关：\n     - Encoder：ViT depth（4 层）、patch size、hidden dim、heads 数\n     - Predictor：Transformer depth（6 层）、hidden dim\n     - 潜在空间维度 z_dim\n     - 随机投影的数量 M=1024\n   - 训练相关：\n     - 学习率 schedule（warmup、decay、peak LR）\n     - batch size\n     - optimizer 超参数（β1, β2, weight decay 等）\n\n   关键点是：**“超参数”是方法实现和性能里需要预先设定的自由度**，而不是“损失项的个数”。  \n   他们把“从 PLDM 的 6 项 loss+6 个权重 → 只有 1 个显式损失权重 λ”作为“只有 1 个超参数”的根据，这在严格定义上是不充分的。\n\n   逻辑链条：\n\n   1. 标准的机器学习定义中，超参数包括：\n      - 模型结构（层数、宽度、维度等）；\n      - 优化设置（学习率、batch size、正则强度）；\n      - 损失项权重等。\n   2. LeWM 相",
+        "success": true,
+        "attempts": 1
+      }
+    ],
+    "confidence": 0.57,
+    "disagreement": 0.3115,
+    "top_answer": "FALSE",
+    "top_strategy": "breadth_first",
+    "weights": {
+      "breadth_first": {
+        "self_confidence": 1.0,
+        "judge_score": 10.0,
+        "judge_normalized": 1.0,
+        "weight": 1.0,
+        "penalties": []
+      },
+      "constraint_propagation": {
+        "self_confidence": 0.9,
+        "judge_score": 9.0,
+        "judge_normalized": 0.9,
+        "weight": 0.81,
+        "penalties": []
+      },
+      "counterfactual": {
+        "self_confidence": 0.75,
+        "judge_score": 7.5,
+        "judge_normalized": 0.75,
+        "weight": 0.5625,
+        "penalties": []
+      },
+      "direct": {
+        "self_confidence": 0.92,
+        "judge_score": 9.200000000000001,
+        "judge_normalized": 0.9200000000000002,
+        "weight": 0.8464,
+        "penalties": []
+      },
+      "science_deep": {
+        "self_confidence": 0.86,
+        "judge_score": 8.6,
+        "judge_normalized": 0.43,
+        "weight": 0.3698,
+        "penalties": [
+          "outlier"
+        ]
+      }
+    },
+    "judge_scores": {
+      "breadth_first": 10.0,
+      "constraint_propagation": 9.0,
+      "counterfactual": 7.5,
+      "direct": 9.200000000000001,
+      "science_deep": 8.6
+    },
+    "judge_verdict": "",
+    "outliers": [
+      "science_deep"
+    ],
+    "low_confidence_ids": [],
+    "collective_blind_risk": false,
+    "injection_probability": 0.0,
+    "injection_type": null,
+    "speculation_score": 0.0,
+    "speculation_matches": [],
+    "sim_matrix": {
+      "breadth_first": {
+        "constraint_propagation": 1.0,
+        "counterfactual": 1.0,
+        "direct": 1.0,
+        "science_deep": 0.091,
+        "_avg": 0.773
+      },
+      "constraint_propagation": {
+        "breadth_first": 1.0,
+        "counterfactual": 1.0,
+        "direct": 1.0,
+        "science_deep": 0.091,
+        "_avg": 0.773
+      },
+      "counterfactual": {
+        "breadth_first": 1.0,
+        "constraint_propagation": 1.0,
+        "direct": 1.0,
+        "science_deep": 0.091,
+        "_avg": 0.773
+      },
+      "direct": {
+        "breadth_first": 1.0,
+        "constraint_propagation": 1.0,
+        "counterfactual": 1.0,
+        "science_deep": 0.091,
+        "_avg": 0.773
+      },
+      "science_deep": {
+        "breadth_first": 0.091,
+        "constraint_propagation": 0.091,
+        "counterfactual": 0.091,
+        "direct": 0.091,
+        "_avg": 0.091
+      }
+    },
+    "reasoning_trail": [
+      {
+        "strategy": "breadth_first",
+        "model": "gemini-3.1-pro-preview",
+        "success": true,
+        "self_confidence": 1.0,
+        "core_answer": "FALSE",
+        "judge_score": 10.0,
+        "weight": 1.0,
+        "penalties": [],
+        "status": "selected"
+      },
+      {
+        "strategy": "constraint_propagation",
+        "model": "o4-mini",
+        "success": true,
+        "self_confidence": 0.9,
+        "core_answer": "FALSE",
+        "judge_score": 9.0,
+        "weight": 0.81,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "counterfactual",
+        "model": "grok-4.1",
+        "success": true,
+        "self_confidence": 0.75,
+        "core_answer": "FALSE",
+        "judge_score": 7.5,
+        "weight": 0.5625,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "deep_first",
+        "model": "gpt-5.5",
+        "success": false,
+        "status": "failed",
+        "error": "'str' object has no attribute 'choices'"
+      },
+      {
+        "strategy": "direct",
+        "model": "kimi-k2.5",
+        "success": true,
+        "self_confidence": 0.92,
+        "core_answer": "FALSE",
+        "judge_score": 9.200000000000001,
+        "weight": 0.8464,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "science_deep",
+        "model": "gpt-5.1",
+        "success": true,
+        "self_confidence": 0.86,
+        "core_answer": "FALSE（该“1 个超参数”说法在严格审视下是夸大的，而不是一个真正意义上的“一超参数算法”）",
+        "judge_score": 8.6,
+        "weight": 0.3698,
+        "penalties": [
+          "outlier"
+        ],
+        "status": "outlier"
+      }
+    ],
+    "low_confidence": false,
+    "uncertain": false,
+    "arbitration_applied": false,
+    "validator_applied": false,
+    "validator_pass": true,
+    "validator_violations": [],
+    "elapsed_time": 29.18,
+    "timestamp": 1780254235.716448,
+    "degraded": true,
+    "failed_generators": [
+      "deep_first"
+    ],
+    "claim": "LeWM needs only 1 hyperparameter (λ=0.1), making it universally simple",
+    "question_id": "Q3"
+  },
+  {
+    "question": "The LeWorldModel paper frames its contribution as 'solving' the JEPA collapse problem: stable end-to-end training from raw pixels without EMA, stop-gradient, or pretrained encoders. The paper's title — 'Stable End-to-End Joint-Embedding Predictive Architecture from Pixels' — implies this is achieved.\n\nIs this claim well-supported?\n\nConsider these constraints:\n(1) The paper tests on only 4 environments: Push-T (2D), Reacher (robot arm), OGBench-Cube (3D grasp), Two-Room (2D navigation). All are relatively simple, low-resolution control tasks. No natural images, no video, no high-dimensional observation spaces. 'Solved on 4 low-dim control tasks' ≠ 'solved from pixels.'\n(2) The paper acknowledges SIGReg effectiveness drops in low intrinsic-dimension environments (Two-Room). If the core mechanism breaks in edge cases, the claim of 'stability' is conditional, not general.\n(3) A concurrent May 2026 benchmark study (TechTimes, May 31, 2026) found 'current world models are brittle' — directly contradicting the 'solved' narrative. If LeWM had truly solved JEPA collapse, a benchmark published 2 months later wouldn't report brittleness as the headline finding.\n(4) The paper's comparison to PLDM (which used 6 loss terms) is the primary evidence of 'solving' collapse. But PLDM is a single baseline from 2025. The paper doesn't compare against other collapse-prevention methods (e.g., VicReg, Barlow Twins, SwAV) adapted to the JEPA setting, making the 'solved' claim relative to a weak strawman.\nAnswer: TRUE (JEPA collapse is solved) or FALSE (claim overreaches; evidence limited to few simple domains, contradicted by independent benchmarks) with reasoning.",
+    "candidates": [
+      {
+        "strategy": "breadth_first",
+        "model": "gemini-3.1-pro-preview",
+        "answer": "【答案】FALSE\n【置信度】1.0\n【推理】基于提供的限制条件，该论文声称“解决”JEPA崩溃问题的主张缺乏充分支持，属于夸大其词。具体原因如下：\n1. 实验领域有限：论文仅在4个简单、低分辨率的控制任务上进行了测试，缺乏在自然图像、视频或高维观测空间中的验证，因此“从像素解决”的普遍性主张站不住脚。\n2. 稳定性存在条件限制：论文承认核心机制（SIGReg）在低内在维度环境（如Two-Room）中效果下降，说明其稳定性并非无懈可击，而是有条件的。\n3. 外部独立基准的反驳：2026年5月的独立基准研究指出“当前世界模型依然脆弱”，这直接反驳了该论文宣称已彻底“解决”崩溃问题和实现稳定性的叙述。\n4. 对比基线薄弱：论文主要与单一的2025年基线（PLDM）进行对比，而没有与VicReg、Barlow Twins等其他成熟的防止崩溃方法在JEPA设置下进行广泛比较，使其结论建立在相对较弱的对比基础上。\n综上所述，该主张证据有限，且被独立基准测试所反驳。",
+        "core_answer": "FALSE",
+        "self_confidence": 1.0,
+        "reasoning": "基于提供的限制条件，该论文声称“解决”JEPA崩溃问题的主张缺乏充分支持，属于夸大其词。具体原因如下：\n1. 实验领域有限：论文仅在4个简单、低分辨率的控制任务上进行了测试，缺乏在自然图像、视频或高维观测空间中的验证，因此“从像素解决”的普遍性主张站不住脚。\n2. 稳定性存在条件限制：论文承认核心机制（SIGReg）在低内在维度环境（如Two-Room）中效果下降，说明其稳定性并非无懈可击，而是有条件的。\n3. 外部独立基准的反驳：2026年5月的独立基准研究指出“当前世界模型依然脆弱”，这直接反驳了该论文宣称已彻底“解决”崩溃问题和实现稳定性的叙述。\n4. 对比基线薄弱：论文主要与单一的2025年基线（PLDM）进行对比，而没有与VicReg、Barlow Twins等其他成熟的防止崩溃方法在JEPA设置下进行广泛比较，使其结论建立在相对较弱的对比基础上。\n综上所述，该主张证据有限，且被独立基准测试所反驳。",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "constraint_propagation",
+        "model": "o4-mini",
+        "answer": "【答案】FALSE  \n【置信度】0.90  \n【推理】  \n1. 已知约束条件  \n   1.1 仅在四个低维度控制环境（Push-T, Reacher, OGBench-Cube, Two-Room）上测试，无自然图像、视频或高维观测。  \n   1.2 核心机制SIGReg在低内在维度环境（Two-Room）效果下降，说明稳定性有条件限制。  \n   1.3 2026年5月基准研究报告“当前世界模型脆弱”，与“已解决JEPA崩溃”结论矛盾。  \n   1.4 仅与2025年Single-baseline PLDM对比，未与其他流行方法（VicReg, Barlow Twins, SwAV等）比较，缺乏全面对照。  \n\n2. 约束传播  \n   2.1 约束1 → 对少量简单任务的成功不能推广到一般像素级JEPA崩溃问题。  \n   2.2 约束2 → 稳定性在某些边界条件下失效，无法称为“普适稳定”。  \n   2.3 约束3 → 独立评测报告与论文主张直接冲突，质疑其“已解决”结论。  \n   2.4 约束4 → 基线过弱，无法证明相较所有已有方法获得稳定改进。  \n\n3. 矛盾与不确定区域  \n   - 各约束一致指向证据不足，无内部冲突。  \n\n4. 验证所有条件  \n   - 四项约束均确认论文实验范围窄、方法局限、外部验证不足。  \n\n结论：论文在四个简单任务上展示了改进，但远不能支持“解决JEPA崩溃”这一广泛主张，故答案为FALSE。",
+        "core_answer": "FALSE",
+        "self_confidence": 0.9,
+        "reasoning": "1. 已知约束条件  \n   1.1 仅在四个低维度控制环境（Push-T, Reacher, OGBench-Cube, Two-Room）上测试，无自然图像、视频或高维观测。  \n   1.2 核心机制SIGReg在低内在维度环境（Two-Room）效果下降，说明稳定性有条件限制。  \n   1.3 2026年5月基准研究报告“当前世界模型脆弱”，与“已解决JEPA崩溃”结论矛盾。  \n   1.4 仅与2025年Single-baseline PLDM对比，未与其他流行方法（VicReg, Barlow Twins, SwAV等）比较，缺乏全面对照。  \n\n2. 约束传播  \n   2.1 约束1 → 对少量简单任务的成功不能推广到一般像素级JEPA崩溃问题。  \n   2.2 约束2 → 稳定性在某些边界条件下失效，无法称为“普适稳定”。  \n   2.3 约束3 → 独立评测报告与论文主张直接冲突，质疑其“已解决”结论。  \n   2.4 约束4 → 基线过弱，无法证明相较所有已有方法获得稳定改进。  \n\n3. 矛盾与不确定区域  \n   - 各约束一致指向证据不足，无内部冲突。  \n\n4. 验证所有条件  \n   - 四项约束均确认论文实验范围窄、方法局限、外部验证不足。  \n\n结论：论文在四个简单任务上展示了改进，但远不能支持“解决JEPA崩溃”这一广泛主张，故答案为FALSE。",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "counterfactual",
+        "model": "grok-4.1",
+        "answer": "【答案】FALSE\n【置信度】0.85\n【推理】The claim of having 'solved' JEPA collapse from raw pixels rests on four narrow, low-dimensional control environments, an acknowledged failure mode in low-intrinsic-dimension settings, and a single 2025 baseline comparison—none of which constitute general evidence. The May 2026 TechTimes benchmark explicitly contradicts the 'solved' narrative, and the absence of comparisons against stronger regularizers (VicReg, Barlow Twins, SwAV) further weakens the argument. Hence the title’s implication overreaches the empirical scope.",
+        "core_answer": "FALSE",
+        "self_confidence": 0.85,
+        "reasoning": "The claim of having 'solved' JEPA collapse from raw pixels rests on four narrow, low-dimensional control environments, an acknowledged failure mode in low-intrinsic-dimension settings, and a single 2025 baseline comparison—none of which constitute general evidence. The May 2026 TechTimes benchmark explicitly contradicts the 'solved' narrative, and the absence of comparisons against stronger regularizers (VicReg, Barlow Twins, SwAV) further weakens the argument. Hence the title’s implication overreaches the empirical scope.",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "deep_first",
+        "model": "gpt-5.5",
+        "answer": null,
+        "core_answer": "",
+        "self_confidence": 0.0,
+        "reasoning": "",
+        "success": false,
+        "error": "'str' object has no attribute 'choices'",
+        "attempts": 1
+      },
+      {
+        "strategy": "direct",
+        "model": "kimi-k2.5",
+        "answer": "【答案】FALSE\n\n【置信度】0.92\n\n【推理】\n\n1. **Scope overreach**: The paper's title claims \"from pixels\" but tests only on 4 low-dimensional control tasks (Push-T, Reacher, OGBench-Cube, Two-Room). These are simple robotics simulations with low-resolution observations, not natural images or video. \"Solved on 4 simple domains\" ≠ \"solved from pixels\" generally.\n\n2. **Mechanism fragility**: The paper explicitly notes SIGReg (their core stability mechanism) fails in low intrinsic-dimension environments like Two-Room. This directly undermines \"stable\" as a universal claim—stability is conditional on environment properties.\n\n3. **External contradiction**: The May 2026 TechTimes benchmark finding that \"current world models are brittle\" (published 2 months post-LeWM) is strong disconfirming evidence. If JEPA collapse were truly solved, independent benchmarks wouldn't headline brittleness.\n\n4. **Weak comparative evidence**: The \"solved\" claim rests primarily on outperforming PLDM (2025), a single complex baseline with 6 loss terms. No comparison to other established collapse-prevention methods (VicReg, Barlow Twins, SwAV adapted to JEPA) means the claim isn't stress-tested against diverse alternatives.\n\n5. **Missing stress tests**: No natural images, no video prediction, no high-dimensional observations (e.g., Atari, ImageNet, real-world robotics). The domains tested are orders of magnitude easier than where JEPA collapse typically manifests.\n\nThe claim conflates \"works on our 4 small benchmarks\" with \"solved.\" This is classic overgeneralization from limited evidence, compounded by acknowledged mechanism failures and external contradiction.",
+        "core_answer": "FALSE",
+        "self_confidence": 0.92,
+        "reasoning": "1. **Scope overreach**: The paper's title claims \"from pixels\" but tests only on 4 low-dimensional control tasks (Push-T, Reacher, OGBench-Cube, Two-Room). These are simple robotics simulations with low-resolution observations, not natural images or video. \"Solved on 4 simple domains\" ≠ \"solved from pixels\" generally.\n\n2. **Mechanism fragility**: The paper explicitly notes SIGReg (their core stability mechanism) fails in low intrinsic-dimension environments like Two-Room. This directly undermines \"stable\" as a universal claim—stability is conditional on environment properties.\n\n3. **External contradiction**: The May 2026 TechTimes benchmark finding that \"current world models are brittle\" (published 2 months post-LeWM) is strong disconfirming evidence. If JEPA collapse were truly solved, independent benchmarks wouldn't headline brittleness.\n\n4. **Weak comparative evidence**: The \"solved\" claim rests primarily on outperforming PLDM (2025), a single complex baseline with 6 loss terms. No comparison to other established collapse-prevention methods (VicReg, Barlow Twins, SwAV adapted to JEPA) means the claim isn't stress-tested against diverse alternatives.\n\n5. **Missing stress tests**: No natural images, no video prediction, no high-dimensional observations (e.g., Atari, ImageNet, real-world robotics). The domains tested are orders of magnitude easier than where JEPA collapse typically manifests.\n\nThe claim conflates \"works on our 4 small benchmarks\" with \"solved.\" This is classic overgeneralization from limited evidence, compounded by acknowledged mechanism failures and external contradiction.",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "science_deep",
+        "model": "gpt-5.1",
+        "answer": "【答案】FALSE（claim overreaches; evidence limited and conditional）\n\n【置信度】0.84\n\n【推理】\n\n1. **明确要判断的主张**\n\n   论文标题与叙述暗示的核心主张是：  \n   > “从原始像素端到端训练 JEPA 时，已经解决了 collapse 稳定性问题，不再需要 EMA、stop-gradient 或预训练 encoder。”  \n\n   也就是一种接近“普适稳定性”的主张，而不是“在若干特定环境中表现较好”。\n\n2. **约束 (1)：任务范围与外推的合法性**\n\n   - 实验仅在 4 个环境上：  \n     - Push-T（2D、简单物体推动），  \n     - Reacher（机械臂），  \n     - OGBench-Cube（3D 抓取），  \n     - Two-Room（2D 导航）。  \n   - 这些环境具有：\n     - 低观测维度（低分辨率、简单几何），  \n     - 任务结构简单（控制任务，非开放世界），  \n     - 无自然图像和高维视觉输入，无复杂纹理/光照/背景多样性。  \n\n   **推理步骤：**\n\n   - 机器学习中，泛化结论需要覆盖广泛分布的测试域。仅在 4 个低维控制环境上成功，并不能支撑“从像素普适地解决 JEPA collapse”的结论。\n   - 逻辑上，这只是证明了：  \n     > “在这些特定环境、特定网络结构和训练超参下，LeWorldModel 没有发生 collapse，且不使用 EMA / stop-grad。”\n\n   - 因此，这部分证据严格来说属于：  \n     - **已被证明的事实**：在这 4 个具体环境和设定下，训练是稳定的。  \n     - **需进一步验证的推断**：这种机制能在高维自然图像/视频等复杂环境上普适地防止 collapse。  \n\n   在缺乏自然图像、复杂视觉任务实验的前提下，把“在 4 个简单任务上稳定”扩展为“从像素端到端稳定”是典型的过度外推。\n\n3. **约束 (2)：对 Two-Room 低维环境的失效说明稳定性是“条件性的”**\n\n   - 论文自己承认：  \n     > SIGReg 在低 intrinsic-dimension 环境（如 Two-Room）中效果显著下降。\n   - JEPA collapse 的“解决”如果是机制级别的声明，应当不依赖于任务的特定 intrinsic dimension。  \n   - 现象：当 intrinsic dimension 低时，正则或目标约束不足以防止 trivial solution / representation collapse 的风险增加，或者学习到的表示退化。\n\n   **推理步骤：**\n\n   - “稳定性”可视作某种形式的全局或至少广泛条件下的训练收敛性（不 collapse）。  \n   - 若方法在特定类别任务（低 intrinsic dimension）上可靠性明显变差，则主张只能在“特定条件”下成立：\n     - 条件如：中等及以上 intrinsic dimension；  \n     - 或某类特定的控制环境结构；  \n     - 而非“从像素的一般 JEPA 框架”。  \n\n   - 从论证逻辑上，这意味着：\n     - 论文证明的是“**条件稳定性**”，即在某些任务条件+某些正则条件下的稳定训练；\n     - 不能称之为“JEPA collapse 已被解决”这种无条件或弱条件的广义命题。\n\n   这进一步表明，结论更多是**局部性结论**而非通用定律级结论。\n\n4. **约束 (3)：独立基准研究对“世界模型稳定性”的否定**\n\n   - 独立研究（TechTimes, May 31, 2026）对当前世界模型给出结论：  \n     > “current world models are brittle.”\n   - 如果 LeWorldModel 真的在“从像素训练的 JEPA 世界模型稳定性”上实现了显著的机制性突破，且该突破具有一定通用性，那么 2 个月后发布的 benchmark 报告一般会体现出明显的性能差异，至少不会用“brittle”作为总结性结论。\n\n   **推理步骤（基于证据强度的逻辑）：**\n\n   - 假设：LeWM 确实从根本上解决了 JEPA collapse 问题，并在多个领域验证。  \n     - 则后续基准研究在使用 LeWM 或类似思想时应观察到显著稳定性提升。  \n   - 实际：该基准研究的总体结论仍是“世界模型脆弱”。  \n     - 可能情况：  \n       1. LeWM 仅在少数简单领域有效（未被基准视为普适方法）；  \n       2. LeWM 被测试但在更广泛设置中也展现出 brittleness；  \n       3. LeWM 根本没进入主流基准视野（代表其影响/泛化尚未得到认可）。  \n\n   - 无论是哪一种，都与“问题已被解决”这种表述冲突。  \n   - 因此，从多源证据角度看，该独立基准研究构成对“已解决 JEPA collapse”命题的反证，至少说明：\n     - **已被证明的事实**：在更广泛基准中，世界模型仍被评价为脆弱；  \n     - **需进一步验证的推断**：LeWM 在广泛设置中是否显著优于其他方法，并改变这一整体评价。  \n\n   在现有信息下，这个独立基准显著削弱了“solved”的可信度。\n\n5. **约束 (4)：对照基线的局限与“稻草人”风险**\n\n   - 论文主要对比对象是 PLDM（2025 年的前作），该方法使用了 6 个损失项。  \n   - LeWM 对比显示：在相同任务上，用更少的 loss 组件、去掉 EMA/stop-grad 等技巧，仍可实现稳定训练。  \n   - 问题在于：\n     - PLDM 只是单一基线，且并非当前所有 collapse-prevention 方法的代表；  \n     - 论文没有系统对比：VicReg、Barlow Twins、SwAV 等现代表征学习/对比学习稳定性技巧在 JEPA 场景下的适配与表现。\n\n   **推理步骤：**\n\n   - “相对某个特定 baseline 更",
+        "core_answer": "FALSE（claim overreaches; evidence limited and conditional）",
+        "self_confidence": 0.84,
+        "reasoning": "1. **明确要判断的主张**\n\n   论文标题与叙述暗示的核心主张是：  \n   > “从原始像素端到端训练 JEPA 时，已经解决了 collapse 稳定性问题，不再需要 EMA、stop-gradient 或预训练 encoder。”  \n\n   也就是一种接近“普适稳定性”的主张，而不是“在若干特定环境中表现较好”。\n\n2. **约束 (1)：任务范围与外推的合法性**\n\n   - 实验仅在 4 个环境上：  \n     - Push-T（2D、简单物体推动），  \n     - Reacher（机械臂），  \n     - OGBench-Cube（3D 抓取），  \n     - Two-Room（2D 导航）。  \n   - 这些环境具有：\n     - 低观测维度（低分辨率、简单几何），  \n     - 任务结构简单（控制任务，非开放世界），  \n     - 无自然图像和高维视觉输入，无复杂纹理/光照/背景多样性。  \n\n   **推理步骤：**\n\n   - 机器学习中，泛化结论需要覆盖广泛分布的测试域。仅在 4 个低维控制环境上成功，并不能支撑“从像素普适地解决 JEPA collapse”的结论。\n   - 逻辑上，这只是证明了：  \n     > “在这些特定环境、特定网络结构和训练超参下，LeWorldModel 没有发生 collapse，且不使用 EMA / stop-grad。”\n\n   - 因此，这部分证据严格来说属于：  \n     - **已被证明的事实**：在这 4 个具体环境和设定下，训练是稳定的。  \n     - **需进一步验证的推断**：这种机制能在高维自然图像/视频等复杂环境上普适地防止 collapse。  \n\n   在缺乏自然图像、复杂视觉任务实验的前提下，把“在 4 个简单任务上稳定”扩展为“从像素端到端稳定”是典型的过度外推。\n\n3. **约束 (2)：对 Two-Room 低维环境的失效说明稳定性是“条件性的”**\n\n   - 论文自己承认：  \n     > SIGReg 在低 intrinsic-dimension 环境（如 Two-Room）中效果显著下降。\n   - JEPA collapse 的“解决”如果是机制级别的声明，应当不依赖于任务的特定 intrinsic dimension。  \n   - 现象：当 intrinsic dimension 低时，正则或目标约束不足以防止 trivial solution / representation collapse 的风险增加，或者学习到的表示退化。\n\n   **推理步骤：**\n\n   - “稳定性”可视作某种形式的全局或至少广泛条件下的训练收敛性（不 collapse）。  \n   - 若方法在特定类别任务（低 intrinsic dimension）上可靠性明显变差，则主张只能在“特定条件”下成立：\n     - 条件如：中等及以上 intrinsic dimension；  \n     - 或某类特定的控制环境结构；  \n     - 而非“从像素的一般 JEPA 框架”。  \n\n   - 从论证逻辑上，这意味着：\n     - 论文证明的是“**条件稳定性**”，即在某些任务条件+某些正则条件下的稳定训练；\n     - 不能称之为“JEPA collapse 已被解决”这种无条件或弱条件的广义命题。\n\n   这进一步表明，结论更多是**局部性结论**而非通用定律级结论。\n\n4. **约束 (3)：独立基准研究对“世界模型稳定性”的否定**\n\n   - 独立研究（TechTimes, May 31, 2026）对当前世界模型给出结论：  \n     > “current world models are brittle.”\n   - 如果 LeWorldModel 真的在“从像素训练的 JEPA 世界模型稳定性”上实现了显著的机制性突破，且该突破具有一定通用性，那么 2 个月后发布的 benchmark 报告一般会体现出明显的性能差异，至少不会用“brittle”作为总结性结论。\n\n   **推理步骤（基于证据强度的逻辑）：**\n\n   - 假设：LeWM 确实从根本上解决了 JEPA collapse 问题，并在多个领域验证。  \n     - 则后续基准研究在使用 LeWM 或类似思想时应观察到显著稳定性提升。  \n   - 实际：该基准研究的总体结论仍是“世界模型脆弱”。  \n     - 可能情况：  \n       1. LeWM 仅在少数简单领域有效（未被基准视为普适方法）；  \n       2. LeWM 被测试但在更广泛设置中也展现出 brittleness；  \n       3. LeWM 根本没进入主流基准视野（代表其影响/泛化尚未得到认可）。  \n\n   - 无论是哪一种，都与“问题已被解决”这种表述冲突。  \n   - 因此，从多源证据角度看，该独立基准研究构成对“已解决 JEPA collapse”命题的反证，至少说明：\n     - **已被证明的事实**：在更广泛基准中，世界模型仍被评价为脆弱；  \n     - **需进一步验证的推断**：LeWM 在广泛设置中是否显著优于其他方法，并改变这一整体评价。  \n\n   在现有信息下，这个独立基准显著削弱了“solved”的可信度。\n\n5. **约束 (4)：对照基线的局限与“稻草人”风险**\n\n   - 论文主要对比对象是 PLDM（2025 年的前作），该方法使用了 6 个损失项。  \n   - LeWM 对比显示：在相同任务上，用更少的 loss 组件、去掉 EMA/stop-grad 等技巧，仍可实现稳定训练。  \n   - 问题在于：\n     - PLDM 只是单一基线，且并非当前所有 collapse-prevention 方法的代表；  \n     - 论文没有系统对比：VicReg、Barlow Twins、SwAV 等现代表征学习/对比学习稳定性技巧在 JEPA 场景下的适配与表现。\n\n   **推理步骤：**\n\n   - “相对某个特定 baseline 更",
+        "success": true,
+        "attempts": 1
+      }
+    ],
+    "confidence": 0.95,
+    "disagreement": 0.2898,
+    "top_answer": "FALSE",
+    "top_strategy": "breadth_first",
+    "weights": {
+      "breadth_first": {
+        "self_confidence": 1.0,
+        "judge_score": 10.0,
+        "judge_normalized": 1.0,
+        "weight": 1.0,
+        "penalties": []
+      },
+      "constraint_propagation": {
+        "self_confidence": 0.9,
+        "judge_score": 9.0,
+        "judge_normalized": 0.9,
+        "weight": 0.81,
+        "penalties": []
+      },
+      "counterfactual": {
+        "self_confidence": 0.85,
+        "judge_score": 8.5,
+        "judge_normalized": 0.85,
+        "weight": 0.7225,
+        "penalties": []
+      },
+      "direct": {
+        "self_confidence": 0.92,
+        "judge_score": 9.200000000000001,
+        "judge_normalized": 0.9200000000000002,
+        "weight": 0.8464,
+        "penalties": []
+      },
+      "science_deep": {
+        "self_confidence": 0.84,
+        "judge_score": 8.4,
+        "judge_normalized": 0.42000000000000004,
+        "weight": 0.3528,
+        "penalties": [
+          "outlier"
+        ]
+      }
+    },
+    "judge_scores": {
+      "breadth_first": 10.0,
+      "constraint_propagation": 9.0,
+      "counterfactual": 8.5,
+      "direct": 9.200000000000001,
+      "science_deep": 8.4
+    },
+    "judge_verdict": "",
+    "outliers": [
+      "science_deep"
+    ],
+    "low_confidence_ids": [],
+    "collective_blind_risk": false,
+    "injection_probability": 0.0,
+    "injection_type": null,
+    "speculation_score": 0.0,
+    "speculation_matches": [],
+    "sim_matrix": {
+      "breadth_first": {
+        "constraint_propagation": 1.0,
+        "counterfactual": 1.0,
+        "direct": 1.0,
+        "science_deep": 0.083,
+        "_avg": 0.771
+      },
+      "constraint_propagation": {
+        "breadth_first": 1.0,
+        "counterfactual": 1.0,
+        "direct": 1.0,
+        "science_deep": 0.083,
+        "_avg": 0.771
+      },
+      "counterfactual": {
+        "breadth_first": 1.0,
+        "constraint_propagation": 1.0,
+        "direct": 1.0,
+        "science_deep": 0.083,
+        "_avg": 0.771
+      },
+      "direct": {
+        "breadth_first": 1.0,
+        "constraint_propagation": 1.0,
+        "counterfactual": 1.0,
+        "science_deep": 0.083,
+        "_avg": 0.771
+      },
+      "science_deep": {
+        "breadth_first": 0.083,
+        "constraint_propagation": 0.083,
+        "counterfactual": 0.083,
+        "direct": 0.083,
+        "_avg": 0.083
+      }
+    },
+    "reasoning_trail": [
+      {
+        "strategy": "breadth_first",
+        "model": "gemini-3.1-pro-preview",
+        "success": true,
+        "self_confidence": 1.0,
+        "core_answer": "FALSE",
+        "judge_score": 10.0,
+        "weight": 1.0,
+        "penalties": [],
+        "status": "selected"
+      },
+      {
+        "strategy": "constraint_propagation",
+        "model": "o4-mini",
+        "success": true,
+        "self_confidence": 0.9,
+        "core_answer": "FALSE",
+        "judge_score": 9.0,
+        "weight": 0.81,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "counterfactual",
+        "model": "grok-4.1",
+        "success": true,
+        "self_confidence": 0.85,
+        "core_answer": "FALSE",
+        "judge_score": 8.5,
+        "weight": 0.7225,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "deep_first",
+        "model": "gpt-5.5",
+        "success": false,
+        "status": "failed",
+        "error": "'str' object has no attribute 'choices'"
+      },
+      {
+        "strategy": "direct",
+        "model": "kimi-k2.5",
+        "success": true,
+        "self_confidence": 0.92,
+        "core_answer": "FALSE",
+        "judge_score": 9.200000000000001,
+        "weight": 0.8464,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "science_deep",
+        "model": "gpt-5.1",
+        "success": true,
+        "self_confidence": 0.84,
+        "core_answer": "FALSE（claim overreaches; evidence limited and conditional）",
+        "judge_score": 8.4,
+        "weight": 0.3528,
+        "penalties": [
+          "outlier"
+        ],
+        "status": "outlier"
+      }
+    ],
+    "low_confidence": false,
+    "uncertain": false,
+    "arbitration_applied": false,
+    "validator_applied": false,
+    "validator_pass": true,
+    "validator_violations": [],
+    "elapsed_time": 40.9,
+    "timestamp": 1780254278.052588,
+    "degraded": true,
+    "failed_generators": [
+      "deep_first"
+    ],
+    "claim": "End-to-end JEPA from pixels is 'solved' — stable training without engineering tricks",
+    "question_id": "Q4"
+  },
+  {
+    "question": "The LeWorldModel paper claims emergent physical understanding: linear probing reveals that LeWM's latent space encodes position, velocity, and angles with r=0.97-0.99 correlation, and Violation-of-Expectation (VoE) experiments show the model expresses 'surprise' at physically impossible events (teleportation) but not superficial changes (color swaps).\n\nDoes this evidence support the claim of 'physical understanding'?\n\nConsider these constraints:\n(1) Linear decodability of state variables is expected, not surprising. A world model trained to predict next-state latents must encode current state to make predictions. If it couldn't linearly encode position, the predictor would have no usable input. This is a necessary condition for the task, not evidence of 'understanding.'\n(2) VoE with teleportation vs. color change is a weak test. The model is trained to predict next-frame latents from position-relevant features. Teleportation breaks temporal continuity — which the MSE prediction loss directly penalizes. Color is likely ignored by the encoder as task-irrelevant (the control tasks don't depend on color). The model isn't 'choosing' to be indifferent to color — it learned to discard it during training because color doesn't predict reward or next state.\n(3) The paper doesn't test intermediate cases: partial occlusion, elastic deformation, or velocity discontinuities. Physical 'understanding' that only distinguishes between complete teleportation and complete normality hasn't demonstrated the graded sensitivity that characterizes genuine physical intuition.\n(4) The r=0.97-0.99 correlation is in-distribution. No out-of-distribution generalization test is reported. If the model encounters a novel object or dynamics, do the linear readouts maintain their accuracy? Without this, 'understanding' is indistinguishable from 'memorized the training distribution.'\nAnswer: TRUE (evidence supports emergent physical understanding) or FALSE (expected behavior for the training objective, not evidence of emergent understanding) with reasoning.",
+    "candidates": [
+      {
+        "strategy": "breadth_first",
+        "model": "gemini-3.1-pro-preview",
+        "answer": "【答案】FALSE\n【置信度】1.0\n【推理】根据提供的约束条件，论文中的证据并不足以支持“涌现出物理理解”的结论，而仅仅是训练目标的预期行为：\n1. **线性可解码性是必要条件而非理解**：为了预测下一个状态，世界模型必须在其潜在空间中编码当前的位置和速度等状态变量。这是最小化预测误差的必然结果，不能被视为涌现出的“理解”。\n2. **VoE实验设计存在缺陷且可被简单解释**：模型对“瞬间移动”感到惊讶是因为它打破了时间连续性，这直接违反了MSE预测损失的平滑性要求；而对“颜色交换”不惊讶，仅仅是因为颜色与控制任务或状态预测无关，编码器在训练中学会了丢弃这些无用特征。这不代表模型具有物理直觉。\n3. **缺乏复杂的物理直觉测试**：论文没有测试部分遮挡、弹性形变等中间情况，无法证明模型具备真正的、具有梯度敏感性的物理直觉。\n4. **缺乏分布外（OOD）泛化测试**：高达0.97-0.99的相关性仅在分布内测得。如果没有在未见过的物体或动态上进行测试，所谓的“理解”与单纯“记忆训练分布”在表现上是无法区分的。\n综上所述，这些现象仅仅是模型优化特定训练目标（如MSE损失）的预期行为，不能作为“涌现物理理解”的有效证据。",
+        "core_answer": "FALSE",
+        "self_confidence": 1.0,
+        "reasoning": "根据提供的约束条件，论文中的证据并不足以支持“涌现出物理理解”的结论，而仅仅是训练目标的预期行为：\n1. **线性可解码性是必要条件而非理解**：为了预测下一个状态，世界模型必须在其潜在空间中编码当前的位置和速度等状态变量。这是最小化预测误差的必然结果，不能被视为涌现出的“理解”。\n2. **VoE实验设计存在缺陷且可被简单解释**：模型对“瞬间移动”感到惊讶是因为它打破了时间连续性，这直接违反了MSE预测损失的平滑性要求；而对“颜色交换”不惊讶，仅仅是因为颜色与控制任务或状态预测无关，编码器在训练中学会了丢弃这些无用特征。这不代表模型具有物理直觉。\n3. **缺乏复杂的物理直觉测试**：论文没有测试部分遮挡、弹性形变等中间情况，无法证明模型具备真正的、具有梯度敏感性的物理直觉。\n4. **缺乏分布外（OOD）泛化测试**：高达0.97-0.99的相关性仅在分布内测得。如果没有在未见过的物体或动态上进行测试，所谓的“理解”与单纯“记忆训练分布”在表现上是无法区分的。\n综上所述，这些现象仅仅是模型优化特定训练目标（如MSE损失）的预期行为，不能作为“涌现物理理解”的有效证据。",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "constraint_propagation",
+        "model": "o4-mini",
+        "answer": "【答案】FALSE  \n【置信度】0.90  \n【推理】  \n1. 列出所有已知约束条件  \n   1.1. 线性可解码性（r=0.97–0.99）对 world model 的训练目标（用 MSE 预测下一个状态）是必需的，不构成“理解”证据，只是对当前状态编码的必然结果。  \n   1.2. VoE 实验：模型对“瞬移”表现惊讶是因为瞬移直接破坏了时间连续性，训练损失会惩罚此类突变；对颜色交换不敏感则因为颜色对预测下一个状态或控制无关紧要，故在编码时被丢弃。  \n   1.3. 缺乏中间物理现象测试（如部分遮挡、弹性形变、速度不连续等），无法展示模型对不同程度物理违规的“分级敏感性”。  \n   1.4. 相关性评估仅限于训练分布内，未提供任何分布外测试，无法排除模型仅“记忆”训练分布而非真正理解物理规律。  \n\n2. 从最确定的约束开始传播  \n   - 约束1和2直接否定线性探针与 VoE 结果能证明“物理理解”。  \n   - 约束3和4进一步表明实验设计不足以覆盖物理直觉的核心特征（分级敏感性和泛化能力）。  \n\n3. 当约束冲突时，标记不确定区域  \n   - 各约束方向一致，无冲突点，无需标记不确定区域。  \n\n4. 验证所有条件  \n   - 线性可解码性是训练目标的直接衍生，VoE 实验依赖损失函数敏感性，缺乏中间测试及泛化测试。  \n   - 所有约束均得到考虑且一致指向“证据不足以支持 emergent physical understanding”。  \n\n5. 输出答案 + 约束满足度评估  \n   - 结论：FALSE，现有证据符合训练目标预期行为，而非对模型具备真正物理理解的证明。  \n   - 置信度：0.90（高置信，但考虑到未来可能有更多测试补充）。",
+        "core_answer": "FALSE",
+        "self_confidence": 0.9,
+        "reasoning": "1. 列出所有已知约束条件  \n   1.1. 线性可解码性（r=0.97–0.99）对 world model 的训练目标（用 MSE 预测下一个状态）是必需的，不构成“理解”证据，只是对当前状态编码的必然结果。  \n   1.2. VoE 实验：模型对“瞬移”表现惊讶是因为瞬移直接破坏了时间连续性，训练损失会惩罚此类突变；对颜色交换不敏感则因为颜色对预测下一个状态或控制无关紧要，故在编码时被丢弃。  \n   1.3. 缺乏中间物理现象测试（如部分遮挡、弹性形变、速度不连续等），无法展示模型对不同程度物理违规的“分级敏感性”。  \n   1.4. 相关性评估仅限于训练分布内，未提供任何分布外测试，无法排除模型仅“记忆”训练分布而非真正理解物理规律。  \n\n2. 从最确定的约束开始传播  \n   - 约束1和2直接否定线性探针与 VoE 结果能证明“物理理解”。  \n   - 约束3和4进一步表明实验设计不足以覆盖物理直觉的核心特征（分级敏感性和泛化能力）。  \n\n3. 当约束冲突时，标记不确定区域  \n   - 各约束方向一致，无冲突点，无需标记不确定区域。  \n\n4. 验证所有条件  \n   - 线性可解码性是训练目标的直接衍生，VoE 实验依赖损失函数敏感性，缺乏中间测试及泛化测试。  \n   - 所有约束均得到考虑且一致指向“证据不足以支持 emergent physical understanding”。  \n\n5. 输出答案 + 约束满足度评估  \n   - 结论：FALSE，现有证据符合训练目标预期行为，而非对模型具备真正物理理解的证明。  \n   - 置信度：0.90（高置信，但考虑到未来可能有更多测试补充）。",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "counterfactual",
+        "model": "grok-4.1",
+        "answer": "【答案】FALSE\n【置信度】0.85\n【推理】The linear probes and VoE results are exactly what a next-frame latent predictor must do to minimize its training loss: it has to keep a usable representation of position/velocity and it must assign high error to any discontinuity that breaks temporal prediction. Color is discarded because it is statistically useless for that loss, not because the model “understands” its physical irrelevance. The absence of harder probes—partial occlusion, elastic or frictional violations, out-of-distribution objects, or graded velocity jumps—means the experiments never rule out simple memorization of training statistics. Under these constraints the reported numbers are consistent with ordinary supervised feature learning rather than evidence of genuine physical understanding.",
+        "core_answer": "FALSE",
+        "self_confidence": 0.85,
+        "reasoning": "The linear probes and VoE results are exactly what a next-frame latent predictor must do to minimize its training loss: it has to keep a usable representation of position/velocity and it must assign high error to any discontinuity that breaks temporal prediction. Color is discarded because it is statistically useless for that loss, not because the model “understands” its physical irrelevance. The absence of harder probes—partial occlusion, elastic or frictional violations, out-of-distribution objects, or graded velocity jumps—means the experiments never rule out simple memorization of training statistics. Under these constraints the reported numbers are consistent with ordinary supervised feature learning rather than evidence of genuine physical understanding.",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "deep_first",
+        "model": "gpt-5.5",
+        "answer": null,
+        "core_answer": "",
+        "self_confidence": 0.0,
+        "reasoning": "",
+        "success": false,
+        "error": "'str' object has no attribute 'choices'",
+        "attempts": 1
+      },
+      {
+        "strategy": "direct",
+        "model": "kimi-k2.5",
+        "answer": "【答案】FALSE\n\n【置信度】0.92\n\n【推理】\n\nI'll evaluate each constraint and its implications:\n\n**Constraint (1): Linear decodability is expected, not surprising**\nThis is correct. A world model trained to predict next states *must* encode current state variables in some form. Linear probe correlation of 0.97-0.99 shows the information is present and extractable, but this is a **necessary condition for the task**, not evidence of \"understanding.\" The predictor network needs position/velocity as inputs to compute predictions—finding these variables in the latent space is like finding wheels on a car designed to roll. The paper frames this as \"emergent,\" but emergence requires showing something beyond what the training objective explicitly optimizes for.\n\n**Constraint (2): VoE test confounds physical understanding with training objective**\nThis is the strongest critique. The model is trained with MSE loss on next-frame prediction. Teleportation creates a large prediction error—this is exactly what the loss function penalizes. The \"surprise\" (higher loss/uncertainty) is **directly incentivized by training**, not an emergent physical intuition. Meanwhile, color is task-irrelevant: if color doesn't predict reward or next state in the training distribution, the encoder learns to discard it (standard representation learning). The model isn't \"understanding\" that color changes are physically fine; it simply never learned to represent color. This is a **trivial baseline effect**, not evidence of physical reasoning.\n\n**Constraint (3): No graded sensitivity testing**\nPhysical understanding in humans and animals shows graded responses: partial occlusion, varying degrees of violation, different physical domains. The paper tests only binary extremes (teleportation vs. normal, color swap vs. normal). This is consistent with a model that learned **prediction error detection**, not physical simulation. A genuine physics engine would show sensitivity to velocity discontinuities, deformation, friction violations, etc.\n\n**Constraint (4): No OOD generalization**\nThe 0.97-0.99 correlations are in-distribution. \"Understanding\" implies compositional, generalizable knowledge. Without testing whether linear readouts maintain accuracy on novel objects, dynamics, or environments, the results are indistinguishable from **memorized feature extraction** tuned to training statistics.\n\n**Synthesis:**\nThe evidence shows the model learned task-appropriate representations and exhibits prediction-error-based responses. These are **expected behaviors for the training objective**, not emergent physical understanding. The VoE results particularly fail to distinguish between: (a) implicit physics simulation vs. (b) prediction loss sensitivity on position-relevant features. The framing as \"emergent physical understanding\" overinterprets standard world model behavior.",
+        "core_answer": "FALSE",
+        "self_confidence": 0.92,
+        "reasoning": "I'll evaluate each constraint and its implications:\n\n**Constraint (1): Linear decodability is expected, not surprising**\nThis is correct. A world model trained to predict next states *must* encode current state variables in some form. Linear probe correlation of 0.97-0.99 shows the information is present and extractable, but this is a **necessary condition for the task**, not evidence of \"understanding.\" The predictor network needs position/velocity as inputs to compute predictions—finding these variables in the latent space is like finding wheels on a car designed to roll. The paper frames this as \"emergent,\" but emergence requires showing something beyond what the training objective explicitly optimizes for.\n\n**Constraint (2): VoE test confounds physical understanding with training objective**\nThis is the strongest critique. The model is trained with MSE loss on next-frame prediction. Teleportation creates a large prediction error—this is exactly what the loss function penalizes. The \"surprise\" (higher loss/uncertainty) is **directly incentivized by training**, not an emergent physical intuition. Meanwhile, color is task-irrelevant: if color doesn't predict reward or next state in the training distribution, the encoder learns to discard it (standard representation learning). The model isn't \"understanding\" that color changes are physically fine; it simply never learned to represent color. This is a **trivial baseline effect**, not evidence of physical reasoning.\n\n**Constraint (3): No graded sensitivity testing**\nPhysical understanding in humans and animals shows graded responses: partial occlusion, varying degrees of violation, different physical domains. The paper tests only binary extremes (teleportation vs. normal, color swap vs. normal). This is consistent with a model that learned **prediction error detection**, not physical simulation. A genuine physics engine would show sensitivity to velocity discontinuities, deformation, friction violations, etc.\n\n**Constraint (4): No OOD generalization**\nThe 0.97-0.99 correlations are in-distribution. \"Understanding\" implies compositional, generalizable knowledge. Without testing whether linear readouts maintain accuracy on novel objects, dynamics, or environments, the results are indistinguishable from **memorized feature extraction** tuned to training statistics.\n\n**Synthesis:**\nThe evidence shows the model learned task-appropriate representations and exhibits prediction-error-based responses. These are **expected behaviors for the training objective**, not emergent physical understanding. The VoE results particularly fail to distinguish between: (a) implicit physics simulation vs. (b) prediction loss sensitivity on position-relevant features. The framing as \"emergent physical understanding\" overinterprets standard world model behavior.",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "science_deep",
+        "model": "gpt-5.1",
+        "answer": "【答案】FALSE\n\n【置信度】0.82\n\n【推理】\n\n1. **先澄清“物理理解”的标准**\n\n   在认知科学/表征学习里，“物理理解”通常意味着不只是：\n   - 能在训练分布内预测下一帧\n   - 能被线性读出一些状态量\n\n   而更接近：\n   - 形成了**可泛化的、结构化的内部物理表征**（位置、速度、约束关系等）  \n   - 这些表征在**分布外变化、任务变化、输入表面特征变化**下仍保持稳定、可读、可迁移  \n   - 对违反物理规律的事件表现出**有结构的误差模式或“惊讶”**，而不仅仅是对“训练分布里没见过的模式”做出大误差\n\n   用“理解”这个词，隐含的是某种近似“模型化世界动力学的能力 + 泛化”的主张，而不是“在训练分布中拟合动力学”的能力。\n\n2. **关于线性 probe 高相关 (r = 0.97–0.99)**\n\n   论文证据：可以用线性回归从 latent 中读出位置、速度、角度，相关系数高达 0.97–0.99。\n\n   你的约束 (1)：  \n   > Linear decodability of state variables is expected, not surprising. A world model trained to predict next-state latents must encode current state to make predictions.\n\n   形式化一下：\n\n   - 训练目标：最小化  \n     \\[\n     \\mathcal{L}_\\text{MSE} = \\mathbb{E}_{t}\\big[\\|z_{t+1} - f_\\theta(z_t, a_t)\\|^2\\big]\n     \\]\n   - 若底层环境动力学满足某种可微近似  \n     \\[\n     s_{t+1} = g(s_t, a_t)\n     \\]\n     且 encoder \\(e(s_t) = z_t\\) 学到的是某种**充分统计量**，那么为了提升预测精度，\\(z_t\\) 必须包含足以恢复 \\(s_t\\) 的信息。在标准连续控制环境中，\\(s_t = (x, \\dot{x}, \\theta, \\dot{\\theta}, \\ldots)\\)。\n   - 若状态空间动力学是近似线性的或低维非线性的，最优的隐变量通常**等价或同构**于真实状态变量的某个线性变换（在很多线性系统辨识文献中，这是标准现象）。\n\n   因此：\n   - 从理论上讲，在这样的条件下，存在一个线性变换 \\(W\\)，使得  \n     \\[\n     \\hat{s}_t = W z_t \\approx s_t\n     \\]\n   - 线性 probe 拿到高相关，说明 latent 至少包含**足以线性恢复**真实状态的方向，但这一点是训练目标和环境结构的直接后果，是完成任务的**必要条件**，而非“额外涌现”的能力。\n\n   关键缺失的是：\n   - 是否存在**任务、观测结构改变时**，linear probe 仍然稳定？  \n   - 是否存在**基于这些线性读出的变量做新任务**时保持性能？\n\n   所以，仅凭 r = 0.97–0.99 的 in-distribution linear decodability，**只能说明 latent 拟合了环境状态，不足以证明“理解”**。\n\n3. **关于 VoE（Violation-of-Expectation）实验：瞬间移动 vs. 颜色变化**\n\n   论文证据：  \n   - 对“瞬间移动”（违反物理连续性）模型 latent 预测误差高，即“吃惊”  \n   - 对颜色交换（不影响动力学）则“无所谓”\n\n   你的约束 (2)：  \n   - MSE 损失是定义在 next latent 上，而 latent 主要编码与动力学/奖励相关的特征  \n   - 瞬间移动破坏了  \n     \\[\n     z_{t+1} \\approx f_\\theta(z_t,a_t)\n     \\]\n     的假设，因此必然导致大误差  \n   - 颜色若在训练中与动力学、奖励无关，则 encoder 可学习到“忽略颜色”的表示：  \n     \\[\n     e(s_t) \\approx e(s_t^\\prime) \\quad\\text{若 } s_t, s_t^\\prime \\text{ 仅颜色不同}\n     \\]\n     于是颜色交换不会在 latent 中留下大差异，自然也不会造成大 VoE 信号\n\n   也就是说，VoE 实验本质在检测：\n\n   - 对“训练中几乎从未出现的严重时空不连续” → 预测误差大  \n   - 对“训练中被 encoder 忽略的特征变化” → 预测误差小\n\n   这与“物理理解”是否存在无关，而与：\n   - 训练损失对哪类特征敏感  \n   - encoder 是否把该特征投影进 latent  \n\n   更简单的解释是：  \n   - 任何只要**强建模时间连续性**、且**把颜色当作噪声丢弃**的预测模型，在瞬间移动 vs. 颜色改变这种对比上，会自动表现出“更在意位置信息，而不在意颜色信息”。  \n   - 这种结果是训练目标和任务结构的直接产物，而不是“选择重视物理规律而忽视表面属性”的高层理解。\n\n   因此，该 VoE 实验的解释空间很大，**并不能区分“物理法则建模”与“训练分布统计的表面拟合”**。\n\n4. **缺失的中间/渐变测试**\n\n   你的约束 (3)：  \n   - 没有测试部分遮挡、弹性形变、速度的细微不连续等中间情况  \n   - Teleportation vs. normality 是一个极端二元对比\n\n   若要支持“物理理解”的主张，VoE 类实验通常需要展示：\n   - 对**小而系统性的偏差**（如略微违反动量守恒、略微穿透障碍）呈现**连续的、可度量的惊讶梯度**  \n   - 不同物理概念（接触、碰撞、重力、支撑、遮挡）之间呈现**有结构的错误模式**\n\n   当前只展示了：\n   - 对完全不连续的 teleportation 极端敏感  \n   - 对任务无关变量",
+        "core_answer": "FALSE",
+        "self_confidence": 0.82,
+        "reasoning": "1. **先澄清“物理理解”的标准**\n\n   在认知科学/表征学习里，“物理理解”通常意味着不只是：\n   - 能在训练分布内预测下一帧\n   - 能被线性读出一些状态量\n\n   而更接近：\n   - 形成了**可泛化的、结构化的内部物理表征**（位置、速度、约束关系等）  \n   - 这些表征在**分布外变化、任务变化、输入表面特征变化**下仍保持稳定、可读、可迁移  \n   - 对违反物理规律的事件表现出**有结构的误差模式或“惊讶”**，而不仅仅是对“训练分布里没见过的模式”做出大误差\n\n   用“理解”这个词，隐含的是某种近似“模型化世界动力学的能力 + 泛化”的主张，而不是“在训练分布中拟合动力学”的能力。\n\n2. **关于线性 probe 高相关 (r = 0.97–0.99)**\n\n   论文证据：可以用线性回归从 latent 中读出位置、速度、角度，相关系数高达 0.97–0.99。\n\n   你的约束 (1)：  \n   > Linear decodability of state variables is expected, not surprising. A world model trained to predict next-state latents must encode current state to make predictions.\n\n   形式化一下：\n\n   - 训练目标：最小化  \n     \\[\n     \\mathcal{L}_\\text{MSE} = \\mathbb{E}_{t}\\big[\\|z_{t+1} - f_\\theta(z_t, a_t)\\|^2\\big]\n     \\]\n   - 若底层环境动力学满足某种可微近似  \n     \\[\n     s_{t+1} = g(s_t, a_t)\n     \\]\n     且 encoder \\(e(s_t) = z_t\\) 学到的是某种**充分统计量**，那么为了提升预测精度，\\(z_t\\) 必须包含足以恢复 \\(s_t\\) 的信息。在标准连续控制环境中，\\(s_t = (x, \\dot{x}, \\theta, \\dot{\\theta}, \\ldots)\\)。\n   - 若状态空间动力学是近似线性的或低维非线性的，最优的隐变量通常**等价或同构**于真实状态变量的某个线性变换（在很多线性系统辨识文献中，这是标准现象）。\n\n   因此：\n   - 从理论上讲，在这样的条件下，存在一个线性变换 \\(W\\)，使得  \n     \\[\n     \\hat{s}_t = W z_t \\approx s_t\n     \\]\n   - 线性 probe 拿到高相关，说明 latent 至少包含**足以线性恢复**真实状态的方向，但这一点是训练目标和环境结构的直接后果，是完成任务的**必要条件**，而非“额外涌现”的能力。\n\n   关键缺失的是：\n   - 是否存在**任务、观测结构改变时**，linear probe 仍然稳定？  \n   - 是否存在**基于这些线性读出的变量做新任务**时保持性能？\n\n   所以，仅凭 r = 0.97–0.99 的 in-distribution linear decodability，**只能说明 latent 拟合了环境状态，不足以证明“理解”**。\n\n3. **关于 VoE（Violation-of-Expectation）实验：瞬间移动 vs. 颜色变化**\n\n   论文证据：  \n   - 对“瞬间移动”（违反物理连续性）模型 latent 预测误差高，即“吃惊”  \n   - 对颜色交换（不影响动力学）则“无所谓”\n\n   你的约束 (2)：  \n   - MSE 损失是定义在 next latent 上，而 latent 主要编码与动力学/奖励相关的特征  \n   - 瞬间移动破坏了  \n     \\[\n     z_{t+1} \\approx f_\\theta(z_t,a_t)\n     \\]\n     的假设，因此必然导致大误差  \n   - 颜色若在训练中与动力学、奖励无关，则 encoder 可学习到“忽略颜色”的表示：  \n     \\[\n     e(s_t) \\approx e(s_t^\\prime) \\quad\\text{若 } s_t, s_t^\\prime \\text{ 仅颜色不同}\n     \\]\n     于是颜色交换不会在 latent 中留下大差异，自然也不会造成大 VoE 信号\n\n   也就是说，VoE 实验本质在检测：\n\n   - 对“训练中几乎从未出现的严重时空不连续” → 预测误差大  \n   - 对“训练中被 encoder 忽略的特征变化” → 预测误差小\n\n   这与“物理理解”是否存在无关，而与：\n   - 训练损失对哪类特征敏感  \n   - encoder 是否把该特征投影进 latent  \n\n   更简单的解释是：  \n   - 任何只要**强建模时间连续性**、且**把颜色当作噪声丢弃**的预测模型，在瞬间移动 vs. 颜色改变这种对比上，会自动表现出“更在意位置信息，而不在意颜色信息”。  \n   - 这种结果是训练目标和任务结构的直接产物，而不是“选择重视物理规律而忽视表面属性”的高层理解。\n\n   因此，该 VoE 实验的解释空间很大，**并不能区分“物理法则建模”与“训练分布统计的表面拟合”**。\n\n4. **缺失的中间/渐变测试**\n\n   你的约束 (3)：  \n   - 没有测试部分遮挡、弹性形变、速度的细微不连续等中间情况  \n   - Teleportation vs. normality 是一个极端二元对比\n\n   若要支持“物理理解”的主张，VoE 类实验通常需要展示：\n   - 对**小而系统性的偏差**（如略微违反动量守恒、略微穿透障碍）呈现**连续的、可度量的惊讶梯度**  \n   - 不同物理概念（接触、碰撞、重力、支撑、遮挡）之间呈现**有结构的错误模式**\n\n   当前只展示了：\n   - 对完全不连续的 teleportation 极端敏感  \n   - 对任务无关变量",
+        "success": true,
+        "attempts": 1
+      }
+    ],
+    "confidence": 0.57,
+    "disagreement": 0.1396,
+    "top_answer": "FALSE",
+    "top_strategy": "breadth_first",
+    "weights": {
+      "breadth_first": {
+        "self_confidence": 1.0,
+        "judge_score": 10.0,
+        "judge_normalized": 1.0,
+        "weight": 1.0,
+        "penalties": []
+      },
+      "constraint_propagation": {
+        "self_confidence": 0.9,
+        "judge_score": 9.0,
+        "judge_normalized": 0.9,
+        "weight": 0.81,
+        "penalties": []
+      },
+      "counterfactual": {
+        "self_confidence": 0.85,
+        "judge_score": 8.5,
+        "judge_normalized": 0.85,
+        "weight": 0.7225,
+        "penalties": []
+      },
+      "direct": {
+        "self_confidence": 0.92,
+        "judge_score": 9.200000000000001,
+        "judge_normalized": 0.9200000000000002,
+        "weight": 0.8464,
+        "penalties": []
+      },
+      "science_deep": {
+        "self_confidence": 0.82,
+        "judge_score": 8.2,
+        "judge_normalized": 0.82,
+        "weight": 0.6724,
+        "penalties": []
+      }
+    },
+    "judge_scores": {
+      "breadth_first": 10.0,
+      "constraint_propagation": 9.0,
+      "counterfactual": 8.5,
+      "direct": 9.200000000000001,
+      "science_deep": 8.2
+    },
+    "judge_verdict": "",
+    "outliers": [],
+    "low_confidence_ids": [],
+    "collective_blind_risk": false,
+    "injection_probability": 0.0,
+    "injection_type": null,
+    "speculation_score": 0.0,
+    "speculation_matches": [],
+    "sim_matrix": {
+      "breadth_first": {
+        "constraint_propagation": 1.0,
+        "counterfactual": 1.0,
+        "direct": 1.0,
+        "science_deep": 1.0,
+        "_avg": 1.0
+      },
+      "constraint_propagation": {
+        "breadth_first": 1.0,
+        "counterfactual": 1.0,
+        "direct": 1.0,
+        "science_deep": 1.0,
+        "_avg": 1.0
+      },
+      "counterfactual": {
+        "breadth_first": 1.0,
+        "constraint_propagation": 1.0,
+        "direct": 1.0,
+        "science_deep": 1.0,
+        "_avg": 1.0
+      },
+      "direct": {
+        "breadth_first": 1.0,
+        "constraint_propagation": 1.0,
+        "counterfactual": 1.0,
+        "science_deep": 1.0,
+        "_avg": 1.0
+      },
+      "science_deep": {
+        "breadth_first": 1.0,
+        "constraint_propagation": 1.0,
+        "counterfactual": 1.0,
+        "direct": 1.0,
+        "_avg": 1.0
+      }
+    },
+    "reasoning_trail": [
+      {
+        "strategy": "breadth_first",
+        "model": "gemini-3.1-pro-preview",
+        "success": true,
+        "self_confidence": 1.0,
+        "core_answer": "FALSE",
+        "judge_score": 10.0,
+        "weight": 1.0,
+        "penalties": [],
+        "status": "selected"
+      },
+      {
+        "strategy": "constraint_propagation",
+        "model": "o4-mini",
+        "success": true,
+        "self_confidence": 0.9,
+        "core_answer": "FALSE",
+        "judge_score": 9.0,
+        "weight": 0.81,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "counterfactual",
+        "model": "grok-4.1",
+        "success": true,
+        "self_confidence": 0.85,
+        "core_answer": "FALSE",
+        "judge_score": 8.5,
+        "weight": 0.7225,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "deep_first",
+        "model": "gpt-5.5",
+        "success": false,
+        "status": "failed",
+        "error": "'str' object has no attribute 'choices'"
+      },
+      {
+        "strategy": "direct",
+        "model": "kimi-k2.5",
+        "success": true,
+        "self_confidence": 0.92,
+        "core_answer": "FALSE",
+        "judge_score": 9.200000000000001,
+        "weight": 0.8464,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "science_deep",
+        "model": "gpt-5.1",
+        "success": true,
+        "self_confidence": 0.82,
+        "core_answer": "FALSE",
+        "judge_score": 8.2,
+        "weight": 0.6724,
+        "penalties": [],
+        "status": "contributing"
+      }
+    ],
+    "low_confidence": false,
+    "uncertain": false,
+    "arbitration_applied": false,
+    "validator_applied": false,
+    "validator_pass": true,
+    "validator_violations": [],
+    "elapsed_time": 39.09,
+    "timestamp": 1780254318.130781,
+    "degraded": true,
+    "failed_generators": [
+      "deep_first"
+    ],
+    "claim": "LeWM's SIGReg-learned latents capture 'physical understanding' without supervision",
+    "question_id": "Q5"
+  }
+]

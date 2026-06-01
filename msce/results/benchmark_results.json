@@ -1,0 +1,9 @@
+{
+  "msce_avg": 0.95,
+  "msce_correct": "19/20",
+  "gpt4o_avg": 0.7,
+  "gpt4o_correct": "14/20",
+  "deepseek_avg": 0.9,
+  "deepseek_correct": "18/20",
+  "avg_time_s": 69.67369076013566
+}

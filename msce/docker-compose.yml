@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  msce:
+    build: .
+    env_file:
+      - .env
+    environment:
+      - MKEAI_API_KEY=${MKEAI_API_KEY}
+      - MKEAI_BASE_URL=${MKEAI_BASE_URL:-https://api.mkeai.com/v1}
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
+    ports:
+      - "8766:8766"
+    restart: unless-stopped

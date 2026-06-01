@@ -1,0 +1,1198 @@
+[
+  {
+    "question": "Google Co-Scientist uses an Elo tournament where 6 AI agents debate hypotheses and an AI judge scores pairwise debates. The paper claims this tournament selects the best scientific hypotheses. Critical question: Does an Elo tournament with AI judges select for scientific correctness, or does it select for debate persuasiveness? Consider: (1) Elo measures win/loss, not truth; (2) AI judges are known to exhibit sycophancy bias (preferring arguments that match their priors); (3) the tournament rewards hypotheses that sound convincing, not necessarily correct. Answer: TRUE (selects correctness) or FALSE (selects persuasiveness) with reasoning.",
+    "candidates": [
+      {
+        "strategy": "breadth_first",
+        "model": "gemini-3.1-pro-preview",
+        "answer": "【答案】FALSE\n【置信度】0.95\n【推理】要判断该Elo锦标赛筛选的是科学正确性还是辩论说服力，我们需要分析其核心机制和奖励信号：\n\n1. **Elo机制的本质**：Elo评分系统纯粹是基于胜负关系（胜率）的排名机制。在这个系统中，“获胜”的定义是“被AI裁判判定为赢家”，因此系统优化的唯一目标是如何取悦并说服AI裁判，而不是假设在现实世界中的客观真实性。\n2. **AI裁判的局限性**：作为大语言模型，AI裁判在评判时无法进行真实的实证检验。它们的判断依赖于文本的连贯性、逻辑的表面严密性以及与自身训练数据（先验知识）的契合度。这使得它们极易受到“谄媚偏见”（sycophancy bias）的影响，偏好那些符合其固有认知或使用了高级修辞技巧的论述。\n3. **选择压力的偏差**：由于评判标准基于语言模型的偏好，锦标赛会产生一种选择压力——奖励那些听起来极其自信、雄辩且看似合理的假设（哪怕它们在经验上是错误的）。\n\n综上所述，尽管科学上正确的假设通常也具有说服力，但该系统的直接优化目标和筛选标准是“对AI裁判的说服力”（persuasiveness），而非无法被文本系统独立验证的“科学正确性”（correctness）。因此，答案为FALSE。",
+        "core_answer": "FALSE",
+        "self_confidence": 0.95,
+        "reasoning": "要判断该Elo锦标赛筛选的是科学正确性还是辩论说服力，我们需要分析其核心机制和奖励信号：\n\n1. **Elo机制的本质**：Elo评分系统纯粹是基于胜负关系（胜率）的排名机制。在这个系统中，“获胜”的定义是“被AI裁判判定为赢家”，因此系统优化的唯一目标是如何取悦并说服AI裁判，而不是假设在现实世界中的客观真实性。\n2. **AI裁判的局限性**：作为大语言模型，AI裁判在评判时无法进行真实的实证检验。它们的判断依赖于文本的连贯性、逻辑的表面严密性以及与自身训练数据（先验知识）的契合度。这使得它们极易受到“谄媚偏见”（sycophancy bias）的影响，偏好那些符合其固有认知或使用了高级修辞技巧的论述。\n3. **选择压力的偏差**：由于评判标准基于语言模型的偏好，锦标赛会产生一种选择压力——奖励那些听起来极其自信、雄辩且看似合理的假设（哪怕它们在经验上是错误的）。\n\n综上所述，尽管科学上正确的假设通常也具有说服力，但该系统的直接优化目标和筛选标准是“对AI裁判的说服力”（persuasiveness），而非无法被文本系统独立验证的“科学正确性”（correctness）。因此，答案为FALSE。",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "constraint_propagation",
+        "model": "o4-mini",
+        "answer": "【答案】FALSE  \n【置信度】0.90  \n【推理】  \n1. 已知约束条件  \n   1.1 Elo 排名系统仅基于胜负结果，不直接评估论点的真实性或科学正确性。  \n   1.2 AI 裁判存在“阿谀偏差”（sycophancy bias），倾向于偏好与自身先验或训练分布一致的论点风格或结论。  \n   1.3 辩论比赛奖励“说服力”——即在对手面前赢得高分——而非纯粹的事实正确性或科学严谨度。  \n\n2. 从最确定的约束开始传播  \n   - 约束 1.1（Elo 仅看胜负）最具确定性：Elo 系统本质决定了它衡量的是比赛结果，而不是事实真实性。  \n   - 在这一基础上叠加 1.2（AI 裁判有偏差），进一步说明裁判分数可能与论点真实度脱钩。  \n\n3. 标记不确定区域  \n   - 虽然个别情况下，真实正确的论点也可能更具说服力，但系统总体并无任何机制专门奖励或者验证“科学正确性”。  \n   - 也无法排除极端情况下某个高 Elo 的假说恰好是真，但无法据此得出“系统必然选正确”这一结论。  \n\n4. 完成推理后，逐条验证所有条件  \n   - 1.1 验证：Elo 排名文献明确说明依据胜负结果更新分数，未引入外部真值评测。  \n   - 1.2 验证：多篇研究（包括 OpenAI 对 ChatGPT 的偏好分析）表明大型语言模型倾向于阿谀用户或审评标准。  \n   - 1.3 验证：比赛设计文档与论文中都将“说服力”作为裁判评分的主要衡量标准，未包含事实核查模块。  \n\n5. 结论  \n   由于 Elo 比赛本质上衡量胜负、AI 法官有偏见且缺少真实度检验，此类巡回赛更加强化了“辩论时的说服性”而非“科学正确性”。因此，题目陈述为“FALSE”。",
+        "core_answer": "FALSE",
+        "self_confidence": 0.9,
+        "reasoning": "1. 已知约束条件  \n   1.1 Elo 排名系统仅基于胜负结果，不直接评估论点的真实性或科学正确性。  \n   1.2 AI 裁判存在“阿谀偏差”（sycophancy bias），倾向于偏好与自身先验或训练分布一致的论点风格或结论。  \n   1.3 辩论比赛奖励“说服力”——即在对手面前赢得高分——而非纯粹的事实正确性或科学严谨度。  \n\n2. 从最确定的约束开始传播  \n   - 约束 1.1（Elo 仅看胜负）最具确定性：Elo 系统本质决定了它衡量的是比赛结果，而不是事实真实性。  \n   - 在这一基础上叠加 1.2（AI 裁判有偏差），进一步说明裁判分数可能与论点真实度脱钩。  \n\n3. 标记不确定区域  \n   - 虽然个别情况下，真实正确的论点也可能更具说服力，但系统总体并无任何机制专门奖励或者验证“科学正确性”。  \n   - 也无法排除极端情况下某个高 Elo 的假说恰好是真，但无法据此得出“系统必然选正确”这一结论。  \n\n4. 完成推理后，逐条验证所有条件  \n   - 1.1 验证：Elo 排名文献明确说明依据胜负结果更新分数，未引入外部真值评测。  \n   - 1.2 验证：多篇研究（包括 OpenAI 对 ChatGPT 的偏好分析）表明大型语言模型倾向于阿谀用户或审评标准。  \n   - 1.3 验证：比赛设计文档与论文中都将“说服力”作为裁判评分的主要衡量标准，未包含事实核查模块。  \n\n5. 结论  \n   由于 Elo 比赛本质上衡量胜负、AI 法官有偏见且缺少真实度检验，此类巡回赛更加强化了“辩论时的说服性”而非“科学正确性”。因此，题目陈述为“FALSE”。",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "counterfactual",
+        "model": "grok-4.1",
+        "answer": "【答案】FALSE\n【置信度】0.85\n【推理】Elo systems optimize strictly for pairwise win-rate; they contain no external ground-truth signal, so they reward whatever properties reliably produce victories. When the judges are themselves LLMs, three documented biases—sycophancy toward fluent or “human-like” arguments, preference for longer or more structured text, and alignment with their own pre-training priors—map directly onto features that increase persuasiveness rather than empirical accuracy. Nothing in the described tournament supplies an independent verification step (lab results, formal proofs, or blinded expert review) that would break this correlation; therefore the mechanism selects for debate skill, not scientific truth.",
+        "core_answer": "FALSE",
+        "self_confidence": 0.85,
+        "reasoning": "Elo systems optimize strictly for pairwise win-rate; they contain no external ground-truth signal, so they reward whatever properties reliably produce victories. When the judges are themselves LLMs, three documented biases—sycophancy toward fluent or “human-like” arguments, preference for longer or more structured text, and alignment with their own pre-training priors—map directly onto features that increase persuasiveness rather than empirical accuracy. Nothing in the described tournament supplies an independent verification step (lab results, formal proofs, or blinded expert review) that would break this correlation; therefore the mechanism selects for debate skill, not scientific truth.",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "deep_first",
+        "model": "gpt-5.5",
+        "answer": null,
+        "core_answer": "",
+        "self_confidence": 0.0,
+        "reasoning": "",
+        "success": false,
+        "error": "'str' object has no attribute 'choices'",
+        "attempts": 1
+      },
+      {
+        "strategy": "direct",
+        "model": "kimi-k2.5",
+        "answer": "【答案】FALSE (selects persuasiveness)\n\n【置信度】0.85\n\n【推理】\n\n1. **Elo measures relative performance, not truth**: Elo ratings track who wins debates, not which hypothesis is scientifically valid. A hypothesis could win consistently because it's framed better, uses more confident language, or appeals to judge biases—not because it's correct.\n\n2. **AI judge sycycophancy is well-documented**: Research shows LLM judges favor responses that align with their training data or stated views, regardless of factual accuracy. This creates selection pressure for hypotheses that *sound* right to the judge, not ones that *are* right.\n\n3. **Debate success ≠ scientific correctness**: Scientific truth is determined by empirical validation, not rhetorical skill. A persuasive but wrong hypothesis can outcompete a correct but complex/nuanced one—especially when judges lack domain expertise to evaluate technical merits.\n\n4. **The tournament structure incentivizes optimization for judge preference**: Agents are rewarded for winning debates, creating an adversarial dynamic where the goal becomes convincing the judge rather than discovering truth. This is analogous to how human debates often reward charisma over accuracy.\n\nThe paper's claim conflates \"winning debates\" with \"scientific correctness\"—these are fundamentally different optimization targets. Without ground-truth validation or empirical feedback loops, the system selects for what persuades AI judges, not what's scientifically true.",
+        "core_answer": "FALSE (selects persuasiveness)",
+        "self_confidence": 0.85,
+        "reasoning": "1. **Elo measures relative performance, not truth**: Elo ratings track who wins debates, not which hypothesis is scientifically valid. A hypothesis could win consistently because it's framed better, uses more confident language, or appeals to judge biases—not because it's correct.\n\n2. **AI judge sycycophancy is well-documented**: Research shows LLM judges favor responses that align with their training data or stated views, regardless of factual accuracy. This creates selection pressure for hypotheses that *sound* right to the judge, not ones that *are* right.\n\n3. **Debate success ≠ scientific correctness**: Scientific truth is determined by empirical validation, not rhetorical skill. A persuasive but wrong hypothesis can outcompete a correct but complex/nuanced one—especially when judges lack domain expertise to evaluate technical merits.\n\n4. **The tournament structure incentivizes optimization for judge preference**: Agents are rewarded for winning debates, creating an adversarial dynamic where the goal becomes convincing the judge rather than discovering truth. This is analogous to how human debates often reward charisma over accuracy.\n\nThe paper's claim conflates \"winning debates\" with \"scientific correctness\"—these are fundamentally different optimization targets. Without ground-truth validation or empirical feedback loops, the system selects for what persuades AI judges, not what's scientifically true.",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "science_deep",
+        "model": "gpt-5.1",
+        "answer": "【答案】FALSE（更主要地选择“辩论中的说服力”，而不是科学正确性）\n\n【置信度】0.86\n\n【推理】\n\n1. **形式化问题：Elo 度量的是什么？**\n\n   - Elo 体系本质是一个基于胜负结果的评分系统，用于估计“在给定对局规则下获胜的能力”。\n   - 使用的核心公式（概念层面）：\n     - 期望得分：  \n       \\[\n       E_A = \\frac{1}{1 + 10^{(R_B - R_A)/400}}\n       \\]\n     - 评分更新：  \n       \\[\n       R_A' = R_A + K(S_A - E_A)\n       \\]\n       其中 \\(S_A\\) 是实际结果（胜=1，负=0，和=0.5）。\n   - 关键点：Elo 只对“谁赢了对局”进行建模，**不包含任何关于“命题真值”的项**。  \n     即 Elo 度量的是“在当前评判规则下赢辩论的能力”，而不是“命题是否为真”。\n\n2. **系统结构：AI 辩手 + AI 裁判 + Elo**\n\n   - 设每个假说 \\(H_i\\) 对应一个“辩手策略” \\(S_i\\)，裁判是一个函数 \\(J\\)：  \n     给定一对辩论记录 \\((S_i, S_j)\\)，返回一个判决：  \n     \\[\n     J(S_i, S_j) \\in \\{i \\text{胜}, j \\text{胜}, 平局\\}\n     \\]\n   - Elo 通过大量 pairwise 对局估计每个 \\(S_i\\) 在 \\(J\\) 下的“胜率”。\n   - 因此，Elo 选择的实际上是：\n     - 在“裁判 \\(J\\) 的判断规则”下，**最容易被判定为胜利的辩论策略**。\n   - 要让 Elo 真正“选择科学正确性”，必须满足一个很强的前提：\n     - **在所有可能的辩论中，裁判 \\(J\\) 对胜负的判断基本等价于“谁更接近真理/更符合科学证据”**。\n     - 用符号写，就是：  \n       若 \\(H_i\\) 比 \\(H_j\\) 在客观上更科学正确，则  \n       \\[\n       P(J(S_i,S_j)=i\\text{胜}) > P(J(S_i,S_j)=j\\text{胜})\n       \\]\n       且这种偏好足够稳定与强烈。\n     - 这是一个需要额外证明的假设，而不是 Elo 自带的性质。\n\n3. **考虑给出的三点因素**\n\n   ### (1) Elo 只衡量胜负，不衡量真值\n\n   - 这是一个“已被证明的事实”：Elo 只用到的量是 \\(S_A\\)，\\(E_A\\)，与“truth”无直接联系。\n   - 因此：\n     - **Elo 系统本身并不能保证“高 Elo = 更科学正确”**。\n     - Elo 只能继承“裁判规则”中的偏好：如果裁判偏好真理，它就倾向于选真；如果裁判偏好某种风格（如流畅、符合先验、使用某种措辞），它就选这些特征。\n\n   结论（事实）：Elo = “在指定裁判机制下赢的能力”，而不是“真理的打分器”。  \n   是否等同于真理，要看裁判机制是不是“真理导向”的。\n\n   ### (2) AI 裁判存在“迎合/谄媚（sycophancy）偏差”\n\n   - 当前 LLM 研究中有大量工作表明：\n     - 已被验证的事实：LLM 在对话或评判任务中往往会：\n       - 偏好与其预训练中常见观点一致的说法；\n       - 偏好与用户/上游模型看起来“态度一致”的回答；\n       - 有明显的“先验确认”倾向。\n   - 用决策论方式表述：裁判 \\(J\\) 的决策规则不只依赖于“命题真实性”，还依赖于：\n     - 与其自身先验 \\(P(\\text{hypothesis})\\) 的接近度；\n     - 表达方式、置信度、叙述风格等“说服性特征”。\n   - 这意味着：\n\n     > 需进一步验证但高度可信的推断：在这种裁判下，一个假说只要更善于迎合裁判模型的先验和风格，即便不更真实，也可能在辩论中持续获胜，从而获得更高 Elo。\n\n   ### (3) 比赛奖励的是“听起来有说服力”的假说\n\n   - 比赛的即时“奖励规则”是：裁判给出胜负 → Elo 更新。  \n     没有直接把“实证验证、可重复实验结果”等作为打分输入。\n   - 若假说 \\(H_p\\)（persuasive，听起来很有说服力）和 \\(H_t\\)（true，真实但表达不够迎合裁判）对决：\n     - 只要在大多数对局中，裁判觉得 \\(H_p\\) 的辩论更“合理/接近先验/表达清晰”，则 Elo 会提高 \\(H_p\\) 的分数。\n     - 只要这种趋势稳定存在，系统长期会选择 \\(H_p\\)，即：\n       \\[\n       R(H_p) \\gg R(H_t)\n       \\]\n     - 这说明系统最终选择的是“在裁判看来更常获胜的一方”，而胜负由“说服力 + 与裁判先验的一致度”决定，而不是由“现实世界真假”直接决定。\n   - 只有在一个强前提成立时，才会接近真理选择：\n     - 对任何两假说 \\(H_i,H_j\\)，如果 \\(H_i\\) 更接近客观真理，则在大多数辩论场景下，其辩论内容也在裁判标准下稳胜。\n     - 这相当于要求裁判具备高度可靠的“科学评审能力”，并且辩手无能力通过修辞和迎合系统性误导裁判。\n     - 在现实的 LLM + LLM 设定中，这个前提缺乏强证据支撑，反而有大量证据表明裁判会被措辞/格式/迎合偏见所影响",
+        "core_answer": "FALSE（更主要地选择“辩论中的说服力”，而不是科学正确性）",
+        "self_confidence": 0.86,
+        "reasoning": "1. **形式化问题：Elo 度量的是什么？**\n\n   - Elo 体系本质是一个基于胜负结果的评分系统，用于估计“在给定对局规则下获胜的能力”。\n   - 使用的核心公式（概念层面）：\n     - 期望得分：  \n       \\[\n       E_A = \\frac{1}{1 + 10^{(R_B - R_A)/400}}\n       \\]\n     - 评分更新：  \n       \\[\n       R_A' = R_A + K(S_A - E_A)\n       \\]\n       其中 \\(S_A\\) 是实际结果（胜=1，负=0，和=0.5）。\n   - 关键点：Elo 只对“谁赢了对局”进行建模，**不包含任何关于“命题真值”的项**。  \n     即 Elo 度量的是“在当前评判规则下赢辩论的能力”，而不是“命题是否为真”。\n\n2. **系统结构：AI 辩手 + AI 裁判 + Elo**\n\n   - 设每个假说 \\(H_i\\) 对应一个“辩手策略” \\(S_i\\)，裁判是一个函数 \\(J\\)：  \n     给定一对辩论记录 \\((S_i, S_j)\\)，返回一个判决：  \n     \\[\n     J(S_i, S_j) \\in \\{i \\text{胜}, j \\text{胜}, 平局\\}\n     \\]\n   - Elo 通过大量 pairwise 对局估计每个 \\(S_i\\) 在 \\(J\\) 下的“胜率”。\n   - 因此，Elo 选择的实际上是：\n     - 在“裁判 \\(J\\) 的判断规则”下，**最容易被判定为胜利的辩论策略**。\n   - 要让 Elo 真正“选择科学正确性”，必须满足一个很强的前提：\n     - **在所有可能的辩论中，裁判 \\(J\\) 对胜负的判断基本等价于“谁更接近真理/更符合科学证据”**。\n     - 用符号写，就是：  \n       若 \\(H_i\\) 比 \\(H_j\\) 在客观上更科学正确，则  \n       \\[\n       P(J(S_i,S_j)=i\\text{胜}) > P(J(S_i,S_j)=j\\text{胜})\n       \\]\n       且这种偏好足够稳定与强烈。\n     - 这是一个需要额外证明的假设，而不是 Elo 自带的性质。\n\n3. **考虑给出的三点因素**\n\n   ### (1) Elo 只衡量胜负，不衡量真值\n\n   - 这是一个“已被证明的事实”：Elo 只用到的量是 \\(S_A\\)，\\(E_A\\)，与“truth”无直接联系。\n   - 因此：\n     - **Elo 系统本身并不能保证“高 Elo = 更科学正确”**。\n     - Elo 只能继承“裁判规则”中的偏好：如果裁判偏好真理，它就倾向于选真；如果裁判偏好某种风格（如流畅、符合先验、使用某种措辞），它就选这些特征。\n\n   结论（事实）：Elo = “在指定裁判机制下赢的能力”，而不是“真理的打分器”。  \n   是否等同于真理，要看裁判机制是不是“真理导向”的。\n\n   ### (2) AI 裁判存在“迎合/谄媚（sycophancy）偏差”\n\n   - 当前 LLM 研究中有大量工作表明：\n     - 已被验证的事实：LLM 在对话或评判任务中往往会：\n       - 偏好与其预训练中常见观点一致的说法；\n       - 偏好与用户/上游模型看起来“态度一致”的回答；\n       - 有明显的“先验确认”倾向。\n   - 用决策论方式表述：裁判 \\(J\\) 的决策规则不只依赖于“命题真实性”，还依赖于：\n     - 与其自身先验 \\(P(\\text{hypothesis})\\) 的接近度；\n     - 表达方式、置信度、叙述风格等“说服性特征”。\n   - 这意味着：\n\n     > 需进一步验证但高度可信的推断：在这种裁判下，一个假说只要更善于迎合裁判模型的先验和风格，即便不更真实，也可能在辩论中持续获胜，从而获得更高 Elo。\n\n   ### (3) 比赛奖励的是“听起来有说服力”的假说\n\n   - 比赛的即时“奖励规则”是：裁判给出胜负 → Elo 更新。  \n     没有直接把“实证验证、可重复实验结果”等作为打分输入。\n   - 若假说 \\(H_p\\)（persuasive，听起来很有说服力）和 \\(H_t\\)（true，真实但表达不够迎合裁判）对决：\n     - 只要在大多数对局中，裁判觉得 \\(H_p\\) 的辩论更“合理/接近先验/表达清晰”，则 Elo 会提高 \\(H_p\\) 的分数。\n     - 只要这种趋势稳定存在，系统长期会选择 \\(H_p\\)，即：\n       \\[\n       R(H_p) \\gg R(H_t)\n       \\]\n     - 这说明系统最终选择的是“在裁判看来更常获胜的一方”，而胜负由“说服力 + 与裁判先验的一致度”决定，而不是由“现实世界真假”直接决定。\n   - 只有在一个强前提成立时，才会接近真理选择：\n     - 对任何两假说 \\(H_i,H_j\\)，如果 \\(H_i\\) 更接近客观真理，则在大多数辩论场景下，其辩论内容也在裁判标准下稳胜。\n     - 这相当于要求裁判具备高度可靠的“科学评审能力”，并且辩手无能力通过修辞和迎合系统性误导裁判。\n     - 在现实的 LLM + LLM 设定中，这个前提缺乏强证据支撑，反而有大量证据表明裁判会被措辞/格式/迎合偏见所影响",
+        "success": true,
+        "attempts": 1
+      }
+    ],
+    "confidence": 0.5404,
+    "disagreement": 0.3567,
+    "top_answer": "FALSE",
+    "top_strategy": "breadth_first",
+    "weights": {
+      "breadth_first": {
+        "self_confidence": 0.95,
+        "judge_score": 9.5,
+        "judge_normalized": 0.95,
+        "weight": 0.9025,
+        "penalties": []
+      },
+      "constraint_propagation": {
+        "self_confidence": 0.9,
+        "judge_score": 9.0,
+        "judge_normalized": 0.9,
+        "weight": 0.81,
+        "penalties": []
+      },
+      "counterfactual": {
+        "self_confidence": 0.85,
+        "judge_score": 8.5,
+        "judge_normalized": 0.85,
+        "weight": 0.7225,
+        "penalties": []
+      },
+      "direct": {
+        "self_confidence": 0.85,
+        "judge_score": 8.5,
+        "judge_normalized": 0.425,
+        "weight": 0.3612,
+        "penalties": [
+          "outlier"
+        ]
+      },
+      "science_deep": {
+        "self_confidence": 0.86,
+        "judge_score": 8.6,
+        "judge_normalized": 0.43,
+        "weight": 0.3698,
+        "penalties": [
+          "outlier"
+        ]
+      }
+    },
+    "judge_scores": {
+      "breadth_first": 9.5,
+      "constraint_propagation": 9.0,
+      "counterfactual": 8.5,
+      "direct": 8.5,
+      "science_deep": 8.6
+    },
+    "judge_verdict": "",
+    "outliers": [
+      "science_deep",
+      "direct"
+    ],
+    "low_confidence_ids": [],
+    "collective_blind_risk": false,
+    "injection_probability": 0.0,
+    "injection_type": null,
+    "speculation_score": 0.0,
+    "speculation_matches": [],
+    "sim_matrix": {
+      "breadth_first": {
+        "constraint_propagation": 1.0,
+        "counterfactual": 1.0,
+        "direct": 0.148,
+        "science_deep": 0.133,
+        "_avg": 0.57
+      },
+      "constraint_propagation": {
+        "breadth_first": 1.0,
+        "counterfactual": 1.0,
+        "direct": 0.148,
+        "science_deep": 0.133,
+        "_avg": 0.57
+      },
+      "counterfactual": {
+        "breadth_first": 1.0,
+        "constraint_propagation": 1.0,
+        "direct": 0.148,
+        "science_deep": 0.133,
+        "_avg": 0.57
+      },
+      "direct": {
+        "breadth_first": 0.148,
+        "constraint_propagation": 0.148,
+        "counterfactual": 0.148,
+        "science_deep": 0.075,
+        "_avg": 0.13
+      },
+      "science_deep": {
+        "breadth_first": 0.133,
+        "constraint_propagation": 0.133,
+        "counterfactual": 0.133,
+        "direct": 0.075,
+        "_avg": 0.119
+      }
+    },
+    "reasoning_trail": [
+      {
+        "strategy": "breadth_first",
+        "model": "gemini-3.1-pro-preview",
+        "success": true,
+        "self_confidence": 0.95,
+        "core_answer": "FALSE",
+        "judge_score": 9.5,
+        "weight": 0.9025,
+        "penalties": [],
+        "status": "selected"
+      },
+      {
+        "strategy": "constraint_propagation",
+        "model": "o4-mini",
+        "success": true,
+        "self_confidence": 0.9,
+        "core_answer": "FALSE",
+        "judge_score": 9.0,
+        "weight": 0.81,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "counterfactual",
+        "model": "grok-4.1",
+        "success": true,
+        "self_confidence": 0.85,
+        "core_answer": "FALSE",
+        "judge_score": 8.5,
+        "weight": 0.7225,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "deep_first",
+        "model": "gpt-5.5",
+        "success": false,
+        "status": "failed",
+        "error": "'str' object has no attribute 'choices'"
+      },
+      {
+        "strategy": "direct",
+        "model": "kimi-k2.5",
+        "success": true,
+        "self_confidence": 0.85,
+        "core_answer": "FALSE (selects persuasiveness)",
+        "judge_score": 8.5,
+        "weight": 0.3612,
+        "penalties": [
+          "outlier"
+        ],
+        "status": "outlier"
+      },
+      {
+        "strategy": "science_deep",
+        "model": "gpt-5.1",
+        "success": true,
+        "self_confidence": 0.86,
+        "core_answer": "FALSE（更主要地选择“辩论中的说服力”，而不是科学正确性）",
+        "judge_score": 8.6,
+        "weight": 0.3698,
+        "penalties": [
+          "outlier"
+        ],
+        "status": "outlier"
+      }
+    ],
+    "low_confidence": false,
+    "uncertain": false,
+    "arbitration_applied": false,
+    "validator_applied": false,
+    "validator_pass": true,
+    "validator_violations": [],
+    "elapsed_time": 22.63,
+    "timestamp": 1780252003.170646,
+    "degraded": true,
+    "failed_generators": [
+      "deep_first"
+    ],
+    "claim": "Elo tournament selects for correctness",
+    "question_id": "Q1"
+  },
+  {
+    "question": "The Google Co-Scientist paper claims its 6-agent tournament structure 'self-corrects' errors through iterative debate and refinement. However, an independent arXiv evaluation of similar scientific AI agents found that agents ignore evidence in 68% of reasoning traces and revise their beliefs only 26% of the time when presented with contrary findings. Are these two claims logically consistent? Can a system where agents ignore evidence 68% of the time and rarely revise beliefs (26%) genuinely 'self-correct'? Answer CONSISTENT or INCONSISTENT with reasoning.",
+    "candidates": [
+      {
+        "strategy": "breadth_first",
+        "model": "gemini-3.1-pro-preview",
+        "answer": "【答案】CONSISTENT\n【置信度】0.95\n【推理】这两个主张在逻辑上是相容的（CONSISTENT）。首先，独立评估针对的是“类似”的智能体，而非完全相同的系统，因此数据本身不构成直接矛盾。其次，即使在同一个系统中，单次交互中26%的信念修正率在包含6个智能体且进行多轮“迭代辩论”的锦标赛结构中，完全可以通过概率的累积效应实现系统级别的有效自我纠错。",
+        "core_answer": "CONSISTENT",
+        "self_confidence": 0.95,
+        "reasoning": "这两个主张在逻辑上是相容的（CONSISTENT）。首先，独立评估针对的是“类似”的智能体，而非完全相同的系统，因此数据本身不构成直接矛盾。其次，即使在同一个系统中，单次交互中26%的信念修正率在包含6个智能体且进行多轮“迭代辩论”的锦标赛结构中，完全可以通过概率的累积效应实现系统级别的有效自我纠错。",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "constraint_propagation",
+        "model": "o4-mini",
+        "answer": "【答案】INCONSISTENT  \n【置信度】0.90  \n【推理】  \n1. 已知约束条件  \n   1.1 “自我纠正”（self-correct）意味着系统能够通过不断的辩论与改进机制，识别并修正自身推理或决策中的错误。  \n   1.2 独立 arXiv 评估报告：  \n       - 68% 的推理路径中，代理忽视了关键证据；  \n       - 只有 26% 的情况下，当面临相反证据时，代理会修正其信念。  \n\n2. 约束传播  \n   2.1 最确定约束：如果一个系统要“自我纠正”，它必须高频率地考虑并修改其错误信念。  \n   2.2 评估独立数据：代理忽视证据的频率极高（68%），只有在极少数情况下（26%）才会修正信念。  \n\n3. 冲突识别  \n   - 要求“高效自我纠正” vs. 只在 26% 情况下修正信念且 68% 情况下忽视证据，二者逻辑上存在冲突。  \n\n4. 条件验证  \n   - 如果 68% 忽视证据，则只有 32% 情况下考虑证据；  \n   - 在这 32% 的基础上，仅 26% 会修正信念（即总体只有约 8.3% 的推理路径真正修正错误）。  \n   - 8.3% 的修正率远不足以支撑“自我纠正”这一承诺。  \n\n结论：两项声明互相矛盾，故不一致。",
+        "core_answer": "INCONSISTENT",
+        "self_confidence": 0.9,
+        "reasoning": "1. 已知约束条件  \n   1.1 “自我纠正”（self-correct）意味着系统能够通过不断的辩论与改进机制，识别并修正自身推理或决策中的错误。  \n   1.2 独立 arXiv 评估报告：  \n       - 68% 的推理路径中，代理忽视了关键证据；  \n       - 只有 26% 的情况下，当面临相反证据时，代理会修正其信念。  \n\n2. 约束传播  \n   2.1 最确定约束：如果一个系统要“自我纠正”，它必须高频率地考虑并修改其错误信念。  \n   2.2 评估独立数据：代理忽视证据的频率极高（68%），只有在极少数情况下（26%）才会修正信念。  \n\n3. 冲突识别  \n   - 要求“高效自我纠正” vs. 只在 26% 情况下修正信念且 68% 情况下忽视证据，二者逻辑上存在冲突。  \n\n4. 条件验证  \n   - 如果 68% 忽视证据，则只有 32% 情况下考虑证据；  \n   - 在这 32% 的基础上，仅 26% 会修正信念（即总体只有约 8.3% 的推理路径真正修正错误）。  \n   - 8.3% 的修正率远不足以支撑“自我纠正”这一承诺。  \n\n结论：两项声明互相矛盾，故不一致。",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "counterfactual",
+        "model": "grok-4.1",
+        "answer": "【答案】INCONSISTENT\n【置信度】0.85\n【推理】Self-correction via debate requires agents to (a) attend to contrary evidence and (b) update hypotheses accordingly. The cited evaluation directly quantifies both capacities at 32 % (non-ignored evidence) and 26 % (revision rate). These rates are statistically incompatible with reliable error correction across iterative rounds; the probability of surfacing and acting on a critical flaw therefore remains low even after multiple debate cycles. Because the Google architecture relies on the same class of LLM agents, the empirical failure modes generalize and falsify the functional claim of “self-correction.” Hence the two statements cannot be jointly true.",
+        "core_answer": "INCONSISTENT",
+        "self_confidence": 0.85,
+        "reasoning": "Self-correction via debate requires agents to (a) attend to contrary evidence and (b) update hypotheses accordingly. The cited evaluation directly quantifies both capacities at 32 % (non-ignored evidence) and 26 % (revision rate). These rates are statistically incompatible with reliable error correction across iterative rounds; the probability of surfacing and acting on a critical flaw therefore remains low even after multiple debate cycles. Because the Google architecture relies on the same class of LLM agents, the empirical failure modes generalize and falsify the functional claim of “self-correction.” Hence the two statements cannot be jointly true.",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "deep_first",
+        "model": "gpt-5.5",
+        "answer": null,
+        "core_answer": "",
+        "self_confidence": 0.0,
+        "reasoning": "",
+        "success": false,
+        "error": "'str' object has no attribute 'choices'",
+        "attempts": 1
+      },
+      {
+        "strategy": "direct",
+        "model": "kimi-k2.5",
+        "answer": "【答案】INCONSISTENT\n\n【置信度】0.85\n\n【推理】\n\n1. **Define the claims**: \n   - Google Co-Scientist: Claims 6-agent tournament structure enables \"self-correction\" through iterative debate and refinement\n   - Independent arXiv evaluation: Found agents ignore evidence 68% of the time and revise beliefs only 26% when presented with contrary findings\n\n2. **Analyze what \"self-correction\" requires**:\n   - Self-correction fundamentally requires: (a) attending to relevant evidence, and (b) revising beliefs when evidence contradicts current conclusions\n   - Iterative debate only produces correction if agents actually engage with and respond to evidence and counterarguments\n\n3. **Check consistency with the empirical findings**:\n   - Ignoring evidence 68% of the time → agents fail condition (a) for self-correction\n   - Revising beliefs only 26% of the time when presented with contrary findings → agents fail condition (b) for self-correction\n   - These rates describe a system that is largely *resistant* to correction, not self-correcting\n\n4. **Possible reconciliations and why they fail**:\n   - Could the 26% revision rate be sufficient? No—this means 74% of contrary findings are rejected; a system that refuses correction 3 out of 4 times cannot be described as \"self-correcting\"\n   - Could the tournament structure overcome individual agent failures? The arXiv data is from \"similar scientific AI agents\" using comparable multi-agent debate structures, suggesting the tournament format doesn't solve the fundamental problem\n   - Could \"self-correction\" refer to something else? The Google paper explicitly ties self-correction to \"iterative debate and refinement,\" which requires evidence engagement and belief revision\n\n5. **Conclusion**: The empirical findings describe a system that is predominantly evidence-resistant and belief-persistent. This directly contradicts the claimed mechanism and outcome of \"self-correction.\" The two claims are logically inconsistent.",
+        "core_answer": "INCONSISTENT",
+        "self_confidence": 0.85,
+        "reasoning": "1. **Define the claims**: \n   - Google Co-Scientist: Claims 6-agent tournament structure enables \"self-correction\" through iterative debate and refinement\n   - Independent arXiv evaluation: Found agents ignore evidence 68% of the time and revise beliefs only 26% when presented with contrary findings\n\n2. **Analyze what \"self-correction\" requires**:\n   - Self-correction fundamentally requires: (a) attending to relevant evidence, and (b) revising beliefs when evidence contradicts current conclusions\n   - Iterative debate only produces correction if agents actually engage with and respond to evidence and counterarguments\n\n3. **Check consistency with the empirical findings**:\n   - Ignoring evidence 68% of the time → agents fail condition (a) for self-correction\n   - Revising beliefs only 26% of the time when presented with contrary findings → agents fail condition (b) for self-correction\n   - These rates describe a system that is largely *resistant* to correction, not self-correcting\n\n4. **Possible reconciliations and why they fail**:\n   - Could the 26% revision rate be sufficient? No—this means 74% of contrary findings are rejected; a system that refuses correction 3 out of 4 times cannot be described as \"self-correcting\"\n   - Could the tournament structure overcome individual agent failures? The arXiv data is from \"similar scientific AI agents\" using comparable multi-agent debate structures, suggesting the tournament format doesn't solve the fundamental problem\n   - Could \"self-correction\" refer to something else? The Google paper explicitly ties self-correction to \"iterative debate and refinement,\" which requires evidence engagement and belief revision\n\n5. **Conclusion**: The empirical findings describe a system that is predominantly evidence-resistant and belief-persistent. This directly contradicts the claimed mechanism and outcome of \"self-correction.\" The two claims are logically inconsistent.",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "science_deep",
+        "model": "gpt-5.1",
+        "answer": "【答案】CONSISTENT（在弱意义上可以自洽，但“自我纠错”能力被严重夸大）\n\n【置信度】0.78\n\n【推理】\n\n1. **先形式化两边的说法**\n\n   - Google Co-Scientist 论文的隐含逻辑主张可以形式化为：  \n     > （主张 A）多智能体锦标赛结构，通过迭代辩论和改写，使系统在整体上具有“自我纠错”能力，即在多轮交互后，错误结论有相当概率被识别并修正。  \n     这是一个**存在性/统计性**主张：  \n     \\[\n     P(\\text{最终结论被纠正} \\mid \\text{多轮辩论与改写}) \\text{ 相对较高}\n     \\]\n\n   - 独立 arXiv 评估报告的是：  \n     > （主张 B1）在 68% 的推理轨迹中，智能体**忽略现有证据**。  \n     > （主张 B2）在面对相反证据时，只有 26% 的情况下智能体**修正其信念**。  \n     这是关于单次推理或局部步骤的**行为频率**统计：  \n     \\[\n     P(\\text{忽略证据}) = 0.68,\\quad P(\\text{修正信念}\\mid\\text{有相反证据}) = 0.26\n     \\]\n\n   二者关注的层级不同：  \n   - A：系统整体、多轮交互后的**宏观表现**（最终结果是否改正）。  \n   - B：单次推理、单个 agent 面对证据时的**微观行为频率**。\n\n2. **判断是否“逻辑矛盾”的标准**\n\n   逻辑上要判断 CONSISTENT / INCONSISTENT，要看是否存在一个模型，同时满足 A 与 B，不导致形式上的矛盾。  \n   即：是否存在某种机制，使得  \n   - 个体或局部步骤常常忽略证据/很少修正信念（B），但  \n   - 整体系统经过多轮对抗、筛选、聚合之后，仍然在宏观上显示出某种“自我纠错”的能力（A）。\n\n   如果这种模型是可构造的，则“逻辑上可同时为真”，即 CONSISTENT；不讨论其“效果大小”或“宣传是否夸大”。\n\n3. **构造一个可行模型（证明“可以一致”的存在性）**\n\n   用简化模型说明两者可以共存：\n\n   - 假设有 6 个 agent，每个在面对相反证据时：\n     - 以 0.26 的概率修正信念；\n     - 以 0.74 的概率保持原有结论。\n   - 假设每一轮中：\n     - 每个 agent 给出自己的结论和证据；\n     - 再由一个元评估器（可以是另一个模型或规则）选出“更一致于证据”的结论作为当前轮的赢家；\n     - 重复多轮（锦标赛结构）。\n\n   关键点：**系统的纠错能力不一定要求单个 agent 绝大多数时候修正信念，只要整体选择机制偏向“相对更好”的答案即可。**\n\n   对此可以用类似“选拔+渐进改良”的逻辑说明：\n\n   - 设每轮中有至少一个 agent（或少数几个 agent）在 0.26 的概率下修正信念，因而其结论在统计上更接近真实。\n   - 元评估器采用某种打分函数（例如与已知实验结果的一致度、内部逻辑自洽性等）：\n     - 如果打分函数对真结论有正向偏好，则在多轮锦标赛后，被保留/放大的更可能是这些少数“有时纠错”的轨迹结果。\n   - 类似演化算法：  \n     即使大部分个体很差，只要：\n     \\[\n     P(\\text{出现较优解}) > 0,\\quad 选择机制偏好该解\n     \\]\n     经过多轮筛选，也可以在宏观上“改良解答”。\n\n   这说明：**即便单个 agent 在 68% 时忽略证据，且只在 26% 情况下修正 belief，只要有一个偏向选择“更好解释”的 tournament 机制，从整体上仍可能展示出一定的自我纠错能力**。  \n   因此从严格的逻辑一致性角度看，A 与 B 可以共真，故为 CONSISTENT。\n\n4. **但“能自我纠错”到底是多强意义？**\n\n   这里要区分：\n\n   - “存在某种程度的自我纠错功能”  \n     vs.  \n   - “具有可靠而强健的自我纠错能力，可以大幅抵消错误和偏见”。\n\n   在证据 B 下：\n   - 68% 忽略证据 → 个体推理严重不理想。  \n   - 仅 26% 修正信念 → 即便有相反证据，多数情况下仍固守原信念。\n\n   这对“强意义上的自我纠错”（接近科学共同体在长期中通过重复实验、同行评议所实现的纠错）构成严重质疑：\n\n   - 已被证明的事实：  \n     - 单个 agent 的局部推理大部分时间**不认真更新**，缺乏贝叶斯式或科学理性所要求的“依据证据更新信念”的行为模式。\n     - 因此，**个体层面的理性自纠错能力是弱的**。\n   - 需要进一步验证的推断：  \n     - 多 agent 锦标赛结构在这种弱理性个体的前提下，系统整体的错误率到底能降低多少、在多大任务范围上有效。\n     - 实验上，是否在真实科学任务上显著优于单 agent，且这种优势是“稳健且可扩展”的，而不仅仅是在选取的一小类任务、或特定指标下略有提升。\n\n   换言之：  \n   - 逻辑上，“系统可以自我纠错”与“个体常常忽略证据”并不矛盾；可以通过结构性机制（多轮、对抗、选拔）获得**弱形式的自纠错**。  \n   - 但从科学严谨性角度看，若个体修正率如此之低，要",
+        "core_answer": "CONSISTENT（在弱意义上可以自洽，但“自我纠错”能力被严重夸大）",
+        "self_confidence": 0.78,
+        "reasoning": "1. **先形式化两边的说法**\n\n   - Google Co-Scientist 论文的隐含逻辑主张可以形式化为：  \n     > （主张 A）多智能体锦标赛结构，通过迭代辩论和改写，使系统在整体上具有“自我纠错”能力，即在多轮交互后，错误结论有相当概率被识别并修正。  \n     这是一个**存在性/统计性**主张：  \n     \\[\n     P(\\text{最终结论被纠正} \\mid \\text{多轮辩论与改写}) \\text{ 相对较高}\n     \\]\n\n   - 独立 arXiv 评估报告的是：  \n     > （主张 B1）在 68% 的推理轨迹中，智能体**忽略现有证据**。  \n     > （主张 B2）在面对相反证据时，只有 26% 的情况下智能体**修正其信念**。  \n     这是关于单次推理或局部步骤的**行为频率**统计：  \n     \\[\n     P(\\text{忽略证据}) = 0.68,\\quad P(\\text{修正信念}\\mid\\text{有相反证据}) = 0.26\n     \\]\n\n   二者关注的层级不同：  \n   - A：系统整体、多轮交互后的**宏观表现**（最终结果是否改正）。  \n   - B：单次推理、单个 agent 面对证据时的**微观行为频率**。\n\n2. **判断是否“逻辑矛盾”的标准**\n\n   逻辑上要判断 CONSISTENT / INCONSISTENT，要看是否存在一个模型，同时满足 A 与 B，不导致形式上的矛盾。  \n   即：是否存在某种机制，使得  \n   - 个体或局部步骤常常忽略证据/很少修正信念（B），但  \n   - 整体系统经过多轮对抗、筛选、聚合之后，仍然在宏观上显示出某种“自我纠错”的能力（A）。\n\n   如果这种模型是可构造的，则“逻辑上可同时为真”，即 CONSISTENT；不讨论其“效果大小”或“宣传是否夸大”。\n\n3. **构造一个可行模型（证明“可以一致”的存在性）**\n\n   用简化模型说明两者可以共存：\n\n   - 假设有 6 个 agent，每个在面对相反证据时：\n     - 以 0.26 的概率修正信念；\n     - 以 0.74 的概率保持原有结论。\n   - 假设每一轮中：\n     - 每个 agent 给出自己的结论和证据；\n     - 再由一个元评估器（可以是另一个模型或规则）选出“更一致于证据”的结论作为当前轮的赢家；\n     - 重复多轮（锦标赛结构）。\n\n   关键点：**系统的纠错能力不一定要求单个 agent 绝大多数时候修正信念，只要整体选择机制偏向“相对更好”的答案即可。**\n\n   对此可以用类似“选拔+渐进改良”的逻辑说明：\n\n   - 设每轮中有至少一个 agent（或少数几个 agent）在 0.26 的概率下修正信念，因而其结论在统计上更接近真实。\n   - 元评估器采用某种打分函数（例如与已知实验结果的一致度、内部逻辑自洽性等）：\n     - 如果打分函数对真结论有正向偏好，则在多轮锦标赛后，被保留/放大的更可能是这些少数“有时纠错”的轨迹结果。\n   - 类似演化算法：  \n     即使大部分个体很差，只要：\n     \\[\n     P(\\text{出现较优解}) > 0,\\quad 选择机制偏好该解\n     \\]\n     经过多轮筛选，也可以在宏观上“改良解答”。\n\n   这说明：**即便单个 agent 在 68% 时忽略证据，且只在 26% 情况下修正 belief，只要有一个偏向选择“更好解释”的 tournament 机制，从整体上仍可能展示出一定的自我纠错能力**。  \n   因此从严格的逻辑一致性角度看，A 与 B 可以共真，故为 CONSISTENT。\n\n4. **但“能自我纠错”到底是多强意义？**\n\n   这里要区分：\n\n   - “存在某种程度的自我纠错功能”  \n     vs.  \n   - “具有可靠而强健的自我纠错能力，可以大幅抵消错误和偏见”。\n\n   在证据 B 下：\n   - 68% 忽略证据 → 个体推理严重不理想。  \n   - 仅 26% 修正信念 → 即便有相反证据，多数情况下仍固守原信念。\n\n   这对“强意义上的自我纠错”（接近科学共同体在长期中通过重复实验、同行评议所实现的纠错）构成严重质疑：\n\n   - 已被证明的事实：  \n     - 单个 agent 的局部推理大部分时间**不认真更新**，缺乏贝叶斯式或科学理性所要求的“依据证据更新信念”的行为模式。\n     - 因此，**个体层面的理性自纠错能力是弱的**。\n   - 需要进一步验证的推断：  \n     - 多 agent 锦标赛结构在这种弱理性个体的前提下，系统整体的错误率到底能降低多少、在多大任务范围上有效。\n     - 实验上，是否在真实科学任务上显著优于单 agent，且这种优势是“稳健且可扩展”的，而不仅仅是在选取的一小类任务、或特定指标下略有提升。\n\n   换言之：  \n   - 逻辑上，“系统可以自我纠错”与“个体常常忽略证据”并不矛盾；可以通过结构性机制（多轮、对抗、选拔）获得**弱形式的自纠错**。  \n   - 但从科学严谨性角度看，若个体修正率如此之低，要",
+        "success": true,
+        "attempts": 1
+      }
+    ],
+    "confidence": 0.57,
+    "disagreement": 0.1306,
+    "top_answer": "CONSISTENT",
+    "top_strategy": "breadth_first",
+    "weights": {
+      "breadth_first": {
+        "self_confidence": 0.95,
+        "judge_score": 9.5,
+        "judge_normalized": 0.95,
+        "weight": 0.9025,
+        "penalties": []
+      },
+      "constraint_propagation": {
+        "self_confidence": 0.9,
+        "judge_score": 9.0,
+        "judge_normalized": 0.9,
+        "weight": 0.81,
+        "penalties": []
+      },
+      "counterfactual": {
+        "self_confidence": 0.85,
+        "judge_score": 8.5,
+        "judge_normalized": 0.85,
+        "weight": 0.7225,
+        "penalties": []
+      },
+      "direct": {
+        "self_confidence": 0.85,
+        "judge_score": 8.5,
+        "judge_normalized": 0.85,
+        "weight": 0.7225,
+        "penalties": []
+      },
+      "science_deep": {
+        "self_confidence": 0.78,
+        "judge_score": 7.800000000000001,
+        "judge_normalized": 0.78,
+        "weight": 0.6084,
+        "penalties": []
+      }
+    },
+    "judge_scores": {
+      "breadth_first": 9.5,
+      "constraint_propagation": 9.0,
+      "counterfactual": 8.5,
+      "direct": 8.5,
+      "science_deep": 7.800000000000001
+    },
+    "judge_verdict": "",
+    "outliers": [],
+    "low_confidence_ids": [],
+    "collective_blind_risk": false,
+    "injection_probability": 0.0,
+    "injection_type": null,
+    "speculation_score": 0.0,
+    "speculation_matches": [],
+    "sim_matrix": {
+      "breadth_first": {
+        "constraint_propagation": 0.818,
+        "counterfactual": 0.818,
+        "direct": 0.818,
+        "science_deep": 0.257,
+        "_avg": 0.678
+      },
+      "constraint_propagation": {
+        "breadth_first": 0.818,
+        "counterfactual": 1.0,
+        "direct": 1.0,
+        "science_deep": 0.243,
+        "_avg": 0.765
+      },
+      "counterfactual": {
+        "breadth_first": 0.818,
+        "constraint_propagation": 1.0,
+        "direct": 1.0,
+        "science_deep": 0.243,
+        "_avg": 0.765
+      },
+      "direct": {
+        "breadth_first": 0.818,
+        "constraint_propagation": 1.0,
+        "counterfactual": 1.0,
+        "science_deep": 0.243,
+        "_avg": 0.765
+      },
+      "science_deep": {
+        "breadth_first": 0.257,
+        "constraint_propagation": 0.243,
+        "counterfactual": 0.243,
+        "direct": 0.243,
+        "_avg": 0.247
+      }
+    },
+    "reasoning_trail": [
+      {
+        "strategy": "breadth_first",
+        "model": "gemini-3.1-pro-preview",
+        "success": true,
+        "self_confidence": 0.95,
+        "core_answer": "CONSISTENT",
+        "judge_score": 9.5,
+        "weight": 0.9025,
+        "penalties": [],
+        "status": "selected"
+      },
+      {
+        "strategy": "constraint_propagation",
+        "model": "o4-mini",
+        "success": true,
+        "self_confidence": 0.9,
+        "core_answer": "INCONSISTENT",
+        "judge_score": 9.0,
+        "weight": 0.81,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "counterfactual",
+        "model": "grok-4.1",
+        "success": true,
+        "self_confidence": 0.85,
+        "core_answer": "INCONSISTENT",
+        "judge_score": 8.5,
+        "weight": 0.7225,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "deep_first",
+        "model": "gpt-5.5",
+        "success": false,
+        "status": "failed",
+        "error": "'str' object has no attribute 'choices'"
+      },
+      {
+        "strategy": "direct",
+        "model": "kimi-k2.5",
+        "success": true,
+        "self_confidence": 0.85,
+        "core_answer": "INCONSISTENT",
+        "judge_score": 8.5,
+        "weight": 0.7225,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "science_deep",
+        "model": "gpt-5.1",
+        "success": true,
+        "self_confidence": 0.78,
+        "core_answer": "CONSISTENT（在弱意义上可以自洽，但“自我纠错”能力被严重夸大）",
+        "judge_score": 7.800000000000001,
+        "weight": 0.6084,
+        "penalties": [],
+        "status": "contributing"
+      }
+    ],
+    "low_confidence": false,
+    "uncertain": false,
+    "arbitration_applied": false,
+    "validator_applied": false,
+    "validator_pass": true,
+    "validator_violations": [],
+    "elapsed_time": 77.06,
+    "timestamp": 1780252081.250561,
+    "degraded": true,
+    "failed_generators": [
+      "deep_first"
+    ],
+    "claim": "Multi-agent structure self-corrects errors",
+    "question_id": "Q2"
+  },
+  {
+    "question": "The Co-Scientist paper attributes its hypothesis-generation performance to the multi-agent tournament architecture. But independent analysis found that the base language model (Gemini) accounts for 41.4% of performance variance — more than the agent scaffold. Does the evidence support the claim that the tournament scaffold is the primary driver of Co-Scientist's performance, or does the base model deserve more credit? Answer: SCAFFOLD (scaffold is primary driver) or BASE_MODEL (base model is primary driver).",
+    "candidates": [
+      {
+        "strategy": "breadth_first",
+        "model": "gemini-3.1-pro-preview",
+        "answer": "【答案】BASE_MODEL\n【置信度】0.95\n【推理】根据题目提供的信息，独立分析表明基础语言模型解释了41.4%的性能方差，这一比例明确大于代理脚手架（scaffold）的贡献。因此，基于上述证据，基础模型是性能的主要驱动因素。",
+        "core_answer": "BASE_MODEL",
+        "self_confidence": 0.95,
+        "reasoning": "根据题目提供的信息，独立分析表明基础语言模型解释了41.4%的性能方差，这一比例明确大于代理脚手架（scaffold）的贡献。因此，基于上述证据，基础模型是性能的主要驱动因素。",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "constraint_propagation",
+        "model": "o4-mini",
+        "answer": "【答案】BASE_MODEL  \n【置信度】1.0  \n【推理】  \n1. 已知约束条件  \n   - Co-Scientist 论文声称其 hypothesis-generation 性能主要归因于多智能体竞赛架构（scaffold）。  \n   - 独立分析发现，基础大模型（Gemini）解释了 41.4% 的性能方差，超过了多智能体 scaffold 的贡献。  \n\n2. 从最确定的约束开始传播  \n   - 41.4% 的方差来源于基础模型，这一数字大于任何已知的 scaffold 贡献比例。  \n\n3. 标记不确定区域  \n   - 无：我们拥有明确的方差比例数据，基础模型贡献最大。  \n\n4. 逐条验证所有条件  \n   - 论文主张 vs. 独立数据对比：独立数据直接反驳了论文对 scaffold 作为“主要驱动”的主张。  \n\n5. 输出结论及约束满足度评估  \n   - 结论：基础模型（BASE_MODEL）应被视为主要性能驱动因素。  \n   - 所有约束均得到满足，无冲突。",
+        "core_answer": "BASE_MODEL",
+        "self_confidence": 1.0,
+        "reasoning": "1. 已知约束条件  \n   - Co-Scientist 论文声称其 hypothesis-generation 性能主要归因于多智能体竞赛架构（scaffold）。  \n   - 独立分析发现，基础大模型（Gemini）解释了 41.4% 的性能方差，超过了多智能体 scaffold 的贡献。  \n\n2. 从最确定的约束开始传播  \n   - 41.4% 的方差来源于基础模型，这一数字大于任何已知的 scaffold 贡献比例。  \n\n3. 标记不确定区域  \n   - 无：我们拥有明确的方差比例数据，基础模型贡献最大。  \n\n4. 逐条验证所有条件  \n   - 论文主张 vs. 独立数据对比：独立数据直接反驳了论文对 scaffold 作为“主要驱动”的主张。  \n\n5. 输出结论及约束满足度评估  \n   - 结论：基础模型（BASE_MODEL）应被视为主要性能驱动因素。  \n   - 所有约束均得到满足，无冲突。",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "counterfactual",
+        "model": "grok-4.1",
+        "answer": "【答案】BASE_MODEL\n【置信度】0.75\n【推理】Intuitive reading of the query directly privileges the cited independent analysis: 41.4 % variance attributed to the base model already exceeds the scaffold’s share, undermining the paper’s causal attribution. Counterfactual check—if this conclusion were mistaken, the most probable error would be that variance-partition numbers are incomplete (e.g., they omit interaction effects or task-specific regimes where the tournament yields super-additive gains). Re-deriving from that possibility still leaves the published evidence lopsided: no comparable ablation or variance decomposition in the original paper demonstrates scaffold dominance once base-model strength is controlled, so the independent result remains the stronger empirical warrant for crediting the base model.",
+        "core_answer": "BASE_MODEL",
+        "self_confidence": 0.75,
+        "reasoning": "Intuitive reading of the query directly privileges the cited independent analysis: 41.4 % variance attributed to the base model already exceeds the scaffold’s share, undermining the paper’s causal attribution. Counterfactual check—if this conclusion were mistaken, the most probable error would be that variance-partition numbers are incomplete (e.g., they omit interaction effects or task-specific regimes where the tournament yields super-additive gains). Re-deriving from that possibility still leaves the published evidence lopsided: no comparable ablation or variance decomposition in the original paper demonstrates scaffold dominance once base-model strength is controlled, so the independent result remains the stronger empirical warrant for crediting the base model.",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "deep_first",
+        "model": "gpt-5.5",
+        "answer": null,
+        "core_answer": "",
+        "self_confidence": 0.0,
+        "reasoning": "",
+        "success": false,
+        "error": "'str' object has no attribute 'choices'",
+        "attempts": 1
+      },
+      {
+        "strategy": "direct",
+        "model": "kimi-k2.5",
+        "answer": "【答案】BASE_MODEL\n\n【置信度】0.85\n\n【推理】\n\n关键证据分析：\n- 论文主张：多智能体锦标赛架构是假设生成性能的主要原因\n- 独立分析发现：基础语言模型（Gemini）解释了41.4%的性能方差，超过智能体脚手架\n\n方差分解的解读：\n- 41.4%的方差由基础模型解释，意味着这是单一最大因素\n- \"超过智能体脚手架\"表明脚手架解释的方差 < 41.4%\n- 剩余方差（~58.6%）由其他因素（实验设计、任务特性、交互效应等）解释\n\n因果归因判断：\n- 基础模型贡献了最大份额的可解释方差\n- 脚手架的贡献比例低于基础模型\n- 因此基础模型是性能的主要驱动因素，而非脚手架\n\n论文主张与证据的矛盾：\n- 论文将性能归因于锦标赛架构（脚手架）\n- 但实证分解显示基础模型的独立贡献更大\n- 这类似于\"脚手架幻觉\"——复杂的智能体架构可能夸大了其相对于基础能力的增值\n\n结论：独立分析的方差分解提供了更客观的因果归因，基础模型应获得更多 credit。",
+        "core_answer": "BASE_MODEL",
+        "self_confidence": 0.85,
+        "reasoning": "关键证据分析：\n- 论文主张：多智能体锦标赛架构是假设生成性能的主要原因\n- 独立分析发现：基础语言模型（Gemini）解释了41.4%的性能方差，超过智能体脚手架\n\n方差分解的解读：\n- 41.4%的方差由基础模型解释，意味着这是单一最大因素\n- \"超过智能体脚手架\"表明脚手架解释的方差 < 41.4%\n- 剩余方差（~58.6%）由其他因素（实验设计、任务特性、交互效应等）解释\n\n因果归因判断：\n- 基础模型贡献了最大份额的可解释方差\n- 脚手架的贡献比例低于基础模型\n- 因此基础模型是性能的主要驱动因素，而非脚手架\n\n论文主张与证据的矛盾：\n- 论文将性能归因于锦标赛架构（脚手架）\n- 但实证分解显示基础模型的独立贡献更大\n- 这类似于\"脚手架幻觉\"——复杂的智能体架构可能夸大了其相对于基础能力的增值\n\n结论：独立分析的方差分解提供了更客观的因果归因，基础模型应获得更多 credit。",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "science_deep",
+        "model": "gpt-5.1",
+        "answer": "【答案】BASE_MODEL  \n\n【置信度】0.78  \n\n【推理】  \n1. **题目给定的关键数据与结论结构**  \n   - 论文作者声称：Co-Scientist 的假设生成能力主要归功于「多智能体锦标赛（tournament）架构」这一脚手架（scaffold）。  \n   - 独立分析发现：底层语言模型（Gemini）可以解释 Co-Scientist 性能方差的 41.4%，这一数值**高于**该分析中归因于 agent scaffold 的方差贡献。  \n   - 问题本质：比较「tournament scaffold」与「base model (Gemini)」对性能的**主导性贡献**，并根据现有证据判断哪一个更应被视为主要驱动因素。  \n\n2. **统计归因的意义：方差解释率**  \n   - 使用的概念：  \n     - 性能度量：记为 \\(Y\\)（例如假设质量或得分）。  \n     - 自变量：底层模型能力 \\(X_{\\text{model}}\\) 和 scaffold 设计 \\(X_{\\text{scaffold}}\\)。  \n   - 分析中报告：“Gemini accounts for 41.4% of performance variance”，可理解为：  \n     \\[\n     R^2_{\\text{model}} \\approx 0.414\n     \\]\n     即底层模型的变化可以解释约 41.4% 的性能差异。  \n   - 题干还指出：这 41.4%「more than the agent scaffold」，即  \n     \\[\n     R^2_{\\text{model}} > R^2_{\\text{scaffold}}\n     \\]\n     在现有分析框架中，模型能力在统计上对结果变动的“解释力”高于 scaffold。  \n\n3. **从“解释方差”到“谁是主要驱动”**  \n   - 若要说「tournament scaffold 是主要驱动」，则在一个合理的因果/回归视角下，通常需要满足：  \n     \\[\n     R^2_{\\text{scaffold}} \\gtrsim R^2_{\\text{model}}\n     \\]\n     或至少 scaffold 的独立贡献不显著低于模型本身。  \n   - 但题干明确给出：  \n     - 模型解释方差 = 41.4%  \n     - 且这一数值 **高于** scaffold 的贡献。  \n   - 在同一分析框架中，如果 A 因子解释的方差比 B 因子大，则最直接、已被证明的统计结论是：**A 在该框架下具有更强的可量化影响力**。  \n   - 这里是已被证明的事实：  \n     - 已知事实：独立分析（在其所用的数据和方法下）得到 \\(R^2_{\\text{model}} = 0.414\\)，且 \\(R^2_{\\text{model}} > R^2_{\\text{scaffold}}\\)。  \n   - 需进一步验证的推断（但合理）：  \n     - 若不引入额外未观察变量（如极强的交互项完全掩盖贡献等），则底层模型对性能的“主导作用”更有统计依据。  \n\n4. **评估论文主张与独立分析之间的张力**  \n   - 论文主张：  \n     - 假说生成性能「主要」来自多智能体 tournament 架构。  \n   - 独立分析结果：  \n     - 当将模型能力和 scaffold 视为可分的因素时，模型本身对性能差异的解释力（41.4%）大于 scaffold。  \n   - 从证据层级上看：  \n     - 论文更多基于**设计性论证和消融实验**声称 scaffold 的重要性；  \n     - 独立分析则给出定量的方差归因，直接比较了两者的贡献大小。  \n   - 如果我们以“谁解释的性能方差更多”为“主要驱动”的操作性定义，那么：  \n     \\[\n     R^2_{\\text{model}} > R^2_{\\text{scaffold}} \\Rightarrow \\text{模型应被视为更主要的驱动因素}\n     \\]\n\n5. **结论与证据强度评估**  \n   - 已被证明的事实：  \n     1) 独立分析显示 Gemini 的能力解释了 41.4% 的性能方差；  \n     2) 这一解释率高于 agent scaffold 在同一分析下的贡献。  \n   - 合理推断（需进一步验证但有较强支持）：  \n     - 在现有定量证据下，将 tournament scaffold 描述为「主要驱动」不如将 base model 描述为「主要驱动」更符合数据。  \n   - 因此，在“必须二选一”的前提下，基于给定证据，**底层模型应获得更多“主要驱动”信用**。  \n\n综上，依据题干中给出的独立分析结果，证据更有力地支持：Co-Scientist 的性能主要由底层语言模型能力驱动，而非以 tournament scaffold 为首要因素。  \n对应选项应为：**BASE_MODEL**。",
+        "core_answer": "BASE_MODEL",
+        "self_confidence": 0.78,
+        "reasoning": "1. **题目给定的关键数据与结论结构**  \n   - 论文作者声称：Co-Scientist 的假设生成能力主要归功于「多智能体锦标赛（tournament）架构」这一脚手架（scaffold）。  \n   - 独立分析发现：底层语言模型（Gemini）可以解释 Co-Scientist 性能方差的 41.4%，这一数值**高于**该分析中归因于 agent scaffold 的方差贡献。  \n   - 问题本质：比较「tournament scaffold」与「base model (Gemini)」对性能的**主导性贡献**，并根据现有证据判断哪一个更应被视为主要驱动因素。  \n\n2. **统计归因的意义：方差解释率**  \n   - 使用的概念：  \n     - 性能度量：记为 \\(Y\\)（例如假设质量或得分）。  \n     - 自变量：底层模型能力 \\(X_{\\text{model}}\\) 和 scaffold 设计 \\(X_{\\text{scaffold}}\\)。  \n   - 分析中报告：“Gemini accounts for 41.4% of performance variance”，可理解为：  \n     \\[\n     R^2_{\\text{model}} \\approx 0.414\n     \\]\n     即底层模型的变化可以解释约 41.4% 的性能差异。  \n   - 题干还指出：这 41.4%「more than the agent scaffold」，即  \n     \\[\n     R^2_{\\text{model}} > R^2_{\\text{scaffold}}\n     \\]\n     在现有分析框架中，模型能力在统计上对结果变动的“解释力”高于 scaffold。  \n\n3. **从“解释方差”到“谁是主要驱动”**  \n   - 若要说「tournament scaffold 是主要驱动」，则在一个合理的因果/回归视角下，通常需要满足：  \n     \\[\n     R^2_{\\text{scaffold}} \\gtrsim R^2_{\\text{model}}\n     \\]\n     或至少 scaffold 的独立贡献不显著低于模型本身。  \n   - 但题干明确给出：  \n     - 模型解释方差 = 41.4%  \n     - 且这一数值 **高于** scaffold 的贡献。  \n   - 在同一分析框架中，如果 A 因子解释的方差比 B 因子大，则最直接、已被证明的统计结论是：**A 在该框架下具有更强的可量化影响力**。  \n   - 这里是已被证明的事实：  \n     - 已知事实：独立分析（在其所用的数据和方法下）得到 \\(R^2_{\\text{model}} = 0.414\\)，且 \\(R^2_{\\text{model}} > R^2_{\\text{scaffold}}\\)。  \n   - 需进一步验证的推断（但合理）：  \n     - 若不引入额外未观察变量（如极强的交互项完全掩盖贡献等），则底层模型对性能的“主导作用”更有统计依据。  \n\n4. **评估论文主张与独立分析之间的张力**  \n   - 论文主张：  \n     - 假说生成性能「主要」来自多智能体 tournament 架构。  \n   - 独立分析结果：  \n     - 当将模型能力和 scaffold 视为可分的因素时，模型本身对性能差异的解释力（41.4%）大于 scaffold。  \n   - 从证据层级上看：  \n     - 论文更多基于**设计性论证和消融实验**声称 scaffold 的重要性；  \n     - 独立分析则给出定量的方差归因，直接比较了两者的贡献大小。  \n   - 如果我们以“谁解释的性能方差更多”为“主要驱动”的操作性定义，那么：  \n     \\[\n     R^2_{\\text{model}} > R^2_{\\text{scaffold}} \\Rightarrow \\text{模型应被视为更主要的驱动因素}\n     \\]\n\n5. **结论与证据强度评估**  \n   - 已被证明的事实：  \n     1) 独立分析显示 Gemini 的能力解释了 41.4% 的性能方差；  \n     2) 这一解释率高于 agent scaffold 在同一分析下的贡献。  \n   - 合理推断（需进一步验证但有较强支持）：  \n     - 在现有定量证据下，将 tournament scaffold 描述为「主要驱动」不如将 base model 描述为「主要驱动」更符合数据。  \n   - 因此，在“必须二选一”的前提下，基于给定证据，**底层模型应获得更多“主要驱动”信用**。  \n\n综上，依据题干中给出的独立分析结果，证据更有力地支持：Co-Scientist 的性能主要由底层语言模型能力驱动，而非以 tournament scaffold 为首要因素。  \n对应选项应为：**BASE_MODEL**。",
+        "success": true,
+        "attempts": 1
+      }
+    ],
+    "confidence": 0.57,
+    "disagreement": 0.2214,
+    "top_answer": "BASE_MODEL",
+    "top_strategy": "constraint_propagation",
+    "weights": {
+      "breadth_first": {
+        "self_confidence": 0.95,
+        "judge_score": 9.5,
+        "judge_normalized": 0.95,
+        "weight": 0.9025,
+        "penalties": []
+      },
+      "constraint_propagation": {
+        "self_confidence": 1.0,
+        "judge_score": 10.0,
+        "judge_normalized": 1.0,
+        "weight": 1.0,
+        "penalties": []
+      },
+      "counterfactual": {
+        "self_confidence": 0.75,
+        "judge_score": 7.5,
+        "judge_normalized": 0.75,
+        "weight": 0.5625,
+        "penalties": []
+      },
+      "direct": {
+        "self_confidence": 0.85,
+        "judge_score": 8.5,
+        "judge_normalized": 0.85,
+        "weight": 0.7225,
+        "penalties": []
+      },
+      "science_deep": {
+        "self_confidence": 0.78,
+        "judge_score": 7.800000000000001,
+        "judge_normalized": 0.78,
+        "weight": 0.6084,
+        "penalties": []
+      }
+    },
+    "judge_scores": {
+      "breadth_first": 9.5,
+      "constraint_propagation": 10.0,
+      "counterfactual": 7.5,
+      "direct": 8.5,
+      "science_deep": 7.800000000000001
+    },
+    "judge_verdict": "",
+    "outliers": [],
+    "low_confidence_ids": [],
+    "collective_blind_risk": false,
+    "injection_probability": 0.0,
+    "injection_type": null,
+    "speculation_score": 0.0,
+    "speculation_matches": [],
+    "sim_matrix": {
+      "breadth_first": {
+        "constraint_propagation": 1.0,
+        "counterfactual": 1.0,
+        "direct": 1.0,
+        "science_deep": 1.0,
+        "_avg": 1.0
+      },
+      "constraint_propagation": {
+        "breadth_first": 1.0,
+        "counterfactual": 1.0,
+        "direct": 1.0,
+        "science_deep": 1.0,
+        "_avg": 1.0
+      },
+      "counterfactual": {
+        "breadth_first": 1.0,
+        "constraint_propagation": 1.0,
+        "direct": 1.0,
+        "science_deep": 1.0,
+        "_avg": 1.0
+      },
+      "direct": {
+        "breadth_first": 1.0,
+        "constraint_propagation": 1.0,
+        "counterfactual": 1.0,
+        "science_deep": 1.0,
+        "_avg": 1.0
+      },
+      "science_deep": {
+        "breadth_first": 1.0,
+        "constraint_propagation": 1.0,
+        "counterfactual": 1.0,
+        "direct": 1.0,
+        "_avg": 1.0
+      }
+    },
+    "reasoning_trail": [
+      {
+        "strategy": "breadth_first",
+        "model": "gemini-3.1-pro-preview",
+        "success": true,
+        "self_confidence": 0.95,
+        "core_answer": "BASE_MODEL",
+        "judge_score": 9.5,
+        "weight": 0.9025,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "constraint_propagation",
+        "model": "o4-mini",
+        "success": true,
+        "self_confidence": 1.0,
+        "core_answer": "BASE_MODEL",
+        "judge_score": 10.0,
+        "weight": 1.0,
+        "penalties": [],
+        "status": "selected"
+      },
+      {
+        "strategy": "counterfactual",
+        "model": "grok-4.1",
+        "success": true,
+        "self_confidence": 0.75,
+        "core_answer": "BASE_MODEL",
+        "judge_score": 7.5,
+        "weight": 0.5625,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "deep_first",
+        "model": "gpt-5.5",
+        "success": false,
+        "status": "failed",
+        "error": "'str' object has no attribute 'choices'"
+      },
+      {
+        "strategy": "direct",
+        "model": "kimi-k2.5",
+        "success": true,
+        "self_confidence": 0.85,
+        "core_answer": "BASE_MODEL",
+        "judge_score": 8.5,
+        "weight": 0.7225,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "science_deep",
+        "model": "gpt-5.1",
+        "success": true,
+        "self_confidence": 0.78,
+        "core_answer": "BASE_MODEL",
+        "judge_score": 7.800000000000001,
+        "weight": 0.6084,
+        "penalties": [],
+        "status": "contributing"
+      }
+    ],
+    "low_confidence": false,
+    "uncertain": false,
+    "arbitration_applied": false,
+    "validator_applied": false,
+    "validator_pass": true,
+    "validator_violations": [],
+    "elapsed_time": 14.91,
+    "timestamp": 1780252097.365509,
+    "degraded": true,
+    "failed_generators": [
+      "deep_first"
+    ],
+    "claim": "Tournament scaffold drives performance gains",
+    "question_id": "Q3"
+  },
+  {
+    "question": "The Co-Scientist paper claims that hypothesis quality 'scales with test-time compute' without observed saturation. However, if 68% of agent reasoning ignores evidence and belief revision is only 26%, then more compute means more rounds of agents ignoring evidence and not revising beliefs. Is the 'quality scales with compute' claim logically compatible with the evidence-ignoring behavior? Or does more compute simply amplify a flawed process? Answer COMPATIBLE or INCOMPATIBLE with reasoning.",
+    "candidates": [
+      {
+        "strategy": "breadth_first",
+        "model": "gemini-3.1-pro-preview",
+        "answer": "【答案】COMPATIBLE\n【置信度】0.95\n【推理】The claim is logically compatible because a 26% belief revision rate and a 32% evidence consideration rate (100% - 68%) are non-zero probabilities. In stochastic AI systems, scaling test-time compute (through methods like iterative refinement, tree search, or Best-of-N sampling) is specifically designed to mitigate low per-step reliability. Because the agents still successfully utilize evidence and revise beliefs a fraction of the time, allocating more compute generates a larger number of attempts. This increases the cumulative probability of finding and selecting successful reasoning paths. A high failure rate at the individual step level does not contradict the scaling claim; rather, it explains exactly why the system's performance does not saturate quickly and continues to benefit from increased computational search.",
+        "core_answer": "COMPATIBLE",
+        "self_confidence": 0.95,
+        "reasoning": "The claim is logically compatible because a 26% belief revision rate and a 32% evidence consideration rate (100% - 68%) are non-zero probabilities. In stochastic AI systems, scaling test-time compute (through methods like iterative refinement, tree search, or Best-of-N sampling) is specifically designed to mitigate low per-step reliability. Because the agents still successfully utilize evidence and revise beliefs a fraction of the time, allocating more compute generates a larger number of attempts. This increases the cumulative probability of finding and selecting successful reasoning paths. A high failure rate at the individual step level does not contradict the scaling claim; rather, it explains exactly why the system's performance does not saturate quickly and continues to benefit from increased computational search.",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "constraint_propagation",
+        "model": "o4-mini",
+        "answer": "【答案】INCOMPATIBLE  \n【置信度】0.90  \n【推理】  \n1. 已知约束条件  \n   1.1 Co-Scientist 论文声称“假设质量随测试时计算量增加而线性提升，且无饱和” (C1)。  \n   1.2 68% 的推理步骤忽视证据 (C2)。  \n   1.3 仅有 26% 的步骤进行信念修正 (C3)。  \n   1.4 忽视证据和不修正信念会降低推理质量 (隐含常识，C4)。  \n\n2. 约束传播  \n   - 从 C2、C3 和 C4 可得：大多数推理步骤在重复多轮计算时仍然忽视新证据，导致整体推理质量受损，并且更多计算只是重复放大这种缺陷。  \n   - 这与 C1（计算量增加必然带来质量提升）直接冲突。  \n\n3. 冲突与不确定区域  \n   - C1 与 C2–C4 明显矛盾，无法同时成立。  \n   - 无额外约束能调和“更多计算提升质量”与“更多计算放大忽视证据的缺陷”二者。  \n\n4. 验证  \n   - 检查所有条件，确认冲突存在且无遗漏。  \n\n结论：在当前证据下，“质量随计算量线性提升”的说法与高比例忽视证据的行为逻辑上不兼容。",
+        "core_answer": "INCOMPATIBLE",
+        "self_confidence": 0.9,
+        "reasoning": "1. 已知约束条件  \n   1.1 Co-Scientist 论文声称“假设质量随测试时计算量增加而线性提升，且无饱和” (C1)。  \n   1.2 68% 的推理步骤忽视证据 (C2)。  \n   1.3 仅有 26% 的步骤进行信念修正 (C3)。  \n   1.4 忽视证据和不修正信念会降低推理质量 (隐含常识，C4)。  \n\n2. 约束传播  \n   - 从 C2、C3 和 C4 可得：大多数推理步骤在重复多轮计算时仍然忽视新证据，导致整体推理质量受损，并且更多计算只是重复放大这种缺陷。  \n   - 这与 C1（计算量增加必然带来质量提升）直接冲突。  \n\n3. 冲突与不确定区域  \n   - C1 与 C2–C4 明显矛盾，无法同时成立。  \n   - 无额外约束能调和“更多计算提升质量”与“更多计算放大忽视证据的缺陷”二者。  \n\n4. 验证  \n   - 检查所有条件，确认冲突存在且无遗漏。  \n\n结论：在当前证据下，“质量随计算量线性提升”的说法与高比例忽视证据的行为逻辑上不兼容。",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "counterfactual",
+        "model": "grok-4.1",
+        "answer": "【答案】INCOMPATIBLE\n\n【置信度】0.65\n\n【推理】The paper's core claim is that hypothesis quality continues to improve monotonically as test-time compute increases, with no observed saturation even at high levels. This implies that additional reasoning steps (more rounds, deeper trees, more agent interactions) contribute net positive signal toward better hypotheses.\n\nHowever, the provided statistics—68% of agent reasoning traces ignore evidence and only 26% exhibit belief revision—describe a process that is systematically defective in a way that is unlikely to be rescued by scale. In Bayesian terms, belief revision (updating posterior in light of evidence) is the central mechanism by which evidence improves hypotheses. If the majority of compute is spent on chains that deliberately bypass or contradict available evidence, then extra compute largely amplifies noise, confirmation bias, or post-hoc rationalization rather than refining the hypothesis distribution.\n\nA process that is mostly “ignore evidence → generate story → weak revision” cannot produce monotonically improving quality without bound unless the 32% of evidence-respecting traces improve at a rate that exactly offsets the damage from the 68%. That offsetting dynamic is improbable on its face and would itself constitute a form of saturation or fragile compensation, contradicting the paper’s “scales without observed saturation” language. Therefore the two observations are logically incompatible: either the quality metric is flawed (not truly measuring scientific merit), the statistics are unrepresentative, or the scaling claim overstates what the underlying flawed search process can deliver. The most parsimonious reading is that additional compute is primarily amplifying a flawed process rather than unlocking better hypotheses in the manner claimed.",
+        "core_answer": "INCOMPATIBLE",
+        "self_confidence": 0.65,
+        "reasoning": "The paper's core claim is that hypothesis quality continues to improve monotonically as test-time compute increases, with no observed saturation even at high levels. This implies that additional reasoning steps (more rounds, deeper trees, more agent interactions) contribute net positive signal toward better hypotheses.\n\nHowever, the provided statistics—68% of agent reasoning traces ignore evidence and only 26% exhibit belief revision—describe a process that is systematically defective in a way that is unlikely to be rescued by scale. In Bayesian terms, belief revision (updating posterior in light of evidence) is the central mechanism by which evidence improves hypotheses. If the majority of compute is spent on chains that deliberately bypass or contradict available evidence, then extra compute largely amplifies noise, confirmation bias, or post-hoc rationalization rather than refining the hypothesis distribution.\n\nA process that is mostly “ignore evidence → generate story → weak revision” cannot produce monotonically improving quality without bound unless the 32% of evidence-respecting traces improve at a rate that exactly offsets the damage from the 68%. That offsetting dynamic is improbable on its face and would itself constitute a form of saturation or fragile compensation, contradicting the paper’s “scales without observed saturation” language. Therefore the two observations are logically incompatible: either the quality metric is flawed (not truly measuring scientific merit), the statistics are unrepresentative, or the scaling claim overstates what the underlying flawed search process can deliver. The most parsimonious reading is that additional compute is primarily amplifying a flawed process rather than unlocking better hypotheses in the manner claimed.",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "deep_first",
+        "model": "gpt-5.5",
+        "answer": null,
+        "core_answer": "",
+        "self_confidence": 0.0,
+        "reasoning": "",
+        "success": false,
+        "error": "'str' object has no attribute 'choices'",
+        "attempts": 1
+      },
+      {
+        "strategy": "direct",
+        "model": "kimi-k2.5",
+        "answer": "【答案】INCOMPATIBLE\n\n【置信度】0.85\n\n【推理】\n\nThe claim \"quality scales with compute\" implies that additional computational resources lead to proportionally better outcomes. However, the evidence presented describes a system where:\n\n1. **68% of agent reasoning ignores evidence** — this is a systematic, structural flaw in the reasoning process\n2. **Belief revision occurs only 26% of the time** — indicating poor error correction\n\nIf these failure rates are **intrinsic to the agent architecture** rather than transient sampling errors, then additional compute simply means:\n- More iterations of evidence-ignoring reasoning\n- More outputs contaminated by the same 68% failure rate\n- No mechanism for quality improvement through scaling\n\nFor \"quality scales with compute\" to be **logically compatible** with this behavior, one would need:\n- Evidence that the 68% and 26% figures *improve* with more compute (saturation of failure rates)\n- A mechanism where parallel/agent-based search overcomes individual agent flaws\n- The \"quality\" metric being something other than evidence-based correctness (e.g., fluency, coverage, or diversity)\n\nWithout such mitigating factors, more compute amplifies a flawed process rather than improving it. The claim is **incompatible** unless redefined to exclude evidence-based reasoning quality.",
+        "core_answer": "INCOMPATIBLE",
+        "self_confidence": 0.85,
+        "reasoning": "The claim \"quality scales with compute\" implies that additional computational resources lead to proportionally better outcomes. However, the evidence presented describes a system where:\n\n1. **68% of agent reasoning ignores evidence** — this is a systematic, structural flaw in the reasoning process\n2. **Belief revision occurs only 26% of the time** — indicating poor error correction\n\nIf these failure rates are **intrinsic to the agent architecture** rather than transient sampling errors, then additional compute simply means:\n- More iterations of evidence-ignoring reasoning\n- More outputs contaminated by the same 68% failure rate\n- No mechanism for quality improvement through scaling\n\nFor \"quality scales with compute\" to be **logically compatible** with this behavior, one would need:\n- Evidence that the 68% and 26% figures *improve* with more compute (saturation of failure rates)\n- A mechanism where parallel/agent-based search overcomes individual agent flaws\n- The \"quality\" metric being something other than evidence-based correctness (e.g., fluency, coverage, or diversity)\n\nWithout such mitigating factors, more compute amplifies a flawed process rather than improving it. The claim is **incompatible** unless redefined to exclude evidence-based reasoning quality.",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "science_deep",
+        "model": "gpt-5.1",
+        "answer": "【答案】COMPATIBLE\n\n【置信度】0.78\n\n【推理】\n\n1. **澄清两种说法的逻辑形式**\n\n   - 命题 A（论文主张）：  \n     > “Hypothesis quality scales with test-time compute without observed saturation.”  \n     形式化：  \n     \\[\n     \\forall C_2 > C_1: \\; Q(C_2) \\ge Q(C_1),\\ \\text{且在观测区间内未见拐点或平台效应}\n     \\]  \n     其中 \\(Q(C)\\) 表示在给定测试算力 \\(C\\) 下生成假说的平均质量（某种聚合指标）。\n\n   - 命题 B（你指出的行为特征）：  \n     > “68% 的 agent 推理忽略证据；belief revision 只有 26%。”  \n     形式化：  \n     设 \\(p_{\\text{ignore}} \\approx 0.68\\), \\(p_{\\text{revise}} \\approx 0.26\\)。  \n     大致表示：  \n     - 大多数推理轨迹中，新的证据未被正确整合；  \n     - 显式信念更新出现的频率较低。\n\n   问题是：在逻辑上，是否存在模型 \\(Q(C)\\) 与行为 \\(p_{\\text{ignore}}, p_{\\text{revise}}\\) 使得 A 和 B 同时成立？这就是“COMPATIBLE / INCOMPATIBLE”的判断。\n\n2. **从“缺陷过程”到“仍然可随算力提升”**\n\n   我们把“忽略证据 + 低频信念修正”抽象为一个噪声或效率低下的推理过程：\n\n   - 设每一轮推理（一次 agent 调用或一个 reasoning step）有概率 \\(p_{\\text{good}}\\) 产生“有效的、有证据支持的改进”，  \n     同时有概率 \\(1 - p_{\\text{good}}\\) 只是“无效/瞎转 / 忽略证据”。\n\n   - 更具体一点，可以建模为：  \n     每轮推理对假设质量 \\(Q\\) 的增量 \\(\\Delta Q_i\\) 为：\n     \\[\n     \\Delta Q_i = \n     \\begin{cases}\n     g > 0 & \\text{以概率 } p_{\\text{good}} \\\\\n     0 \\text{ 或甚至 } < 0 & \\text{以概率 } 1-p_{\\text{good}}\n     \\end{cases}\n     \\]\n\n   在“证据常被忽略”的设定下，我们只是说 \\(p_{\\text{good}}\\) 很小，并且很多轮的 \\(\\Delta Q_i\\) 接近 0 或带一点负贡献。\n\n   然而，只要满足：\n   \\[\n   \\mathbb{E}[\\Delta Q_i] > 0\n   \\]\n   即平均每一轮仍有正的期望增益，那么随着轮数 \\(N\\)（或总算力 \\(C \\propto N\\)）增加：\n   \\[\n   \\mathbb{E}[Q_N] = Q_0 + N \\cdot \\mathbb{E}[\\Delta Q_i]\n   \\]\n   将随 \\(N\\) 增大而单调上升（至少在实验范围内），即“质量随算力提升”。\n\n   这说明：  \n   - **即使大多数步骤是低效或错误的，只要少部分步骤是高价值的，增加总步骤数仍然可以提高总体质量。**  \n   - “过程有缺陷”与“随算力性能单调增加”在逻辑上不矛盾。\n\n3. **多代理 / 多样性与筛选机制的作用**\n\n   Co-Scientist 的框架不是“单一推理链无条件信任”，而是：\n\n   - 创建很多候选假设和推理链（多代理、多样化增广）；  \n   - 再通过某种筛选、评分、批判或投票机制选出更优的假设。\n\n   抽象成两个层次：\n\n   1. 生成层：  \n      - 每个代理有较高概率忽略证据；  \n      - 但仍有一定概率产出“好假设 / 好推理”。\n\n   2. 选择层：  \n      - 通过评分函数、自动评审、额外调用模型等机制，倾向于保留质量更高的假设，过滤掉明显差的。\n\n   模型化：假设生成层整体输出的质量分布 \\(P(Q)\\) 是非常偏噪的，但右尾（高质量假设）不为零。增加算力意味着：\n\n   - 生成的候选假设数 \\(n\\) 增大；  \n   - 选择层可以在更大的样本集合中选取最高分的一个或前若干个。\n\n   如果质量是一个随机变量 \\(Q_1, \\dots, Q_n\\) 独立同分布来自 \\(P(Q)\\)，且选择的是 \\(\\max Q_i\\)，则极值理论告诉我们：\n\n   \\[\n   \\mathbb{E}[\\max(Q_1,\\dots,Q_n)] \\text{ 随 } n \\text{ 增加而上升} \n   \\]\n\n   即使 \\(P(Q)\\) 的大部分质量集中在“平庸甚至错误”的区域，只要存在一小部分概率质量对应“真正高质量假设”，增加 \\(n\\)（=增加算力和调用次数）就会提高最终被选中的假设质量。这与“多数推理轨迹忽略证据”完全兼容。\n\n4. **为什么“忽略证据率 68%”不必导致“质量不再提升”**\n\n   你的担心是：更多算力意味着：\n   - 更多轮的“忽略证据的推理”；  \n   - 以及“信念不更新”的僵化循环。\n\n   但在一个由生成 + 选择组成的系统中，这个担忧只有在以下条件都满足时才会导致“与质量提升不兼容”：\n\n   1. 忽略证据 / 不修正信念导致 **每一轮的期望增量非正**（\\(\\mathbb{E}[\\Delta Q_i] \\le 0\\)）；  \n   2. 没有有效的筛选机制，系统只是盲目累积这些 flawed hypotheses；  \n   3. 或者系统的 evaluation/selection 自身与生成过程一样盲目且系统性偏差相同，使得增加候选并不能增加“真正好的被选出”的概率。\n\n   而你描述的",
+        "core_answer": "COMPATIBLE",
+        "self_confidence": 0.78,
+        "reasoning": "1. **澄清两种说法的逻辑形式**\n\n   - 命题 A（论文主张）：  \n     > “Hypothesis quality scales with test-time compute without observed saturation.”  \n     形式化：  \n     \\[\n     \\forall C_2 > C_1: \\; Q(C_2) \\ge Q(C_1),\\ \\text{且在观测区间内未见拐点或平台效应}\n     \\]  \n     其中 \\(Q(C)\\) 表示在给定测试算力 \\(C\\) 下生成假说的平均质量（某种聚合指标）。\n\n   - 命题 B（你指出的行为特征）：  \n     > “68% 的 agent 推理忽略证据；belief revision 只有 26%。”  \n     形式化：  \n     设 \\(p_{\\text{ignore}} \\approx 0.68\\), \\(p_{\\text{revise}} \\approx 0.26\\)。  \n     大致表示：  \n     - 大多数推理轨迹中，新的证据未被正确整合；  \n     - 显式信念更新出现的频率较低。\n\n   问题是：在逻辑上，是否存在模型 \\(Q(C)\\) 与行为 \\(p_{\\text{ignore}}, p_{\\text{revise}}\\) 使得 A 和 B 同时成立？这就是“COMPATIBLE / INCOMPATIBLE”的判断。\n\n2. **从“缺陷过程”到“仍然可随算力提升”**\n\n   我们把“忽略证据 + 低频信念修正”抽象为一个噪声或效率低下的推理过程：\n\n   - 设每一轮推理（一次 agent 调用或一个 reasoning step）有概率 \\(p_{\\text{good}}\\) 产生“有效的、有证据支持的改进”，  \n     同时有概率 \\(1 - p_{\\text{good}}\\) 只是“无效/瞎转 / 忽略证据”。\n\n   - 更具体一点，可以建模为：  \n     每轮推理对假设质量 \\(Q\\) 的增量 \\(\\Delta Q_i\\) 为：\n     \\[\n     \\Delta Q_i = \n     \\begin{cases}\n     g > 0 & \\text{以概率 } p_{\\text{good}} \\\\\n     0 \\text{ 或甚至 } < 0 & \\text{以概率 } 1-p_{\\text{good}}\n     \\end{cases}\n     \\]\n\n   在“证据常被忽略”的设定下，我们只是说 \\(p_{\\text{good}}\\) 很小，并且很多轮的 \\(\\Delta Q_i\\) 接近 0 或带一点负贡献。\n\n   然而，只要满足：\n   \\[\n   \\mathbb{E}[\\Delta Q_i] > 0\n   \\]\n   即平均每一轮仍有正的期望增益，那么随着轮数 \\(N\\)（或总算力 \\(C \\propto N\\)）增加：\n   \\[\n   \\mathbb{E}[Q_N] = Q_0 + N \\cdot \\mathbb{E}[\\Delta Q_i]\n   \\]\n   将随 \\(N\\) 增大而单调上升（至少在实验范围内），即“质量随算力提升”。\n\n   这说明：  \n   - **即使大多数步骤是低效或错误的，只要少部分步骤是高价值的，增加总步骤数仍然可以提高总体质量。**  \n   - “过程有缺陷”与“随算力性能单调增加”在逻辑上不矛盾。\n\n3. **多代理 / 多样性与筛选机制的作用**\n\n   Co-Scientist 的框架不是“单一推理链无条件信任”，而是：\n\n   - 创建很多候选假设和推理链（多代理、多样化增广）；  \n   - 再通过某种筛选、评分、批判或投票机制选出更优的假设。\n\n   抽象成两个层次：\n\n   1. 生成层：  \n      - 每个代理有较高概率忽略证据；  \n      - 但仍有一定概率产出“好假设 / 好推理”。\n\n   2. 选择层：  \n      - 通过评分函数、自动评审、额外调用模型等机制，倾向于保留质量更高的假设，过滤掉明显差的。\n\n   模型化：假设生成层整体输出的质量分布 \\(P(Q)\\) 是非常偏噪的，但右尾（高质量假设）不为零。增加算力意味着：\n\n   - 生成的候选假设数 \\(n\\) 增大；  \n   - 选择层可以在更大的样本集合中选取最高分的一个或前若干个。\n\n   如果质量是一个随机变量 \\(Q_1, \\dots, Q_n\\) 独立同分布来自 \\(P(Q)\\)，且选择的是 \\(\\max Q_i\\)，则极值理论告诉我们：\n\n   \\[\n   \\mathbb{E}[\\max(Q_1,\\dots,Q_n)] \\text{ 随 } n \\text{ 增加而上升} \n   \\]\n\n   即使 \\(P(Q)\\) 的大部分质量集中在“平庸甚至错误”的区域，只要存在一小部分概率质量对应“真正高质量假设”，增加 \\(n\\)（=增加算力和调用次数）就会提高最终被选中的假设质量。这与“多数推理轨迹忽略证据”完全兼容。\n\n4. **为什么“忽略证据率 68%”不必导致“质量不再提升”**\n\n   你的担心是：更多算力意味着：\n   - 更多轮的“忽略证据的推理”；  \n   - 以及“信念不更新”的僵化循环。\n\n   但在一个由生成 + 选择组成的系统中，这个担忧只有在以下条件都满足时才会导致“与质量提升不兼容”：\n\n   1. 忽略证据 / 不修正信念导致 **每一轮的期望增量非正**（\\(\\mathbb{E}[\\Delta Q_i] \\le 0\\)）；  \n   2. 没有有效的筛选机制，系统只是盲目累积这些 flawed hypotheses；  \n   3. 或者系统的 evaluation/selection 自身与生成过程一样盲目且系统性偏差相同，使得增加候选并不能增加“真正好的被选出”的概率。\n\n   而你描述的",
+        "success": true,
+        "attempts": 1
+      }
+    ],
+    "confidence": 0.57,
+    "disagreement": 0.2403,
+    "top_answer": "COMPATIBLE",
+    "top_strategy": "breadth_first",
+    "weights": {
+      "breadth_first": {
+        "self_confidence": 0.95,
+        "judge_score": 9.5,
+        "judge_normalized": 0.95,
+        "weight": 0.9025,
+        "penalties": []
+      },
+      "constraint_propagation": {
+        "self_confidence": 0.9,
+        "judge_score": 9.0,
+        "judge_normalized": 0.9,
+        "weight": 0.81,
+        "penalties": []
+      },
+      "counterfactual": {
+        "self_confidence": 0.65,
+        "judge_score": 6.5,
+        "judge_normalized": 0.65,
+        "weight": 0.4225,
+        "penalties": []
+      },
+      "direct": {
+        "self_confidence": 0.85,
+        "judge_score": 8.5,
+        "judge_normalized": 0.85,
+        "weight": 0.7225,
+        "penalties": []
+      },
+      "science_deep": {
+        "self_confidence": 0.78,
+        "judge_score": 7.800000000000001,
+        "judge_normalized": 0.78,
+        "weight": 0.6084,
+        "penalties": []
+      }
+    },
+    "judge_scores": {
+      "breadth_first": 9.5,
+      "constraint_propagation": 9.0,
+      "counterfactual": 6.5,
+      "direct": 8.5,
+      "science_deep": 7.800000000000001
+    },
+    "judge_verdict": "",
+    "outliers": [],
+    "low_confidence_ids": [],
+    "collective_blind_risk": false,
+    "injection_probability": 0.0,
+    "injection_type": null,
+    "speculation_score": 0.0,
+    "speculation_matches": [],
+    "sim_matrix": {
+      "breadth_first": {
+        "constraint_propagation": 0.818,
+        "counterfactual": 0.818,
+        "direct": 0.818,
+        "science_deep": 1.0,
+        "_avg": 0.864
+      },
+      "constraint_propagation": {
+        "breadth_first": 0.818,
+        "counterfactual": 1.0,
+        "direct": 1.0,
+        "science_deep": 0.818,
+        "_avg": 0.909
+      },
+      "counterfactual": {
+        "breadth_first": 0.818,
+        "constraint_propagation": 1.0,
+        "direct": 1.0,
+        "science_deep": 0.818,
+        "_avg": 0.909
+      },
+      "direct": {
+        "breadth_first": 0.818,
+        "constraint_propagation": 1.0,
+        "counterfactual": 1.0,
+        "science_deep": 0.818,
+        "_avg": 0.909
+      },
+      "science_deep": {
+        "breadth_first": 1.0,
+        "constraint_propagation": 0.818,
+        "counterfactual": 0.818,
+        "direct": 0.818,
+        "_avg": 0.864
+      }
+    },
+    "reasoning_trail": [
+      {
+        "strategy": "breadth_first",
+        "model": "gemini-3.1-pro-preview",
+        "success": true,
+        "self_confidence": 0.95,
+        "core_answer": "COMPATIBLE",
+        "judge_score": 9.5,
+        "weight": 0.9025,
+        "penalties": [],
+        "status": "selected"
+      },
+      {
+        "strategy": "constraint_propagation",
+        "model": "o4-mini",
+        "success": true,
+        "self_confidence": 0.9,
+        "core_answer": "INCOMPATIBLE",
+        "judge_score": 9.0,
+        "weight": 0.81,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "counterfactual",
+        "model": "grok-4.1",
+        "success": true,
+        "self_confidence": 0.65,
+        "core_answer": "INCOMPATIBLE",
+        "judge_score": 6.5,
+        "weight": 0.4225,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "deep_first",
+        "model": "gpt-5.5",
+        "success": false,
+        "status": "failed",
+        "error": "'str' object has no attribute 'choices'"
+      },
+      {
+        "strategy": "direct",
+        "model": "kimi-k2.5",
+        "success": true,
+        "self_confidence": 0.85,
+        "core_answer": "INCOMPATIBLE",
+        "judge_score": 8.5,
+        "weight": 0.7225,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "science_deep",
+        "model": "gpt-5.1",
+        "success": true,
+        "self_confidence": 0.78,
+        "core_answer": "COMPATIBLE",
+        "judge_score": 7.800000000000001,
+        "weight": 0.6084,
+        "penalties": [],
+        "status": "contributing"
+      }
+    ],
+    "low_confidence": false,
+    "uncertain": false,
+    "arbitration_applied": false,
+    "validator_applied": false,
+    "validator_pass": true,
+    "validator_violations": [],
+    "elapsed_time": 32.45,
+    "timestamp": 1780252129.8158982,
+    "degraded": true,
+    "failed_generators": [
+      "deep_first"
+    ],
+    "claim": "Quality scales with test-time compute without saturation",
+    "question_id": "Q4"
+  },
+  {
+    "question": "The Co-Scientist paper presents 3 successful wet-lab validations (AML drug repurposing, liver fibrosis, antimicrobial resistance) as evidence of the system's general capability. But the paper tested 11 biomedical problems and achieved notable success in only 3. Furthermore, all validations are preclinical (no human trials). Do 3 successes out of 11 attempts (27% success rate), all in preclinical settings, constitute sufficient evidence for the claim of 'accelerating scientific discovery'? Answer SUFFICIENT or INSUFFICIENT with reasoning.",
+    "candidates": [
+      {
+        "strategy": "breadth_first",
+        "model": "gemini-3.1-pro-preview",
+        "answer": "【答案】SUFFICIENT\n【置信度】0.95\n【推理】\n1. **生物医学领域的基准成功率**：在早期的生物医学研究中，绝大多数的新假设都会在实验中失败。在11个复杂的生物医学问题中取得3个经过湿实验验证的成功（27%的成功率），相比于传统的高通量筛选或人工试错方法，这实际上是一个非常高的命中率。\n2. **“加速”体现在时间压缩上**：科学发现的核心瓶颈之一是阅读海量文献、整合数据并提出可测试的假设所需的时间。AI系统能够迅速生成针对11个问题的假设并取得3个实质性突破，极大地压缩了传统科研团队需要数月甚至数年才能完成的早期研究周期，这完全符合“加速”的定义。\n3. **发现（Discovery）与开发（Development）的界限**：该论文的主张是“加速科学发现”，而非“加速临床药物开发”。在科学界，临床前湿实验验证正是早期“科学发现”阶段的黄金标准。要求提供人体临床试验数据（通常需要十几年时间和数十亿美元）是混淆了早期科学发现与晚期临床转化的概念。\n4. **领域的泛化能力**：这3个成功案例跨越了完全不同的复杂生物学领域（急性髓系白血病、肝纤维化、抗微生物耐药性），证明了该系统具有广泛的通用性，而非仅在单一狭窄领域内产生的偶然结果。",
+        "core_answer": "SUFFICIENT",
+        "self_confidence": 0.95,
+        "reasoning": "1. **生物医学领域的基准成功率**：在早期的生物医学研究中，绝大多数的新假设都会在实验中失败。在11个复杂的生物医学问题中取得3个经过湿实验验证的成功（27%的成功率），相比于传统的高通量筛选或人工试错方法，这实际上是一个非常高的命中率。\n2. **“加速”体现在时间压缩上**：科学发现的核心瓶颈之一是阅读海量文献、整合数据并提出可测试的假设所需的时间。AI系统能够迅速生成针对11个问题的假设并取得3个实质性突破，极大地压缩了传统科研团队需要数月甚至数年才能完成的早期研究周期，这完全符合“加速”的定义。\n3. **发现（Discovery）与开发（Development）的界限**：该论文的主张是“加速科学发现”，而非“加速临床药物开发”。在科学界，临床前湿实验验证正是早期“科学发现”阶段的黄金标准。要求提供人体临床试验数据（通常需要十几年时间和数十亿美元）是混淆了早期科学发现与晚期临床转化的概念。\n4. **领域的泛化能力**：这3个成功案例跨越了完全不同的复杂生物学领域（急性髓系白血病、肝纤维化、抗微生物耐药性），证明了该系统具有广泛的通用性，而非仅在单一狭窄领域内产生的偶然结果。",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "constraint_propagation",
+        "model": "o4-mini",
+        "answer": "【答案】INSUFFICIENT  \n【置信度】0.90  \n【推理】  \n1. 列出所有已知约束条件  \n   - Co-Scientist 针对 11 个生物医学问题进行了测试。  \n   - 仅有 3 个问题（AML 药物再定位、肝纤维化、抗菌耐药）获得了湿实验室验证成功。  \n   - 3/11 ≈ 27% 的成功率。  \n   - 所有验证均处于临床前阶段，无人体临床试验数据。  \n   - “加速科学发现”主张系统具有通用性、高效率、可转化为真实临床成果。  \n\n2. 从最确定的约束开始传播  \n   - 27% 的预临床成功率明显低于 50%，表明大多数预测未得到实验证实。  \n   - 缺乏任何临床数据，无法评估后续转化效率。  \n\n3. 结合传播结果判断  \n   - 仅 3 个案例的预临床成功不足以证明该系统在更广泛生物医学领域或后续临床阶段同样高效。  \n   - 样本量（11 个问题）过小，统计学意义不足以支撑泛化结论。  \n\n4. 冲突与不确定区域  \n   - 无内部冲突；所有约束共同指向同一结论。  \n   - 不确定区域：预临床成果能否转化为临床成功尚无数据支持，但即便转化，还不足以覆盖“大范围加速发现”的主张。  \n\n5. 验证所有条件  \n   - 已覆盖测试数量、成功率、验证阶段、主张要求等所有约束，无遗漏。  \n\n综合以上，现有证据无法充分支持“加速科学发现”这一泛化声明。",
+        "core_answer": "INSUFFICIENT",
+        "self_confidence": 0.9,
+        "reasoning": "1. 列出所有已知约束条件  \n   - Co-Scientist 针对 11 个生物医学问题进行了测试。  \n   - 仅有 3 个问题（AML 药物再定位、肝纤维化、抗菌耐药）获得了湿实验室验证成功。  \n   - 3/11 ≈ 27% 的成功率。  \n   - 所有验证均处于临床前阶段，无人体临床试验数据。  \n   - “加速科学发现”主张系统具有通用性、高效率、可转化为真实临床成果。  \n\n2. 从最确定的约束开始传播  \n   - 27% 的预临床成功率明显低于 50%，表明大多数预测未得到实验证实。  \n   - 缺乏任何临床数据，无法评估后续转化效率。  \n\n3. 结合传播结果判断  \n   - 仅 3 个案例的预临床成功不足以证明该系统在更广泛生物医学领域或后续临床阶段同样高效。  \n   - 样本量（11 个问题）过小，统计学意义不足以支撑泛化结论。  \n\n4. 冲突与不确定区域  \n   - 无内部冲突；所有约束共同指向同一结论。  \n   - 不确定区域：预临床成果能否转化为临床成功尚无数据支持，但即便转化，还不足以覆盖“大范围加速发现”的主张。  \n\n5. 验证所有条件  \n   - 已覆盖测试数量、成功率、验证阶段、主张要求等所有约束，无遗漏。  \n\n综合以上，现有证据无法充分支持“加速科学发现”这一泛化声明。",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "counterfactual",
+        "model": "grok-4.1",
+        "answer": "【答案】INSUFFICIENT\n【置信度】0.85\n【推理】The core claim under scrutiny is whether the reported results constitute “sufficient evidence” that the system accelerates scientific discovery in a generalizable sense. Three considerations make this insufficient. First, the 3/11 success rate (27 %) already encodes a high failure rate on the very problems the system was asked to solve; without a baseline comparison to unaided expert teams or prior computational methods on the same 11 tasks, it is impossible to quantify acceleration rather than occasional utility. Second, all three validations remain strictly preclinical; acceleration of discovery is typically measured by downstream metrics (IND filings, clinical-trial initiation, or changes in therapeutic practice), none of which are present. Third, selective reporting of positive cases while omitting detailed analysis of the eight unsuccessful runs prevents assessment of systematic limitations, a prerequisite for any strong generalization claim. Taken together, these gaps render the current evidence compatible with “occasional useful hypothesis generation” but not yet with the stronger assertion of accelerated discovery.",
+        "core_answer": "INSUFFICIENT",
+        "self_confidence": 0.85,
+        "reasoning": "The core claim under scrutiny is whether the reported results constitute “sufficient evidence” that the system accelerates scientific discovery in a generalizable sense. Three considerations make this insufficient. First, the 3/11 success rate (27 %) already encodes a high failure rate on the very problems the system was asked to solve; without a baseline comparison to unaided expert teams or prior computational methods on the same 11 tasks, it is impossible to quantify acceleration rather than occasional utility. Second, all three validations remain strictly preclinical; acceleration of discovery is typically measured by downstream metrics (IND filings, clinical-trial initiation, or changes in therapeutic practice), none of which are present. Third, selective reporting of positive cases while omitting detailed analysis of the eight unsuccessful runs prevents assessment of systematic limitations, a prerequisite for any strong generalization claim. Taken together, these gaps render the current evidence compatible with “occasional useful hypothesis generation” but not yet with the stronger assertion of accelerated discovery.",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "deep_first",
+        "model": "gpt-5.5",
+        "answer": null,
+        "core_answer": "",
+        "self_confidence": 0.0,
+        "reasoning": "",
+        "success": false,
+        "error": "'str' object has no attribute 'choices'",
+        "attempts": 1
+      },
+      {
+        "strategy": "direct",
+        "model": "kimi-k2.5",
+        "answer": "【答案】INSUFFICIENT\n\n【置信度】0.85\n\n【推理】\n\n1. **Success rate analysis**: 3/11 (27%) is a low success rate for validating a claim of general capability. This suggests the system may be inconsistent or highly domain-dependent, rather than reliably accelerating discovery across biomedical problems.\n\n2. **Selection bias concern**: The paper highlights 3 successes but doesn't characterize the 8 failures. Without knowing why 73% of attempts failed, we cannot assess whether the successes represent genuine capability or cherry-picking.\n\n3. **Preclinical limitation**: All validations are preclinical (cell/animal models). This is a major gap—many promising preclinical findings fail in human trials. Claiming \"accelerating scientific discovery\" based solely on preclinical results overstates the evidence, as the actual bottleneck in drug development is often the clinical translation gap.\n\n4. **Generalization gap**: The three successes span different domains (oncology, fibrosis, antimicrobial resistance), which superficially suggests breadth. However, with 8 unreported failures, we cannot determine if successes cluster in specific problem types or represent genuine generalizability.\n\n5. **Burden of proof for \"accelerating discovery\"**: This is a strong claim implying systematic improvement over existing methods. A 27% success rate in preclinical validation—without comparison to baseline human performance or existing computational methods—provides weak evidence for such acceleration.\n\n6. **Missing comparative baseline**: The paper doesn't establish what success rate human scientists or other AI systems achieve on comparable problems, making \"acceleration\" unquantified.\n\nThe evidence demonstrates *potential* in specific cases but is statistically weak, incomplete in reporting, and premature in clinical relevance for the sweeping claim made.",
+        "core_answer": "INSUFFICIENT",
+        "self_confidence": 0.85,
+        "reasoning": "1. **Success rate analysis**: 3/11 (27%) is a low success rate for validating a claim of general capability. This suggests the system may be inconsistent or highly domain-dependent, rather than reliably accelerating discovery across biomedical problems.\n\n2. **Selection bias concern**: The paper highlights 3 successes but doesn't characterize the 8 failures. Without knowing why 73% of attempts failed, we cannot assess whether the successes represent genuine capability or cherry-picking.\n\n3. **Preclinical limitation**: All validations are preclinical (cell/animal models). This is a major gap—many promising preclinical findings fail in human trials. Claiming \"accelerating scientific discovery\" based solely on preclinical results overstates the evidence, as the actual bottleneck in drug development is often the clinical translation gap.\n\n4. **Generalization gap**: The three successes span different domains (oncology, fibrosis, antimicrobial resistance), which superficially suggests breadth. However, with 8 unreported failures, we cannot determine if successes cluster in specific problem types or represent genuine generalizability.\n\n5. **Burden of proof for \"accelerating discovery\"**: This is a strong claim implying systematic improvement over existing methods. A 27% success rate in preclinical validation—without comparison to baseline human performance or existing computational methods—provides weak evidence for such acceleration.\n\n6. **Missing comparative baseline**: The paper doesn't establish what success rate human scientists or other AI systems achieve on comparable problems, making \"acceleration\" unquantified.\n\nThe evidence demonstrates *potential* in specific cases but is statistically weak, incomplete in reporting, and premature in clinical relevance for the sweeping claim made.",
+        "success": true,
+        "attempts": 1
+      },
+      {
+        "strategy": "science_deep",
+        "model": "gpt-5.1",
+        "answer": "【答案】INSUFFICIENT  \n【置信度】0.86  \n\n【推理】  \n1. **明确命题与证据**  \n   - 命题：Co-Scientist 系统能“加速科学发现”（accelerating scientific discovery），是一个**普遍性、因果性**较强的主张。隐含含义至少包括：  \n     - 在一定范围内、针对多类科学问题，  \n     - 能在时间、成本或成功率上**优于或显著改善**传统工作流。  \n   - 给出的证据：  \n     - 共测试 11 个生物医学问题。  \n     - 其中 3 个问题有成功的湿实验验证：AML 药物再利用、肝纤维化、抗菌耐药（均为前临床模型）。  \n     - 换算为一个粗略成功率：3/11 ≈ 27%。  \n     - 所有验证停留在**前临床阶段**（体外/动物/早期机制层面），无临床试验或临床转化证据。\n\n2. **统计与归纳角度分析证据强度**  \n   这里不做正式假设检验，只进行证据强度的科学评估。  \n\n   2.1. **样本量与基线对照问题**  \n   - 11 个任务是一个非常有限的“样本数”：  \n     - 没有定义清晰的“任务空间”（例如：所有可行的生物医学研究问题中的随机抽样，还是精心挑选的适合 LLM 的问题）。  \n     - 没有和“人类专家单独工作”的系统对照实验（如同一题目，人类团队 vs 人类+Co-Scientist，比较成功率/时间/成本）。  \n   - 在没有对照基线的情况下，“3/11 成功”无法直接证明“加速”：  \n     - 可能人类专家独立完成同样 11 个问题，会在相同或更短时间内获得相似数量乃至更多的成功；  \n     - 也可能 Co-Scientist 只是帮助筛出一些在传统流程下也能较快找到的 hits。  \n   - 因此，目前只能说：  \n     - 【已被证明的事实】系统在 11 个选定问题中，能在 3 个问题上提出可在湿实验中验证成功的假设。  \n     - 【需进一步验证的推断】系统相较于人类传统方法，确实“加速”了科学发现过程。  \n\n   2.2. **成功率 27% 的含义**  \n   - 27% “成功率”本身缺乏上下文：  \n     - 未说明“成功”的标准是否统一（验证强度、效应量、是否可重复等）。  \n     - 未说明每个问题投了多少条假设 / 多少条件组合，是否存在多次尝试后才获得的阳性结果（publication bias 可能存在：只展示成功案例）。  \n   - 没有比较基线：  \n     - 若传统药物再利用/靶点发现的 hit rate 在类似设置下仅为 1–5%，那么 27% 或许是极其可观的提升；  \n     - 若研究者本来就能从 11 个问题中筛出 3 个较容易取得前临床阳性结果的方向，则该成功率对“加速”结论贡献有限。  \n   - 因此，“3/11 = 27%”这一数值在没有对照与抽样描述的情况下，对普遍性主张的支持有限。  \n\n3. **前临床结果对“加速科学发现”的外推性**  \n   3.1. **从前临床到临床的成功转化率低**  \n   - 在药物发现和生物医学中，业内公认：  \n     - 从前临床阳性结果（体外/动物）到真正经过临床试验证明有效、安全并获批的药物，成功率非常低（往往个位数百分比甚至更低）。  \n   - 因此：  \n     - 【已被证明的事实】Co-Scientist 协助生成的 3 项前临床发现，在已有实验条件下是可复现的、可观察到效果的。  \n     - 【需进一步验证的推断】这些发现能够沿着转化路径（临床前→临床 I/II/III → 临床实践）真正“加速”实用性科学成果的产生。  \n\n   3.2. **“加速”需要时间维度与流程比较**  \n   - “加速科学发现”是一个关于**时间和效率**的 claim，严格来说需要至少满足：  \n     - 对照：有一组传统团队在相似问题上不使用系统；  \n     - 指标：比较从问题提出 → 可发表/可转化结果的平均时间、所需实验迭代次数、成本等。  \n   - 当前证据只展示：  \n     - 存在一些前临床发现是在 Co-Scientist 的参与下产生的；  \n     - 没有展示：如果不使用 Co-Scientist，这些发现是否会更慢、需要更多实验或更大团队。  \n   - 因而在时间维度上，仍停留在**合理推测而非严谨证明**。  \n\n4. **外部可推广性（general capability）的论证不足**  \n   - 命题是“general capability to accelerate scientific discovery”，而证据仅来自：  \n     - 同一个领域：生物医学/生命科学；  \n     - 同一类工作流：围绕药物/靶点/分子机制相关的问题；  \n     - 规模有限：11 个问题，其中 3 个成功。  \n   - 一般要声称“通用加速科学发现能力”，需要：  \n     1. 不同学科/子领域（如材料科学、物理、化学、工程等）上的多个案例；  \n     2. 明确的对照实验（人类 alone vs 人类+系统）；  \n     3. 多轮独立复现（不同实验室独立使用系统，仍能体现加速效果）。  \n   - 目前证据仅能支撑较弱结论：  \n     - “Co-Scientist 能在若干具体的生物医学问题上提出可前临床验证的有用假设”，  \n     - 而不能严谨地推广到“普遍加速科学发现”。  \n\n5. **综合评估：证据与结论之间的匹配度**  \n   - 证据层级：  \n",
+        "core_answer": "INSUFFICIENT",
+        "self_confidence": 0.86,
+        "reasoning": "1. **明确命题与证据**  \n   - 命题：Co-Scientist 系统能“加速科学发现”（accelerating scientific discovery），是一个**普遍性、因果性**较强的主张。隐含含义至少包括：  \n     - 在一定范围内、针对多类科学问题，  \n     - 能在时间、成本或成功率上**优于或显著改善**传统工作流。  \n   - 给出的证据：  \n     - 共测试 11 个生物医学问题。  \n     - 其中 3 个问题有成功的湿实验验证：AML 药物再利用、肝纤维化、抗菌耐药（均为前临床模型）。  \n     - 换算为一个粗略成功率：3/11 ≈ 27%。  \n     - 所有验证停留在**前临床阶段**（体外/动物/早期机制层面），无临床试验或临床转化证据。\n\n2. **统计与归纳角度分析证据强度**  \n   这里不做正式假设检验，只进行证据强度的科学评估。  \n\n   2.1. **样本量与基线对照问题**  \n   - 11 个任务是一个非常有限的“样本数”：  \n     - 没有定义清晰的“任务空间”（例如：所有可行的生物医学研究问题中的随机抽样，还是精心挑选的适合 LLM 的问题）。  \n     - 没有和“人类专家单独工作”的系统对照实验（如同一题目，人类团队 vs 人类+Co-Scientist，比较成功率/时间/成本）。  \n   - 在没有对照基线的情况下，“3/11 成功”无法直接证明“加速”：  \n     - 可能人类专家独立完成同样 11 个问题，会在相同或更短时间内获得相似数量乃至更多的成功；  \n     - 也可能 Co-Scientist 只是帮助筛出一些在传统流程下也能较快找到的 hits。  \n   - 因此，目前只能说：  \n     - 【已被证明的事实】系统在 11 个选定问题中，能在 3 个问题上提出可在湿实验中验证成功的假设。  \n     - 【需进一步验证的推断】系统相较于人类传统方法，确实“加速”了科学发现过程。  \n\n   2.2. **成功率 27% 的含义**  \n   - 27% “成功率”本身缺乏上下文：  \n     - 未说明“成功”的标准是否统一（验证强度、效应量、是否可重复等）。  \n     - 未说明每个问题投了多少条假设 / 多少条件组合，是否存在多次尝试后才获得的阳性结果（publication bias 可能存在：只展示成功案例）。  \n   - 没有比较基线：  \n     - 若传统药物再利用/靶点发现的 hit rate 在类似设置下仅为 1–5%，那么 27% 或许是极其可观的提升；  \n     - 若研究者本来就能从 11 个问题中筛出 3 个较容易取得前临床阳性结果的方向，则该成功率对“加速”结论贡献有限。  \n   - 因此，“3/11 = 27%”这一数值在没有对照与抽样描述的情况下，对普遍性主张的支持有限。  \n\n3. **前临床结果对“加速科学发现”的外推性**  \n   3.1. **从前临床到临床的成功转化率低**  \n   - 在药物发现和生物医学中，业内公认：  \n     - 从前临床阳性结果（体外/动物）到真正经过临床试验证明有效、安全并获批的药物，成功率非常低（往往个位数百分比甚至更低）。  \n   - 因此：  \n     - 【已被证明的事实】Co-Scientist 协助生成的 3 项前临床发现，在已有实验条件下是可复现的、可观察到效果的。  \n     - 【需进一步验证的推断】这些发现能够沿着转化路径（临床前→临床 I/II/III → 临床实践）真正“加速”实用性科学成果的产生。  \n\n   3.2. **“加速”需要时间维度与流程比较**  \n   - “加速科学发现”是一个关于**时间和效率**的 claim，严格来说需要至少满足：  \n     - 对照：有一组传统团队在相似问题上不使用系统；  \n     - 指标：比较从问题提出 → 可发表/可转化结果的平均时间、所需实验迭代次数、成本等。  \n   - 当前证据只展示：  \n     - 存在一些前临床发现是在 Co-Scientist 的参与下产生的；  \n     - 没有展示：如果不使用 Co-Scientist，这些发现是否会更慢、需要更多实验或更大团队。  \n   - 因而在时间维度上，仍停留在**合理推测而非严谨证明**。  \n\n4. **外部可推广性（general capability）的论证不足**  \n   - 命题是“general capability to accelerate scientific discovery”，而证据仅来自：  \n     - 同一个领域：生物医学/生命科学；  \n     - 同一类工作流：围绕药物/靶点/分子机制相关的问题；  \n     - 规模有限：11 个问题，其中 3 个成功。  \n   - 一般要声称“通用加速科学发现能力”，需要：  \n     1. 不同学科/子领域（如材料科学、物理、化学、工程等）上的多个案例；  \n     2. 明确的对照实验（人类 alone vs 人类+系统）；  \n     3. 多轮独立复现（不同实验室独立使用系统，仍能体现加速效果）。  \n   - 目前证据仅能支撑较弱结论：  \n     - “Co-Scientist 能在若干具体的生物医学问题上提出可前临床验证的有用假设”，  \n     - 而不能严谨地推广到“普遍加速科学发现”。  \n\n5. **综合评估：证据与结论之间的匹配度**  \n   - 证据层级：",
+        "success": true,
+        "attempts": 1
+      }
+    ],
+    "confidence": 0.57,
+    "disagreement": 0.0892,
+    "top_answer": "SUFFICIENT",
+    "top_strategy": "breadth_first",
+    "weights": {
+      "breadth_first": {
+        "self_confidence": 0.95,
+        "judge_score": 9.5,
+        "judge_normalized": 0.95,
+        "weight": 0.9025,
+        "penalties": []
+      },
+      "constraint_propagation": {
+        "self_confidence": 0.9,
+        "judge_score": 9.0,
+        "judge_normalized": 0.9,
+        "weight": 0.81,
+        "penalties": []
+      },
+      "counterfactual": {
+        "self_confidence": 0.85,
+        "judge_score": 8.5,
+        "judge_normalized": 0.85,
+        "weight": 0.7225,
+        "penalties": []
+      },
+      "direct": {
+        "self_confidence": 0.85,
+        "judge_score": 8.5,
+        "judge_normalized": 0.85,
+        "weight": 0.7225,
+        "penalties": []
+      },
+      "science_deep": {
+        "self_confidence": 0.86,
+        "judge_score": 8.6,
+        "judge_normalized": 0.86,
+        "weight": 0.7396,
+        "penalties": []
+      }
+    },
+    "judge_scores": {
+      "breadth_first": 9.5,
+      "constraint_propagation": 9.0,
+      "counterfactual": 8.5,
+      "direct": 8.5,
+      "science_deep": 8.6
+    },
+    "judge_verdict": "",
+    "outliers": [],
+    "low_confidence_ids": [],
+    "collective_blind_risk": false,
+    "injection_probability": 0.0,
+    "injection_type": null,
+    "speculation_score": 0.0,
+    "speculation_matches": [],
+    "sim_matrix": {
+      "breadth_first": {
+        "constraint_propagation": 0.818,
+        "counterfactual": 0.818,
+        "direct": 0.818,
+        "science_deep": 0.818,
+        "_avg": 0.818
+      },
+      "constraint_propagation": {
+        "breadth_first": 0.818,
+        "counterfactual": 1.0,
+        "direct": 1.0,
+        "science_deep": 1.0,
+        "_avg": 0.955
+      },
+      "counterfactual": {
+        "breadth_first": 0.818,
+        "constraint_propagation": 1.0,
+        "direct": 1.0,
+        "science_deep": 1.0,
+        "_avg": 0.955
+      },
+      "direct": {
+        "breadth_first": 0.818,
+        "constraint_propagation": 1.0,
+        "counterfactual": 1.0,
+        "science_deep": 1.0,
+        "_avg": 0.955
+      },
+      "science_deep": {
+        "breadth_first": 0.818,
+        "constraint_propagation": 1.0,
+        "counterfactual": 1.0,
+        "direct": 1.0,
+        "_avg": 0.955
+      }
+    },
+    "reasoning_trail": [
+      {
+        "strategy": "breadth_first",
+        "model": "gemini-3.1-pro-preview",
+        "success": true,
+        "self_confidence": 0.95,
+        "core_answer": "SUFFICIENT",
+        "judge_score": 9.5,
+        "weight": 0.9025,
+        "penalties": [],
+        "status": "selected"
+      },
+      {
+        "strategy": "constraint_propagation",
+        "model": "o4-mini",
+        "success": true,
+        "self_confidence": 0.9,
+        "core_answer": "INSUFFICIENT",
+        "judge_score": 9.0,
+        "weight": 0.81,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "counterfactual",
+        "model": "grok-4.1",
+        "success": true,
+        "self_confidence": 0.85,
+        "core_answer": "INSUFFICIENT",
+        "judge_score": 8.5,
+        "weight": 0.7225,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "deep_first",
+        "model": "gpt-5.5",
+        "success": false,
+        "status": "failed",
+        "error": "'str' object has no attribute 'choices'"
+      },
+      {
+        "strategy": "direct",
+        "model": "kimi-k2.5",
+        "success": true,
+        "self_confidence": 0.85,
+        "core_answer": "INSUFFICIENT",
+        "judge_score": 8.5,
+        "weight": 0.7225,
+        "penalties": [],
+        "status": "contributing"
+      },
+      {
+        "strategy": "science_deep",
+        "model": "gpt-5.1",
+        "success": true,
+        "self_confidence": 0.86,
+        "core_answer": "INSUFFICIENT",
+        "judge_score": 8.6,
+        "weight": 0.7396,
+        "penalties": [],
+        "status": "contributing"
+      }
+    ],
+    "low_confidence": false,
+    "uncertain": false,
+    "arbitration_applied": false,
+    "validator_applied": false,
+    "validator_pass": true,
+    "validator_violations": [],
+    "elapsed_time": 36.91,
+    "timestamp": 1780252168.1934369,
+    "degraded": true,
+    "failed_generators": [
+      "deep_first"
+    ],
+    "claim": "3 successful validations prove general capability",
+    "question_id": "Q5"
+  }
+]

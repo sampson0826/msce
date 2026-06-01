@@ -1,0 +1,102 @@
+{
+  "timestamp": 1780131957.47309,
+  "analysis_type": "hubble_tension_multi_constraint",
+  "proposals": {
+    "A_early_dark_energy": {
+      "name": "早期暗能量 (Early Dark Energy, EDE)",
+      "mechanism": "在z~3000处注入~5%额外暗能量，持续到z~500左右衰减。这使CMB退耦时的宇宙膨胀率增大→声视界减小→推导出的H₀升高，从而与SH0ES一致。",
+      "parameters": "f_EDE ~ 0.05, z_c ~ 3000, 衰减指数 n ~ 3",
+      "claimed_effects": "H₀↑至~71-73，不破坏CMB功率谱主峰位置",
+      "known_challenges": "S₈张力可能加剧（σ₈预测偏高），可能与DES弱引力透镜数据冲突"
+    },
+    "B_modified_gravity": {
+      "name": "修改引力 (Modified Gravity / f(R) / 大质量引力)",
+      "mechanism": "在晚期宇宙（z<1）修改广义相对论，使距离阶梯测量的局部H₀偏高但全局膨胀率不变。相当于局部有效引力常数变化→造父变星周期-光度关系偏移。",
+      "parameters": "f_R0 ~ 10^-6 到 10^-4, 或引力子质量 m_g",
+      "claimed_effects": "只在z<0.01内影响H₀测量，不影响CMB和BAO",
+      "known_challenges": "需满足太阳系检验（Cassini, 月球激光测距），可能破坏大尺度结构增长速率"
+    },
+    "C_extra_neutrinos": {
+      "name": "额外中微子/暗辐射 (ΔN_eff + m_sterile)",
+      "mechanism": "引入额外辐射自由度ΔN_eff≈0.3-0.5（如惰性中微子），增加CMB退耦前的辐射能量密度→声视界减小→推导H₀升高。",
+      "parameters": "ΔN_eff ~ 0.3-0.5, 可能 m_sterile ~ 0.1-1 eV",
+      "claimed_effects": "H₀↑至~70-71，同时保持CMB功率谱形状",
+      "known_challenges": "BBN氦-4丰度约束ΔN_eff<0.3（95%CL），可能与氘丰度冲突。CMB阻尼尾可能检测到额外辐射平滑效应。"
+    },
+    "D_decaying_dark_matter": {
+      "name": "衰变暗物质 (Decaying Dark Matter, DDM)",
+      "mechanism": "部分暗物质（~5-10%）在z~10^4到z~10^2之间衰变为暗辐射。衰变产物增加晚期辐射密度→减小声视界→H₀升高。",
+      "parameters": "衰变比例Γ ~ (10-100 Gyr)^-1, 衰变红移z_decay",
+      "claimed_effects": "H₀↑至~70-72，对CMB的影响与EDE类似但更平滑",
+      "known_challenges": "衰变热可能破坏再电离历史；扰动演化可能与Planck CMB透镜谱冲突"
+    },
+    "E_local_void": {
+      "name": "局部空洞假说 (Local Void / 局部膨胀率偏高)",
+      "mechanism": "银河系位于一个~200Mpc半径的低密度区（局部空洞），空洞内的局部膨胀率高于宇宙平均。造父变星→Ia超新星的距离阶梯全在空洞内→测得的H₀是局部值不是全局值。",
+      "parameters": "空洞密度对比δ ~ -0.3, 半径 ~ 200-300 Mpc",
+      "claimed_effects": "不需要修改ΛCDM物理，纯观测效应→H₀表观张力",
+      "known_challenges": "现有巡天（2M++）显示局部空洞不足以解释全部张力（最多贡献~1-2km/s/Mpc）。需要精细调谐空洞形状。"
+    },
+    "F_systematic_error": {
+      "name": "未被发现的系统误差 (Unknown Systematics)",
+      "mechanism": "Planck或SH0ES其中一方（或双方）存在未被识别的系统误差。可能来源：CMB前景扣除、造父变星周光关系的金属丰度依赖、SNe Ia标准化中的人口漂移。",
+      "parameters": "无自由参数——需要更精确的独立测量来验证",
+      "claimed_effects": "如果只有一方有系统误差，张力自然消失",
+      "known_challenges": "JWST已独立验证造父变星周期-光度关系（2023年结果支持SH0ES），降低了系统误差假说的可能性"
+    }
+  },
+  "results": {
+    "A_early_dark_energy": {
+      "proposal_name": "早期暗能量 (Early Dark Energy, EDE)",
+      "msce_confidence": 0.0762,
+      "msce_disagreement": 0.712,
+      "msce_top_answer": "早期暗能量 EDE（f_EDE≈0.05, z_c≈3000, n≈3）只能部分缓解哈勃张力，不能同时通过全部8项约束一致性检查；总体结论是：作为完整解法不成立或至少受到强烈限制，主要失败点在 CMB精细谱形、BAO+CMB联合约束和S₈/大尺度结构约束。",
+      "constraint_check_raw": "{\n  \"cmb_power_spectrum\": {\n    \"status\": \"tension\",\n    \"detail\": \"EDE在z~3000注入f_EDE~0.05可通过减小声视界并重新调节H0、Ω_c h^2、n_s等参数来近似保持声学角尺度θ_s，因此主峰位置可被拟合。但额外早期能量密度会改变退耦前膨胀率、早期ISW效应、阻尼尾和峰高比。Planck TT/TE/EE对这些效应约束很强；f_EDE~0.05通常处于可勉强允许但有张力的范围，而若要把H0推到72-73通常需要更大的f_EDE并显著恶化CMB拟合。因此不是明确通过，而是与高精度Planck谱存在张力。\"\n  },\n  \"bao_scale\": {\n    \"status\": \"violation\",\n    \"detail\": \"该机制的核心是减小拖曳 epoch 的共动声视界r_d，以便在保持CMB角尺度的同时提高H0。要把H0从67.4提高到约73，通常需要将r_d从标准ΛCDM的约147 Mpc降低到约136-140 Mpc量级。题设要求DESI 2024 BAO约束r_d=147.5±0.3 M",
+      "msce_elapsed": 94.6
+    },
+    "B_modified_gravity": {
+      "proposal_name": "修改引力 (Modified Gravity / f(R) / 大质量引力)",
+      "msce_confidence": 0.2532,
+      "msce_disagreement": 0.0934,
+      "msce_top_answer": "该修改引力方案（通过局部修改引力改变造父变星光度以解释哈勃张力）不可行，在8项观测约束中至少面临3项致命冲突。",
+      "constraint_check_raw": "{\n  \"cmb_power_spectrum\": {\n    \"status\": \"tension\",\n    \"detail\": \"若背景膨胀史和早期物理完全保持ΛCDM，则声学峰位置θ_s、重子/暗物质决定的峰高比基本不变，主CMB TT峰可通过；但f(R)或大质量引力在晚期会改变引力势演化、ISW效应和CMB lensing。对于|f_R0|~10^-5-10^-4，Planck的透镜势谱和低ℓTT通常会给出明显限制；|f_R0|~10^-6附近才可能勉强兼容。因此不是自动通过，存在晚期CMB二级效应张力。\"\n  },\n  \"bao_scale\": {\n    \"status\": \"pass\",\n    \"detail\": \"该方案声称只在z<0.01或晚期局域引力中起作用，且不改变早期声波物理，因此共动声视界r_d应保持在ΛCDM的约147 Mpc，符合DESI 2024约束r_d=147.5±0.3 Mpc。若全局H(z)也保持Planck/BAO偏好的低H0解，则BAO尺度本身不被破坏。\"\n  },\n  \"supernova_hubble_diagram\": {\n    ",
+      "msce_elapsed": 61.5
+    },
+    "C_extra_neutrinos": {
+      "proposal_name": "额外中微子/暗辐射 (ΔN_eff + m_sterile)",
+      "msce_confidence": 0.2873,
+      "msce_disagreement": 0.5896,
+      "msce_top_answer": "额外中微子/暗辐射 (ΔN_eff + m_sterile) 方案**无法**同时满足全部8项约束，尤其在BBN氘/氦-4丰度和CMB阻尼尾方面存在严重冲突，即使通过精细调节也只能部分缓解哈勃张力，无法作为完整解决方案。",
+      "constraint_check_raw": "{\n  \"cmb_power_spectrum\": {\n    \"status\": \"tension\",\n    \"detail\": \"ΔN_eff≈0.3-0.5会增加退耦前辐射密度，使声视界r_s变小；通过提高H₀可近似保持角声尺度θ_s不变。但额外自由流辐射会改变CMB阻尼尾、早期ISW效应、声学峰相位偏移和峰高比。Planck对N_eff的约束约为N_eff≈3.0±0.17量级，因此ΔN_eff≈0.3约为~1.5-2σ张力，ΔN_eff≈0.5接近或超过~3σ。若再加入m_sterile≈0.1-1 eV，还会影响透镜振幅和小尺度功率谱。该方案不能严格保持Planck TT/TE/EE谱在~1%以内完全不变。\"\n  },\n  \"bao_scale\": {\n    \"status\": \"violation\",\n    \"detail\": \"该机制通过增加早期辐射密度来降低共动声视界r_d，以便在固定角尺度下提高H₀。ΔN_eff≈0.3-0.5通常会使r_d降低约2-4%，即从ΛCDM的约147 Mpc降至约141-144 Mpc量级。题设给出的DESI 2024 BAO约束",
+      "msce_elapsed": 54.02
+    },
+    "D_decaying_dark_matter": {
+      "proposal_name": "衰变暗物质 (Decaying Dark Matter, DDM)",
+      "msce_confidence": 0.3576,
+      "msce_disagreement": 0.4218,
+      "msce_top_answer": "DDM方案在8项约束检查中仅通过3项（CMB功率谱、BAO尺度、宇宙年龄），部分通过1项（弱引力透镜），严重失败4项（超新星距离模数、BBN、CMB透镜谱、再电离历史），整体不可行。",
+      "constraint_check_raw": "ERROR: Request timed out.",
+      "msce_elapsed": 85.26
+    },
+    "E_local_void": {
+      "proposal_name": "局部空洞假说 (Local Void / 局部膨胀率偏高)",
+      "msce_confidence": 0.1712,
+      "msce_disagreement": 0.4248,
+      "msce_top_answer": "局部空洞假说在“标准ΛCDM不变、仅靠局部密度起伏解释全部哈勃张力”的形式下，与现有8项观测约束整体不相容。它最多能贡献约 ΔH₀ ≲ 1–2 km/s/Mpc，远不足以从67–68提升到73 km/s/Mpc；要做到这一点需要极端且精细调谐的空洞结构，已被大尺度巡天和速度场测量显著限制。",
+      "constraint_check_raw": "{\n  \"cmb_power_spectrum\": {\n    \"status\": \"pass\",\n    \"detail\": \"该方案不修改早期宇宙物理、重组史、Ω_b h^2、Ω_c h^2或声视界，因此CMB声学峰位置θ_s、峰高比和阻尼尾基本保持Planck ΛCDM预测。局部200-300 Mpc空洞只影响低红移传播和局部速度场，不会显著改变Planck TT/TE/EE声学峰结构。若观测者严重偏离空洞中心会产生CMB偶极和kSZ约束，但这不是该方案给出的主要机制。\"\n  },\n  \"bao_scale\": {\n    \"status\": \"pass\",\n    \"detail\": \"局部空洞假说不改变重组前声波传播，因此共动声视界r_d仍为ΛCDM值约147 Mpc，与DESI 2024给出的r_d = 147.5 ± 0.3 Mpc一致。低红移BAO距离可能受到局部速度场小幅影响，但200-300 Mpc空洞主要对应z约0.05-0.07，DESI主BAO样本多数在更高红移，且r_d本身不被改变。\"\n  },\n  \"supernova_hubble_diagram\": {",
+      "msce_elapsed": 52.09
+    },
+    "F_systematic_error": {
+      "proposal_name": "未被发现的系统误差 (Unknown Systematics)",
+      "msce_confidence": 0.1079,
+      "msce_disagreement": 0.5817,
+      "msce_top_answer": "“未知系统误差”方案在定性上当然可以 trivially 消除哈勃张力（只要假定某一侧测量错了），但在现有多种独立观测约束下，这一方案已受到明显限制：  \n- “Planck 端存在大系统误差”的假说与 CMB 功率谱自洽性+BAO+BBN+LSS 等整体一致性要求不符，只能允许非常有限（≲1 km/s/Mpc 级）的偏差。  \n- “SH0ES 端存在大系统误差”的假说被 JWST 对造父变星标定、其他独立距离标尺（强透镜时间延迟、水脉泽、SBF 等）显著削弱，但尚未完全排除；仍可以通过多个距离阶梯环节的小系统误差叠加来解释部分或全部张力。  \n- 若要求“只靠未知系统误差、完全不引入新物理且不破坏 8 项观测约束的一致性”，则这一方案的可行性被明显压缩，但在统计上尚不能视为已经被排除，只能说“受到严重挑战”。",
+      "constraint_check_raw": "{\n  \"cmb_power_spectrum\": {\n    \"status\": \"tension\",\n    \"detail\": \"该方案本身不修改宇宙学模型，因此若系统误差主要来自SH0ES距离阶梯，Planck ΛCDM对CMB声学峰位置θ_s、峰高比和阻尼尾的拟合可保持不变，属于通过CMB约束。但若要求Planck存在足以把H₀从67.4提高到约73 km/s/Mpc的未识别系统误差，则需要显著改变由TT/TE/EE精确约束的θ_s、Ω_m h^2、Ω_b h^2或r_s推断；Planck多频段、偏振、透镜和ACT/SPT交叉检验均不支持如此大的CMB系统偏移。因此作为“Planck系统误差”解释存在明显张力，但不是单独由功率谱数值直接排除。\"\n  },\n  \"bao_scale\": {\n    \"status\": \"pass\",\n    \"detail\": \"若真实宇宙学接近Planck/BAO ΛCDM，则共动声视界r_d≈147 Mpc，与DESI 2024 BAO给出的r_d=147.5±0.3 Mpc一致。未知系统误差方案不引入早期能量注入或额外辐射，因此不会自动改",
+      "msce_elapsed": 63.85
+    }
+  },
+  "summary": {
+    "total_proposals": 6,
+    "total_time_s": 766.3
+  }
+}

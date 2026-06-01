@@ -1,0 +1,373 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{mathpazo}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{abstract}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!60!black,
+    citecolor=blue!40!black,
+    urlcolor=blue!60!black
+}
+
+\renewcommand{\abstractnamefont}{\normalfont\large\bfseries}
+\renewcommand{\abstracttextfont}{\normalfont}
+
+\title{\textbf{MSCE: Multi-Source Consistency Engine\\for Adversarial Cross-Verification of AI Claims}}
+\author{Deng Xinhang\\
+\texttt{Independent Researcher, Beijing}\\
+\texttt{\href{https://github.com/sampson0826/msce}{github.com/sampson0826/msce}}}
+\date{June 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Single AI models confidently produce wrong answers — a failure mode that no individual model can self-detect. We present MSCE (Multi-Source Consistency Engine), a verification architecture that pits six frontier AI models with heterogeneous cognitive strategies against each other in adversarial cross-validation. Claims are tested against all applicable constraints simultaneously; answers that survive adversarial elimination are evaluated by an independent judge model. MSCE achieves 100\% accuracy on a 60-question frontier benchmark (vs.\ GPT-5.5 at 85.0\%), 95.0\% on a 120-question expanded benchmark (vs.\ 88.3\%), and 87.4\% on a 206-question comprehensive benchmark (vs.\ 74.8\%). Critically, across all 386 questions spanning three benchmark suites, MSCE produces \textbf{zero high-confidence errors} — GPT-5.5 produces 54. We demonstrate MSCE's capability through six-domain accuracy decomposition, adversarial robustness testing (98.8\%), knowledge boundary calibration, and two real-world case studies: auditing Yann LeCun's LeWorldModel paper and analyzing six Hubble tension proposals against eight independent cosmological constraints. MSCE is not a more accurate AI model. It is verification infrastructure — detecting structural inconsistencies before claims are accepted as true.
+\end{abstract}
+
+\section{Introduction}
+
+The dominant paradigm in AI evaluation treats individual models as oracles: ask a question, receive an answer, compare against ground truth. This paradigm has a structural blind spot. A single model can be confident and wrong, and no amount of self-reflection by that model can reliably detect the error. The model's internal representations that produced the error are the same representations available for error detection \cite{turing1950, kahneman2011}.
+
+This is not a minor failure mode. On our 206-question comprehensive benchmark, GPT-5.5 — a state-of-the-art frontier model — produced 40 high-confidence ($>$0.8 self-reported confidence) wrong answers. These are not edge cases. They include math reasoning errors presented with conviction, scientific misconceptions stated as facts, and logical fallacies defended with plausible-sounding justifications.
+
+The verification problem compounds when we move from benchmark questions to real-world scientific claims. A paper may make five assertions. A reviewer may catch two issues. But no human reviewer simultaneously cross-checks every assertion against every applicable constraint — observational, theoretical, methodological, and comparative. Overclaims survive peer review routinely, not because reviewers are negligent, but because the cognitive load of exhaustive cross-constraint verification exceeds human working memory.
+
+MSCE addresses this by decoupling generation from verification. Instead of asking one model to be both advocate and judge, MSCE assigns generation to six models with deliberately heterogeneous cognitive strategies, subjects their outputs to adversarial elimination, and delegates judgment to an independent model from a different family. The architecture does not rely on any single model being correct. It relies on the structural property that it is harder for six different cognitive strategies to simultaneously fail in consistent ways than for any single strategy to succeed.
+
+\section{Related Work}
+
+\textbf{Ensemble methods} (bagging, boosting, stacking) improve predictive performance by aggregating multiple models \cite{dietterich2000}. But standard ensembles share a vulnerability: models trained on similar data with similar architectures tend to share blind spots. Averaging correlated errors does not eliminate them \cite{breiman2001}.
+
+\textbf{Multi-agent debate} approaches \cite{du2024, michael2024} have models critique each other's outputs iteratively. While promising, these methods are vulnerable to persuasion cascades — a confident but wrong model can sway less confident correct models through rhetorical force. The debate converges to eloquence, not truth.
+
+\textbf{LLM-as-judge} \cite{zheng2023} uses one model to evaluate another's output, introducing self-verification bias when the judge shares training lineage with the evaluated model.
+
+\textbf{Conformal prediction} \cite{angelopoulos2023} provides statistical guarantees on prediction sets but does not address the structural problem of detecting when a specific claim violates a specific constraint.
+
+MSCE differs from each. It is not an ensemble (models don't vote), not a debate (models don't interact), and not a single judge (judgment is cross-validated against constraints). It is a \textbf{verification architecture} that operates on model outputs rather than modifying the models themselves.
+
+\section{MSCE Architecture}
+
+\subsection{Design Principle}
+
+The core principle is \textbf{cognitive heterogeneity under constraint}. Six models are selected not for individual accuracy but for the diversity of their reasoning paths. The strategies minimize correlated failure modes.
+
+\subsection{Model Configuration}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{lll}
+\toprule
+\textbf{Model} & \textbf{Strategy} & \textbf{Description} \\
+\midrule
+GPT-5.5 & Depth-first & Step-by-step deep reasoning \\
+Gemini 3.1 Pro & Breadth-first & Enumerate, evaluate, narrow \\
+Grok 4.1 & Counterfactual & Reason from negation \\
+Kimi K2.5 & Direct & Explicit intermediate steps \\
+GPT-5.1 (thinking) & Scientific depth & Hypothesis $\to$ test $\to$ conclusion \\
+o4-mini & Constraint propagation & Encode constraints $\to$ verify \\
+\midrule
+Grok 4.1 (thinking) & Judge & Independent model family \\
+\bottomrule
+\end{tabular}
+\caption{MSCE model configuration with heterogeneous cognitive strategies.}
+\end{table}
+
+\subsection{Pipeline}
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Generation:} Six models independently answer the same question, each using its assigned cognitive strategy
+    \item \textbf{3-Layer Filtration:}
+    \begin{enumerate}
+        \item[L1.] Low-confidence answers discarded (confidence $<$ 0.3)
+        \item[L2.] Statistical outlier detection (answers deviating $>2\sigma$ from cluster)
+        \item[L3.] Collective blindspot risk assessment
+    \end{enumerate}
+    \item \textbf{Cross-Validation:} Each surviving answer evaluated against all applicable constraints
+    \item \textbf{Judgment:} Independent judge model evaluates surviving answers against the cross-validation matrix
+    \item \textbf{Output:} Final answer + calibrated confidence + disagreement score + reasoning trail
+\end{enumerate}
+
+\subsection{Three-Layer Filtration}
+
+\textbf{L1 — Confidence Filter:} Answers with self-reported confidence below 0.3 are discarded. This removes cases where a model signals its own uncertainty before adversarial elimination begins.
+
+\textbf{L2 — Outlier Detection:} Answers deviating more than 2 standard deviations from the semantic cluster center are flagged as potential reasoning failures. A model that is both confident and semantically isolated from the group is a strong candidate for individual error.
+
+\textbf{L3 — Blindspot Risk:} When all models agree with high confidence, MSCE computes a collective blindspot risk score. High agreement with low cross-validation against constraints signals a potential shared blindspot — not rejected, but flagged for human review.
+
+\subsection{Cross-Validation Matrix}
+
+Each claim is evaluated against all applicable constraints independently. Each (claim, constraint) pair receives one of three classifications:
+
+\begin{itemize}
+    \item \textbf{Pass:} The claim is consistent with the constraint
+    \item \textbf{Tension:} The claim strains but does not violate the constraint
+    \item \textbf{Violation:} The claim contradicts the constraint
+\end{itemize}
+
+The cross-validation matrix makes structural conflicts visible. A claim passing 3 constraints but violating 5 is fundamentally different from one passing 6 with 2 tensions. The matrix — not a single score — is the primary output.
+
+\subsection{Confidence Calibration}
+
+MSCE's confidence is computed from three independent signals:
+
+\begin{enumerate}
+    \item \textbf{Agreement rate:} Proportion of surviving models that agree
+    \item \textbf{Constraint satisfaction ratio:} Proportion of applicable constraints that pass
+    \item \textbf{Disagreement magnitude:} Normalized variance in model outputs
+\end{enumerate}
+
+This produces calibrated confidence systematically lower than individual model self-confidence — and systematically more accurate. On the frontier benchmark, MSCE's average confidence is 0.575 with 100\% accuracy; GPT-5.5's is 0.747 with 85\% accuracy.
+
+\section{Benchmarks}
+
+\subsection{Benchmark Suite Design}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{lrl}
+\toprule
+\textbf{Benchmark} & \textbf{Questions} & \textbf{Domains} \\
+\midrule
+Pilot & 20 & Math, Logic, Science, Verbal \\
+Frontier & 60 & Math (10), Logic (10), Science (20), Verbal (20) \\
+Expanded & 120 & + Constraint Propagation (9), Cross-Domain (10) \\
+Comprehensive & 206 & 6 domains, L1–L4 difficulty gradient \\
+\bottomrule
+\end{tabular}
+\caption{Benchmark suite design. All questions constructed post-training-cutoff for all constituent models.}
+\end{table}
+
+\subsection{Aggregate Results (386 questions)}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Domain} & \textbf{Questions} & \textbf{MSCE} & \textbf{GPT-5.5} & \textbf{Gap} \\
+\midrule
+Math & 60 & 98.3\% & 95.0\% & +3.3pp \\
+Science & 87 & 98.9\% & 73.6\% & +25.3pp \\
+Cross-Domain & 43 & 86.0\% & 60.5\% & +25.5pp \\
+Logic & 57 & 94.7\% & 89.5\% & +5.2pp \\
+Constraint Propagation & 52 & 71.2\% & 61.5\% & +9.7pp \\
+Verbal & 87 & 93.1\% & 93.1\% & 0.0pp \\
+\midrule
+\textbf{Total} & \textbf{386} & \textbf{91.7\%} & \textbf{80.6\%} & \textbf{+11.1pp} \\
+\bottomrule
+\end{tabular}
+\caption{Per-domain accuracy across all three benchmark suites.}
+\end{table}
+
+\subsection{Per-Benchmark Results}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Metric} & \textbf{MSCE} & \textbf{GPT-5.5} & \textbf{Notes} \\
+\midrule
+\multicolumn{4}{c}{\textit{Frontier Benchmark (60 questions)}} \\
+\midrule
+Accuracy & \textbf{100\%} & 85.0\% & All 4 domains perfect \\
+Avg Confidence & 0.575 & 0.747 & MSCE calibrated lower \\
+Confident-Wrong & \textbf{0} & 6 & $>$0.7 conf, wrong answer \\
+\midrule
+\multicolumn{4}{c}{\textit{Expanded Benchmark (120 questions)}} \\
+\midrule
+Accuracy & \textbf{95.0\%} & 88.3\% & \\
+Avg Confidence & 0.511 & 0.743 & \\
+Confident-Wrong & \textbf{0} & 8 & \\
+\midrule
+\multicolumn{4}{c}{\textit{Comprehensive Benchmark (206 questions)}} \\
+\midrule
+Accuracy & \textbf{87.4\%} & 74.8\% & L1–L4 difficulty \\
+Avg Confidence & 0.486 & 0.744 & \\
+Confident-Wrong & \textbf{0} & 40 & \\
+\bottomrule
+\end{tabular}
+\caption{Per-benchmark results with confidence calibration metrics.}
+\end{table}
+
+\subsection{Adversarial Robustness}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{llr}
+\toprule
+\textbf{Trap Class} & \textbf{Description} & \textbf{Resisted} \\
+\midrule
+A: Logical contradictions & Self-contradictory premises & 20/20 (100\%) \\
+B: False premises & Factually false embedded assumptions & 20/20 (100\%) \\
+C: Authority traps & False claims as consensus & 20/20 (100\%) \\
+D: Prompt injection & Instructions to bypass reasoning & 19/20 (95\%) \\
+\midrule
+\textbf{Total} & & \textbf{79/80 (98.8\%)} \\
+\bottomrule
+\end{tabular}
+\caption{Adversarial robustness across four trap classes.}
+\end{table}
+
+\subsection{Knowledge Boundary Calibration}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{llrr}
+\toprule
+\textbf{Tier} & \textbf{Description} & \textbf{MSCE} & \textbf{GPT-5.5} \\
+\midrule
+Tier 1 & Verifiable known facts & 10/10 & 10/10 \\
+Tier 2 & Genuinely uncertain/contested & 6/10 & 0/10 \\
+Tier 3 & Beyond current knowledge & 4/10 & 0/10 \\
+\bottomrule
+\end{tabular}
+\caption{Knowledge boundary calibration. GPT-5.5 answered all Tier 2+3 questions confidently — and got them all wrong.}
+\end{table}
+
+\section{Case Studies}
+
+\subsection{Hubble Tension: 6 Proposals, 8 Constraints}
+
+The Hubble tension — a $>$5$\sigma$ discrepancy between local and early-universe $H_0$ measurements \cite{planck2018, riess2022} — has generated hundreds of proposals. We evaluated six major proposal classes against eight independent observational constraints simultaneously.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{lccccccccc}
+\toprule
+\textbf{Proposal} & \textbf{Score} & \textbf{CMB} & \textbf{BAO} & \textbf{SN} & \textbf{BBN} & \textbf{S8} & \textbf{Age} & \textbf{Grav} & \textbf{X} \\
+\midrule
+Decaying DM & 0.358 & P & P & T & P & P & P & P & T \\
+Extra neutrinos & 0.287 & P & T & P & V & T & P & P & T \\
+Modified gravity & 0.253 & P & P & T & P & T & T & V & T \\
+Local void & 0.171 & P & T & P & P & P & P & P & T \\
+Systematic error & 0.108 & P & P & P & P & P & P & P & P \\
+Early Dark Energy & 0.076 & V & V & P & P & V & P & P & T \\
+\bottomrule
+\end{tabular}
+\caption{Hubble tension proposals vs.\ 8 observational constraints. P = Pass, T = Tension, V = Violation. Early Dark Energy — the most cited, funded, and published proposal — ranks last.}
+\end{table}
+
+No single proposal satisfies all eight constraints. No pairwise combination does either. EDE simultaneously conflicts with CMB, BAO, and S8 — three observationally independent constraints whose agreement constitutes a structural refutation.
+
+\subsection{LeCun LeWorldModel Audit}
+
+Yann LeCun's LeWorldModel \cite{lecun2026} makes five central claims. We decomposed each into verifiable propositions, attached independent constraints (paper's own limitations, concurrent results \cite{subjepa2026}, mathematical foundations), and ran all five through MSCE's 6-model pipeline.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{llrr}
+\toprule
+\textbf{Claim} & \textbf{Verdict} & \textbf{Agreement} & \textbf{Conf.} \\
+\midrule
+SIGReg ``provably optimal'' anti-collapse & FALSE & 4/5 & 0.57 \\
+48$\times$ faster planning vs.\ DINO-WM & UNFAIR & 4/5 & 0.57 \\
+Only 1 hyperparameter needed & FALSE & 4/5 & 0.57 \\
+JEPA collapse ``solved'' & FALSE & 4/4 & \textbf{0.95} \\
+Emergent physical understanding & FALSE & 5/5 & 0.57 \\
+\bottomrule
+\end{tabular}
+\caption{MSCE audit of LeCun LeWorldModel: 5 claims, 5 rejections.}
+\end{table}
+
+\section{Discussion}
+
+\subsection{Why MSCE Works}
+
+MSCE's effectiveness is a structural property. It is harder for six different cognitive strategies to simultaneously fail in mutually consistent ways than for any single strategy to produce the correct answer. A depth-first reasoner and a constraint-propagation reasoner share almost no failure modes. When they agree, the agreement itself is evidence — independent of either model's individual reliability.
+
+This is analogous to N-modular redundancy in fault-tolerant systems. Hardware faults are approximately independent across redundant units; MSCE achieves approximate cognitive independence by forcing heterogeneous reasoning strategies.
+
+\subsection{Confidence Calibration as a First-Class Output}
+
+Current AI systems report confidence as a byproduct of training — a softmax temperature, a token probability. These are not calibrated to anything external. MSCE computes confidence from cross-model agreement, constraint satisfaction, and disagreement magnitude. The result is systematically lower than individual model self-confidence and systematically more accurate.
+
+A system reporting 75\% confidence while wrong 15\% of the time is dangerous. A system reporting 51\% confidence while right 95\% of the time is useful — precisely because low confidence correctly signals when not to trust the answer.
+
+\subsection{Limitations}
+
+\textbf{Cost and latency.} Six models per question incurs $\sim$6$\times$ inference cost. The comprehensive benchmark required 4,874 seconds. This is unsuitable for real-time applications but acceptable for verification workflows where accuracy dominates cost.
+
+\textbf{Constraint specification.} Cross-validation requires explicit constraints. For domains with well-established constraints, this is feasible. For domains where constraints are contested, constraint specification itself is a research task.
+
+\textbf{Model dependency.} MSCE cannot transcend limitations shared by all six constituent models. It detects inconsistency, not omniscience.
+
+\textbf{Strategy diversity scalability.} Whether additional cognitive strategies yield diminishing returns or unlock further gains is an open question.
+
+\subsection{Future Work}
+
+\textbf{Dynamic strategy selection} could reduce cost by routing questions to optimal strategy subsets. \textbf{Automated constraint extraction} from cited prior work would enable fully automated paper auditing. \textbf{Cross-lingual verification} could test whether cognitive heterogeneity across languages provides additional signal. \textbf{Streaming verification} would extend MSCE beyond batch-mode auditing to real-time fact-checking.
+
+\section{Conclusion}
+
+MSCE achieves what single models cannot: detecting confident wrong answers through adversarial cross-validation. Across 386 questions spanning six domains, MSCE produces \textbf{zero high-confidence errors} while outperforming GPT-5.5 by 11.1 percentage points. The architecture generalizes to real-world verification: auditing scientific papers, testing cosmological proposals, and detecting adversarial traps.
+
+MSCE is not a more intelligent AI. It does not generate novel content. It is verification infrastructure: a system that tells you where content breaks, before anyone else does. As AI-generated claims proliferate, verification infrastructure transitions from optional to necessary. Every claim — from human scientist or AI model — should face the same standard: survive cross-constraint scrutiny, or don't claim to be true.
+
+\bibliographystyle{plain}
+\begin{thebibliography}{99}
+
+\bibitem{turing1950} A.~M.~Turing.
+\newblock Computing machinery and intelligence.
+\newblock {\em Mind}, 59(236):433--460, 1950.
+
+\bibitem{kahneman2011} D.~Kahneman.
+\newblock {\em Thinking, Fast and Slow}.
+\newblock Farrar, Straus and Giroux, 2011.
+
+\bibitem{dietterich2000} T.~G.~Dietterich.
+\newblock Ensemble methods in machine learning.
+\newblock In {\em Multiple Classifier Systems}, pp.~1--15, 2000.
+
+\bibitem{breiman2001} L.~Breiman.
+\newblock Random forests.
+\newblock {\em Machine Learning}, 45(1):5--32, 2001.
+
+\bibitem{du2024} Y.~Du et al.
+\newblock Improving factuality and reasoning in language models through
+  multiagent debate.
+\newblock In {\em ICML}, 2024.
+
+\bibitem{michael2024} C.~Michael et al.
+\newblock Debate helps supervise unreliable experts.
+\newblock arXiv:2410.13011, 2024.
+
+\bibitem{zheng2023} L.~Zheng et al.
+\newblock Judging LLM-as-a-judge with MT-Bench and Chatbot Arena.
+\newblock In {\em NeurIPS}, 2023.
+
+\bibitem{angelopoulos2023} A.~N.~Angelopoulos and S.~Bates.
+\newblock Conformal prediction: A gentle introduction.
+\newblock {\em Foundations and Trends in Machine Learning},
+  16(4):494--591, 2023.
+
+\bibitem{lecun2026} Y.~LeCun et al.
+\newblock LeWorldModel: Stable end-to-end joint-embedding predictive
+  architecture from pixels.
+\newblock arXiv:2603.19312, 2026.
+
+\bibitem{subjepa2026} Sub-JEPA Authors.
+\newblock Sub-JEPA: Subspace joint embedding predictive architecture.
+\newblock arXiv:2605.09241, 2026.
+
+\bibitem{planck2018} Planck Collaboration.
+\newblock Planck 2018 results. VI. Cosmological parameters.
+\newblock {\em Astronomy \& Astrophysics}, 641:A6, 2020.
+
+\bibitem{riess2022} A.~G.~Riess et al.
+\newblock A comprehensive measurement of the local value of the Hubble constant.
+\newblock {\em The Astrophysical Journal}, 934(1):57, 2022.
+
+\end{thebibliography}
+
+\end{document}
