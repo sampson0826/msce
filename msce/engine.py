@@ -9,7 +9,7 @@ MKEAI_BASE = os.environ.get("MKEAI_BASE_URL", "https://api.mkeai.com/v1")
 DEEPSEEK_KEY = os.environ.get("DEEPSEEK_API_KEY", "")
 
 # ── 默认多模型配置 ──
-# Sam 建议：3个生成器用3个不同模型，模型差异 > prompt 差异
+# 3个生成器用3个不同模型，模型差异 > prompt 差异
 DEFAULT_CONFIG = {
     "deep_first":     {"client_type": "mkeai",    "model": "gpt-4o"},
     "breadth_first":  {"client_type": "mkeai",    "model": "gemini-2.5-pro"},
@@ -59,7 +59,7 @@ JUDGE_PROMPT = """你是一个公正的裁决者。检查候选答案，决定�
 
 只输出这一行JSON。"""
 
-# ── 二次裁决 Prompt（Sam建议：反事实检查被淘汰候选）──
+# ── 二次裁决 Prompt（反事实检查被淘汰候选）──
 APPEAL_PROMPT = """你是二次裁决者。重新审查被淘汰的候选答案，判断是否有误杀。
 
 ## 反事实检查：
@@ -160,7 +160,7 @@ def _simple_similarity(text_a, text_b):
 
 
 def _run_appeal(appeal_client, appeal_model, question, candidates, eliminated):
-    """Sam建议：二次裁决——反事实检查被淘汰候选，防止误杀"""
+    """二次裁决——反事实检查被淘汰候选，防止误杀"""
     if not eliminated:
         return eliminated, []
 
@@ -216,7 +216,7 @@ def _run_appeal(appeal_client, appeal_model, question, candidates, eliminated):
 
 
 def _force_eliminate_similar(surviving, candidates, threshold=0.75):
-    """Sam建议：如果多个候选高度相似，强制淘汰最弱的那个，防止'全部保留赛'"""
+    """如果多个候选高度相似，强制淘汰最弱的那个，防止'全部保留赛'"""
     if len(surviving) <= 1:
         return surviving
 
@@ -341,7 +341,7 @@ def _best_of_n_judge(judge_client, judge_model, question, candidate_text, n=3):
     max_s = max(scores) if scores else 0
     elim_count = len(v1.get("eliminated", []))
 
-    # Sam建议：高置信度且裁判做出了淘汰决策 → 跳过重复投票
+    # 高置信度且裁判做出了淘汰决策 → 跳过重复投票
     ADAPTIVE_THRESHOLD = 0.9
     if max_s >= ADAPTIVE_THRESHOLD and elim_count > 0:
         v1["_judge_votes"] = 1
@@ -393,7 +393,7 @@ def run_elimination(judge_client, judge_model, question, candidates, appeal_conf
         if "error" in verdict:
             return verdict
 
-        # Sam建议：强制淘汰高相似度候选
+        # 强制淘汰高相似度候选
         if "surviving" in verdict and len(verdict.get("surviving", [])) >= 2:
             before = len(verdict["surviving"])
             verdict["surviving"] = _force_eliminate_similar(
@@ -403,7 +403,7 @@ def run_elimination(judge_client, judge_model, question, candidates, appeal_conf
             if before != after:
                 verdict["_force_eliminated"] = before - after
 
-        # Sam建议：二次裁决——反事实检查被淘汰候选
+        # 二次裁决——反事实检查被淘汰候选
         eliminated = verdict.get("eliminated", [])
         if eliminated and appeal_config:
             try:
@@ -465,7 +465,7 @@ def run_msce(question, config=None, domain=None):
     appeal_cfg = config.get("appeal")
     verdict = run_elimination(judge_client, judge_cfg["model"], question, candidates, appeal_cfg, domain=domain)
 
-    # Step 3: 置信度检查（Sam建议：所有候选都不可靠时，诚实说"不确定"）
+    # Step 3: 置信度检查（所有候选都不可靠时，诚实说"不确定"）
     CONFIDENCE_THRESHOLD = 0.5
     surviving = verdict.get("surviving", [])
     top_scores = [s.get("score", 0) for s in surviving]

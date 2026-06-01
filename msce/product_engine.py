@@ -1,7 +1,7 @@
 """MSCE Product Engine v3.0 — Cognitive Adversarial Engine
 6 heterogeneous generators + 3-layer filtering + weighted integration
 
-v3.0 (Sam's redesign):
+v3.0 (redesign):
   - Layer 1: Self-assessed confidence (generators output confidence score)
   - Layer 2: Divergence detection (outlier marking via similarity matrix)
   - Layer 3: Answer length normalization (core conclusion extraction)
@@ -440,7 +440,7 @@ def _scoring_judge(judge_client, judge_model, question, candidate_summaries, tim
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# Constraint Validator (Sam v3.1 — B-operator logic for MSCE)
+# Constraint Validator — constraint satisfaction check
 # For constraint_propagation domain: validate candidate against stated constraints.
 # ══════════════════════════════════════════════════════════════════════════════
 
@@ -481,7 +481,7 @@ def _constraint_validate(client, question, answer_text, timeout=10):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# Arbitration Mode (Sam's design — v3.1)
+# Arbitration Mode (v3.1)
 # When conf < 0.3 AND disag > 0.8: extract the 2 most divergent answers,
 # quick consistency check on each, select the non-contradictory one.
 # ══════════════════════════════════════════════════════════════════════════════
@@ -537,7 +537,7 @@ def _arbitration_consistency_check(client, answer_text, timeout=10):
 
 
 def _arbitration(candidates, sim_matrix, top_id, top_answer, confidence, disagreement, mkeai_client):
-    """Sam's arbitration: when high-disagreement low-confidence, validate the top 2 divergent answers.
+    """Arbitration mode: when high-disagreement low-confidence, validate the top 2 divergent answers.
 
     Returns: (new_top_id, new_top_answer, new_confidence, arbitration_applied)
     """
@@ -602,7 +602,7 @@ def _weighted_integration(candidates, judge_scores, outliers, low_conf_ids):
         raw_judge = judge_scores.get(sid, 5.0)
         judge_norm = raw_judge / 10.0
 
-        # Per-strategy confidence cap (Sam: prevent single-model dominance)
+        # Per-strategy confidence cap (prevent single-model dominance)
         cap = PRODUCT_CONFIG.get(sid, {}).get("confidence_cap", 1.0)
         if self_conf > cap:
             self_conf = cap
@@ -641,7 +641,7 @@ def _weighted_integration(candidates, judge_scores, outliers, low_conf_ids):
     else:
         disagreement = 1.0
 
-    # Calibrated confidence: raw_weight × (1 - disagreement) × 1.4 (Sam P0)
+    # Calibrated confidence: raw_weight × (1 - disagreement) × 1.4
     # Scale factor 1.4 brings avg conf from 0.57 → ~0.80, capped at 0.95
     raw_conf = min(top_weight * 1.5, 1.0)
     final_confidence = round(min(0.95, raw_conf * (1.0 - disagreement) * 1.4), 4)
@@ -661,7 +661,7 @@ def _weighted_integration(candidates, judge_scores, outliers, low_conf_ids):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# Speculation Classifier — Rule-based + lightweight fallback (Sam P0)
+# Speculation Classifier — Rule-based + lightweight fallback
 # ══════════════════════════════════════════════════════════════════════════════
 
 # Rule patterns: (regex, weight, category)
@@ -767,7 +767,7 @@ def _speculation_classify(question):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# Layer 0: Prompt Injection Detection (Sam P0 Day 5-6)
+# Layer 0: Prompt Injection Detection
 # ══════════════════════════════════════════════════════════════════════════════
 
 # Rule engine: 3 tiers (D1 override, D2 context, D3 role, D4 hidden)
@@ -938,7 +938,7 @@ def run_msce(question, config=None, domain="math"):
     if config is None:
         config = PRODUCT_CONFIG
 
-    # ── Layer 0: Injection detection (Sam P0) ──
+    # ── Layer 0: Injection detection ──
     injection_prob, injection_type, hard_block = _injection_detect(question)
     if hard_block:
         log.info(f"Layer 0/REJECTED: prob={injection_prob:.3f} type={injection_type}")
@@ -998,7 +998,7 @@ def run_msce(question, config=None, domain="math"):
     if outliers:
         log.info(f"Layer 2: outliers → {outliers}")
 
-    # ── Step 3b: Layer 3 — Collective blind spot detection (Sam P1) ──
+    # ── Step 3b: Layer 3 — Collective blind spot detection ──
     # Danger zone A: all models confident (>0.8) but answers differ significantly (avg sim < 0.25)
     # Danger zone B: majority (≥4/6) are outliers → question is inherently ambiguous (Tier 2/3)
     # Danger zone C: majority high-conf but answers diverge (≥4 models >0.8 AND avg sim < 0.35)
@@ -1070,7 +1070,7 @@ def run_msce(question, config=None, domain="math"):
         if confidence < 0.5:
             uncertain = True
 
-    # ── Step 6c: Speculation classifier penalty (Sam P0) ──
+    # ── Step 6c: Speculation classifier penalty ──
     # Detects inherently speculative/counterfactual/fuzzy questions.
     # Gate: skip if system already confidently self-detected (uncertain + high disagreement).
     # Edge case: very high spec_score (>0.8) → apply light penalty even if uncertain.
@@ -1101,7 +1101,7 @@ def run_msce(question, config=None, domain="math"):
         else:
             log.info(f"Layer 4 (speculation): score={spec_score:.3f}, already uncertain, skip")
 
-    # ── Step 6d: Layer 0 injection penalty (Sam P0) ──
+    # ── Step 6d: Layer 0 injection penalty ──
     # When injection_prob 0.3-0.7 (suspicious but not definitive), halve confidence.
     # This is a soft penalty — the content is still generated but marked as low-trust.
     if injection_prob > 0.3 and not hard_block:
@@ -1112,7 +1112,7 @@ def run_msce(question, config=None, domain="math"):
         if confidence < 0.5:
             uncertain = True
 
-    # ── Step 6e: L2 Source credibility decay (Sam P1) ──
+    # ── Step 6e: L2 Source credibility decay ──
     # When models reach high consensus on a factual claim but no model provides
     # a verifiable source citation, the claim is likely based on fabricated context.
     # Decay confidence by ×0.6.
@@ -1143,7 +1143,7 @@ def run_msce(question, config=None, domain="math"):
             if confidence < 0.5:
                 uncertain = True
 
-    # ── Step 6f: Arbitration mode (Sam v3.1) ──
+    # ── Step 6f: Arbitration mode (v3.1) ──
     # When conf < 0.3 AND disag > 0.8: high-disagreement low-confidence pattern.
     # Extract 2 most divergent answers, quick consistency check, select the non-contradictory one.
     arbitration_applied = False
@@ -1157,8 +1157,8 @@ def run_msce(question, config=None, domain="math"):
             if confidence < 0.5:
                 uncertain = True
 
-    # ── Step 6g: Constraint validator (Sam v3.1 — constraint_propagation domain only) ──
-    # B-operator logic: filter candidates by checking if answer satisfies stated constraints.
+    # ── Step 6g: Constraint validator (constraint_propagation domain only) ──
+    # Filter candidates by checking if answer satisfies stated constraints.
     validator_applied = False
     validator_pass = True
     validator_violations = []
