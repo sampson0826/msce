@@ -1,0 +1,8 @@
+include README.md
+include README_zh.md
+include LICENSE
+include pyproject.toml
+recursive-include src/msce *.py
+recursive-include examples *.py
+recursive-include notebooks *.ipynb
+recursive-include assets *
